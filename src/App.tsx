@@ -1,11 +1,20 @@
 import './App.css'
+import LoginPage from "./pages/Login/LoginPage";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 function App() {
 
   return (
     <>
-      <div className='text-5xl font-bold'>
-        PerfumeOnMe
+      <div>
+            <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        {/* 추후에 회원가입 페이지 추가 시: */}
+        {/* <Route path="/signup" element={<SignupPage />} /> */}
+      </Routes>
+    </BrowserRouter>
       </div>
     </>
   )
