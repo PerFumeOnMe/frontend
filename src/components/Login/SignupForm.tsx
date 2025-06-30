@@ -1,26 +1,33 @@
 import { useState } from "react";
 
 export default function SignupForm(){
-  const [inputPassword, setInputPassword] = useState<string>();
-  const [inputConfirmPassword,setInputConfirmPassword] = useState<string>();
+  const [inputName, setInputName] = useState<string>("");
+  const [inputId , setInputId] =  useState<string>("");
+  const [inputPassword, setInputPassword] = useState<string>("");
+  const [inputConfirmPassword, setInputConfirmPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-//  const [signupBtn, setSignupBtn] = useState(false);
+  const [isAgreed, setIsAgreed] = useState(false);
+
+  //
+  const isFormvalid = 
+    inputName.trim() !== "" &&
+    inputId.trim() !== "" &&
+    inputPassword.trim() !== "" &&
+    inputPassword === inputConfirmPassword &&
+    isAgreed;
+    
 
   const handleSignupSubmit = async(e: FormEvent<HTMLFormElement>) =>{
-     e.preventDefault();
+    e.preventDefault();
 
      //비밀번호 확인
-     if(inputPassword !== inputConfirmPassword) {
+    if(inputPassword !== inputConfirmPassword) {
       setErrorMessage("비밀번호가 일치하지 않습니다.");
-     } else{
+    } else {
       setErrorMessage("");
-
-     }
+    }
   }
 
-
-  //signUpSubmint -> 비밀번호 == 비밀번호 확인.   
-  // 에러 ->  "비밀번호가 일치하지 않습니다" ...맞음+ 개인정보 수집 동의 회원가입 버튼 활성화
   // 버튼 누르면 alert 창? 뜨고 로그인으로 넘어가는 버튼.
   return(
     <div className="w-screan h-screan flex items-center justify-center">
@@ -43,6 +50,8 @@ export default function SignupForm(){
             <label className="block text-lg text-black mb-1">이름</label>
             <input 
               type="text"
+              value={inputName}
+              onChange={(e) => setInputName(e.target.value)}
               placeholder="홍길동"
               className="w-full text-base border-b border-gray-300 outline-none py-2"
                 />
@@ -52,6 +61,8 @@ export default function SignupForm(){
             <label className="block text-lg text-black mb-1">아이디</label>
             <input 
               type="text"
+              value={inputId}
+              onChange={(e) => setInputId(e.target.value)}
               placeholder="UMC123"
               className="w-full text-base border-b border-gray-300 outline-none py-2"/>
           </div>  
@@ -80,10 +91,14 @@ export default function SignupForm(){
 
 
         {/* 개인정보 동의 */}
-        {/* 체크박스 이미지로 isChecked useState */}
+        {/* 체크박스 이미지로 isAgreed useState */}
         <div className="flex items-center justify-between mt-[19px]">
           <label className="flex items-center gap-10  text-sm">
-            <input type="checkbox" className="accent-black cursor-pointer"/>        
+            <input 
+              type="checkbox" 
+              checked={isAgreed}
+              onChange={(e) => setIsAgreed(e.target.checked)}
+              className="accent-black cursor-pointer"/>        
             개인정보 수집 및 이용 동의서
           </label>
           <button className="cursor-pointer">
@@ -94,10 +109,11 @@ export default function SignupForm(){
          </div> 
         </form>         
 
-      {/* 회원가입 버튼 */}    
+      {/* 회원가입 버튼 */}
       <div className="mt-auto pt-10">
-
-        <button className="text-2xl py-[18px] bg-gray-300 w-full cursor-pointer">회원가입</button>
+        <button 
+          disabled={!isFormvalid}
+          className={`text-2xl  text-white py-[18px] w-full ${isFormvalid ? ' bg-black cursor-pointer':' bg-gray-300 cursor-not-allowed'}`}>회원가입</button>
       </div>
 
       {/* 드롭다운 박스 내용 */}
