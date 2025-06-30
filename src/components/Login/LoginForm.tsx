@@ -2,63 +2,70 @@ import { Link } from "react-router-dom";
 
 export default function LoginForm(){
   return(
-    
-    <div 
-      className=" w-screen h-screen flex items-center justify-center">
-      <form 
-        className="w-[412px] h-[816px] min-w-[412px] min-h-[816px] bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
+    <div className="w-screen h-screen flex items-center justify-center">
+      <div className="w-[480px] h-[910px] min-w-[480px] min-h-[910px] bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
         <h1 
           className="self-start
-                     mt-[80px] mb-[302px] ml-[61px] mr-[231px]
+                     mt-[104px] mb-[232px] ml-[48px] mr-[312px]
                      text-left break-keep
-                     text-white text-[32px] font-bold leading-[44px]">
+                     text-white text-4xl font-bold leading-[44px]">
           향수와 친해지는 지름길
         </h1>
-
-        <div className="flex flex-col gap-[19px] items-center mt-[20px]">
-          {/*#ccccc 커스텀?*/}  
-          <input 
-            type="text" 
-            placeholder="아이디" 
-            className="w-[298px] h-[36px]
-                       text-base font-medium text-white/70
-                       bg-transparent border-b border-gray-300
-                       focus:outline-none" />
-          <input  
-            type="password" 
-            placeholder="비밀번호" 
-            className="w-[298px] h-[36px]
-                       text-base font-medium text-white/70
-                       bg-transparent border-b border-gray-300
-                       focus:outline-none" />
+      <form className="flex flex-col items-center gap-[11px] pb-[24px]">
+        <div className="flex items-center w-[384px] h-[55px] border border-white rounded-md px-4 mb-3">
+          <img src="/Login/id.svg" alt="아이디 아이콘" className="w-5 h-5 mr-3" />
+          <input
+            type="text"
+            placeholder="아이디"
+            className="bg-transparent flex-1 text-white placeholder-white text-lg focus:outline-none"
+          />
         </div>
+
+
+        <div className="flex items-center w-[384px] h-[55px] border border-white rounded-md px-4">
+          <img src="/Login/pw.svg" alt="패스워드 아이콘" className="w-5 h-5 mr-3" />
+          <input
+            type="password"
+            placeholder="패스워드"
+            className="bg-transparent flex-1 text-white placeholder-white text-lg focus:outline-none"
+          />
+        </div>
+
+        
         <div className="flex justify-center mt-[28px]">
           <button 
             type="submit"
             className="px-[70px]
-                       text-base font-medium text-black/65
-                       border border-black rounded-[30px]
-                       cursor-pointer">
+                       text-base font-medium text-white
+                       border border-black  bg-black rounded-[30px]
+                       cursor-pointer
+                       w-[384px] h-[55px]"
+                        >
             로그인</button>
         </div>
-        <div className="flex justify-center">
+      </form> 
+      <div className="flex justify-center">
+        <div className="w-[384px] border-b border-white my-6" />
+      </div>
+
+        <div className="flex flex-col items-center">
           {/*onClick으로 이동 처리/ 라우팅 or URL */}
           <button 
             type="button" 
-            className="mt-[35px]">
-            <img 
-              src="/Login/kakao_login.svg" 
-              alt="카카오 로그인 버튼" 
-              className="w-[183px] h-[36px] cursor-pointer" />
+            className="flex items-center justify-center gap-[7px] w-[384px] h-[55px] mt-[35px]
+                      border border-none bg-yellow-400 rounded-[30px] ">
+            <img alt="카카오톡" src="/Login/kakao.svg"/>
+          카카오로 시작
           </button>
         </div>
-        <div className="flex justify-center mt-[13px] text-white/30 text-sm">
+        <div className="flex justify-center mt-[13px] text-white text-lg">
           아이디가 없다면?
-          <Link to="/signup" className="ml-2 underline text-white/60 cursor-pointer">
+          <Link to="/signup" className="ml-2 underline cursor-pointer">
             회원가입
           </Link> 
         </div> 
-      </form>
+
+      </div>
     </div>      
     );
 }
