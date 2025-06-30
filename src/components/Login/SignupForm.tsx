@@ -1,4 +1,27 @@
+import { useState } from "react";
+
 export default function SignupForm(){
+  const [inputPassword, setInputPassword] = useState<string>();
+  const [inputConfirmPassword,setInputConfirmPassword] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState<string>("");
+//  const [signupBtn, setSignupBtn] = useState(false);
+
+  const handleSignupSubmit = async(e: FormEvent<HTMLFormElement>) =>{
+     e.preventDefault();
+
+     //비밀번호 확인
+     if(inputPassword !== inputConfirmPassword) {
+      setErrorMessage("비밀번호가 일치하지 않습니다.");
+     } else{
+      setErrorMessage("");
+
+     }
+  }
+
+
+  //signUpSubmint -> 비밀번호 == 비밀번호 확인.   
+  // 에러 ->  "비밀번호가 일치하지 않습니다" ...맞음+ 개인정보 수집 동의 회원가입 버튼 활성화
+  // 버튼 누르면 alert 창? 뜨고 로그인으로 넘어가는 버튼.
   return(
     <div className="w-screan h-screan flex items-center justify-center">
       <div className="w-[480px] h-[910px] bg-white flex flex-col justify-between">
@@ -15,7 +38,7 @@ export default function SignupForm(){
 
         {/*Form */}
         {/* map 써서 refact */}
-        <form className="flex flex-col gap-[11px] mt-[56px]">
+        <form onSubmit={handleSignupSubmit} className="flex flex-col gap-[11px] mt-[56px]">
           <div className="">
             <label className="block text-lg text-black mb-1">이름</label>
             <input 
@@ -36,18 +59,24 @@ export default function SignupForm(){
           <div>
             <label className="block text-lg text-black mb-1">비밀번호</label>
             <input 
-              placeholder="비밀번호"
               type="password"
-              className="w-full text-base border-b border-gray-300 outline-none py-2"/> 
+              value={inputPassword}
+              onChange={(e) => setInputPassword(e.target.value)}
+              className="w-full text-base border-b border-gray-300 outline-none py-2"
+              placeholder="비밀번호"/> 
           </div>  
 
           <div>  
             <label className="block text-lg text-black mb-1">비밀번호 확인</label>
             <input 
-              placeholder="비밀번호"
               type="password"
-              className="w-full text-base border-b border-gray-300 outline-none py-2"/>  
-          </div>       
+              value={inputConfirmPassword}
+              onChange={(e) =>  setInputConfirmPassword(e.target.value)}
+              className="w-full text-base border-b border-gray-300 outline-none py-2"
+              placeholder="비밀번호"/>  
+          </div>
+        {/* 비밀번호 확인 실패 메시지 */}
+        {errorMessage && <div className="flex items-center text-red-600 text-xs">{errorMessage}</div>}
 
 
         {/* 개인정보 동의 */}
@@ -67,6 +96,7 @@ export default function SignupForm(){
 
       {/* 회원가입 버튼 */}    
       <div className="mt-auto pt-10">
+
         <button className="text-2xl py-[18px] bg-gray-300 w-full cursor-pointer">회원가입</button>
       </div>
 
