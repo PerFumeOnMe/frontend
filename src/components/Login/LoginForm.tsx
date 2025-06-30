@@ -1,6 +1,20 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function LoginForm() {
+  const [inputPassword, setInputPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  // 로그인 에러 메시지
+  const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if(inputPassword !== "1234") {
+      setErrorMessage("비밀번호가 일치하지 않습니다.");
+    }else{
+      setErrorMessage("");
+    }
+  }  
+
   return (
     <div className="w-screen h-screen flex items-center justify-center">
       <div className="w-[480px] h-[910px] bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
@@ -11,7 +25,7 @@ export default function LoginForm() {
         </h1>
 
         {/* 로그인 Form */}
-        <form className="flex flex-col items-center gap-[11px] pb-6">
+        <form onSubmit={handleLoginSubmit} className="flex flex-col items-center gap-[11px] pb-6">
           {/* 아이디 */}
           <div className="flex items-center w-96 h-[55px] px-4 mb-3 border border-white rounded-md">
             <img src="/Login/id.svg" alt="아이디 아이콘" className="w-5 h-5 mr-3" />
@@ -27,10 +41,15 @@ export default function LoginForm() {
             <img src="/Login/pw.svg" alt="패스워드 아이콘" className="w-5 h-5 mr-3" />
             <input
               type="password"
-              placeholder="패스워드"
+              value={inputPassword}
+              onChange={(e) => setInputPassword(e.target.value) }
               className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
+              placeholder="패스워드"
             />
           </div>
+
+          {/* 로그인 에러 메시지 */}
+          {errorMessage && <div className="flex items-center text-red-600 text-xs">{errorMessage}</div>}
 
           {/* 로그인 버튼 */}
           <button
