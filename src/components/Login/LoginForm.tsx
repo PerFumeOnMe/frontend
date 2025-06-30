@@ -1,71 +1,71 @@
 import { Link } from "react-router-dom";
 
-export default function LoginForm(){
-  return(
+export default function LoginForm() {
+  return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <div className="w-[480px] h-[910px] min-w-[480px] min-h-[910px] bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
-        <h1 
-          className="self-start
-                     mt-[104px] mb-[232px] ml-[48px] mr-[312px]
-                     text-left break-keep
-                     text-white text-4xl font-bold leading-[44px]">
+      <div className="w-[480px] h-[910px] bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
+
+        {/* 상단 타이틀 */}
+        <h1 className="self-start mt-26 mb-58 ml-12 mr-78 text-white text-4xl font-bold leading-[44px] text-left break-keep">
           향수와 친해지는 지름길
         </h1>
-      <form className="flex flex-col items-center gap-[11px] pb-[24px]">
-        <div className="flex items-center w-[384px] h-[55px] border border-white rounded-md px-4 mb-3">
-          <img src="/Login/id.svg" alt="아이디 아이콘" className="w-5 h-5 mr-3" />
-          <input
-            type="text"
-            placeholder="아이디"
-            className="bg-transparent flex-1 text-white placeholder-white text-lg focus:outline-none"
-          />
-        </div>
 
+        {/* 로그인 Form */}
+        <form className="flex flex-col items-center gap-[11px] pb-6">
+          {/* 아이디 */}
+          <div className="flex items-center w-96 h-[55px] px-4 mb-3 border border-white rounded-md">
+            <img src="/Login/id.svg" alt="아이디 아이콘" className="w-5 h-5 mr-3" />
+            <input
+              type="text"
+              placeholder="아이디"
+              className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
+            />
+          </div>
 
-        <div className="flex items-center w-[384px] h-[55px] border border-white rounded-md px-4">
-          <img src="/Login/pw.svg" alt="패스워드 아이콘" className="w-5 h-5 mr-3" />
-          <input
-            type="password"
-            placeholder="패스워드"
-            className="bg-transparent flex-1 text-white placeholder-white text-lg focus:outline-none"
-          />
-        </div>
+          {/* 비밀번호 */}
+          <div className="flex items-center w-96 h-[55px] px-4 border border-white rounded-md">
+            <img src="/Login/pw.svg" alt="패스워드 아이콘" className="w-5 h-5 mr-3" />
+            <input
+              type="password"
+              placeholder="패스워드"
+              className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
+            />
+          </div>
 
-        
-        <div className="flex justify-center mt-[28px]">
-          <button 
+          {/* 로그인 버튼 */}
+          <button
             type="submit"
-            className="px-[70px]
-                       text-base font-medium text-white
-                       border border-black  bg-black rounded-[30px]
-                       cursor-pointer
-                       w-[384px] h-[55px]"
-                        >
-            로그인</button>
-        </div>
-      </form> 
-      <div className="flex justify-center">
-        <div className="w-[384px] border-b border-white my-6" />
-      </div>
+            className="w-96 h-[55px] mt-7 bg-black border border-black rounded-[30px] text-white text-base font-medium cursor-pointer"
+          >
+            로그인
+          </button>
+        </form>
 
-        <div className="flex flex-col items-center">
-          {/*onClick으로 이동 처리/ 라우팅 or URL */}
-          <button 
-            type="button" 
-            className="flex items-center justify-center gap-[7px] w-[384px] h-[55px] mt-[35px]
-                      border border-none bg-yellow-400 rounded-[30px] ">
-            <img alt="카카오톡" src="/Login/kakao.svg"/>
-          카카오로 시작
+        {/* 구분선 */}
+        <div className="flex justify-center">
+          <div className="w-96 border-b border-white my-6" />
+        </div>
+
+        {/* 카카오 로그인 */}
+        <div className="flex justify-center">
+          <button
+            type="button"
+            className="flex items-center justify-center gap-[7px] w-96 h-[55px] bg-yellow-400 rounded-[30px] text-black font-bold cursor-pointer"
+          >
+            <img src="/Login/kakao.svg" alt="카카오톡" className="w-5 h-5" />
+            카카오로 시작
           </button>
         </div>
+
+        {/* 회원가입 안내 */}
         <div className="flex justify-center mt-[13px] text-white text-lg">
           아이디가 없다면?
           <Link to="/signup" className="ml-2 underline cursor-pointer">
             회원가입
-          </Link> 
-        </div> 
+          </Link>
+        </div>
 
       </div>
-    </div>      
-    );
+    </div>
+  );
 }
