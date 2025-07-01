@@ -34,11 +34,11 @@ export default function SignupForm(){
 
        {/* 헤더 */}
         <div className="flex items-center justify-start ml-[35px]  mt-[42px] ">
-          <button className="cursor-pointer">
+          <Link to="/login">
             <img 
             src="/Login/return_shape.svg" 
             alt="뒤로 가기" />
-          </button>
+          </Link>
           <h2 className="ml-[24px] text-[20px] font-bold">로그인에 사용할 정보를 입력해주세요.</h2>  
         </div>
 
@@ -154,12 +154,14 @@ export default function SignupForm(){
               회원가입
               </button>
       </div>
+
+      {/* css 수정해야함 */}
       {isModalOpen && 
       <div className="fixed inset-0  backdrop-blur-none bg-black/20 flex items-end justify-center z-50">
-        <div className="w-120 h-50 bg-white rounded-t-xl shadow-lg flex flex-col items-center justify-center">
-          <p className="flex items-center justify-center">회원가입이 완료되었습니다.</p>
+        <div className="w-[480px] h-[200px] bg-white rounded-t-xl shadow-lg flex flex-col items-center text-xl justify-center py-0">
+          <p className="flex items-center justify-center mt-[51px]">회원가입이 완료되었습니다.</p>
           <Link
-          className="flex items-center justify-center w-110 h-[50px] bg-black text-white text-xl rounded-md"
+          className="flex items-center justify-center w-110 h-[50px] mb-[29px] bg-black text-white text-xl rounded-md"
           to="/login">    
             로그인하러가기
           </Link>
@@ -167,7 +169,6 @@ export default function SignupForm(){
       </div>}
     </div>
     </div>
-
 );
 }
 
