@@ -154,15 +154,20 @@ export default function SignupForm(){
               회원가입
               </button>
       </div>
-         {isModalOpen && <div>
-        <div>회원가입이 완료되었습니다.</div>
-        <Link
-        to="/login">    
-          로그인하러가기
-        </Link>
+      {isModalOpen && 
+      <div className="fixed inset-0  backdrop-blur-none bg-black/20 flex items-end justify-center z-50">
+        <div className="w-120 h-50 bg-white rounded-t-xl shadow-lg flex flex-col items-center justify-center">
+          <p className="flex items-center justify-center">회원가입이 완료되었습니다.</p>
+          <Link
+          className="flex items-center justify-center w-110 h-[50px] bg-black text-white text-xl rounded-md"
+          to="/login">    
+            로그인하러가기
+          </Link>
+        </div>  
       </div>}
-      </div>
+    </div>
     </div>
 
 );
 }
+
