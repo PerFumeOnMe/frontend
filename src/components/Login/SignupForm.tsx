@@ -7,8 +7,8 @@ export default function SignupForm(){
   const [inputConfirmPassword, setInputConfirmPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isAgreed, setIsAgreed] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  //
   const isFormvalid = 
     inputName.trim() !== "" &&
     inputId.trim() !== "" &&
@@ -16,7 +16,6 @@ export default function SignupForm(){
     inputPassword === inputConfirmPassword &&
     isAgreed;
     
-
   const handleSignupSubmit = async(e: FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
 
@@ -101,11 +100,21 @@ export default function SignupForm(){
               className="accent-black cursor-pointer"/>        
             개인정보 수집 및 이용 동의서
           </label>
-          <button className="cursor-pointer">
+          <button 
+            onClick={()=>setIsDropdownOpen(!isDropdownOpen)}
+            className="cursor-pointer">
             <img 
             src="/Login/down_shape.svg"
             alt="드롭다운 버튼"></img>
           </button>
+
+          {/* 개인정보 수집 및 이용 동의서 (드롭다운) */}
+{/* 이 부분 css 수정부터 하면 됨  */}
+          {isDropdownOpen&&
+          <div className="">
+            <div className="">1. 수집하는 개인정보 항목 ~~~~~</div>
+          </div>}
+
          </div> 
         </form>         
 
@@ -115,8 +124,6 @@ export default function SignupForm(){
           disabled={!isFormvalid}
           className={`text-2xl  text-white py-[18px] w-full ${isFormvalid ? ' bg-black cursor-pointer':' bg-gray-300 cursor-not-allowed'}`}>회원가입</button>
       </div>
-
-      {/* 드롭다운 박스 내용 */}
       </div>
     </div>
 );
