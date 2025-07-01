@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function SignupForm(){
   const [inputName, setInputName] = useState<string>("");
@@ -8,6 +9,7 @@ export default function SignupForm(){
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isAgreed, setIsAgreed] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isModalOpen,  setIsModalOpen] = useState(false);
 
   const isFormvalid = 
     inputName.trim() !== "" &&
@@ -18,7 +20,6 @@ export default function SignupForm(){
     
   const handleSignupSubmit = async(e: FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
-
      //비밀번호 확인
     if(inputPassword !== inputConfirmPassword) {
       setErrorMessage("비밀번호가 일치하지 않습니다.");
@@ -27,7 +28,6 @@ export default function SignupForm(){
     }
   }
 
-  // 버튼 누르면 alert 창? 뜨고 로그인으로 넘어가는 버튼.
   return(
     <div className="w-screan h-screan flex items-center justify-center">
       <div className="w-[480px] min-h-screen bg-white flex flex-col justify-between">
@@ -141,10 +141,12 @@ export default function SignupForm(){
         </div>
       </form>         
 
+      {/* 버튼 누르면 모달 뜨고 로그인으로 넘어가는 버튼. */}
       {/* 회원가입 버튼 */}
       <div className="mt-auto pt-10">
         <button 
           disabled={!isFormvalid}
+          onClick={()=> setIsModalOpen(true)}
           className={`text-2xl  text-white py-[18px] w-full ${
             isFormvalid ? ' bg-black cursor-pointer':' bg-gray-300 cursor-not-allowed'
             }`}
@@ -152,6 +154,13 @@ export default function SignupForm(){
               회원가입
               </button>
       </div>
+         {isModalOpen && <div>
+        <div>회원가입이 완료되었습니다.</div>
+        <Link
+        to="/login">    
+          로그인하러가기
+        </Link>
+      </div>}
       </div>
     </div>
 
