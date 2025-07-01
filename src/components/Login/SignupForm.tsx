@@ -30,7 +30,7 @@ export default function SignupForm(){
   // 버튼 누르면 alert 창? 뜨고 로그인으로 넘어가는 버튼.
   return(
     <div className="w-screan h-screan flex items-center justify-center">
-      <div className="w-[480px] h-[910px] bg-white flex flex-col justify-between">
+      <div className="w-[480px] min-h-screen bg-white flex flex-col justify-between">
 
        {/* 헤더 */}
         <div className="flex items-center justify-start ml-[35px]  mt-[42px] ">
