@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function SignupForm(){
@@ -29,25 +29,25 @@ export default function SignupForm(){
   }
 
   return(
-    <div className="w-screan h-screan flex items-center justify-center">
-      <div className="w-[480px] min-h-screen bg-white flex flex-col justify-between">
+    <main className="w-screan h-screan flex items-center justify-center">
+      <section className="w-[480px] min-h-screen bg-white flex flex-col justify-between">
 
        {/* 헤더 */}
-        <div className="flex items-center justify-start ml-[35px]  mt-[42px] ">
+        <header className="flex items-center justify-start ml-[35px]  mt-[42px] ">
           <Link to="/login">
             <img 
             src="/Login/return_shape.svg" 
             alt="뒤로 가기" />
           </Link>
           <h2 className="ml-[24px] text-[20px] font-bold">로그인에 사용할 정보를 입력해주세요.</h2>  
-        </div>
+        </header>
 
         {/*Form */}
         {/* map 써서 refact */}
         <form onSubmit={handleSignupSubmit} className="flex flex-col gap-[11px] mt-[56px] w-full max-w-[372px] mx-auto">
 
           {/* 이름 */}
-          <div>
+          <fieldset>
             <label className="block text-lg text-black mb-1">이름</label>
             <input 
               type="text"
@@ -56,10 +56,10 @@ export default function SignupForm(){
               placeholder="홍길동"
               className="w-full text-base border-b border-gray-300 outline-none py-2"
                 />
-          </div>
+          </fieldset>
 
           {/* 아이디 */}
-          <div>
+          <fieldset>
             <label className="block text-lg text-black mb-1">아이디</label>
             <input 
               type="text"
@@ -67,10 +67,10 @@ export default function SignupForm(){
               onChange={(e) => setInputId(e.target.value)}
               placeholder="UMC123"
               className="w-full text-base border-b border-gray-300 outline-none py-2"/>
-          </div>  
+          </fieldset>  
 
           {/* 비밀번호 */}
-          <div>
+          <fieldset>
             <label className="block text-lg text-black mb-1">비밀번호</label>
             <input 
               type="password"
@@ -78,10 +78,10 @@ export default function SignupForm(){
               onChange={(e) => setInputPassword(e.target.value)}
               className="w-full text-base border-b border-gray-300 outline-none py-2"
               placeholder="비밀번호"/> 
-          </div>  
+          </fieldset>  
 
           {/* 비밀번호 확인 */}
-          <div>  
+          <fieldset>  
             <label className="block text-lg text-black mb-1">비밀번호 확인</label>
             <input 
               type="password"
@@ -89,16 +89,15 @@ export default function SignupForm(){
               onChange={(e) =>  setInputConfirmPassword(e.target.value)}
               className="w-full text-base border-b border-gray-300 outline-none py-2"
               placeholder="비밀번호"/>  
-          </div>
+          </fieldset>
         {/* 비밀번호 확인 실패 메시지 */}
         {errorMessage && <div className="flex items-center text-red-600 text-xs">{errorMessage}</div>}
 
 
         {/* 개인정보 동의 전체 영역*/}
         {/* 체크박스 이미지로 isAgreed useState */}
-        <div className="mt-[19px] mx-auto w-full max-w-[372px]">
+        <section className="mt-[19px] mx-auto w-full max-w-[372px]">
           <div className="flex items-center justify-between mt-[19px]">
-
             <label className="flex items-center gap-10  text-sm">
               <input 
                 type="checkbox" 
@@ -110,14 +109,10 @@ export default function SignupForm(){
             <button 
               onClick={()=>setIsDropdownOpen(!isDropdownOpen)}
               className="cursor-pointer">
-              <img 
-              src="/Login/down_shape.svg"
-              alt="드롭다운 버튼"></img>
+              <img src="/Login/down_shape.svg" alt="드롭다운 버튼"></img>
             </button>
-
           </div> 
             {/* 개인정보 수집 및 이용 동의서 (드롭다운) */}
-            {/* 이 부분 css 수정부터 하면 됨  */}
             {isDropdownOpen&& (<div className="mt-2 bg-gray-100 text-sm text-gray-700 p-4 rounded-md leading-relaxed whitespace-pre-line">
             {`1. 수집하는 개인정보 항목
             회사는 회원가입 및 서비스 이용을 위해 아래의 개인정보를 수집합니다.
@@ -138,12 +133,12 @@ export default function SignupForm(){
             이용자는 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있습니다. 
             다만, 필수 정보의 수집 및 이용에 대한 동의를 거부할 경우, 회원가입 및 서비스 이용이 제한될 수 있습니다.`}
             </div>)}
-        </div>
+        </section>
       </form>         
 
       {/* 버튼 누르면 모달 뜨고 로그인으로 넘어가는 버튼. */}
       {/* 회원가입 버튼 */}
-      <div className="mt-auto pt-10">
+      <footer className="mt-auto pt-10">
         <button 
           disabled={!isFormvalid}
           onClick={()=> setIsModalOpen(true)}
@@ -153,11 +148,11 @@ export default function SignupForm(){
             >
               회원가입
               </button>
-      </div>
+      </footer>
 
       {/* css 수정해야함 */}
       {isModalOpen && 
-      <div className="fixed inset-0  backdrop-blur-none bg-black/20 flex items-end justify-center z-50">
+      <section className="fixed inset-0  backdrop-blur-none bg-black/20 flex items-end justify-center z-50">
         <div className="w-[480px] h-[200px] bg-white rounded-t-xl shadow-lg flex flex-col items-center text-xl justify-center py-0">
           <p className="flex items-center justify-center mt-[51px]">회원가입이 완료되었습니다.</p>
           <Link
@@ -166,9 +161,8 @@ export default function SignupForm(){
             로그인하러가기
           </Link>
         </div>  
-      </div>}
-    </div>
-    </div>
+      </section>}
+    </section>
+    </main>
 );
 }
-
