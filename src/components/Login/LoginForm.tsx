@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom"; // 임시 로그인 용 코드 추가
 
 export default function LoginForm() {
@@ -21,40 +21,46 @@ export default function LoginForm() {
   }  
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
-      <div className="w-[480px] min-h-screen bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
+    <main className="w-screen h-screen flex items-center justify-center">
+      <section className="w-[480px] min-h-screen bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
 
         {/* 상단 타이틀 */}
         <h1 className="self-start mt-26 mb-58 ml-12 mr-78 text-white text-4xl font-bold leading-[44px] text-left break-keep">
           향수와 친해지는 지름길
         </h1>
 
+
         {/* 로그인 Form */}
         <form onSubmit={handleLoginSubmit} className="flex flex-col items-center gap-[11px] pb-6">
           {/* 아이디 */}
-          <div className="flex items-center w-96 h-[55px] px-4 mb-3 border border-white rounded-md">
-            <img src="/Login/id.svg" alt="아이디 아이콘" className="w-5 h-5 mr-3" />
-            <input
-              type="text"
-              placeholder="아이디"
-              className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
-            />
+          <div className="mb-3 w-96">
+            <label className="flex items-center h-[55px] px-4 border border-white rounded-md">
+              <img src="/Login/id.svg" alt="아이디 아이콘" className="w-5 h-5 mr-3" />
+              <input
+                type="text"
+                placeholder="아이디"
+                className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
+              />
+            </label>
           </div>
 
           {/* 비밀번호 */}
-          <div className="flex items-center w-96 h-[55px] px-4 border border-white rounded-md">
-            <img src="/Login/pw.svg" alt="패스워드 아이콘" className="w-5 h-5 mr-3" />
-            <input
-              type="password"
-              value={inputPassword}
-              onChange={(e) => setInputPassword(e.target.value) }
-              className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
-              placeholder="패스워드"
-            />
+          <div className="mb-3 w-96">
+            <label className="flex items-center h-[55px] px-4 border border-white rounded-md">
+              <img src="/Login/pw.svg" alt="패스워드 아이콘" className="w-5 h-5 mr-3" />
+              <input
+                type="password"
+                value={inputPassword}
+                onChange={(e) => setInputPassword(e.target.value) }
+                className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
+                placeholder="패스워드"
+              />
+            </label>
           </div>
 
+
           {/* 로그인 에러 메시지 */}
-          {errorMessage && <div className="flex items-center text-red-600 text-xs">{errorMessage}</div>}
+          {errorMessage && <p className="flex items-center text-red-600 text-xs">{errorMessage}</p>}
 
           {/* 로그인 버튼 */}
           <button
@@ -71,6 +77,7 @@ export default function LoginForm() {
         </div>
 
         {/* 카카오 로그인 */}
+        <footer className="flex flex-col items-center mt-auto pb-10">
         <div className="flex justify-center">
           <Link
             to="/kakao"
@@ -82,14 +89,15 @@ export default function LoginForm() {
         </div>
 
         {/* 회원가입 안내 */}
-        <div className="flex justify-center mt-[13px] text-white text-lg">
-          아이디가 없다면?
-          <Link to="/signup" className="ml-2 underline cursor-pointer">
-            회원가입
-          </Link>
-        </div>
+          <p className="flex justify-center mt-[13px] text-white text-lg">
+            아이디가 없다면?
+            <Link to="/signup" className="ml-2 underline cursor-pointer">
+              회원가입
+            </Link>
+          </p>
+        </footer>
 
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
