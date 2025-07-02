@@ -5,11 +5,16 @@ export default function KakaoSignupForm(){
         <div className="flex flex-col items-center w-[361px] h-[564px] mt-[154px] bg-white rounded-[20px]">
           
           {/* 퍼퓨온미 */}
-          <header className="w-[318px] pt-[34px] border-b">
-            <div className="w-[56px] h-[54px] bg-gray-400">사진 추가??</div>
-            <div className="text-sm">퍼퓨온미</div>
-            <p className="text-[10px]">퍼퓨온미</p>
+          <header className="w-full px-6 pt-[34px] pb-[14px] border-b border-gray-200 flex items-center gap-4">
+            {/* 왼쪽:이미지 */}
+            <div className="w-[56px] h-[54px] bg-gray-300" />
+            {/* 오른쪽:텍스트 */}
+            <div className="flex flex-col justify-center">
+              <span className="text-sm">퍼퓨온미</span>
+              <span className="text-[10px] text-gray-500">퍼퓨온미</span>
+            </div>
           </header>
+
           {/* 전체 동의하기 */}
             <main className="w-[318px] pt-[34px]">
               <section className="border-b">  
