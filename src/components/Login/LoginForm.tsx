@@ -11,15 +11,18 @@ export default function LoginForm() {
   // 로그인 에러 메시지
   const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    localStorage.setItem("isLoggedIn", "true"); // 임시 로그인 용 코드 추가
-    navigate("/", { replace: true }); // 임시 로그인 용 코드 추가
 
     if(inputId === "UMC" && inputPassword !== "1234") {
       setErrorMessage("비밀번호가 일치하지 않습니다.");
-    }else{
-      setErrorMessage("");
+      return;
     }
+
+    // 로그인 성공 처리
+    setErrorMessage("")
+    localStorage.setItem("isLoggedIn", "true"); // 임시 로그인 용 코드 추가
+    navigate("/", { replace: true }); // 임시 로그인 용 코드 추가
   }  
+
 
   return (
     <main className="w-screen h-screen flex items-center justify-center">
