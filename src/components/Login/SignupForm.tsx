@@ -106,7 +106,8 @@ export default function SignupForm(){
                 className="accent-black cursor-pointer"/>        
               개인정보 수집 및 이용 동의서
             </label>
-            <button 
+            <button
+              type="button" 
               onClick={()=>setIsDropdownOpen(!isDropdownOpen)}
               className="cursor-pointer">
               <img src="/Login/down_shape.svg" alt="드롭다운 버튼"></img>
