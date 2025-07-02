@@ -78,20 +78,20 @@ export default function LoginForm() {
 
         {/* 카카오 로그인 */}
         <footer className="flex flex-col items-center mt-auto pb-10">
-        <div className="flex justify-center">
-          <Link
-            to="/kakao"
-            className="flex items-center justify-center gap-[7px] w-96 h-[55px] bg-yellow-400 rounded-[30px] text-black font-bold cursor-pointer"
-          >
-            <img src="/Login/kakao.svg" alt="카카오톡" className="w-5 h-5" />
-            카카오로 시작
-          </Link>
-        </div>
+          <div className="flex justify-center">
+            <Link
+              to="/kakao"
+              className="flex items-center justify-center gap-[7px] w-96 h-[55px] bg-yellow-400 rounded-[30px] text-black font-bold"
+            >
+              <img src="/Login/kakao.svg" alt="카카오톡" className="w-5 h-5" />
+              카카오로 시작
+            </Link>
+          </div>
 
-        {/* 회원가입 안내 */}
+          {/* 회원가입 안내 */}
           <p className="flex justify-center mt-[13px] text-white text-lg">
             아이디가 없다면?
-            <Link to="/signup" className="ml-2 underline cursor-pointer">
+            <Link to="/signup" className="ml-2 underline">
               회원가입
             </Link>
           </p>
