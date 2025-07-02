@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"; // 임시 로그인 용 코드 �
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const [inputId, setInputId] = useState<string>("");
   const [inputPassword, setInputPassword] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -13,7 +14,7 @@ export default function LoginForm() {
     localStorage.setItem("isLoggedIn", "true"); // 임시 로그인 용 코드 추가
     navigate("/", { replace: true }); // 임시 로그인 용 코드 추가
 
-    if(inputPassword !== "1234") {
+    if(inputId === "UMC" && inputPassword !== "1234") {
       setErrorMessage("비밀번호가 일치하지 않습니다.");
     }else{
       setErrorMessage("");
@@ -38,6 +39,8 @@ export default function LoginForm() {
               <img src="/Login/id.svg" alt="아이디 아이콘" className="w-5 h-5 mr-3" />
               <input
                 type="text"
+                value={inputId}
+                onChange={(e) => setInputId(e.target.value)}
                 placeholder="아이디"
                 className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
               />
@@ -51,7 +54,7 @@ export default function LoginForm() {
               <input
                 type="password"
                 value={inputPassword}
-                onChange={(e) => setInputPassword(e.target.value) }
+                onChange={(e) => setInputPassword(e.target.value)}
                 className="flex-1 bg-transparent text-white placeholder-white text-lg focus:outline-none"
                 placeholder="패스워드"
               />
