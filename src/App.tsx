@@ -8,6 +8,7 @@ import MyPage from './pages/MyPage.tsx';
 import PBTIPage from './pages/PBTIPage.tsx';
 import DiaryPage from './pages/DiaryPage.tsx';
 import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
+import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupPage />
+  },
+  {
+    path: "/kakao",
+    element: <KakaoSignupPage />
   },
   // 아래는 보호 라우트로 감싼 실제 서비스 페이지들
   {
