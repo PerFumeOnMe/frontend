@@ -33,13 +33,14 @@ export default function SignupForm(){
       <section className="w-[480px] min-w-[480px] min-h-screen bg-white flex flex-col justify-between">
 
        {/* 헤더 */}
-        <header className="flex items-center justify-start ml-[35px]  mt-[42px] ">
+        <header className="flex items-center justify-start ml-[35px]  mt-[36px] ">
           <Link to="/login">
             <img 
             src="/Login/return_shape.svg" 
-            alt="뒤로 가기" />
+            alt="뒤로 가기"
+            className="w-[11px] h-[18px]" />
           </Link>
-          <h2 className="ml-[24px] text-[20px] font-bold">로그인에 사용할 정보를 입력해주세요.</h2>  
+          <h2 className="ml-[24px] text-xl font-bold">로그인에 사용할 정보를 입력해주세요.</h2>  
         </header>
 
         {/*Form */}
@@ -47,7 +48,7 @@ export default function SignupForm(){
         <form onSubmit={handleSignupSubmit} className="flex flex-col gap-[11px] mt-[56px] w-full max-w-[372px] mx-auto">
 
           {/* 이름 */}
-          <fieldset>
+          <fieldset className="h-[76px]">
             <label className="block text-lg text-black mb-1">이름</label>
             <input 
               type="text"
@@ -59,7 +60,7 @@ export default function SignupForm(){
           </fieldset>
 
           {/* 아이디 */}
-          <fieldset>
+          <fieldset className="h-[76px]">
             <label className="block text-lg text-black mb-1">아이디</label>
             <input 
               type="text"
@@ -70,7 +71,7 @@ export default function SignupForm(){
           </fieldset>  
 
           {/* 비밀번호 */}
-          <fieldset>
+          <fieldset className="h-[76px]">
             <label className="block text-lg text-black mb-1">비밀번호</label>
             <input 
               type="password"
@@ -81,7 +82,7 @@ export default function SignupForm(){
           </fieldset>  
 
           {/* 비밀번호 확인 */}
-          <fieldset>  
+          <fieldset className="h-[76px]">  
             <label className="block text-lg text-black mb-1">비밀번호 확인</label>
             <input 
               type="password"
@@ -153,11 +154,10 @@ export default function SignupForm(){
               </button>
       </footer>
 
-      {/* css 수정해야함 */}
       {isModalOpen && 
       <section className="fixed inset-0  backdrop-blur-none bg-black/20 flex items-end justify-center z-50">
-        <div className="w-[480px] h-[200px] bg-white rounded-t-xl shadow-lg flex flex-col items-center text-xl justify-center py-0">
-          <p className="flex items-center justify-center mt-[51px]">회원가입이 완료되었습니다.</p>
+        <div className="w-[480px] h-[200px] bg-white rounded-t-xl shadow-lg flex flex-col items-center text-xl justify-center py-0 pt-[51px]">
+          <p className="flex items-center justify-center mb-[49px] font-bold">회원가입이 완료되었습니다.</p>
           <Link
           className="flex items-center justify-center w-110 h-[50px] mb-[29px] bg-black text-white text-xl rounded-md"
           to="/login">    
