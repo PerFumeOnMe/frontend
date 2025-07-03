@@ -4,7 +4,7 @@ export default function KakaoSignupForm(){
       <div className="flex justify-center w-[480px] min-h-screen bg-gray-500">
         <div className="flex flex-col items-center w-[361px] h-[564px] mt-[154px] bg-white rounded-[20px]">
           
-          {/* 퍼퓨온미 */}
+          {/* 헤더 밑줄 수정해야함 */}
           <header className="w-full px-6 pt-[34px] pb-[14px] border-b border-gray-200 flex items-center gap-4">
             {/* 왼쪽:이미지 */}
             <div className="w-[56px] h-[54px] bg-gray-300" />
@@ -15,32 +15,70 @@ export default function KakaoSignupForm(){
             </div>
           </header>
 
-          {/* 전체 동의하기 */}
-            <main className="w-[318px] pt-[34px]">
-              <section className="border-b">  
+          {/* 전체 동의하기/  체크 박스 수정해야함 */}
+          <main className="w-[318px] ">
+            <section className="border-b pt-[2px] pb-[24px] px-1"> 
+              <div className="flex items-start gap-2 mb-2"> 
                 <input 
                   type="checkbox"/>
-                <label>전체 동의하기</label>
-                <p>{`전체동의는 선택목적에 대한 동의를 포함하고 있으며, 선택목적에 대한
-                      동의를 거부해도 서비스 이용이 가능합니다.`}
+                <label className="text-sm font-bold text-black">전체 동의하기</label>
+               </div>  
+                <p className="text-[10px] text-gray-500 leading-snug">{`전체동의는 선택목적에 대한 동의를 포함하고 있으며, 선택목적에 대한
+                  동의를 거부해도 서비스 이용이 가능합니다.`}
                 </p>
-                <section className="border-b">
-                  <p>이메일(예: wdd789@naver.com)</p>
-                  <p>퍼퓨온미 서비스 제공을 위해 회원번호와 함께 개인 정보가 제공됩니다.</p>
-                </section>
+            </section>  
+            <section className="border-b border-gray-200 pb-4 pt-4 px-1">
+              <p className="text-sm">이메일(예: wdd789@naver.com)</p>
+              <p className="text-[10px] text-gray-500 leading-snug mt-1">
+                {`퍼퓨온미 서비스 제공을 위해 회원번호와 함께 개인 정보가 제공됩니다. 보다 자세한 개인정보 제공항목은 등의 내용에서 확인할 수 있습니다. 정보는 서비스 탈퇴 시 지체없이 파기 됩니다.`}
+              </p>
+            </section>
 
-                <section>
-                    <input />
-                    <label>[필수] 카카오 개인정보 제3자 제공 동의</label>
-                </section>
-              </section>
+            <section>
+              <label className="text-[13px]">
+                <input 
+                  type="checkbox"/> 
+              [필수] 카카오 개인정보 제3자 제공 동의
+                <a href="https://www.kakao.com/ko/terms" 
+                  className="underline ml-[39px]"
+                  >보기</a> 
+              </label>
 
-              <button className="text-xl w-full mt-6 py-2 rounded-md">
-                    동의하고 계속하기
-              </button>               
-            </main>
+              <ul className="text-[13px] pl-[54px]">
+                <li>닉네임</li>
+                <li>계정</li>
+                <li>전화번호</li>
+                <li>별명</li>
+              </ul>
+            </section>
+              
+            <button className="text-xl w-full mt-6 py-2 rounded-md">
+              동의하고 계속하기
+            </button>               
+          </main>
         </div>
       </div>
     </div>
   );
 }
+//css 수정 중이었음
+{/* <section className="px-1 pt-4 pb-5 border-b border-gray-200 text-sm">
+  {/* 상단 라인: 체크 + 제목 + 보기 */}
+  // <div className="flex justify-between items-center">
+  //   <div className="flex items-center gap-2">
+  //     <span className="text-yellow-400 text-lg">✔</span>
+  //     <span className="font-medium">[필수] 카카오 개인정보 제3자 제공 동의</span>
+  //   </div>
+  //   <button type="button" className="text-[12px] underline text-gray-500">
+  //     보기
+  //   </button>
+  // </div>
+
+  {/* 하위 항목 */}
+//   <ul className="mt-2 pl-6 text-[12px] text-gray-500 space-y-[2px] leading-snug">
+//     <li>닉네임</li>
+//     <li>계정</li>
+//     <li>전화번호</li>
+//     <li>별명</li>
+//   </ul>
+// </section> */}
