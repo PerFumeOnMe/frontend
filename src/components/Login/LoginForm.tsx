@@ -37,7 +37,7 @@ export default function LoginForm() {
         {/* 로그인 Form */}
         <form onSubmit={handleLoginSubmit} className="flex flex-col items-center gap-[11px] pb-6">
           {/* 아이디 */}
-          <div className="mb-3 w-96">
+          <div className="w-96">
             <label className="flex items-center h-[55px] px-4 border border-white rounded-md">
               <img src="/Login/id.svg" alt="아이디 아이콘" className="w-5 h-5 mr-3" />
               <input
@@ -51,7 +51,7 @@ export default function LoginForm() {
           </div>
 
           {/* 비밀번호 */}
-          <div className="mb-3 w-96">
+          <div className="w-96">
             <label className="flex items-center h-[55px] px-4 border border-white rounded-md">
               <img src="/Login/pw.svg" alt="패스워드 아이콘" className="w-5 h-5 mr-3" />
               <input
@@ -71,7 +71,7 @@ export default function LoginForm() {
           {/* 로그인 버튼 */}
           <button
             type="submit"
-            className="w-96 h-[55px] mt-7 bg-black border border-black rounded-[30px] text-white text-base font-medium cursor-pointer"
+            className="w-96 h-[55px] bg-black border border-black rounded-[30px] text-white text-base font-medium cursor-pointer"
           >
             로그인
           </button>
@@ -79,11 +79,11 @@ export default function LoginForm() {
 
         {/* 구분선 */}
         <div className="flex justify-center">
-          <div className="w-96 border-b border-white my-6" />
+          <div className="w-96 border-b border-white" />
         </div>
 
         {/* 카카오 로그인 */}
-        <footer className="flex flex-col items-center mt-auto pb-10">
+        <footer className="flex flex-col items-center pb-10 pt-[28px]">
           <div className="flex justify-center">
             <Link
               to="/kakao"
@@ -97,7 +97,7 @@ export default function LoginForm() {
           {/* 회원가입 안내 */}
           <p className="flex justify-center mt-[13px] text-white text-lg">
             아이디가 없다면?
-            <Link to="/signup" className="ml-2 underline">
+            <Link to="/signup" className="pl-[14px] underline">
               회원가입
             </Link>
           </p>
