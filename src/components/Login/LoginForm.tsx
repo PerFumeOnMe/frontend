@@ -26,7 +26,7 @@ export default function LoginForm() {
 
   return (
     <main className="w-screen h-screen flex items-center justify-center">
-      <section className="w-[480px] min-h-screen bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
+      <section className="w-[480px] min-w-[480px] min-h-screen bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
 
         {/* 상단 타이틀 */}
         <h1 className="self-start mt-26 mb-58 ml-12 mr-78 text-white text-4xl font-bold leading-[44px] text-left break-keep">

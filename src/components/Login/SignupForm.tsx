@@ -30,7 +30,7 @@ export default function SignupForm(){
 
   return(
     <main className="w-screan h-screan flex items-center justify-center">
-      <section className="w-[480px] min-h-screen bg-white flex flex-col justify-between">
+      <section className="w-[480px] min-w-[480px] min-h-screen bg-white flex flex-col justify-between">
 
        {/* 헤더 */}
         <header className="flex items-center justify-start ml-[35px]  mt-[42px] ">

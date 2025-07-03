@@ -1,8 +1,12 @@
+//import { useState } from "react";
+
 export default function KakaoSignupForm(){
+//  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return(
     <div className="w-screen h-screen flex items-center justify-center">
-      <div className="flex justify-center w-[480px] min-h-screen bg-gray-500">
-        <div className="flex flex-col items-center w-[361px] h-[564px] mt-[154px] bg-white rounded-[20px]">
+      <div className="flex justify-center w-[480px] min-w-[480px] min-h-screen bg-gray-500">
+        <div className="flex flex-col justify-between w-[361px] h-[564px] mt-[154px] bg-white rounded-[20px]">
           
           {/* 헤더 밑줄 수정해야함 */}
           <header className="w-full px-6 pt-[34px] pb-[14px] border-b border-gray-200 flex items-center gap-4">
@@ -14,9 +18,9 @@ export default function KakaoSignupForm(){
               <span className="text-[10px] text-gray-500">퍼퓨온미</span>
             </div>
           </header>
-
+          <form>
           {/* 전체 동의하기/  체크 박스 수정해야함 */}
-          <main className="w-[318px] ">
+          <div className="w-[318px] ">
             <section className="border-b pt-[2px] pb-[24px] px-1"> 
               <div className="flex items-start gap-2 mb-2"> 
                 <input 
@@ -44,41 +48,20 @@ export default function KakaoSignupForm(){
                   >보기</a> 
               </label>
 
-              <ul className="text-[13px] pl-[54px]">
+              <ul className="text-[13px] pl-[54px] text-gray-500">
                 <li>닉네임</li>
                 <li>계정</li>
                 <li>전화번호</li>
                 <li>별명</li>
               </ul>
-            </section>
-              
-            <button className="text-xl w-full mt-6 py-2 rounded-md">
-              동의하고 계속하기
-            </button>               
-          </main>
+            </section>               
+          </div>            
+          <button type="submit" className="text-xl w-full mt-6 py-2 rounded-md">
+            동의하고 계속하기
+          </button>
+          </form>
         </div>
       </div>
     </div>
   );
 }
-//css 수정 중이었음
-{/* <section className="px-1 pt-4 pb-5 border-b border-gray-200 text-sm">
-  {/* 상단 라인: 체크 + 제목 + 보기 */}
-  // <div className="flex justify-between items-center">
-  //   <div className="flex items-center gap-2">
-  //     <span className="text-yellow-400 text-lg">✔</span>
-  //     <span className="font-medium">[필수] 카카오 개인정보 제3자 제공 동의</span>
-  //   </div>
-  //   <button type="button" className="text-[12px] underline text-gray-500">
-  //     보기
-  //   </button>
-  // </div>
-
-  {/* 하위 항목 */}
-//   <ul className="mt-2 pl-6 text-[12px] text-gray-500 space-y-[2px] leading-snug">
-//     <li>닉네임</li>
-//     <li>계정</li>
-//     <li>전화번호</li>
-//     <li>별명</li>
-//   </ul>
-// </section> */}
