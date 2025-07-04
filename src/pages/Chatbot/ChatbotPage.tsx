@@ -24,7 +24,7 @@ const ChatbotPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[400px] mx-auto border border-[#eee] rounded bg-white flex flex-col h-[600px]">
+    <div className="max-w-[480px] h-screen mx-auto bg-white flex flex-col">
       <Header />
       <ChatArea messages={messages} />
       <InputBox onSend={handleSend} />

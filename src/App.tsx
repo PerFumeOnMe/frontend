@@ -38,8 +38,12 @@ const router = createBrowserRouter([
           { path: 'PBTI', element: <PBTIPage /> },
           { path: 'Diary', element: <DiaryPage /> },
           { path: 'MyPage', element: <MyPage /> },
-          { path: 'Chatbot', element: <ChatbotPage /> },
         ]
+      },
+      // ChatbotPage를 별도의 자식으로 분리
+      {
+        path: '/Chatbot',
+        element: <ChatbotPage />
       }
     ]
   }

@@ -15,17 +15,17 @@ const InputBox: React.FC<InputBoxProps> = ({ onSend }) => {
   };
 
   return (
-    <div className="input-box flex px-[10px] py-[10px] bg-[#fafafa] border-t">
+    <div className="input-box flex px-3 py-3 border-t-gray-300 border-t-1 bg-white">
       <input
         type="text"
-        className="flex-1 px-[8px] py-[8px] border border-[#ccc] rounded-[8px] mr-[8px] focus:outline-none"
+        className="flex-1 px-3 py-3 border border-[#ccc] rounded-md mr-2 focus:outline-none"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="검색어를 입력해주세요."
         onKeyDown={(e) => e.key === "Enter" && handleSend()}
       />
       <button
-        className="ml-[8px] px-[8px] py-[8px] bg-indigo-500 hover:bg-indigo-600 text-white rounded-[8px] font-semibold"
+        className="ml-0 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-[8px] font-semibold"
         onClick={handleSend}
       >
         전송

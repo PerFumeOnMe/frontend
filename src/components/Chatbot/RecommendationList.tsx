@@ -16,7 +16,7 @@ const recommendations = [
 ];
 
 const RecommendationList: React.FC = () => (
-  <ul className="recommendation-list ml-[20px] pl-0">
+  <ul className="recommendation-list">
     {recommendations.map((item, idx) => (
       <li key={idx} className="mb-2">
         <strong>{item.name}</strong>: {item.desc}

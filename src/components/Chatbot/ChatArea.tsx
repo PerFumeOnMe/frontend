@@ -17,7 +17,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ messages }) => {
   return (
     <div
       ref={chatRef}
-      className="chat-area px-[10px] py-[10px] h-[500px] overflow-y-auto bg-[#f5f5f5] flex-1"
+      className="chat-area px-4 py-4 overflow-y-auto bg-[#ffffff] flex-1"
     >
       {messages.map((msg, idx) =>
         msg.type === "user" ? (

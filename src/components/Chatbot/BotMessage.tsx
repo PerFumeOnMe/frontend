@@ -6,11 +6,20 @@ interface BotMessageProps {
 }
 
 const BotMessage: React.FC<BotMessageProps> = ({ text }) => (
-  <div className="bot-message flex items-start my-[10px]">
-    <span className="bot-icon mr-[8px] text-2xl">🤖</span>
-    <span className="inline-block bg-white px-[12px] py-[8px] rounded-[16px] border shadow">
+  <div className="flex flex-col items-start ml-1 mb-2">
+    <div className="flex items-center">
+        {/* 챗봇 아이콘 */}
+        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#e0e7ef] flex items-center justify-center mr-2 mt-1">
+            <span className="text-lg">🤖</span>
+        </div>
+        <div className="font-bold">
+            퍼퓨봇
+        </div>
+    </div>
+    {/* 말풍선 */}
+    <div className="bg-white ml-7 border border-[#eee] rounded-2xl px-4 py-3 shadow-sm max-w-[75%] text-sm text-gray-800 whitespace-pre-line">
       {text.includes("향수 추천 요약") ? <RecommendationList /> : text}
-    </span>
+    </div>
   </div>
 );
 
