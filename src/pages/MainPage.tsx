@@ -1,9 +1,12 @@
+import Banner from "../components/MainPage/Banner";
+
 const MainPage = () => {
     
     return(
-        <>
-            <div>메인페이지</div>
-        </>
+        // <div className="w-full px-4 pt-6 pb-24 bg-white">
+        //     <Banner/>
+        // </div>
+        <Banner />
     )
 }
 
