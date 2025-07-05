@@ -25,7 +25,7 @@ export default function KakaoSignupForm() {
       <div className="flex justify-center w-[480px] min-w-[480px] min-h-screen bg-[#00000066]">
         <div className="flex flex-col justify-between w-[361px] h-[564px] mt-[154px] bg-white rounded-[20px]">
           {/* Header */}
-          <header className="w-full px-6 pt-[34px] pb-[14px] border-b border-gray-200 flex items-center gap-4">
+          <header className="w-[318px] mx-auto flex items-center pt-[34px] pb-[14px] border-b border-[#0000004D] gap-4">
             <div className="w-[56px] h-[54px] bg-[#C5C5C57D]" />
             <div className="flex flex-col justify-center">
               <span className="text-sm">퍼퓨온미</span>
@@ -33,11 +33,11 @@ export default function KakaoSignupForm() {
             </div>
           </header>
 
-          <form>
-            <div className="w-[318px] px-6">
+          <form className="flex flex-col justify-center items-center">
+            <div className="w-[318px] pb-[51px]">
               {/* 전체 동의하기 */}
-              <section className="border-b pt-[2px] pb-[24px]">
-                <div className="flex items-start gap-2 mb-2">
+              <section className="border-b border-[#0000004D] pb-[24px]">
+                <div className="flex items-center gap-2 mb-2">
                   <input
                     type="checkbox"
                     checked={isAllChecked}
@@ -52,8 +52,8 @@ export default function KakaoSignupForm() {
               </section>
 
               {/* 이메일 안내 */}
-              <section className="border-b border-gray-200 pb-4 pt-4">
-                <p className="text-sm">이메일(예: wdd789@naver.com)</p>
+              <section className="border-b border-[#0000004D] pb-4 pt-4">
+                <p className="text-[10px]">이메일(예: wdd789@naver.com)</p>
                 <p className="text-[10px] text-[#00000066] leading-snug mt-1">
                   퍼퓨온미 서비스 제공을 위해 회원번호와 함께 개인 정보가 제공됩니다.
                   보다 자세한 개인정보 제공항목은 등의 내용에서 확인할 수 있습니다.
@@ -90,7 +90,7 @@ export default function KakaoSignupForm() {
                 isAllChecked
                   ? 'bg-[#FEE500] text-black cursor-pointer'
                   : 'bg-[#D9D9D9] text-black cursor-not-allowed'
-              } text-xl w-full mt-6 py-2 rounded-md transition`}
+              } text-xl w-full py-[20px] rounded-br-[10px] rounded-bl-[10px] transition`}
               onClick={() => setIsModalActive(true)}
               disabled={!isAllChecked}>
               동의하고 계속하기
