@@ -36,16 +36,31 @@ export default function KakaoSignupForm() {
           <form className="flex flex-col justify-center items-center">
             <div className="w-[318px] pb-[51px]">
               {/* 전체 동의하기 */}
-              <section className="border-b border-[#0000004D] pb-[24px]">
-                <div className="flex items-center gap-2 mb-2">
+              <section className="border-b border-[#0000004D] pt-[10px] pb-[24px]">
+                <label className="flex items-center gap-2 mb-2">
                   <input
                     type="checkbox"
                     checked={isAllChecked}
                     onChange={handleAllCheck}
+                    className="sr-only peer"
                   />
-                  <label className="text-sm font-bold text-black">전체 동의하기</label>
-                </div>
-                <p className="text-[10px] text-[#00000066] leading-snug">
+                  <span className="w-5 h-5 rounded-full border flex items-center justify-center
+                    transition-colors duration-200
+                    bg-white border-[#838383]
+                    peer-checked:bg-[#FEE500] peer-checked:border-[#FEE500]">
+                    <svg
+                      className="w-3 h-3 text-[#838383]  peer-checked:text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />      
+                    </svg>
+                  </span>
+
+                  <span className="text-sm font-bold text-black">전체 동의하기</span>
+                </label>
+                <p className="text-[10px] w-[287px] pl-[27px] text-[#00000066] leading-snug">
                   전체동의는 선택목적에 대한 동의를 포함하고 있으며, 선택목적에 대한
                   동의를 거부해도 서비스 이용이 가능합니다.
                 </p>
@@ -53,34 +68,65 @@ export default function KakaoSignupForm() {
 
               {/* 이메일 안내 */}
               <section className="border-b border-[#0000004D] pb-4 pt-4">
-                <p className="text-[10px]">이메일(예: wdd789@naver.com)</p>
-                <p className="text-[10px] text-[#00000066] leading-snug mt-1">
-                  퍼퓨온미 서비스 제공을 위해 회원번호와 함께 개인 정보가 제공됩니다.
-                  보다 자세한 개인정보 제공항목은 등의 내용에서 확인할 수 있습니다.
-                  정보는 서비스 탈퇴 시 지체없이 파기 됩니다.
-                </p>
+                <div className="w-[290px] pl-[27px]">
+                  <div className="flex items-center gap-[2px]">
+                    <img src="/Login/kakao_user.svg"/>
+                    <p className="text-[10px]">wdd789@naver.com</p>
+                  </div>
+                  <p className="text-[10px] text-[#00000066] leading-snug mt-1">
+                    퍼퓨온미 서비스 제공을 위해 회원번호와 함께 개인 정보가 제공됩니다.
+                    보다 자세한 개인정보 제공항목은 등의 내용에서 확인할 수 있습니다.
+                    정보는 서비스 탈퇴 시 지체없이 파기 됩니다.
+                  </p>
+                </div>
               </section>
 
               {/* 약관 항목들 */}
               <section className="pt-4 space-y-2">
-                {termsItems.map((item, index) => (
-                  <div key={item.id} className="flex items-center justify-between">
-                    {isAllChecked && (
-                      <input type="checkbox" checked readOnly className="mr-2" />
-                    )}
-                    <span className="text-[13px] text-[#838383]">
-                      {item.label}
-                    </span>
-                    {item.hasLink && (
-                      <a
-                        href="https://www.kakao.com/ko/terms"
-                        className="underline text-[13px] ml-auto"
+              {termsItems.map((item, index) => (
+                <div key={item.id} className="flex items-center ml-[8px] justify-between">
+                  <div className="flex items-center">
+                    {/* 체크 아이콘 렌더링 조건 */}
+                    {index === 0 ? (
+                      // [필수] 항목은 항상 표시
+                      <svg
+                        className={`w-4 h-4 
+                          ${isAllChecked ? 'text-[#FEE500]' : 'text-[#C5C5C5]'}`}
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
                       >
-                        보기
-                      </a>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      // 나머지는 체크됐을 때만 표시
+                      isAllChecked && (
+                        <svg
+                          className="w-4 h-4 text-[#FEE500]"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )
                     )}
+                    <span className={`text-[13px] text-[#838383] ${index === 0 ? 'ml-[11px]' : 'ml-[32px]'}`}>{item.label}</span>
                   </div>
-                ))}
+                  {item.hasLink && (
+                    <a
+                      href="https://www.kakao.com/ko/terms"
+                      className="underline text-[13px] ml-auto"
+                    >
+                      보기
+                    </a>
+                  )}
+                </div>
+              ))}
+
+
               </section>
             </div>
 
