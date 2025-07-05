@@ -4,16 +4,16 @@ const Banner = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full h-[270px] bg-[#FFEDED] flex items-center justify-between mb-6 pl-[65px] pr-[26px] py-4">
+        <div className="w-full h-[270px] bg-[#FFEDED] flex items-center justify-between mb-6">
             {/* 향수 아이콘 이미지 */}
             <img
                 src="/public/MainPage/perfume.png"
-                className="w-[126.72px] h-[175px]"
+                className="w-[126.72px] h-[175px] ml-[65px]"
             />
 
             {/* 텍스트, 버튼 */}
             {/* style은 추후에 index.css에 적용 후 주석 풀기 */}
-            <div className="flex flex-col items-center justify-center text-center">
+            <div className="flex flex-col items-center justify-center text-center mr-[26px]">
                 <p 
                     className="text-[#785F5F] text-[16px] font-bold leading-[140%] mb-[7px]"
                     // style={{ fontFamily: 'Ria Sans' }}

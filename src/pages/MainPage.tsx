@@ -1,13 +1,13 @@
 import Banner from "../components/MainPage/Banner";
+import SearchBar from "../components/MainPage/SearchBar";
 
 const MainPage = () => {
-    
-    return(
-        // <div className="w-full px-4 pt-6 pb-24 bg-white">
-        //     <Banner/>
-        // </div>
-        <Banner />
-    )
-}
+    return (
+        <div className="pb-20 bg-white min-h-screen w-full">
+            <Banner />
+            <SearchBar />
+        </div>
+    );
+};
 
 export default MainPage;

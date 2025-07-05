@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
 import ChoosePathPage from "./pages/ChoosePathPage.tsx";
 import ImageKeywordPage from "./pages/ImageKeywordPage.tsx";
+import FilterPage from "./pages/FilterPage.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -40,7 +41,8 @@ const router = createBrowserRouter([
           { path: 'Diary', element: <DiaryPage /> },
           { path: 'MyPage', element: <MyPage /> },
           { path: 'choose-path', element: <ChoosePathPage /> },
-          { path: 'image-keyword', element: <ImageKeywordPage /> }
+          { path: 'image-keyword', element: <ImageKeywordPage /> },
+          { path: 'filter', element: <FilterPage /> }
         ]
       }
     ]
