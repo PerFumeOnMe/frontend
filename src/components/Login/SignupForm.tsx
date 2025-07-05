@@ -1,6 +1,9 @@
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
+
+// 체크 박스, 스크롤 삭제, 위치 , 폰트
+
 export default function SignupForm(){
   const [inputName, setInputName] = useState<string>("");
   const [inputId , setInputId] =  useState<string>("");
@@ -49,46 +52,46 @@ export default function SignupForm(){
 
           {/* 이름 */}
           <fieldset className="h-[76px]">
-            <label className="block text-lg text-black mb-1">이름</label>
+            <label className="block text-lg text-black mb-1 font-bold">이름</label>
             <input 
               type="text"
               value={inputName}
               onChange={(e) => setInputName(e.target.value)}
               placeholder="홍길동"
-              className="w-full text-base border-b border-gray-300 outline-none py-2"
+              className="w-full text-base border-b border-[#D5D5D5] outline-none py-2"
                 />
           </fieldset>
 
           {/* 아이디 */}
           <fieldset className="h-[76px]">
-            <label className="block text-lg text-black mb-1">아이디</label>
+            <label className="block text-lg text-black mb-1 font-bold">아이디</label>
             <input 
               type="text"
               value={inputId}
               onChange={(e) => setInputId(e.target.value)}
               placeholder="UMC123"
-              className="w-full text-base border-b border-gray-300 outline-none py-2"/>
+              className="w-full text-base border-b border-[#D5D5D5] outline-none py-2"/>
           </fieldset>  
 
           {/* 비밀번호 */}
           <fieldset className="h-[76px]">
-            <label className="block text-lg text-black mb-1">비밀번호</label>
+            <label className="block text-lg text-black mb-1 font-bold">비밀번호</label>
             <input 
               type="password"
               value={inputPassword}
               onChange={(e) => setInputPassword(e.target.value)}
-              className="w-full text-base border-b border-gray-300 outline-none py-2"
+              className="w-full text-base border-b border-[#D5D5D5] outline-none py-2"
               placeholder="비밀번호"/> 
           </fieldset>  
 
           {/* 비밀번호 확인 */}
           <fieldset className="h-[76px]">  
-            <label className="block text-lg text-black mb-1">비밀번호 확인</label>
+            <label className="block text-lg text-black mb-1 font-bold">비밀번호 확인</label>
             <input 
               type="password"
               value={inputConfirmPassword}
               onChange={(e) =>  setInputConfirmPassword(e.target.value)}
-              className="w-full text-base border-b border-gray-300 outline-none py-2"
+              className="w-full text-base border-b border-[#D5D5D5] outline-none py-2"
               placeholder="비밀번호"/>  
           </fieldset>
         {/* 비밀번호 확인 실패 메시지 */}
@@ -96,16 +99,37 @@ export default function SignupForm(){
 
 
         {/* 개인정보 동의 전체 영역*/}
-        {/* 체크박스 이미지로 isAgreed useState */}
         <section className="mt-[19px] mx-auto w-full max-w-[372px]">
           <div className="flex items-center justify-between mt-[19px]">
-            <label className="flex items-center gap-10  text-sm">
+            <label className="flex items-center gap-10 text-sm cursor-pointer">
+              {/* 숨겨진 실제 체크박스 */}
               <input 
                 type="checkbox" 
                 checked={isAgreed}
                 onChange={(e) => setIsAgreed(e.target.checked)}
-                className="accent-black cursor-pointer"/>        
-              개인정보 수집 및 이용 동의서
+                className="sr-only peer"
+              />
+
+              {/* 커스텀 체크박스 */}
+              <span
+                className="w-5 h-5 rounded-full border flex items-center justify-center 
+                transition-colors duration-200
+                bg-[#D9D9D9] border-[#D9D9D9]
+                peer-checked:bg-black peer-checked:border-black"
+              >
+                <svg
+                  className="w-3 h-3 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+
+              {/* 라벨 텍스트 */}
+              <span className="ml-2">개인정보 수집 및 이용 동의서</span>
             </label>
             
             <button
@@ -117,7 +141,7 @@ export default function SignupForm(){
           </div> 
             {/* 개인정보 수집 및 이용 동의서 (드롭다운)//scrollbar-hide 커스텀 만들어야함 */}
             {isDropdownOpen&& (<div 
-              className="mt-2 bg-gray-100 text-sm text-gray-700 p-4 rounded-md leading-relaxed whitespace-pre-line max-h-[282px] overflow-y-scroll scrollbar-hide">
+              className="mt-2 bg-[#EFEFEF] text-sm text-black p-4 rounded-md leading-relaxed whitespace-pre-line max-h-[282px] overflow-y-scroll scrollbar-hide">
             {`1. 수집하는 개인정보 항목
             회사는 회원가입 및 서비스 이용을 위해 아래의 개인정보를 수집합니다.
              필수 수집 항목: 아이디, 비밀번호, 이름
@@ -147,7 +171,7 @@ export default function SignupForm(){
           disabled={!isFormvalid}
           onClick={()=> setIsModalOpen(true)}
           className={`text-2xl  text-white py-[18px] w-full ${
-            isFormvalid ? ' bg-black cursor-pointer':' bg-gray-300 cursor-not-allowed'
+            isFormvalid ? ' bg-black cursor-pointer':' bg-[#AAAAAA] cursor-not-allowed'
             }`}
             >
               회원가입
@@ -155,7 +179,7 @@ export default function SignupForm(){
       </footer>
 
       {isModalOpen && 
-      <section className="fixed inset-0  backdrop-blur-none bg-black/20 flex items-end justify-center z-50">
+      <section className="fixed inset-0  backdrop-blur-none bg-[#00000033] flex items-end justify-center z-50">
         <div className="w-[480px] h-[200px] bg-white rounded-t-xl shadow-lg flex flex-col items-center text-xl justify-center py-0 pt-[51px]">
           <p className="flex items-center justify-center mb-[49px] font-bold">회원가입이 완료되었습니다.</p>
           <Link
