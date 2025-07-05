@@ -28,7 +28,7 @@ const Banner = () => {
                 </p>
                 <div className="p-[1px] rounded-full bg-gradient-to-r from-white to-[#80498B] shadow-[0_4px_4px_#DF6966]">
                     <button
-                        onClick={() => navigate("/PBTI")}
+                        onClick={() => navigate("/choose-path")}
                         className="w-[190px] h-[36px] rounded-full bg-gradient-to-r from-[#FF9999] to-[#B159DA] text-white text-[13px] font-bold"
                         // style={{ fontFamily: 'Ria Sans' }}
                     >
