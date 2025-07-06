@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../../components/Chatbot/Header';
 import ChatArea from '../../components/Chatbot/ChatArea';
 import InputBox from '../../components/Chatbot/InputBox';
+import PerfumeTagList from '../../components/Chatbot/PerfumeTagList';
 
 // ChatbotPage.tsx
 export interface Message {
@@ -9,6 +10,11 @@ export interface Message {
   text: string;
 }
 
+const perfumeTags = [
+  "#오늘같은 날씨 어떤 향수 뿌릴까?",
+  "#비온 뒤 새벽에 나는 향 같은 향수",
+  "#향수의 역사"
+];
 
 const ChatbotPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -27,6 +33,7 @@ const ChatbotPage: React.FC = () => {
     <div className="max-w-[480px] h-screen mx-auto bg-white flex flex-col">
       <Header />
       <ChatArea messages={messages} />
+      <PerfumeTagList tags={perfumeTags} />
       <InputBox onSend={handleSend} />
     </div>
   );
