@@ -1,21 +1,63 @@
 import { SlArrowLeft } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
-import BottomSheetModal from "../components/BottomSheetModal";
+import BottomSheetModal from "../components/PerfumeLabPage/BottomSheetModal";
+import NoteSelectionButton from "../components/PerfumeLabPage/NoteSelectionButton";
 import { useState } from "react";
 
 const PerfumLabPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState("");
+  const [selectedNotes, setSelectedNotes] = useState({
+    베이스: "",
+    미들: "",
+    탑: "",
+  });
 
   const handleNoteSelect = (note: string) => {
     setSelectedNote(note);
     setIsModalOpen(true);
   };
 
-  const handlemodalClose = () => {
+  const handleModalClose = () => {
     setIsModalOpen(false);
     setSelectedNote("");
+  };
+
+  const handleNoteSelected = (noteType: string, selectedValue: string) => {
+    setSelectedNotes((prev) => ({
+      ...prev,
+      [noteType]: selectedValue,
+    }));
+    setIsModalOpen(false);
+    setSelectedNote("");
+  };
+
+  const handleReset = () => {
+    setSelectedNotes({
+      베이스: "",
+      미들: "",
+      탑: "",
+    });
+  };
+
+  const handleNoteRemove = (noteType: string) => {
+    setSelectedNotes((prev) => {
+      const newNotes = { ...prev };
+
+      // 선택된 노트 제거
+      newNotes[noteType] = "";
+
+      // 하위 노트들도 함께 제거 (계층 구조 유지)
+      if (noteType === "베이스") {
+        newNotes.미들 = "";
+        newNotes.탑 = "";
+      } else if (noteType === "미들") {
+        newNotes.탑 = "";
+      }
+
+      return newNotes;
+    });
   };
 
   return (
@@ -31,7 +73,7 @@ const PerfumLabPage = () => {
         <h1 className="text-xl text-center w-full">향수공방</h1>
       </div>
       {/* 메인 콘텐츠 */}
-      <div className="w-full flex-1 flex flex-col gap-2">
+      <div className="w-full flex-1 flex flex-col">
         {/* 인트로 텍스트 */}
         <div className="w-full px-4 py-4 flex flex-col gap-1">
           <h1 className="text-xl">이미지와 맞는 향수를 만들어봅시다.</h1>
@@ -51,37 +93,66 @@ const PerfumLabPage = () => {
             </div>
           </div>
         </div>
+
         {/* 내가 선택한 계열 */}
-        <div className="flex flex-1 flex-col justify-between">
+        <div className="flex flex-col flex-1">
           <div className="flex justify-between items-center">
             <h3 className="px-4 text-xl">내가 선택한 계열</h3>
-            <button className="border px-3 py-1 rounded-full text-xs mx-4">
+            <button
+              className="border px-3 py-1 rounded-full text-xs mx-4"
+              onClick={handleReset}
+            >
               초기화
             </button>
           </div>
           {/* 노트 선택 칸 */}
-          <div className="flex flex-wrap justify-center gap-2 px-4 py-4 flex-col">
-            <button
-              className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40"
+          <div className="flex flex-col gap-2 px-4 py-4 flex-1">
+            {/* 베이스 노트 - 항상 표시 */}
+            <NoteSelectionButton
+              noteType="베이스"
+              isSelected={!!selectedNotes.베이스}
+              selectedValue={selectedNotes.베이스}
               onClick={() => handleNoteSelect("베이스")}
-            >
-              + 베이스 노트 선택하기
-            </button>
-            <button
-              className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40"
-              onClick={() => handleNoteSelect("미들")}
-            >
-              + 미들 노트 선택하기
-            </button>
-            <button
-              className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40"
-              onClick={() => handleNoteSelect("탑")}
-            >
-              + 탑 노트 선택하기
-            </button>
+              onRemove={() => handleNoteRemove("베이스")}
+            />
+
+            {/* 미들 노트 - 베이스가 선택된 후에만 표시 */}
+            {selectedNotes.베이스 && (
+              <NoteSelectionButton
+                noteType="미들"
+                isSelected={!!selectedNotes.미들}
+                selectedValue={selectedNotes.미들}
+                onClick={() => handleNoteSelect("미들")}
+                onRemove={() => handleNoteRemove("미들")}
+              />
+            )}
+
+            {/* 탑 노트 - 미들이 선택된 후에만 표시 */}
+            {selectedNotes.미들 && (
+              <NoteSelectionButton
+                noteType="탑"
+                isSelected={!!selectedNotes.탑}
+                selectedValue={selectedNotes.탑}
+                onClick={() => handleNoteSelect("탑")}
+                onRemove={() => handleNoteRemove("탑")}
+              />
+            )}
           </div>
-          <div className="px-4 py-4">
-            <button className="w-full py-4 border rounded border-gray-300 text-gray-400 bg-white">
+
+          {/* 결과보기 버튼 */}
+          <div className="mt-auto px-4 py-4">
+            <button
+              className={`w-full py-4 border rounded ${
+                selectedNotes.베이스 && selectedNotes.미들 && selectedNotes.탑
+                  ? "bg-black text-white border-black hover:bg-gray-800"
+                  : "border-gray-300 text-gray-400"
+              }`}
+              disabled={
+                !selectedNotes.베이스 ||
+                !selectedNotes.미들 ||
+                !selectedNotes.탑
+              }
+            >
               결과보기
             </button>
           </div>
@@ -89,8 +160,9 @@ const PerfumLabPage = () => {
       </div>
       <BottomSheetModal
         isOpen={isModalOpen}
-        onClose={handlemodalClose}
+        onClose={handleModalClose}
         selectedNote={selectedNote}
+        onNoteSelected={handleNoteSelected}
       />
     </div>
   );
