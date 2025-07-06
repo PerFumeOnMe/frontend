@@ -2,23 +2,35 @@ interface BottomSheetModalProps {
   isOpen: boolean;
   onClose: () => void;
   selectedNote: string;
+  onNoteSelected: (noteType: string, selectedValue: string) => void;
 }
 
 const BottomSheetModal = ({
   isOpen,
   onClose,
   selectedNote,
+  onNoteSelected,
 }: BottomSheetModalProps) => {
   if (!isOpen) return null;
+
+  const noteOptions: { [key: string]: string[] } = {
+    베이스: ["시트러스", "플로럴", "우디", "머스크", "바닐라", "앰버"],
+    미들: ["로즈", "라벤더", "베르가못", "페퍼민트", "재스민", "일랑일랑"],
+    탑: ["레몬", "오렌지", "자몽", "유칼립투스", "페퍼", "핑크페퍼"],
+  };
+
+  const handleOptionSelect = (option: string) => {
+    onNoteSelected(selectedNote, option);
+  };
 
   return (
     <>
       {/* 배경 오버레이 */}
-      <div className="fixed inset-0 bg-black/40 z-40" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/30 z-40" onClick={onClose} />
 
       {/* 모달 컨테이너 */}
       <div className="fixed inset-0 z-50 flex items-end justify-center pointer-events-none">
-        <div className="w-full max-w-[480px] bg-white rounded-t-lg shadow-lg pointer-events-auto animate-slide-up">
+        <div className="w-full max-w-[480px] bg-white rounded-t-lg shadow-2xl pointer-events-auto animate-slide-up">
           {/* 모달 핸들 */}
           <div className="flex justify-center py-2">
             <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
@@ -75,42 +87,15 @@ const BottomSheetModal = ({
 
             {/* 향수 노트 그리드 - 추후 백엔드로부터 데이터를 받으면 컴포넌트로 빼서 수정 예정 */}
             <div className="grid grid-cols-3 gap-3">
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 1
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 2
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 3
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 4
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 5
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 6
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 1
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 2
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 3
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 4
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 5
-              </div>
-              <div className="bg-gray-100 rounded-lg aspect-square flex items-center justify-center text-gray-400 text-sm">
-                향수 노트 6
-              </div>
+              {noteOptions[selectedNote]?.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleOptionSelect(option)}
+                  className="bg-gray-100 hover:bg-gray-200 rounded-lg aspect-square flex items-center justify-center text-gray-700 text-sm font-medium transition-colors"
+                >
+                  {option}
+                </button>
+              ))}
             </div>
           </div>
         </div>
