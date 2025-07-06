@@ -1,8 +1,23 @@
 import { SlArrowLeft } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
+import BottomSheetModal from "../components/BottomSheetModal";
+import { useState } from "react";
 
 const PerfumLabPage = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNote, setSelectedNote] = useState("");
+
+  const handleNoteSelect = (note: string) => {
+    setSelectedNote(note);
+    setIsModalOpen(true);
+  };
+
+  const handlemodalClose = () => {
+    setIsModalOpen(false);
+    setSelectedNote("");
+  };
+
   return (
     <div className="min-w-[480px] bg-[#F4ECE6] flex flex-col items-center">
       {/* 헤더 */}
@@ -46,13 +61,22 @@ const PerfumLabPage = () => {
           </div>
           {/* 노트 선택 칸 */}
           <div className="flex flex-wrap justify-center gap-2 px-4 py-4 flex-col">
-            <button className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40">
+            <button
+              className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40"
+              onClick={() => handleNoteSelect("베이스")}
+            >
               + 베이스 노트 선택하기
             </button>
-            <button className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40">
+            <button
+              className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40"
+              onClick={() => handleNoteSelect("미들")}
+            >
               + 미들 노트 선택하기
             </button>
-            <button className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40">
+            <button
+              className="flex justify-center py-6 border-1 rounded border-[#FAFAFA] bg-white/40"
+              onClick={() => handleNoteSelect("탑")}
+            >
               + 탑 노트 선택하기
             </button>
           </div>
@@ -63,6 +87,11 @@ const PerfumLabPage = () => {
           </div>
         </div>
       </div>
+      <BottomSheetModal
+        isOpen={isModalOpen}
+        onClose={handlemodalClose}
+        selectedNote={selectedNote}
+      />
     </div>
   );
 };
