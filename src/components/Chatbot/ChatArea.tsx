@@ -18,7 +18,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ messages }) => {
   return (
     <div
       ref={chatRef}
-      className="px-[10px] py-[10px] h-[400px] overflow-y-auto bg-[#ffffff] flex-1"
+      className="px-1 py-1 overflow-y-auto bg-[#ffffff] flex-1"
     >
       <WelcomeHeader name="김성섭" date="2025년 7월 06일" />
       {messages.map((msg, idx) =>

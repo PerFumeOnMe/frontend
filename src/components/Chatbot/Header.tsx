@@ -1,7 +1,7 @@
 import React from "react";
 
 const Header: React.FC = () => (
-  <header className="flex items-center px-4 py-3 bg-[#fafafa] border-b-gray-300 border-b-1 chatbot-header relative">
+  <header className="flex items-center px-4 py-3 bg-[#fafafa] border-b-gray-300 border-b-1 chatbot-header">
     <button className="back-btn text-gray-500 hover:text-gray-700">
       {/* 뒤로가기 아이콘 예시 */}
       <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">

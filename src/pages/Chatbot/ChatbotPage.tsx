@@ -18,8 +18,7 @@ const perfumeTags = [
 
 const ChatbotPage: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
-    { type: "bot", text: "김성섭님, 반가워요 퍼퓨봇이에요" },
-    { type: "bot", text: "복잡하게 찾지 말고 한 번에 검색을 통해서 원하는 향수를 찾아보세요..." },
+    { type: "bot", text: "복잡하게 찾지 말고 한 번에 검색을 통하여 원하는 향수를 찾아보세요!\n저는 지하주차장 냄새가 은근 괜찮더라구요. 지하주차장 냄새랑 비슷한 향수를 찾곤 합니다 :)  " },
     { type: "user", text: "메니큐어 냄새가 좋던데, 메니큐어 냄새랑 비슷한 향수를 추천해줘." },
     { type: "bot", text: "메니큐어 향을 좋아하는 분들을 위한 향수 추천 요약..." },
   ]);
@@ -30,9 +29,11 @@ const ChatbotPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[480px] h-screen mx-auto bg-white flex flex-col">
-      <Header />
-      <ChatArea messages={messages} />
+    <div className="min-w-[375px] w-120 h-full bg-white flex flex-col">
+      <div className='pb-28'>
+        <Header />
+        <ChatArea messages={messages} />
+      </div>
       <PerfumeTagList tags={perfumeTags} />
       <InputBox onSend={handleSend} />
     </div>
