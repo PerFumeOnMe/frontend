@@ -14,9 +14,9 @@ export default function SignupAgreement({
   setIsDropdownOpen,
 }: Props) {
   return (
-    <section className="mt-[19px] mx-auto w-full max-w-[372px]">
-      <div className="flex items-center justify-between mt-[19px]">
-        <label className="flex items-center gap-10 text-sm cursor-pointer">
+    <section className="mx-auto w-full max-w-[372px]">
+      <div className="flex items-center justify-between">
+        <label className="flex items-center gap-[10px] text-sm cursor-pointer">
           <input
             type="checkbox"
             checked={isAgreed}

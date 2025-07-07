@@ -31,7 +31,7 @@ export default function KakaoTermsList({ termsItems, isAllChecked }: Props) {
             </span>
           </div>
           {item.hasLink && (
-            <a href="https://www.kakao.com/ko/terms" className="underline text-[13px] ml-auto">
+            <a href="https://www.kakao.com/ko/terms" className="underline font-normal text-[13px] text-[#838383] ml-auto">
               보기
             </a>
           )}
