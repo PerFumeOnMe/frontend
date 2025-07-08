@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Banner from "../components/MainPage/Banner";
 import SearchBar from "../components/MainPage/SearchBar";
 import PerfumeGrid from "../components/MainPage/PerfumeGrid";

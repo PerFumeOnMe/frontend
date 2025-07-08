@@ -13,15 +13,14 @@ const Navbar = () => {
 
   return (
     <nav className="
-      absolute bottom-0 z-50
-      fixed
-      min-w-[480px]
+      fixed bottom-0 inset-x-0 mx-auto
+      w-full max-w-120
       h-20 bg-white
       shadow-[0_-1px_8px_0_rgba(0,0,0,0.10)]
       border-t border-gray-100
       flex justify-between items-center
-      px-"
-      >
+      z-50
+    ">
       {navItems.map(({ to, label, icon }) => (
         <Link
           key={to}
