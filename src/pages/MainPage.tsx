@@ -57,7 +57,9 @@ const MainPage = () => {
         <div className="pb-20 bg-white min-h-screen w-full">
             <Banner />
             <SearchBar />
+            <h2 className="text-title3 mb-[7px] pl-[24px] pt-[24px]">캐실님이 좋아할만한 향수</h2>
             <PerfumeGrid perfumes={firstMDChoice} />
+            <h2 className="text-title3 mb-[7px] pl-[24px] pt-[31px]">요즘 뜨는 향수</h2>
             <PerfumeGrid perfumes={secondMDChoice} />
         </div>
     );

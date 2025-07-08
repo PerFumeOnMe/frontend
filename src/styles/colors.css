@@ -37,6 +37,16 @@
   .bg-grayscale-300 { background-color: var(--grayscale-300); }
   .bg-grayscale-200 { background-color: var(--grayscale-200); }
 
+  .border-grayscale-1000 { border-color: var(--grayscale-1000); }
+  .border-grayscale-900 { border-color: var(--grayscale-900); }
+  .border-grayscale-800 { border-color: var(--grayscale-800); }
+  .border-grayscale-700 { border-color: var(--grayscale-700); }
+  .border-grayscale-600 { border-color: var(--grayscale-600); }
+  .border-grayscale-500 { border-color: var(--grayscale-500); }
+  .border-grayscale-400 { border-color: var(--grayscale-400); }
+  .border-grayscale-300 { border-color: var(--grayscale-300); }
+  .border-grayscale-200 { border-color: var(--grayscale-200); }
+
   .text-error { color: var(--error); }
   .bg-error { background-color: var(--error); }
 
