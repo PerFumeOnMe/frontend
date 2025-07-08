@@ -8,6 +8,12 @@
   --grayscale-400: #B2B2B8;
   --grayscale-300: #CDCDD0;
   --grayscale-200: #E7E7E9;
+  --error: #BE1B2E;
+  --white: #FBFBFB;
+  --main-600: #490189;
+  --main-500: #6401BB;
+  --main-400: #8001EE;
+  --main-10: #F8F0FF;
 }
 
 @layer base {
@@ -30,4 +36,19 @@
   .bg-grayscale-400 { background-color: var(--grayscale-400); }
   .bg-grayscale-300 { background-color: var(--grayscale-300); }
   .bg-grayscale-200 { background-color: var(--grayscale-200); }
+
+  .text-error { color: var(--error); }
+  .bg-error { background-color: var(--error); }
+
+  .text-white { color: var(--white); }
+  .bg-white { background-color: var(--white); }
+
+  .text-main-600 { color: var(--main-600); }
+  .text-main-500 { color: var(--main-500); }
+  .text-main-400 { color: var(--main-400); }
+  .text-main-10 { color: var(--main-10); }
+  .bg-main-600 { background-color: var(--main-600); }
+  .bg-main-500 { background-color: var(--main-500); }
+  .bg-main-400 { background-color: var(--main-400); }
+  .bg-main-10 { background-color: var(--main-10); }
 } 
