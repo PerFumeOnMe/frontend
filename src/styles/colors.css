@@ -1,0 +1,33 @@
+:root {
+  --grayscale-1000: #1C1C1E;
+  --grayscale-900: #343437;
+  --grayscale-800: #4C4C52;
+  --grayscale-700: #65656C;
+  --grayscale-600: #7E7E86;
+  --grayscale-500: #98989F;
+  --grayscale-400: #B2B2B8;
+  --grayscale-300: #CDCDD0;
+  --grayscale-200: #E7E7E9;
+}
+
+@layer base {
+  .text-grayscale-1000 { color: var(--grayscale-1000); }
+  .text-grayscale-900 { color: var(--grayscale-900); }
+  .text-grayscale-800 { color: var(--grayscale-800); }
+  .text-grayscale-700 { color: var(--grayscale-700); }
+  .text-grayscale-600 { color: var(--grayscale-600); }
+  .text-grayscale-500 { color: var(--grayscale-500); }
+  .text-grayscale-400 { color: var(--grayscale-400); }
+  .text-grayscale-300 { color: var(--grayscale-300); }
+  .text-grayscale-200 { color: var(--grayscale-200); }
+
+  .bg-grayscale-1000 { background-color: var(--grayscale-1000); }
+  .bg-grayscale-900 { background-color: var(--grayscale-900); }
+  .bg-grayscale-800 { background-color: var(--grayscale-800); }
+  .bg-grayscale-700 { background-color: var(--grayscale-700); }
+  .bg-grayscale-600 { background-color: var(--grayscale-600); }
+  .bg-grayscale-500 { background-color: var(--grayscale-500); }
+  .bg-grayscale-400 { background-color: var(--grayscale-400); }
+  .bg-grayscale-300 { background-color: var(--grayscale-300); }
+  .bg-grayscale-200 { background-color: var(--grayscale-200); }
+} 
