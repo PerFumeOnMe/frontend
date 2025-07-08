@@ -11,9 +11,9 @@ export interface Message {
 }
 
 const perfumeTags = [
-  "#오늘같은 날씨 어떤 향수 뿌릴까?",
-  "#비온 뒤 새벽에 나는 향 같은 향수",
-  "#향수의 역사"
+  "#오늘같은날씨어떤향수뿌릴까?",
+  "#비온뒤새벽에나는향같은향수",
+  "#향수의역사"
 ];
 
 const ChatbotPage: React.FC = () => {
@@ -28,13 +28,15 @@ const ChatbotPage: React.FC = () => {
     // 실제 챗봇 응답 로직 추가 필요
   };
 
+  const hasUserMessage = messages.some(msg => msg.type === "user");
+
   return (
-    <div className="min-w-[375px] w-120 h-full bg-white flex flex-col">
-      <div className='pb-28'>
+    <div className="min-w-[375px] w-120 h-full bg-[#F8F0FF] flex flex-col font-[Pretandard]">
+      <div className='pb-20'>
         <Header />
         <ChatArea messages={messages} />
       </div>
-      <PerfumeTagList tags={perfumeTags} />
+      {!hasUserMessage && <PerfumeTagList tags={perfumeTags} />}
       <InputBox onSend={handleSend} />
     </div>
   );
