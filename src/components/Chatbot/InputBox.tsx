@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MessageSend from "../../assets/Chatbot/MessageSend.png"; // 상대경로에 맞게 수정
+import MessageSend from "../../assets/Chatbot/MessageSend.png";
 
 interface InputBoxProps {
   onSend: (text: string) => void;

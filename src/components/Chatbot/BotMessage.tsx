@@ -1,6 +1,6 @@
 import React from "react";
 import RecommendationList from "./RecommendationList";
-import BotIcon from "../../assets/Chatbot/PerfumeBot.png"; // 경로에 맞게 수정
+import BotIcon from "../../assets/Chatbot/PerfumeBot.png";
 import TextTime from "./TextTime";
 
 interface BotMessageProps {
