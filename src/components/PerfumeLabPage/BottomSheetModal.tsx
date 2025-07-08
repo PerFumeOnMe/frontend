@@ -1,4 +1,3 @@
-// BottomSheetModal.tsx
 import React from "react";
 
 interface BottomSheetModalProps {
@@ -35,11 +34,11 @@ const BottomSheetModal = ({
         onPointerDown={handleBackdrop}
       />
 
-      {/* 모달 컨테이너 — 배경 클릭 이벤트 없이 깨끗하게 */}
-      <div className="fixed inset-0 z-50 flex items-end justify-center">
+      {/* 모달 컨테이너 */}
+      <div className="fixed inset-0 z-50 flex items-end justify-center sm:px-0">
         <div
-          className="w-full max-w-[480px] bg-white rounded-t-lg shadow-2xl animate-slide-up"
-          onPointerDownCapture={stop} // ★ 핵심: 캡처 단계 차단
+          className="w-120 min-w-[375px] bg-white rounded-t-lg shadow-2xl animate-slide-up"
+          onPointerDownCapture={stop}
         >
           {/* 핸들 */}
           <div className="flex justify-center py-2">
@@ -54,7 +53,7 @@ const BottomSheetModal = ({
             <button
               aria-label="close"
               onClick={onClose}
-              className="absolute right-4 text-gray-500 hover:text-gray-700"
+              className="absolute right-4 text-gray-500 hover:text-gray-700 p-1"
             >
               ✕
             </button>
