@@ -1,43 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SignupHeader from "./SignupHeader";
 import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import SignupErrorMessage from "./SignupErrorMessage";
 import SignupButton from "./SignupButton";
 
-
 export default function SignupIdForm({ onNext }: { onNext: () => void }) {
   const [inputId, setInputId] = useState("");
   const [error, setError] = useState("");
-  // 중복된 아이디 목록
-  const takenIds = ["umcuser", "perfume01", "test_id"]; 
+  const [isValid, setIsValid] = useState(false);
 
- const validate = () => {
+  const takenIds = ["umcuser", "perfume01", "testid"];
+
+  useEffect(() => {
     const formatValid = /^[a-z_]{5,16}$/.test(inputId);
-    if (!formatValid) {
+
+    if (inputId === "") {
+      setError("");
+      setIsValid(false);
+    } else if (!formatValid) {
       setError("올바른 아이디를 입력해주세요.");
-      return false;
-    }
-
-    if (takenIds.includes(inputId)) {
+      setIsValid(false);
+    } else if (takenIds.includes(inputId)) {
       setError("중복된 아이디입니다.");
-      return false;
+      setIsValid(false);
+    } else {
+      setError("");
+      setIsValid(true);
     }
-
-    setError("");
-    return true;
-  };
+  }, [inputId]);
 
   const handleNext = () => {
-    if (validate()) {
-     onNext();
+    if (isValid) {
+      onNext();
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <SignupHeader />
-       <div className="w-full max-w-[432px] mx-auto mt-8">
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n아이디가 필요해요."}
         subtitle="영어랑 소문자로만 작성해 주세요."
@@ -49,13 +50,11 @@ export default function SignupIdForm({ onNext }: { onNext: () => void }) {
           placeholder="아이디를 입력해주세요!"
         />
         <SignupErrorMessage message={error} />
-        </div>
-      <div className="absolute bottom-1">
-      <SignupButton disabled={!inputId} onClick={handleNext}>
+      </div>
+
+      <SignupButton disabled={!isValid} onClick={handleNext}>
         다음
       </SignupButton>
-      </div>
-    </div>
     </div>
   );
 }
