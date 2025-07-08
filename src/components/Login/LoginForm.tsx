@@ -27,10 +27,10 @@ export default function LoginForm() {
 
   return (
     <main className="w-screen h-screen flex items-center justify-center">
-      <section className="w-full min-w-[480px] max-w-[480px] min-h-screen bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
+      <section className="w-full max-w-120 min-h-screen bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
         <LoginTitle />
-
-        <form onSubmit={handleLoginSubmit} className="flex flex-col items-center gap-[11px] pb-6">
+        <div className="w-full max-w-[384px] mx-auto">
+        <form onSubmit={handleLoginSubmit} className="w-full flex flex-col items-center gap-[11px] pb-6">
           <LoginInput
             type="text"
             icon="/Login/id.svg"
@@ -52,6 +52,7 @@ export default function LoginForm() {
         <Divider />
         <SocialLogin />
         <SignupGuide />
+        </div>
       </section>
     </main>
   );

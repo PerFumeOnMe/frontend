@@ -2,7 +2,7 @@ const MyPage = () => {
     
     return(
         <>
-            <div className="h-[3798213982174px]">마이페이지</div>
+            <div className="bg-amber-800 h-[5000px]">마이페이지</div>
         </>
     )
 }
