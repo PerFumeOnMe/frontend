@@ -3,8 +3,10 @@ import Navbar from "../components/common/Navbar.tsx";
 
 const RootLayout = () => {
     return (
-        <div className="min-w-[480px] w-50 bg-white flex flex-col justify-between items-center">
-            <Outlet/>
+        <div className="min-w-[375px] w-120 bg-sky-300 items-center relative">
+            <div className="pb-20">
+                <Outlet />
+            </div>
             <Navbar/>
         </div>
     );
