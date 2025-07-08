@@ -7,8 +7,8 @@ export default function SignupButton({ disabled, onClick, children }: {
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`w-full py-4 text-base font-semibold rounded-b-xl ${
-        disabled ? "bg-gray-300 text-white" : "bg-purple-600 text-white"
+      className={`w-[361px] mb-8 py-[10.5px] text-title3 rounded-2xl ${
+        disabled ? "bg-grayscale-500 text-white" : "bg-main-500 text-white"
       }`}
     >
       {children}

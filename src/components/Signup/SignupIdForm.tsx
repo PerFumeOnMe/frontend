@@ -6,7 +6,6 @@ import SignupErrorMessage from "./SignupErrorMessage";
 import SignupButton from "./SignupButton";
 
 
-
 export default function SignupIdForm({ onNext }: { onNext: () => void }) {
   const [inputId, setInputId] = useState("");
   const [error, setError] = useState("");
@@ -38,6 +37,7 @@ export default function SignupIdForm({ onNext }: { onNext: () => void }) {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <SignupHeader />
+       <div className="w-full max-w-[432px] mx-auto mt-8">
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n아이디가 필요해요."}
         subtitle="영어랑 소문자로만 작성해 주세요."
@@ -49,10 +49,13 @@ export default function SignupIdForm({ onNext }: { onNext: () => void }) {
           placeholder="아이디를 입력해주세요!"
         />
         <SignupErrorMessage message={error} />
-      </div>
+        </div>
+      <div className="absolute bottom-1">
       <SignupButton disabled={!inputId} onClick={handleNext}>
         다음
       </SignupButton>
+      </div>
+    </div>
     </div>
   );
 }

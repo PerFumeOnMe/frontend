@@ -10,6 +10,7 @@ export default function SignupNameForm({ onNext }: { onNext: () => void }) {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <SignupHeader />
+      <div className="w-full max-w-[432px] mx-auto mt-8">
       <SignupTitle
         title={"안녕하세요!\n퍼퓨온미에 오신 걸 환영해요."}
         subtitle="로그인에 사용할 이름이 필요해요."
@@ -21,9 +22,13 @@ export default function SignupNameForm({ onNext }: { onNext: () => void }) {
           placeholder="이름을 입력해주세요!"
         />
       </div>
+      
+      <div className="absolute bottom-1">
       <SignupButton disabled={!name} onClick={onNext}>
         다음
       </SignupButton>
+      </div>
+    </div>
     </div>
   );
 }

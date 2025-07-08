@@ -40,11 +40,12 @@ const validate = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <SignupHeader />
+      <div className="w-full max-w-[432px] mx-auto mt-8">
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n비밀번호를 입력해주세요."}
         subtitle="8-20자로 입력해주세요."
       />
-      <div className="flex-1">
+      <div className="flex flex-col gap-6 flex-1" >
       <SignupInput
         type="password"
         value={password}
@@ -61,9 +62,12 @@ const validate = () => {
       />
       {errorType === "match" && <SignupErrorMessage message={error} />}
       </div>
+      <div className="absolute bottom-1">
       <SignupButton disabled={!password} onClick={handleNext}>
         다음
       </SignupButton>
+      </div>
+      </div>
     </div>
   );
 }
