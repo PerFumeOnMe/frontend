@@ -3,14 +3,19 @@ import returnIcon from "../../assets/Login/return_shape.svg";
 
 export default function SignupHeader() {
   return (
-    <header className="flex items-center justify-start ml-6 mt-5 ">
-      <Link to="/login">
-      <div className="w-4 h-8 mt-[1px]">
-        <img src={returnIcon} alt="뒤로 가기" className="ml-[1.34px] mt-[4.67px]" />
-      </div>  
+    <header className="relative flex items-center justify-center h-[27px] mt-6 ml-[11px]">
+      <h2 className="text-title3 text-grayscale-900 text-center">
+        회원가입
+      </h2>
+
+      <Link
+        to="/login"
+        className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center"
+      >
+        <img src={returnIcon} alt="뒤로 가기"
+             className="ml-[6px] mt-[3px] mb-[1.33px]"/>   
       </Link>
-      <h2 className=" flex-1 text-title2 text-grayscale-900 mt-[1px] text-center">회원가입</h2>
-      <div className="w-4 h-8" />
-    </header> 
+    </header>
   );
 }
+
