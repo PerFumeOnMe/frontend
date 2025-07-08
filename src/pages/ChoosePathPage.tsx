@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import choosePageImage from "../assets/MainPage/choose_page_image.png";
 
 const ChoosePathPage = () => {
     const navigate = useNavigate();
@@ -8,7 +9,7 @@ const ChoosePathPage = () => {
             <div className="w-full px-[22px] flex flex-col items-center">
                 {/* 이미지 */}
                 <img 
-                    src="/MainPage/choose_page_image.png" 
+                    src= {choosePageImage}
                     alt="선택 페이지 이미지" 
                     className="w-[295px] h-[240px] mb-[68px]"
                 />
