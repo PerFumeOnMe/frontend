@@ -16,22 +16,22 @@ const InputBox: React.FC<InputBoxProps> = ({ onSend }) => {
   };
 
   return (
-    <div className="fixed bottom-0 inset-x-0 mx-auto w-full max-w-120 h-20 bg-white">
-      <div className="h-full flex p-3">
+    <div className="fixed bottom-0 inset-x-0 mx-auto w-full max-w-120 h-20 bg-[#FBFBFB]">
+      <div className="h-full flex px-[15px] py-4.5">
         <input
           type="text"
-          className="w-full border border-gray-300 rounded-md px-3 py-3 pr-10 text-sm outline-none"
+          className="w-full border border-[#6401BB] rounded-2xl px-7 py-2.5 pr-12 text-[14px] font-[400] text-[#343437] placeholder-[#343437] outline-none"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="검색어를 입력해주세요."
+          placeholder="궁금한 내용을 입력해 주세요!"
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
         />
         <button
           onClick={handleSend}
-          className="absolute right-7 top-1/2 -translate-y-1/2 transition hover:brightness-110"
+          className="absolute right-9 top-1/2 -translate-y-1/2 transition hover:brightness-110"
           aria-label="전송"
         >
-          <img src={MessageSend} alt="send" className="w-[22px] h-[22px]" />
+          <img src={MessageSend} alt="send" className="w-[20px] h-[16px]" />
         </button>
       </div>
     </div>
