@@ -2,46 +2,56 @@ import { SlArrowLeft } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import BottomSheetModal from "../components/PerfumeLabPage/BottomSheetModal";
 import NoteSelectionButton from "../components/PerfumeLabPage/NoteSelectionButton";
+import NoteSelectionContent from "../components/PerfumeLabPage/NoteSelectionContent";
+import VolumeSelectionContent from "../components/PerfumeLabPage/VolumeSelectionContent";
 import { useState } from "react";
+import type { Note } from "../types/note";
+import perfumeImage from "../assets/PerfumeLab/perfume.png";
+import perfumeRackImage from "../assets/PerfumeLab/perfume-rack.png";
+import testTubeImage from "../assets/PerfumeLab/test-tube.png";
+
+type ModalType = "note" | "volume" | null;
 
 const PerfumLabPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<ModalType>(null);
   const [selectedNote, setSelectedNote] = useState("");
+  const [selectedVolume, setSelectedVolume] = useState("");
   const [selectedNotes, setSelectedNotes] = useState({
     베이스: "",
     미들: "",
     탑: "",
   });
 
-  const handleNoteSelect = (note: string) => {
+  const handleNoteSelect = (note: Note) => {
     setSelectedNote(note);
+    setModalType("note");
+    setIsModalOpen(true);
+  };
+
+  const handleVolumeSelect = () => {
+    setModalType("volume");
     setIsModalOpen(true);
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setModalType(null);
     setSelectedNote("");
   };
 
-  const handleNoteSelected = (noteType: string, selectedValue: string) => {
+  const handleNoteSelected = (noteType: Note, selectedValue: string) => {
     setSelectedNotes((prev) => ({
       ...prev,
       [noteType]: selectedValue,
     }));
     setIsModalOpen(false);
+    setModalType(null);
     setSelectedNote("");
   };
 
-  const handleReset = () => {
-    setSelectedNotes({
-      베이스: "",
-      미들: "",
-      탑: "",
-    });
-  };
-
-  const handleNoteRemove = (noteType: string) => {
+  const handleNoteRemove = (noteType: Note) => {
     setSelectedNotes((prev) => {
       const newNotes = { ...prev };
 
@@ -60,6 +70,29 @@ const PerfumLabPage = () => {
     });
   };
 
+  const handleReset = () => {
+    setSelectedNotes({
+      베이스: "",
+      미들: "",
+      탑: "",
+    });
+    setSelectedVolume("");
+  };
+
+  // 모든 노트가 선택되었는지 확인
+  const allNotesSelected =
+    selectedNotes.베이스 && selectedNotes.미들 && selectedNotes.탑;
+
+  // 모달 제목과 내용 결정
+  const getModalTitle = () => {
+    if (modalType === "note") {
+      return `${selectedNote} 노트 선택`;
+    } else if (modalType === "volume") {
+      return "용량 설정하기";
+    }
+    return "";
+  };
+
   return (
     <div className="min-w-[480px] bg-[#F4ECE6] flex flex-col items-center">
       {/* 헤더 */}
@@ -72,6 +105,7 @@ const PerfumLabPage = () => {
         </button>
         <h1 className="text-xl text-center w-full">향수공방</h1>
       </div>
+
       {/* 메인 콘텐츠 */}
       <div className="w-full flex-1 flex flex-col">
         {/* 인트로 텍스트 */}
@@ -82,14 +116,25 @@ const PerfumLabPage = () => {
             위해서예요.
           </p>
         </div>
+
         {/* 향수 */}
         <div className="flex items-start justify-center">
           <div className="w-full py-4 flex flex-row">
-            <div className="flex-[2] px-10 py-35 text-center border-dashed border-1 border-black">
-              향수 공병
+            <div className="px-3 py-10">
+              <img src={perfumeImage} className="w-46" alt="향수 공병" />
             </div>
-            <div className="flex-[3] px-10 py-35 text-center border-dashed border-1 border-black">
-              실린더 칸
+            <div className="flex-[3] py-10 relative">
+              <div className="absolute bottom-20 right-2 flex gap-5">
+                <img src={testTubeImage} className="w-12" alt="테스트 튜브" />
+                <img src={testTubeImage} className="w-12" alt="테스트 튜브" />
+                <img src={testTubeImage} className="w-12" alt="테스트 튜브" />
+                <img src={testTubeImage} className="w-12" alt="테스트 튜브" />
+              </div>
+              <img
+                src={perfumeRackImage}
+                className="w-70 absolute bottom-10 right-0"
+                alt="실린더 거치대"
+              />
             </div>
           </div>
         </div>
@@ -105,6 +150,7 @@ const PerfumLabPage = () => {
               초기화
             </button>
           </div>
+
           {/* 노트 선택 칸 */}
           <div className="flex flex-col gap-2 px-4 py-4 flex-1">
             {/* 베이스 노트 - 항상 표시 */}
@@ -139,31 +185,51 @@ const PerfumLabPage = () => {
             )}
           </div>
 
-          {/* 결과보기 버튼 */}
+          {/* 하단 버튼 */}
           <div className="mt-auto px-4 py-4">
-            <button
-              className={`w-full py-4 border rounded ${
-                selectedNotes.베이스 && selectedNotes.미들 && selectedNotes.탑
-                  ? "bg-black text-white border-black hover:bg-gray-800"
-                  : "border-gray-300 text-gray-400"
-              }`}
-              disabled={
-                !selectedNotes.베이스 ||
-                !selectedNotes.미들 ||
-                !selectedNotes.탑
-              }
-            >
-              결과보기
-            </button>
+            {!allNotesSelected ? (
+              // 모든 노트가 선택되지 않은 경우 - 비활성화된 결과보기 버튼
+              <button
+                className="w-full py-4 border rounded border-gray-300 text-gray-400"
+                disabled
+              >
+                결과보기
+              </button>
+            ) : !selectedVolume ? (
+              // 모든 노트는 선택되었지만 용량이 선택되지 않은 경우 - 용량 설정하기 버튼
+              <button
+                className="w-full py-4 border rounded bg-black text-white border-black hover:bg-gray-800"
+                onClick={handleVolumeSelect}
+              >
+                용량 설정하기
+              </button>
+            ) : (
+              // 모든 선택이 완료된 경우 - 활성화된 결과보기 버튼
+              <button
+                className="w-full py-4 border rounded bg-black text-white border-black hover:bg-gray-800"
+                onClick={() => console.log("결과 페이지로 이동")}
+              >
+                결과보기
+              </button>
+            )}
           </div>
         </div>
       </div>
+
+      {/* 범용 BottomSheetModal */}
       <BottomSheetModal
         isOpen={isModalOpen}
         onClose={handleModalClose}
-        selectedNote={selectedNote}
-        onNoteSelected={handleNoteSelected}
-      />
+        title={getModalTitle()}
+      >
+        {modalType === "note" && (
+          <NoteSelectionContent
+            selectedNote={selectedNote as Note}
+            onNoteSelected={handleNoteSelected}
+          />
+        )}
+        {modalType === "volume" && <VolumeSelectionContent />}
+      </BottomSheetModal>
     </div>
   );
 };
