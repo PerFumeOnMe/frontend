@@ -5,8 +5,8 @@ type Props = {
 
 export default function KakaoAgreementSection({ isAllChecked, onToggle }: Props) {
   return (
-    <section className="border-b border-[#0000004D] pt-[10px] pb-[24px]">
-      <label className="flex items-center gap-2 mb-2">
+    <section className="border-b border-[#0000004D] pt-[2px] pb-[24px]">
+      <label className="flex items-center gap-2 ">
         <input
           type="checkbox"
           checked={isAllChecked}
@@ -29,10 +29,10 @@ export default function KakaoAgreementSection({ isAllChecked, onToggle }: Props)
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </span>
-        <span className="text-sm font-bold text-black">전체 동의하기</span>
+        <span className="font-bold text-[14px] leading-[36px] align-middle text-black">전체 동의하기</span>
       </label>
 
-      <p className="text-[10px] leading-[16px] font-medium w-[287px] ml-[27px] text-[#00000066]">
+      <p className="font-medium text-[10px] leading-[16px] align-middle ml-[27px] text-[#00000066] max-w-[calc(100%-32px)]">
         전체동의는 선택목적에 대한 동의를 포함하고 있으며,
         선택목적에 대한 동의를 거부해도 서비스 이용이 가능합니다.
       </p>

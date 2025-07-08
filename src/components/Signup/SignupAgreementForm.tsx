@@ -23,19 +23,21 @@ export default function SignupAgreementForm({ onNext }: { onNext: () => void }) 
         title={"약관에 동의하시면\n퍼퓨온미에 가입할 수 있어요."}
         subtitle={"마지막 단계예요"}
       />
-      <div className="flex-1 px-6">
+      <div className="flex-1">
         <SignupAgreement
           isAgreed={isAgreed}
           setIsAgreed={setIsAgreed}
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
         />
-      </div>
+    </div>
+
       <SignupButton disabled={!isAgreed} onClick={handleSubmit}>
         회원가입하기
       </SignupButton>
       
         {isModalOpen && <SignupCompleteModal />}
     </div>
+
   );
 }
