@@ -1,0 +1,49 @@
+import { useState } from "react";
+import OnboardingLayout from "../../components/Onboarding/OnboardingLayout";
+import TopBackButton from "../../components/Onboarding/TopBackButton";
+import BottomButton from "../../components/Onboarding/BottomButton";
+import OnboardingProgress from "../../components/Onboarding/OnboardingProgress";
+
+
+const scentOptions = [
+  "Citrus", "Musk", "Bergamot", "Cedarwood", "Pink Pepper", "Rose",
+  "Patchouli", "White Musk", "Vetiver", "Vanilla", "Sandalwood", "Amber",
+  "Green Tea", "Grapefruit", "Iris",
+];
+
+export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
+  const [selected, setSelected] = useState<string[]>([]);
+
+  const toggle = (scent: string) => {
+    if (selected.includes(scent)) {
+      setSelected(selected.filter((s) => s !== scent));
+    } else if (selected.length < 3) {
+      setSelected([...selected, scent]);
+    }
+  };
+
+  return (
+    <OnboardingLayout>
+      <TopBackButton onClick={onPrev} />
+      <OnboardingProgress current={3} />
+      <div className="mt-16 w-[361px] mx-auto">
+        <h2 className="text-lg font-semibold">선호하는 향을<br />3가지 선택해 주세요.</h2>
+        <p className="text-sm text-gray-500 mt-2">이후 AI가 추천해줄 향에 반영돼요.</p>
+
+        <div className="mt-6 grid grid-cols-3 gap-2">
+          {scentOptions.map((scent) => (
+            <button
+              key={scent}
+              onClick={() => toggle(scent)}
+              className={`h-[80px] rounded-md border text-sm ${selected.includes(scent) ? "bg-primary text-black border-main-500" : "bg-white border-gray-300"}`}
+            >
+              {scent}
+            </button>
+          ))}
+        </div>
+      
+      <BottomButton text="확인" onClick={() => window.location.href = '/'} disabled={selected.length !== 3} />
+      </div>  
+    </OnboardingLayout>
+  );
+}
