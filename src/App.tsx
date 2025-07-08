@@ -10,6 +10,8 @@ import DiaryPage from "./pages/DiaryPage.tsx";
 import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
 import PerfumLabPage from "./pages/PerfumeLabPage.tsx";
+import LabLoadingPage from "./pages/LabLoadingPage.tsx";
+import LabResultPage from "./pages/LabResultPage.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -42,7 +44,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/lab",
-        element: <PerfumLabPage />,
+        children: [
+          {
+            index: true,
+            element: <PerfumLabPage />,
+          },
+          {
+            path: "loading",
+            element: <LabLoadingPage />,
+          },
+          {
+            path: "result",
+            element: <LabResultPage />,
+          },
+        ],
       },
     ],
   },
