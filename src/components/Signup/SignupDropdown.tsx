@@ -1,9 +1,9 @@
 export default function SignupDropdown() {
   return (
-    <div className="mt-2 bg-[#EFEFEF] text-[10px] text-black p-4 rounded-[5px] leading-relaxed whitespace-pre-line max-h-[282px] overflow-y-scroll scrollbar-hide">
+    <div className="mt-2 bg-[#EFEFEF] text-[10px] text-black p-4 rounded-[5px] leading-relaxed whitespace-pre-line max-h-[302px] max-m-[432px] overflow-y-scroll scrollbar-hide">
       {`1. 수집하는 개인정보 항목
 회사는 회원가입 및 서비스 이용을 위해 아래의 개인정보를 수집합니다.
- ·필수 수집 항목: 아이디, 비밀번호, 이름
+ · 필수 수집 항목: 아이디, 비밀번호, 이름
 
 2. 개인정보의 수집 및 이용 목적
 수집한 개인정보는 다음의 목적을 위해 사용됩니다.
