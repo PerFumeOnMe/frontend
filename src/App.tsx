@@ -40,7 +40,6 @@ const router = createBrowserRouter([
           { path: 'MyPage', element: <MyPage /> },
         ]
       },
-      // ChatbotPage를 별도의 자식으로 분리
       {
         path: '/Chatbot',
         element: <ChatbotPage />
