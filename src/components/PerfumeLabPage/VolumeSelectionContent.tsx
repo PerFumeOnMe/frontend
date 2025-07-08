@@ -37,6 +37,7 @@ const VolumeSelectionContent = () => {
       </div>
 
       {/* 슬라이더 영역 */}
+      {/* 추후에 실린더 입력값의 총합이 10을 넘으면 결과를 보지 못하도록 수정할 것! */}
       <div className="space-y-6">
         <div className="flex items-center justify-between gap-4 mb-4">
           <h1 className="text-xl font-semibold w-28 text-right">Top Note</h1>

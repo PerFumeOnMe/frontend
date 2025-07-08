@@ -94,7 +94,7 @@ const PerfumLabPage = () => {
   };
 
   return (
-    <div className="min-w-[480px] bg-[#F4ECE6] flex flex-col items-center">
+    <div className="min-w-[375px] w-120 bg-[#F4ECE6] flex flex-col items-center">
       {/* 헤더 */}
       <div className="w-full h-16 relative flex items-center border-b border-gray-300">
         <button
@@ -118,23 +118,54 @@ const PerfumLabPage = () => {
         </div>
 
         {/* 향수 */}
-        <div className="flex items-start justify-center">
-          <div className="w-full py-4 flex flex-row">
-            <div className="px-3 py-10">
-              <img src={perfumeImage} className="w-46" alt="향수 공병" />
-            </div>
-            <div className="flex-[3] py-10 relative">
-              <div className="absolute bottom-20 right-2 flex gap-5">
-                <img src={testTubeImage} className="w-12" alt="테스트 튜브" />
-                <img src={testTubeImage} className="w-12" alt="테스트 튜브" />
-                <img src={testTubeImage} className="w-12" alt="테스트 튜브" />
-                <img src={testTubeImage} className="w-12" alt="테스트 튜브" />
+        <div className="flex-shrink-0 px-2 sm:px-4 overflow-hidden">
+          <div className="flex items-start justify-center max-w-full">
+            <div className="w-full py-2 sm:py-4 flex flex-row">
+              <div className="flex-shrink-0 pb-5 pr-3">
+                <img
+                  src={perfumeImage}
+                  className="h-auto"
+                  style={{ width: "clamp(7rem, 38.33vw, 11.5rem)" }}
+                  alt="향수 공병"
+                />
               </div>
-              <img
-                src={perfumeRackImage}
-                className="w-70 absolute bottom-10 right-0"
-                alt="실린더 거치대"
-              />
+              <div className="flex-[3] py-6 sm:py-8 md:py-10 relative">
+                <div
+                  className="absolute bottom-12 sm:bottom-16 md:bottom-20 right-1 sm:right-2 flex"
+                  style={{ gap: "clamp(0.5rem, 3.2vw, 1rem)" }}
+                >
+                  <img
+                    src={testTubeImage}
+                    className="h-auto"
+                    style={{ width: "clamp(1.75rem, 10vw, 3rem)" }}
+                    alt="테스트 튜브"
+                  />
+                  <img
+                    src={testTubeImage}
+                    className="h-auto"
+                    style={{ width: "clamp(1.75rem, 10vw, 3rem)" }}
+                    alt="테스트 튜브"
+                  />
+                  <img
+                    src={testTubeImage}
+                    className="h-auto"
+                    style={{ width: "clamp(1.75rem, 10vw, 3rem)" }}
+                    alt="테스트 튜브"
+                  />
+                  <img
+                    src={testTubeImage}
+                    className="h-auto"
+                    style={{ width: "clamp(1.75rem, 10vw, 3rem)" }}
+                    alt="테스트 튜브"
+                  />
+                </div>
+                <img
+                  src={perfumeRackImage}
+                  className="h-auto absolute bottom-6 sm:bottom-8 md:bottom-10 right-0"
+                  style={{ width: "clamp(10rem, 58.33vw, 17.5rem)" }}
+                  alt="실린더 거치대"
+                />
+              </div>
             </div>
           </div>
         </div>
