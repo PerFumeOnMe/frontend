@@ -16,14 +16,14 @@ export default function OnboardingStep2({ onNext, onPrev }: { onNext: () => void
       {/* 상단 영역 */}
       <div className="w-full ml-[11px] mx-auto pt-[26px]">
         <div className="relative h-[24px]">
-          <TopBackButton />
+          <TopBackButton onClick={onPrev}/>
           <div className="absolute inset-0 flex justify-center items-center">
             <OnboardingProgress current={2} />
           </div>
         </div>
       </div>
 
-      <div className="mt-20 w-[316px] mx-auto flex flex-col items-start gap-6">
+      <div className="w-full px-4 mx-auto mt-[22px] flex flex-col items-start gap-6">
         <div>
           <h2 className="text-title2 text-grayscale-1000">퍼퓨온미는 정보를 통해<br />더욱 정밀하게 추천하고 있어요.</h2>
           <p className="text-body3 text-grayscale-600 mt-2">성별과 연령대를 입력해주세요.</p>
@@ -43,7 +43,7 @@ export default function OnboardingStep2({ onNext, onPrev }: { onNext: () => void
               </button>
             ))}
           </div>
-          <p className={`mt-1 text-xs ${genderOptions.includes(gender) ? 'text-gray-400' : 'text-main-500 font-semibold'}`}>
+          <p className={`mt-1 text-body4 w-full text-center ${genderOptions.includes(gender) ? 'text-gray-400' : 'text-main-500 font-semibold'}`}>
             상관없음
           </p>
         </div>
@@ -62,14 +62,15 @@ export default function OnboardingStep2({ onNext, onPrev }: { onNext: () => void
               </button>
             ))}
           </div>
-          <p className={`mt-1 text-xs ${ageOptions.includes(age) ? 'text-gray-400' : 'text-main-500 font-semibold'}`}>
+          <p className={`mt-1 text-body4 w-full text-center ${ageOptions.includes(age) ? 'text-gray-400' : 'text-main-500 font-semibold'}`}>
             상관없음
           </p>
         </div>
 
-        <div className="w-full pt-4">
-          <BottomButton text="다음" onClick={onNext} disabled={!gender || !age} />
-        </div>
+
+      </div>
+      <div className="w-full px-4 pt-4">
+        <BottomButton text="다음" onClick={onNext} disabled={!gender || !age} />
       </div>
     </OnboardingLayout>
   );
