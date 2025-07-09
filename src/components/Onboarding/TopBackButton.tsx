@@ -6,13 +6,13 @@ export default function TopBackButton({ onClick }: { onClick?: () => void }) {
   return (
     <button
       onClick={onClick ?? (() => navigate(-1))}
-      className="absolute left-[6px] top-[1px] w-[24px] h-[24px] flex items-center justify-center"
+      className=" w-[24px] h-[24px] "
       aria-label="뒤로가기"
     >
       <img
         src="/src/assets/Onboarding/return_shape.svg"
         alt="뒤로가기"
-        className="w-[12px] h-[22.67px]"
+        className="w-[12px] h-[22.67px] mx-[6px] mt-[1px] mb-[0.33px] z-10 cursor-pointer"
       />
     </button>
   );

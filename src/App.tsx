@@ -16,6 +16,7 @@ import ChatbotPage from "./pages/Chatbot/ChatbotPage.tsx";
 import ChoosePathPage from "./pages/ChoosePathPage.tsx";
 import ImageKeywordPage from "./pages/ImageKeywordPage.tsx";
 import FilterPage from "./pages/FilterPage.tsx";
+import OnboardingRouter from "./pages/Onboarding/index.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/kakao",
     element: <KakaoSignupPage />,
+  },
+  {
+  path: "/onboarding",
+  element: <OnboardingRouter  />
   },
   // 아래는 보호 라우트로 감싼 실제 서비스 페이지들
   {

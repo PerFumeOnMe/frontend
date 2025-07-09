@@ -50,7 +50,7 @@ export default function OnboardingStep1({ onNext }: { onNext: () => void }) {
 
 
       {/* 하단 버튼 */}
-      <div className="px-4 mt-6">
+      <div className="px-4 mt-130 mb-[24px]">
         <BottomButton text="다음" onClick={onNext} disabled={!nickname.trim()} />
       </div>
     </OnboardingLayout>
