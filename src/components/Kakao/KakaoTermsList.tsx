@@ -12,11 +12,11 @@ type Props = {
 
 export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: Props) {
   return (
-    <section className="pt-4 space-y-2 w-full max-w-[305px] mx-auto">
+    <section className="pt-6 space-y-2 w-full max-w-[318px] mx-auto">
       <div className="flex items-start justify-between px-2 cursor-pointer" onClick={onToggle}>
         <div className="flex items-start gap-1.5">
           <svg
-            className={`w-4 h-4 mt-[2px] ${isAllChecked ? "text-[#FEE500]" : "text-[#C5C5C5]"}`}
+            className={`w-4 h-4 ${isAllChecked ? "text-[#FEE500]" : "text-[#C5C5C5]"}`}
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -36,22 +36,30 @@ export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: P
         </a>
       </div>
 
-      {["닉네임", "계정", "전화번호", "별명"].map((label) => (
-        <div key={label} className="flex items-start gap-1.5 pl-8 min-h-[20px] font-normal text-[13px] leading-[100%] tracking-[0]">
-          {isAllChecked && (
-            <svg
-              className="w-4 h-4 mt-[2px] text-[#FEE500]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-          )}
-          <span className="text-[13px] text-[#838383]">{label}</span>
-        </div>
-      ))}
+      <div className="space-y-[6px] pl-8">
+        {["닉네임", "계정", "전화번호", "별명"].map((label, index, arr) => (
+          <div
+            key={label}
+            className={`flex items-center gap-1.5 min-h-[20px] text-[13px] leading-[16px] text-[#838383] ${
+              index === arr.length - 1 ? "mb-[51px]" : ""
+            }`}
+          >
+            {isAllChecked && (
+              <svg
+                className="w-[16px] h-[16px] mt-[1px] text-[#FEE500]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            )}
+            <span>{label}</span>
+          </div>
+        ))}
+      </div>
+    
     </section>
   );
 }
