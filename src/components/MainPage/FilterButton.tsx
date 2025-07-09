@@ -1,3 +1,5 @@
+import filterImage from "../../assets/MainPage/filter.png";
+
 interface FilterButtonProps {
     onClick?: () => void;
 }
@@ -9,7 +11,7 @@ const FilterButton = ({ onClick }: FilterButtonProps) => {
             className="flex items-center justify-center gap-1 w-[73px] h-[30px] bg-white rounded-[20px] text-[12px] text-semibold text-black border border-[#000000] border-[1.5px]"
         >
             <img 
-                src="/MainPage/filter.png" 
+                src= {filterImage}
                 alt="필터" 
                 className="w-[12px] h-[12px] mr-[2px]"
             />
