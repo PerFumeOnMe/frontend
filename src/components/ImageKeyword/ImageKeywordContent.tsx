@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { KEYWORD_CATEGORIES, CATEGORY_KOREAN, KEYWORD_OPTIONS } from '../../types/ImageKeyword/imageKeyword.const';
 import type { KeywordCategory } from '../../types/ImageKeyword/imageKeyword.type';
 import type { ImageKeywordRequest } from '../../types/ImageKeyword/imageKeyword';
@@ -29,31 +28,16 @@ const STEP_CONTENT = {
 
 interface ImageKeywordContentProps {
     currentStep: number;
-    onNext: () => void;
-    onSubmit: (keywords: ImageKeywordRequest) => void;
+    selectedKeywords: Partial<ImageKeywordRequest>;
+    onKeywordSelect: (keyword: string) => void;
 }
 
-export default function ImageKeywordContent({ currentStep, onNext, onSubmit }: ImageKeywordContentProps) {
-    const [selectedKeywords, setSelectedKeywords] = useState<Partial<ImageKeywordRequest>>({});
-
+export default function ImageKeywordContent({ 
+    currentStep, 
+    selectedKeywords,
+    onKeywordSelect 
+}: ImageKeywordContentProps) {
     const currentCategory = KEYWORD_CATEGORIES[currentStep] as KeywordCategory;
-    const isLastStep = currentStep === KEYWORD_CATEGORIES.length - 1;
-    const isStepComplete = Boolean(selectedKeywords[currentCategory]);
-
-    const handleKeywordSelect = (keyword: string) => {
-        setSelectedKeywords(prev => ({
-            ...prev,
-            [currentCategory]: keyword
-        }));
-
-        if (isStepComplete) {
-            if (isLastStep) {
-                onSubmit(selectedKeywords as ImageKeywordRequest);
-            } else {
-                onNext();
-            }
-        }
-    };
 
     return (
         <div className="px-[16px]">
@@ -72,7 +56,7 @@ export default function ImageKeywordContent({ currentStep, onNext, onSubmit }: I
                 {KEYWORD_OPTIONS[currentCategory].map((keyword) => (
                     <button
                         key={keyword}
-                        onClick={() => handleKeywordSelect(keyword)}
+                        onClick={() => onKeywordSelect(keyword)}
                         className={`
                             h-[40px] rounded-[16px] border transition-all
                             ${selectedKeywords[currentCategory] === keyword
