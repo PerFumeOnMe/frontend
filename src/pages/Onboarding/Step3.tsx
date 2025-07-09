@@ -27,13 +27,13 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
       {/* 상단 영역 */}
       <div className="w-full ml-[11px] mx-auto pt-[26px]">
         <div className="relative h-[24px]">
-          <TopBackButton />
+          <TopBackButton onClick={onPrev}/>
           <div className="absolute inset-0 flex justify-center items-center">
             <OnboardingProgress current={3} />
           </div>
         </div>
       </div>
-      <div className="mt-16 w-[361px] mx-auto">
+      <div className="mt-16 px-4 mx-auto">
         <h2 className="text-lg font-semibold">선호하는 향을<br />3가지 선택해 주세요.</h2>
         <p className="text-sm text-gray-500 mt-2">이제 회원님의 향을 찾아드릴게요.</p>
 
@@ -49,8 +49,11 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
           ))}
         </div>
       
-      <BottomButton text="확인" onClick={() => window.location.href = '/'} disabled={selected.length !== 3} />
+
       </div>  
+      <div className="w-full px-4">
+        <BottomButton text="확인" onClick={() => window.location.href = '/'} disabled={selected.length !== 3} />
+      </div>
     </OnboardingLayout>
   );
 }

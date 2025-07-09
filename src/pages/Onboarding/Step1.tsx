@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import OnboardingLayout from "../../components/Onboarding/OnboardingLayout";
 import TopBackButton from "../../components/Onboarding/TopBackButton";
 import BottomButton from "../../components/Onboarding/BottomButton";
@@ -6,13 +7,13 @@ import OnboardingProgress from "../../components/Onboarding/OnboardingProgress";
 
 export default function OnboardingStep1({ onNext }: { onNext: () => void }) {
   const [nickname, setNickname] = useState("");
-
+  const navigate = useNavigate();
   return (
     <OnboardingLayout>
       {/* 상단 영역 */}
       <div className="w-full ml-[11px] mx-auto pt-[26px]">
         <div className="relative h-[24px]">
-          <TopBackButton />
+          <TopBackButton onClick={() => navigate(-1)}/>
           <div className="absolute inset-0 flex justify-center items-center">
             <OnboardingProgress current={1} />
           </div>
@@ -49,7 +50,7 @@ export default function OnboardingStep1({ onNext }: { onNext: () => void }) {
 
 
       {/* 하단 버튼 */}
-      <div className="w-[361px] mx-auto mt-6">
+      <div className="px-4 mt-6">
         <BottomButton text="다음" onClick={onNext} disabled={!nickname.trim()} />
       </div>
     </OnboardingLayout>
