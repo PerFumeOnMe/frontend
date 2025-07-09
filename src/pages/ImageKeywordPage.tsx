@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import KeywordHeader from '../components/ImageKeyword/KeywordHeader';
+import ImageKeywordHeader from '../components/ImageKeyword/ImageKeywordHeader';
+import ImageKeywordContent from '../components/ImageKeyword/ImageKeywordContent';
 import { KEYWORD_CATEGORIES, CATEGORY_KOREAN } from '../types/ImageKeyword/imageKeyword.const';
 import type { KeywordCategory } from '../types/ImageKeyword/imageKeyword.type';
+import type { ImageKeywordRequest } from '../types/ImageKeyword/imageKeyword';
 
 const ImageKeywordPage = () => {
     const navigate = useNavigate();
@@ -12,14 +14,30 @@ const ImageKeywordPage = () => {
         navigate('/');
     };
 
+    const handleNext = () => {
+        if (currentStep < KEYWORD_CATEGORIES.length - 1) {
+            setCurrentStep(prev => prev + 1);
+        }
+    };
+
+    const handleSubmit = (keywords: ImageKeywordRequest) => {
+        // TODO: API 호출
+        console.log('Final keywords:', keywords);
+    };
+
     const currentCategory = KEYWORD_CATEGORIES[currentStep] as KeywordCategory;
     
     return (
         <div className="bg-white min-h-screen w-full">
-            <KeywordHeader
+            <ImageKeywordHeader
                 step={currentStep + 1}
                 onClose={handleClose}
                 categoryLabel={CATEGORY_KOREAN[currentCategory]}
+            />
+            <ImageKeywordContent
+                currentStep={currentStep}
+                onNext={handleNext}
+                onSubmit={handleSubmit}
             />
         </div>
     );

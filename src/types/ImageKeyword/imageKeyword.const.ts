@@ -1,5 +1,14 @@
 import type { KeywordCategory } from './imageKeyword.type';
 
+// 키워드 카테고리
+export const KEYWORD_CATEGORIES = [
+    'ambience', 
+    'style', 
+    'gender', 
+    'season', 
+    'character'
+] as const;
+
 // 분위기 키워드 옵션
 export const AMBIENCE_OPTIONS = [
     "세련된",

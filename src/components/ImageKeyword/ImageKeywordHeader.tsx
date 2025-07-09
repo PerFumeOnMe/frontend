@@ -1,14 +1,14 @@
-interface KeywordHeaderProps {
+interface ImageKeywordHeaderProps {
   step: number;
   onClose: () => void;
   categoryLabel: string;
 }
 
-export default function KeywordHeader({
+export default function ImageKeywordHeader({
   step,
   onClose,
   categoryLabel,
-}: KeywordHeaderProps) {
+}: ImageKeywordHeaderProps) {
   return (
     <div className="mb-[32px] px-[16px] pt-[24px]">
       {/* 상단 네비게이션 */}
