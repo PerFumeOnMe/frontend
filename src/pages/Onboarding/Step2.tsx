@@ -13,8 +13,16 @@ export default function OnboardingStep2({ onNext, onPrev }: { onNext: () => void
 
   return (
     <OnboardingLayout>
-      <TopBackButton onClick={onPrev} />
-      <OnboardingProgress current={2} />
+      {/* 상단 영역 */}
+      <div className="w-full ml-[11px] mx-auto pt-[26px]">
+        <div className="relative h-[24px]">
+          <TopBackButton />
+          <div className="absolute inset-0 flex justify-center items-center">
+            <OnboardingProgress current={2} />
+          </div>
+        </div>
+      </div>
+
       <div className="mt-20 w-[316px] mx-auto flex flex-col items-start gap-6">
         <div>
           <h2 className="text-title2 text-grayscale-1000">퍼퓨온미는 정보를 통해<br />더욱 정밀하게 추천하고 있어요.</h2>

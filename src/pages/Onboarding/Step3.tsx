@@ -24,11 +24,18 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
 
   return (
     <OnboardingLayout>
-      <TopBackButton onClick={onPrev} />
-      <OnboardingProgress current={3} />
+      {/* 상단 영역 */}
+      <div className="w-full ml-[11px] mx-auto pt-[26px]">
+        <div className="relative h-[24px]">
+          <TopBackButton />
+          <div className="absolute inset-0 flex justify-center items-center">
+            <OnboardingProgress current={3} />
+          </div>
+        </div>
+      </div>
       <div className="mt-16 w-[361px] mx-auto">
         <h2 className="text-lg font-semibold">선호하는 향을<br />3가지 선택해 주세요.</h2>
-        <p className="text-sm text-gray-500 mt-2">이후 AI가 추천해줄 향에 반영돼요.</p>
+        <p className="text-sm text-gray-500 mt-2">이제 회원님의 향을 찾아드릴게요.</p>
 
         <div className="mt-6 grid grid-cols-3 gap-2">
           {scentOptions.map((scent) => (
