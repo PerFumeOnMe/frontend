@@ -67,6 +67,8 @@ const scentOptions = [
   },
 ];
 
+
+
 export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
   const [selected, setSelected] = useState<string[]>([]);
 
@@ -80,7 +82,6 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
 
   return (
     <OnboardingLayout>
-      {/* 상단 영역 */}
       <div className="w-full ml-[11px] mx-auto pt-[26px]">
         <div className="relative h-[24px]">
           <TopBackButton onClick={onPrev} />
@@ -90,30 +91,39 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
         </div>
       </div>
 
-      {/* 본문 */}
       <div className="mt-16 px-4 mx-auto">
-        <h2 className="text-lg font-semibold">선호하는 향을<br />3가지 선택해 주세요.</h2>
-        <p className="text-sm text-gray-500 mt-2">이제 회원님의 향을 찾아드릴게요.</p>
+        <h2 className="text-lg font-semibold">
+          선호하는 향을<br />3가지 선택해 주세요.
+        </h2>
+        <p className="text-sm text-gray-500 mt-2">
+          이제 회원님의 향을 찾아드릴게요.
+        </p>
 
         <div className="mt-6 grid grid-cols-3 gap-4">
-          {scentOptions.map(({ svg, description }) => (
+          {scentOptions.map(({ svg, description}) => (
             <button
               key={svg}
               onClick={() => toggle(svg)}
-              className={`flex flex-col items-center justify-center h-[108px] px-2 py-3 rounded-md border text-center text-xs leading-tight ${
+              className={`w-[112px] h-[124px] rounded-xl overflow-hidden border text-center ${
                 selected.includes(svg)
-                  ? "border-main-500 bg-[#F9F5FF] text-main-500"
-                  : "border-gray-300 bg-white"
+                  ? "border-main-500"
+                  : "border-gray-300"
               }`}
             >
-              <img src={svg} alt="scent icon" className="w-[40px] h-[40px] mb-2" />
-              <span className="line-clamp-2">{description}</span>
+              <div className="relative w-full h-[80px]">
+                <img
+                  src={svg}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="bg-white px-1 pt-[2px] h-[44px] flex items-center justify-center text-[11px] text-grayscale-600 leading-[14px]">
+                <p className="line-clamp-2">{description}</p>
+              </div>
             </button>
           ))}
         </div>
       </div>
 
-      {/* 하단 버튼 */}
       <div className="w-full px-4 mt-6 mb-[24px]">
         <BottomButton
           text="확인"
