@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import PBTIHeader from '../../components/PBTI/PBTIHeader';
 import PBTIStartButton from '../../components/PBTI/PBTIStartButton';
@@ -23,8 +24,21 @@ const PBTIQuestionPage: React.FC = () => {
         ))}
       </div>
       <PBTIStartButton />
+=======
+import React, { useState } from 'react';
+
+const PBTIQuestionPage: React.FC = () => {
+
+  return (
+    <div className="min-w-[375px] w-120 h-full bg-[#F8F0FF] flex flex-col font-[Pretandard]">
+      
+>>>>>>> b68a60e (:sparkles: PBTI 페이지  작업 시작 Header와 StartButton 작업중)
     </div>
   );
 };
 
+<<<<<<< HEAD
 export default PBTIQuestionPage;
+=======
+export default PBTIQuestionPage;
+>>>>>>> b68a60e (:sparkles: PBTI 페이지  작업 시작 Header와 StartButton 작업중)
