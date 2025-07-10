@@ -6,11 +6,10 @@ type LoginInputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function LoginInput({ type, icon, placeholder, value, onChange }: LoginInputProps) {
+export default function LoginInput({ type, placeholder, value, onChange }: LoginInputProps) {
   return (
     <div className="w-full ">
       <label className="flex items-center bg-[#A6A6A666] h-[55px] px-4 border border-white rounded-[5px]">
-        <img src={icon} alt={`${placeholder} 아이콘`} className="w-5 h-5 mr-3" />
         <input
           type={type}
           value={value}

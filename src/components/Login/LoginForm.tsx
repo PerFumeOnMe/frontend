@@ -33,14 +33,12 @@ export default function LoginForm() {
         <form onSubmit={handleLoginSubmit} className="w-full flex flex-col items-center gap-[11px] pb-6">
           <LoginInput
             type="text"
-            icon="/Login/id.svg"
             placeholder="아이디"
             value={inputId}
             onChange={(e) => setInputId(e.target.value)}
           />
           <LoginInput
             type="password"
-            icon="/Login/pw.svg"
             placeholder="패스워드"
             value={inputPassword}
             onChange={(e) => setInputPassword(e.target.value)}
