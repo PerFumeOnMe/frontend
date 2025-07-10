@@ -29,27 +29,27 @@ export default function LoginForm() {
     <main className="w-screen h-screen flex items-center justify-center">
       <section className="w-full max-w-120 min-w-[375px] min-h-screen  bg-white bg-center flex flex-col">
         <div className="w-full px-4 mx-auto my-auto">
-        <LoginTitle />
-        <form onSubmit={handleLoginSubmit} className="w-full flex flex-col items-center gap-[11px] pb-6">
-          <LoginInput
-            type="text"
-            placeholder="아이디 입력하기"
-            value={inputId}
-            onChange={(e) => setInputId(e.target.value)}
-          />
-          <LoginInput
-            type="password"
-            placeholder="비밀번호 입력하기"
-            value={inputPassword}
-            onChange={(e) => setInputPassword(e.target.value)}
-          />
-          <LoginErrorMessage message={errorMessage} />
-          <LoginButton />
-        </form>
+          <LoginTitle />
+            <form onSubmit={handleLoginSubmit} className="w-full flex flex-col items-center gap-4 pb-4.5">
+              <LoginInput
+                type="text"
+                placeholder="아이디 입력하기"
+                value={inputId}
+                onChange={(e) => setInputId(e.target.value)}
+              />
+              <LoginInput
+                type="password"
+                placeholder="비밀번호 입력하기"
+                value={inputPassword}
+                onChange={(e) => setInputPassword(e.target.value)}
+              />
+              <LoginErrorMessage message={errorMessage} />
+              <LoginButton />
+              <Divider />
+            </form>
 
-        <Divider />
-        <SocialLogin />
-        <SignupGuide />
+          <SocialLogin />
+          <SignupGuide />
         </div>
       </section>
     </main>

@@ -21,14 +21,6 @@
     @apply text-[16px] font-semibold leading-[150%];
   }
 
-  .text-title5 {
-    @apply text-[18px] font-medium leading-[44px];
-}
-
-  .text-title6 {
-    @apply text-[36px] font-normal leading-[44px];
-  }
-
 
   /* Body */
   .text-body1 {
