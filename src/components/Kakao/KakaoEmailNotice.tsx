@@ -1,9 +1,11 @@
+import user from '../../assets/Login/kakao_user.svg';
+
 export default function KakaoEmailNotice() {
   return (
     <section className="border-b border-[#0000004D] py-4 px-5">
       <div className="w-full max-w-[318px]">
         <div className="flex items-center gap-[2px]">
-          <img src="/Login/kakao_user.svg" />
+          <img src={user} />
           <p className="text-[10px]">wdd789@naver.com</p>
         </div>
         <p className="max-w-[290px] w-full text-[10px] text-[#00000066] leading-snug mt-1 pb-[11px]">
