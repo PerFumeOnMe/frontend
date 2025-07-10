@@ -1,8 +1,8 @@
 export default function SignupDropdown() {
   return (
-    <div className="w-full max-w-[361px] h-[362px] mx-auto mt-6 px-[29px] flex items-center bg-grayscale-200 text-caption2 text-grayscale-900 rounded-[8px] whitespace-pre-wrap
+    <div className="w-full px-4 h-[362px] mx-auto mt-6  flex items-center justify-center bg-grayscale-200 text-caption2 text-grayscale-900 rounded-[8px] whitespace-pre-wrap
  tracking-[-0.02em] ">
-      <div className="w-full max-w-[303px] mx-auto">
+      <div className="w-full  mx-auto">
       {`1. 수집하는 개인정보 항목
 회사는 회원가입 및 서비스 이용을 위해 아래의 개인정보를 수집합니다.
 • 필수 수집 항목: 아이디, 비밀번호, 이름

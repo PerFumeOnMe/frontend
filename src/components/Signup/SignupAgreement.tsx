@@ -16,7 +16,7 @@ export default function SignupAgreement({
   setIsDropdownOpen,
 }: Props) {
   return (
-    <section className="w-full max-w-[361px] mx-auto ">
+    <section className="w-full px-4 mx-auto ">
       <div className="flex items-center justify-between">
         <label className="flex items-center gap-[10px] text-body3 cursor-pointer">
           <input

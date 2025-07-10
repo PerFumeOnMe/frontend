@@ -13,7 +13,7 @@ export default function SignupButton({ disabled = false, onClick, children, to }
     (disabled ? "bg-grayscale-500" : "bg-main-500");
 
   return (
-    <div className="max-w-[361px] w-full mx-auto">
+    <div className="px-4 w-full mx-auto">
       {to ? (
         <Link to={to} className={baseClass}>
           {children}

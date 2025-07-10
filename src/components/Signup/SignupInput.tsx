@@ -14,7 +14,7 @@ export default function SignupInput({
   const isFilled = value.trim().length > 0;
 
   return (
-    <div className="max-w-[361px] w-full mx-auto">
+    <div className="px-4 w-full mx-auto">
     <input
       type={type}
       placeholder={placeholder}
