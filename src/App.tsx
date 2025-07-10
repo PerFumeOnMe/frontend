@@ -5,7 +5,7 @@ import MainPage from './pages/MainPage.tsx';
 import LoginPage from "./pages/Login/LoginPage.tsx";
 import SignupPage from './pages/Login/SignupPage.tsx';
 import MyPage from './pages/MyPage.tsx';
-import PBTIPage from './pages/PBTIPage.tsx';
+import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
 import DiaryPage from './pages/DiaryPage.tsx';
 import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         errorElement: <NotFoundPage />,
         children: [
           { index: true, element: <MainPage /> },
-          { path: 'PBTI', element: <PBTIPage /> },
+          { path: 'PBTI', element: <PBTIMainPage /> },
           { path: 'Diary', element: <DiaryPage /> },
           { path: 'MyPage', element: <MyPage /> },
           { path: 'choose-path', element: <ChoosePathPage /> },
