@@ -27,9 +27,9 @@ export default function LoginForm() {
 
   return (
     <main className="w-screen h-screen flex items-center justify-center">
-      <section className="w-full max-w-120 min-w-[375px] min-h-screen bg-[url('/Login/background.svg')] bg-cover bg-center flex flex-col">
+      <section className="w-full max-w-120 min-w-[375px] min-h-screen  bg-white bg-center flex flex-col">
+        <div className="w-full px-4 mx-auto">
         <LoginTitle />
-        <div className="w-full max-w-[384px] mx-auto">
         <form onSubmit={handleLoginSubmit} className="w-full flex flex-col items-center gap-[11px] pb-6">
           <LoginInput
             type="text"
