@@ -9,13 +9,13 @@ type LoginInputProps = {
 export default function LoginInput({ type, placeholder, value, onChange }: LoginInputProps) {
   return (
     <div className="w-full ">
-      <label className="flex items-center bg-[#A6A6A666] h-[55px] px-4 border border-white rounded-[5px]">
+      <label className="flex items-center  text-grayscale-900 h-[55px] px-4 border border-grayscale-700 rounded-2xl">
         <input
           type={type}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="flex-1 bg-transparent text-white placeholder-white focus:outline-none text-title5"
+          className="flex-1 bg-transparent placeholder-grayscale-900 focus:outline-none text-body3"
         />
       </label>
     </div>

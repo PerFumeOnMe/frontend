@@ -55,10 +55,4 @@
   .text-caption2 {
     @apply text-[10px] font-light leading-[150%];
   }
-
-
-  /* Button */
-  .text-button1 {
-    @apply text-[18px] font-bold leading-[44px] text-center;
-  }
 }

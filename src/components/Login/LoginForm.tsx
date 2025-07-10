@@ -28,18 +28,18 @@ export default function LoginForm() {
   return (
     <main className="w-screen h-screen flex items-center justify-center">
       <section className="w-full max-w-120 min-w-[375px] min-h-screen  bg-white bg-center flex flex-col">
-        <div className="w-full px-4 mx-auto">
+        <div className="w-full px-4 mx-auto my-auto">
         <LoginTitle />
         <form onSubmit={handleLoginSubmit} className="w-full flex flex-col items-center gap-[11px] pb-6">
           <LoginInput
             type="text"
-            placeholder="아이디"
+            placeholder="아이디 입력하기"
             value={inputId}
             onChange={(e) => setInputId(e.target.value)}
           />
           <LoginInput
             type="password"
-            placeholder="패스워드"
+            placeholder="비밀번호 입력하기"
             value={inputPassword}
             onChange={(e) => setInputPassword(e.target.value)}
           />
