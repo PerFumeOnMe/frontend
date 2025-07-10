@@ -1,19 +1,29 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ImageKeywordHeader from '../components/ImageKeyword/ImageKeywordHeader';
-import ImageKeywordContent from '../components/ImageKeyword/ImageKeywordContent';
-import ImageKeywordButton from '../components/ImageKeyword/ImageKeywordButton';
-import { KEYWORD_CATEGORIES, CATEGORY_KOREAN } from '../types/ImageKeyword/imageKeyword.const';
-import type { KeywordCategory } from '../types/ImageKeyword/imageKeyword.type';
-import type { ImageKeywordRequest } from '../types/ImageKeyword/imageKeyword';
+import ImageKeywordHeader from '../../components/ImageKeyword/ImageKeywordHeader';
+import ImageKeywordContent from '../../components/ImageKeyword/ImageKeywordContent';
+import ImageKeywordButton from '../../components/ImageKeyword/ImageKeywordButton';
+import ImageKeywordModal from '../../components/ImageKeyword/ImageKeywordModal';
+import { KEYWORD_CATEGORIES, CATEGORY_KOREAN } from '../../types/ImageKeyword/imageKeyword.const';
+import type { KeywordCategory } from '../../types/ImageKeyword/imageKeyword.type';
+import type { ImageKeywordRequest } from '../../types/ImageKeyword/imageKeyword';
 
 const ImageKeywordPage = () => {
     const navigate = useNavigate();
     const [currentStep, setCurrentStep] = useState(0);
     const [selectedKeywords, setSelectedKeywords] = useState<Partial<ImageKeywordRequest>>({});
+    const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => {
+        setShowModal(true);
+    };
+
+    const handleModalClose = () => {
         navigate('/');
+    };
+
+    const handleModalConfirm = () => {
+        setShowModal(false);
     };
 
     const handleNext = () => {
@@ -57,6 +67,12 @@ const ImageKeywordPage = () => {
                 onNext={handleNext}
                 onSubmit={handleSubmit}
             />
+            {showModal && (
+                <ImageKeywordModal
+                    onClose={handleModalClose}
+                    onConfirm={handleModalConfirm}
+                />
+            )}
         </div>
     );
 }

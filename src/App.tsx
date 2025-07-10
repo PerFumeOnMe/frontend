@@ -14,8 +14,10 @@ import LabLoadingPage from "./pages/LabLoadingPage.tsx";
 import LabResultPage from "./pages/LabResultPage.tsx";
 import ChatbotPage from "./pages/Chatbot/ChatbotPage.tsx";
 import ChoosePathPage from "./pages/ChoosePathPage.tsx";
-import ImageKeywordPage from "./pages/ImageKeywordPage.tsx";
+import ImageKeywordPage from "./pages/ImageKeyword/ImageKeywordPage.tsx";
+import ImageKeywordLoading from "./pages/ImageKeyword/ImageKeywordLoading.tsx";
 import FilterPage from "./pages/FilterPage.tsx";
+import OnboardingRouter from "./pages/Onboarding/index.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
     path: "/kakao",
     element: <KakaoSignupPage />,
   },
+  {
+  path: "/onboarding",
+  element: <OnboardingRouter  />
+  },
   // 아래는 보호 라우트로 감싼 실제 서비스 페이지들
   {
     element: <ProtectedRoute />, // 보호 라우트
@@ -45,8 +51,14 @@ const router = createBrowserRouter([
           { path: 'Diary', element: <DiaryPage /> },
           { path: 'MyPage', element: <MyPage /> },
           { path: 'choose-path', element: <ChoosePathPage /> },
-          { path: 'image-keyword', element: <ImageKeywordPage /> },
-          { path: 'filter', element: <FilterPage /> }
+          { path: 'filter', element: <FilterPage /> },
+          { 
+            path: 'image-keyword',
+            children: [
+              { index: true, element: <ImageKeywordPage /> },
+              { path: 'loading', element: <ImageKeywordLoading /> }
+            ]
+          }
         ]
       },
       {
@@ -69,7 +81,7 @@ const router = createBrowserRouter([
             element: <LabResultPage />,
           },
         ],
-      },
+      }
     ]
   }
 ]);
