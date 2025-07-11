@@ -1,4 +1,4 @@
-import KakaoSignupForm from "../../components/Login/KakaoSignupForm"
+import KakaoSignupForm from "../../components/Kakao/KakaoSignupForm"
 
 export default function KakaoSignupPage(){
     return(
