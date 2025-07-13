@@ -1,8 +1,10 @@
+// src/pages/Onboarding/Step3.tsx
 import { useState } from "react";
 import OnboardingLayout from "../../components/Onboarding/OnboardingLayout";
 import TopBackButton from "../../components/Onboarding/TopBackButton";
 import BottomButton from "../../components/Onboarding/BottomButton";
 import OnboardingProgress from "../../components/Onboarding/OnboardingProgress";
+import ScentCard from "../../components/common/ScentCard"; 
 
 const scentOptions = [
   {
@@ -14,7 +16,7 @@ const scentOptions = [
     svg: "/src/assets/Onboarding/musk.svg",
   },
   {
-    description: "쌉쌀하면서도 상큼한  감귤류향, 향수의 첫인상 역할",
+    description: "쌉쌀하면서도 상큼한 감귤류향, 향수의 첫인상 역할",
     svg: "/src/assets/Onboarding/bergamot.svg",
   },
   {
@@ -67,8 +69,6 @@ const scentOptions = [
   },
 ];
 
-
-
 export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
   const [selected, setSelected] = useState<string[]>([]);
 
@@ -101,31 +101,22 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
 
         <div className="mt-6 mb-6 grid grid-cols-3 gap-x-3 gap-y-4">
           {scentOptions.map(({ svg, description }) => (
-        <button
-          key={svg}
-          onClick={() => toggle(svg)}
-          className={`rounded-[8px] overflow-hidden border text-caption2 text-center transition-colors duration-150 ${
-            selected.includes(svg)
-              ? "border-main-500 text-main-500"
-              : "border-grayscale-500 text-grayscale-900"
-          }`}
-        >
-          <div className="relative w-full h-[80px]">
-            <img src={svg} className="w-full h-full object-cover" />
-          </div>
-          <div className="bg-white px-1 pt-[2px] h-[44px] flex items-center justify-center text-[11px] leading-[14px]">
-            <p className="line-clamp-2">{description}</p>
-          </div>
-        </button>
+            <ScentCard
+              key={svg}
+              svg={svg}
+              description={description}
+              selected={selected.includes(svg)}
+              onClick={() => toggle(svg)}
+            />
           ))}
         </div>
       </div>
 
-        <BottomButton
-          text="확인"
-          onClick={() => window.location.href = "/"}
-          disabled={selected.length !== 3}
-        />
+      <BottomButton
+        text="확인"
+        onClick={() => window.location.href = "/"}
+        disabled={selected.length !== 3}
+      />
     </OnboardingLayout>
   );
 }
