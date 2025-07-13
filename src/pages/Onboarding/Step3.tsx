@@ -95,31 +95,28 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
         <h2 className="text-title2 text-grayscale-1000 ">
           선호하는 향을<br />3가지 선택해 주세요.
         </h2>
-        <p className="text-grayscale-600 text-body3 mb-8">
+        <p className="text-grayscale-600 text-body3 mt-2 ">
           이제 회원님의 향을 찾아드릴게요.
         </p>
 
-        <div className="mt-6 grid grid-cols-3 gap-[12px]">
-          {scentOptions.map(({ svg, description}) => (
-            <button
-              key={svg}
-              onClick={() => toggle(svg)}
-              className={`w-[112px] h-[124px] rounded-[8px] overflow-hidden border text-caption2 text-center ${
-                selected.includes(svg)
-                  ? "border-main-500 text-main-500"
-                  : "border-grayscale-500 text-grayscale-900"
-              }`}
-            >
-              <div className="relative w-full h-[80px]">
-                <img
-                  src={svg}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="bg-white px-1 pt-[2px] h-[44px] flex items-center justify-center text-[11px] text-grayscale-600 leading-[14px]">
-                <p className="line-clamp-2">{description}</p>
-              </div>
-            </button>
+        <div className="mt-6 mb-6 grid grid-cols-3 gap-x-3 gap-y-4">
+          {scentOptions.map(({ svg, description }) => (
+        <button
+          key={svg}
+          onClick={() => toggle(svg)}
+          className={`rounded-[8px] overflow-hidden border text-caption2 text-center transition-colors duration-150 ${
+            selected.includes(svg)
+              ? "border-main-500 text-main-500"
+              : "border-grayscale-500 text-grayscale-900"
+          }`}
+        >
+          <div className="relative w-full h-[80px]">
+            <img src={svg} className="w-full h-full object-cover" />
+          </div>
+          <div className="bg-white px-1 pt-[2px] h-[44px] flex items-center justify-center text-[11px] leading-[14px]">
+            <p className="line-clamp-2">{description}</p>
+          </div>
+        </button>
           ))}
         </div>
       </div>
