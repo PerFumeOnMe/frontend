@@ -124,13 +124,11 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
         </div>
       </div>
 
-      <div className="w-full px-4 mt-6 mb-[24px]">
         <BottomButton
           text="확인"
           onClick={() => window.location.href = "/"}
           disabled={selected.length !== 3}
         />
-      </div>
     </OnboardingLayout>
   );
 }

@@ -11,7 +11,7 @@ export default function BottomButton({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`w-full px-4 py-3 rounded-2xl text-title-3 text-grayscale-200 ${
+      className={`mt-auto mx-4 py-3 mb-6 rounded-2xl text-title-3 text-grayscale-200 ${
         disabled ? 'bg-grayscale-500 cursor-not-allowed' : 'bg-main-500'
       }`}
     >
