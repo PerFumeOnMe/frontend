@@ -1,7 +1,7 @@
 import React from 'react';
-import PBTIHeader from '../../components/PBTI/PBTIHeader';
-import PBTIStartButton from '../../components/PBTI/PBTIStartButton';
-import PBTIInfoCard from '../../components/PBTI/PBTIInfoCard';
+import PBTIHeader from '../../components/PBTI/PBTIMain/PBTIHeader';
+import PBTIStartButton from '../../components/PBTI/PBTIMain/PBTIStartButton';
+import PBTIInfoCard from '../../components/PBTI/PBTIMain/PBTIInfoCard';
 
 const PBTIMainPage: React.FC = () => {
   const infoList = [
@@ -24,7 +24,7 @@ const PBTIMainPage: React.FC = () => {
           </div>
         ))}
       </div>
-      <PBTIStartButton />
+      <PBTIStartButton/>
     </div>
   );
 };
