@@ -11,7 +11,7 @@ export default function OnboardingRouter() {
 
   return (
     <>
-      {step === 1 && <OnboardingStep1 onNext={next} onPrev={prev}/>}
+      {step === 1 && <OnboardingStep1 onNext={next}/>}
       {step === 2 && <OnboardingStep2 onNext={next} onPrev={prev} />}
       {step === 3 && <OnboardingStep3 onPrev={prev} />}
     </>
