@@ -19,7 +19,7 @@ const PBTIQuestionCard: React.FC<QuestionCardProps> = ({
   onSelect
 }) => {
   return (
-    <div className="bg-white rounded-3xl p-6 shadow-lg">
+    <div className="flex flex-col bg-white rounded-3xl items-center -mt-10 p-5.5 px-2.5 pb-10 shadow-md">
       <PBTIProgressBar progress={progress} />
       <PBTIQuestionText text={question} />
       <PBTIAnswerOptions

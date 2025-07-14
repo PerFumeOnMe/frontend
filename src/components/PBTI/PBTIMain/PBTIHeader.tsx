@@ -2,7 +2,7 @@ import character from "../../../assets/PBTI/character.png"
 
 const PBTIHeader : React.FC = () => {
     return (
-        <div className="flex flex-col items-center justify-center pt-30">
+        <div className="flex flex-col w-full items-center justify-center mt-30">
             <div className="text-[28px] font-semibold text-grayscale-1000">
                 나의 향수 성향 알아보기
             </div>

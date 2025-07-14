@@ -12,12 +12,14 @@ const PBTIAnswerOptions: React.FC<AnswerOptionsProps> = ({ options, selectedIdx,
       {options.map((option, idx) => (
         <div
           key={idx}
-          className={`flex-1 p-4 rounded-2xl text-center cursor-pointer transition
-            ${selectedIdx === idx ? 'bg-purple-600 text-white' : 'bg-purple-50 text-black'}
+          className={`flex w-40 h-45 rounded-2xl justify-center text-body3 items-center cursor-pointer transition
+            ${selectedIdx === idx ? 'bg-main-500 text-[#FBFBFB]' : 'bg-purple-50 text-grayscale-1000'}
           `}
           onClick={() => onSelect(idx)}
         >
-          {option}
+          <div className='w-35 h-15.8 px-1.5 text-center'>
+            {option}
+          </div>
         </div>
       ))}
     </div>

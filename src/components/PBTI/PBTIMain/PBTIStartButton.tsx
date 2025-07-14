@@ -11,8 +11,8 @@ const PBTIStartButton : React.FC = () => {
     
     return (
         <button onClick={handleStart}>
-            <div className="w-110 py-4 mt-5 mb-5 rounded-3xl bg-main-500 text-[#E7E7E9] text-[18px] font-[600]">
-                PBTI 시작하기
+            <div className="w-80 py-3 mt-15 mb-5 rounded-3xl bg-main-500 text-title3 text-grayscale-200 font-[600]">
+                시작하기
             </div>
         </button>
     );

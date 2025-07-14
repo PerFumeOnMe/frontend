@@ -12,16 +12,17 @@ const PBTIMainPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-w-[375px] w-120 h-screen bg-[#FBFBFB] flex flex-col items-center font-[Pretandard]">
+    <div className="min-w-[375px] w-full h-screen bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
       <PBTIHeader />
-      <div className='flex flex-col mt-10 gap-4 w-[90%]'>
+      <div className="flex flex-col mt-10 gap-5 w-[90%] h-fit relative">
         {infoList.map((info, idx) => (
-          <div
+          <PBTIInfoCard 
             key={idx}
-            className={`flex ${idx % 2 === 0 ? 'justify-start' : 'justify-end'}`}
-          >
-            <PBTIInfoCard info={info}/>
-          </div>
+            info={info}
+            direction={idx % 2 === 0 ? 'left' : 'right'}
+            delay={200 + idx * 1000}
+            position={idx % 2 === 0 ? 'left' : 'right'}
+          />
         ))}
       </div>
       <PBTIStartButton/>
@@ -30,4 +31,3 @@ const PBTIMainPage: React.FC = () => {
 };
 
 export default PBTIMainPage;
-

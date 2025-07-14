@@ -6,9 +6,12 @@ interface QuestionTextProps {
 
 const PBTIQuestionText: React.FC<QuestionTextProps> = ({ text }) => {
   return (
-    <h2 className="text-center text-lg font-bold text-gray-800 mb-6 whitespace-pre-line">
-      {text}
-    </h2>
+    <div className="flex flex-col gap-2 text-center mb-6">
+      <div className='text-display1 text-main-500'>{`Q1`}.</div>
+      <div className="text-title3 text-grayscale-800 whitespace-pre-line">
+        {text}
+      </div>
+    </div>
   );
 };
 
