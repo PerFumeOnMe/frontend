@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 import React from 'react';
-import PBTIHeader from '../../components/PBTI/PBTIHeader';
-import PBTIStartButton from '../../components/PBTI/PBTIStartButton';
-import PBTIInfoCard from '../../components/PBTI/PBTIInfoCard';
+import PBTIHeader from '../../components/PBTI/PBTIMain/PBTIHeader';
+import PBTIStartButton from '../../components/PBTI/PBTIMain/PBTIStartButton';
+import PBTIInfoCard from '../../components/PBTI/PBTIMain/PBTIInfoCard';
 
 const PBTIMainPage: React.FC = () => {
   const infoList = [
@@ -25,24 +24,10 @@ const PBTIMainPage: React.FC = () => {
           </div>
         ))}
       </div>
-      <PBTIStartButton />
-=======
-import React, { useState } from 'react';
-import PBTIHeader from '../../components/PBTI/PBTIHeader';
-
-const PBTIMainPage: React.FC = () => {
-
-  return (
-    <div className="min-w-[375px] w-120 h-full bg-[#F8F0FF] flex flex-col items-center font-[Pretandard]">
-      <PBTIHeader/>
-      <div className='w-[80%] border-1 border-[#65656C]'></div>
->>>>>>> b68a60e (:sparkles: PBTI 페이지  작업 시작 Header와 StartButton 작업중)
+      <PBTIStartButton/>
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default PBTIMainPage;
-=======
-export default PBTIMainPage;
->>>>>>> b68a60e (:sparkles: PBTI 페이지  작업 시작 Header와 StartButton 작업중)
+

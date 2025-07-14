@@ -1,44 +1,27 @@
-<<<<<<< HEAD
-import React from 'react';
-import PBTIHeader from '../../components/PBTI/PBTIHeader';
-import PBTIStartButton from '../../components/PBTI/PBTIStartButton';
-import PBTIInfoCard from '../../components/PBTI/PBTIInfoCard';
+import React, { useState } from 'react';
+import PerfumeOnMeCharacter from '../../assets/PBTI/character.png'
+import PBTIQuestionCard from '../../components/PBTI/PBTIQuestion/PBTIQuestionCard';
 
 const PBTIQuestionPage: React.FC = () => {
-  const infoList = [
-    "질문 기반 해석 성향 키워드",
-    "성향 기반 향기 스타일",
-    "나에게 맞는 향수"
-  ];
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
 
   return (
     <div className="min-w-[375px] w-120 h-full bg-[#FBFBFB] flex flex-col items-center font-[Pretandard]">
-      <PBTIHeader />
-      <div className='w-[88%] border-1 border-[#65656C]'></div>
-      <div className='mt-6 text-[18px] text-grayscale-900 font-[600]'>
-        PBTI를 통해 확인할 수 있어요.
+      <img src={PerfumeOnMeCharacter} />
+      <div className="px-6 pt-4">
+        <PBTIQuestionCard
+          progress={20}
+          question={`Q1.\n아침에 양치질을 마친 뒤,\n거울 앞에서 향수를 뿌리는 당신의 방식은?`}
+          options={[
+            "칫솔을 씻어두고 바로 한 번 톡, 얼굴과 목에 은은히 스며들게 한다.",
+            "수건으로 입가만 닦고 난 뒤 손목에 소량만 콕콕 찍어 마무리한다."
+          ]}
+          selectedIdx={selectedIdx}
+          onSelect={setSelectedIdx}
+        />
       </div>
-      <div className='flex w-full justify-center m-6 gap-5'>
-        {infoList.map((info, idx) => (
-          <PBTIInfoCard key={idx} info={info} />
-        ))}
-      </div>
-      <PBTIStartButton />
-=======
-import React, { useState } from 'react';
-
-const PBTIQuestionPage: React.FC = () => {
-
-  return (
-    <div className="min-w-[375px] w-120 h-full bg-[#F8F0FF] flex flex-col font-[Pretandard]">
-      
->>>>>>> b68a60e (:sparkles: PBTI 페이지  작업 시작 Header와 StartButton 작업중)
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default PBTIQuestionPage;
-=======
-export default PBTIQuestionPage;
->>>>>>> b68a60e (:sparkles: PBTI 페이지  작업 시작 Header와 StartButton 작업중)

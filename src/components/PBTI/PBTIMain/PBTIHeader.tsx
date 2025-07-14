@@ -1,4 +1,4 @@
-import character from "../../assets/PBTI/character.png"
+import character from "../../../assets/PBTI/character.png"
 
 const PBTIHeader : React.FC = () => {
     return (
