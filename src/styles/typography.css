@@ -21,6 +21,7 @@
     @apply text-[16px] font-semibold leading-[150%];
   }
 
+
   /* Body */
   .text-body1 {
     @apply text-[18px] font-normal leading-[150%];
