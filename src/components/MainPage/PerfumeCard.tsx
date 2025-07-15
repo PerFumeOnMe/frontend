@@ -22,7 +22,7 @@ const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
                 <img 
                     src={imageUrl} 
                     alt={name} 
-                    className="w-full aspect-square bg-grayscale-200 rounded-[16px] object-cover border border-grayscale-300"
+                    className="w-full aspect-[14/15] bg-grayscale-200 rounded-[8px] object-cover border border-[1px] border-grayscale-200"
                 />
                 <button 
                     onClick={handleLikeClick}

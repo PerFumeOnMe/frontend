@@ -2,7 +2,7 @@ import loading from '../../assets/ImageKeyword/loading.png';
 
 export default function ImageKeywordLoading() {
     return (
-        <div className="w-full min-h-screen bg-white flex flex-col items-center justify-center">
+        <div className="w-full min-w-[375px] max-w-[480px] bg-white flex flex-col items-center justify-center">
                 <img 
                     src= {loading} 
                     alt="로딩 이미지"

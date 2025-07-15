@@ -17,6 +17,7 @@ import ChoosePathPage from "./pages/ChoosePathPage.tsx";
 import ImageKeywordPage from "./pages/ImageKeyword/ImageKeywordPage.tsx";
 import ImageKeywordLoading from "./pages/ImageKeyword/ImageKeywordLoading.tsx";
 import FilterPage from "./pages/FilterPage.tsx";
+import AllPerfumePage from "./pages/AllPerfumePage.tsx";
 import OnboardingRouter from "./pages/Onboarding/index.tsx";
 
 const router = createBrowserRouter([
@@ -52,13 +53,20 @@ const router = createBrowserRouter([
           { path: 'MyPage', element: <MyPage /> },
           { path: 'choose-path', element: <ChoosePathPage /> },
           { path: 'filter', element: <FilterPage /> },
-          { 
-            path: 'image-keyword',
-            children: [
-              { index: true, element: <ImageKeywordPage /> },
-              { path: 'loading', element: <ImageKeywordLoading /> }
-            ]
-          }
+          { path: 'all-perfume', element: <AllPerfumePage /> }
+        ]
+      },
+      {
+        path: "/image-keyword",
+        children: [
+          {
+            index: true,
+            element: <ImageKeywordPage />,
+          },
+          {
+            path: "loading",
+            element: <ImageKeywordLoading />,
+          },
         ]
       },
       {

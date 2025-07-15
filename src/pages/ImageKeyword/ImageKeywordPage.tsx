@@ -50,7 +50,7 @@ const ImageKeywordPage = () => {
     const isStepComplete = Boolean(selectedKeywords[currentCategory]);
 
     return (
-        <div className="relative bg-white min-h-screen w-full">
+        <div className="relative bg-white min-w-[375px] max-w-[480px] min-h-screen w-full">
             <ImageKeywordHeader
                 step={currentStep + 1}
                 onClose={handleClose}
