@@ -1,16 +1,16 @@
-interface ImageKeywordButtonProps {
+interface ButtonProps {
     isLastStep: boolean;
     isStepComplete: boolean;
     onNext: () => void;
     onSubmit: () => void;
 }
 
-export default function ImageKeywordButton({
+export default function Button({
     isLastStep,
     isStepComplete,
     onNext,
     onSubmit
-}: ImageKeywordButtonProps) {
+}: ButtonProps) {
     return (
         <div className="absolute bottom-0 left-0 right-0 px-[16px] pb-[24px] bg-white">
             <button

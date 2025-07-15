@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ImageKeywordHeader from '../../components/ImageKeyword/ImageKeywordHeader';
 import ImageKeywordContent from '../../components/ImageKeyword/ImageKeywordContent';
-import ImageKeywordButton from '../../components/ImageKeyword/ImageKeywordButton';
+import Button from '../../components/ImageKeyword/Button';
 import ImageKeywordModal from '../../components/ImageKeyword/ImageKeywordModal';
 import { KEYWORD_CATEGORIES, CATEGORY_KOREAN } from '../../types/ImageKeyword/imageKeyword.const';
 import type { KeywordCategory } from '../../types/ImageKeyword/imageKeyword.type';
@@ -61,7 +61,7 @@ const ImageKeywordPage = () => {
                 selectedKeywords={selectedKeywords}
                 onKeywordSelect={handleKeywordSelect}
             />
-            <ImageKeywordButton
+            <Button
                 isLastStep={isLastStep}
                 isStepComplete={isStepComplete}
                 onNext={handleNext}
