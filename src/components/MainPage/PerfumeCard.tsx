@@ -36,8 +36,8 @@ const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
                 </button>
             </div>
             <p className="text-caption2 text-grayscale-800 mb-[-2]">{brand}</p>
-            <p className="text-[14px] font-medium mb-[-2]">{name}</p>
-            <p className="text-body4 font-bold">{price.toLocaleString()}원~</p>
+            <p className="text-body3 text-grayscale-1000 mb-[-2]">{name}</p>
+            <p className="text-body4 text-grayscale-900">{price.toLocaleString()}원~</p>
         </div>
     );
 };

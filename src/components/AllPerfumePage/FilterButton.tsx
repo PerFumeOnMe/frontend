@@ -1,4 +1,3 @@
-import filterImage from "../../assets/MainPage/filter.png";
 import { PiSlidersHorizontal } from "react-icons/pi";
 
 interface FilterButtonProps {
