@@ -1,14 +1,14 @@
 import { SlArrowLeft } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
-import BottomSheetModal from "../components/PerfumeLabPage/BottomSheetModal";
-import NoteSelectionButton from "../components/PerfumeLabPage/NoteSelectionButton";
-import NoteSelectionContent from "../components/PerfumeLabPage/NoteSelectionContent";
-import VolumeSelectionContent from "../components/PerfumeLabPage/VolumeSelectionContent";
+import BottomSheetModal from "../../components/PerfumeLabPage/BottomSheetModal";
+import NoteSelectionButton from "../../components/PerfumeLabPage/NoteSelectionButton";
+import NoteSelectionContent from "../../components/PerfumeLabPage/NoteSelectionContent";
+import VolumeSelectionContent from "../../components/PerfumeLabPage/VolumeSelectionContent";
 import { useState } from "react";
-import type { Note } from "../types/note";
-import perfumeImage from "../assets/PerfumeLab/perfume.png";
-import perfumeRackImage from "../assets/PerfumeLab/perfume-rack.png";
-import testTubeImage from "../assets/PerfumeLab/test-tube.png";
+import type { Note } from "../../types/note";
+import perfumeImage from "../../assets/PerfumeLab/perfume.png";
+import perfumeRackImage from "../../assets/PerfumeLab/perfume-rack.png";
+import testTubeImage from "../../assets/PerfumeLab/test-tube.png";
 
 type ModalType = "note" | "volume" | null;
 
