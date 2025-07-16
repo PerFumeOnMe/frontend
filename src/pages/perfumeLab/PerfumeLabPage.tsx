@@ -1,5 +1,3 @@
-import { SlArrowLeft } from "react-icons/sl";
-import { useNavigate } from "react-router-dom";
 import BottomSheetModal from "../../components/PerfumeLabPage/BottomSheetModal";
 import NoteSelectionButton from "../../components/PerfumeLabPage/NoteSelectionButton";
 import NoteSelectionContent from "../../components/PerfumeLabPage/NoteSelectionContent";
@@ -7,13 +5,11 @@ import VolumeSelectionContent from "../../components/PerfumeLabPage/VolumeSelect
 import { useState } from "react";
 import type { Note } from "../../types/note";
 import perfumeImage from "../../assets/PerfumeLab/perfume.png";
-import perfumeRackImage from "../../assets/PerfumeLab/perfume-rack.png";
-import testTubeImage from "../../assets/PerfumeLab/test-tube.png";
+import Header from "../../components/PerfumeLabPage/Header";
 
 type ModalType = "note" | "volume" | null;
 
 const PerfumLabPage = () => {
-  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<ModalType>(null);
   const [selectedNote, setSelectedNote] = useState("");
@@ -94,88 +90,44 @@ const PerfumLabPage = () => {
   };
 
   return (
-    <div className="min-w-[375px] w-120 bg-[#F4ECE6] flex flex-col items-center">
+    <div className="min-w-[375px] w-120 bg-gradient-to-b from-[#F4EEFA] to-[#FBFBFB] flex flex-col items-center">
       {/* 헤더 */}
-      <div className="w-full h-16 relative flex items-center border-b border-gray-300">
-        <button
-          onClick={() => navigate("/")}
-          className="absolute left-4 top-1/2 -translate-y-1/2"
-        >
-          <SlArrowLeft className="w-5 h-5" />
-        </button>
-        <h1 className="text-xl text-center w-full">향수공방</h1>
-      </div>
+      <Header />
 
       {/* 메인 콘텐츠 */}
-      <div className="w-full flex-1 flex flex-col">
+      <div className="w-full flex-1 flex flex-col px-4 gap-[40px]">
         {/* 인트로 텍스트 */}
-        <div className="w-full px-4 py-4 flex flex-col gap-1">
-          <h1 className="text-xl">이미지와 맞는 향수를 만들어봅시다.</h1>
-          <p className="text-xs text-gray-500">
-            향수를 노트로 나누는 건, 시간이 지날수록 향이 변해가는 이야기를 담기
-            위해서예요.
+        <div className="w-full flex flex-col gap-1">
+          <h1 className="text-title3 text-grayscale-1000">
+            이미지와 맞는 향수를 만들어봅시다.
+          </h1>
+          <p className="text-caption1 text-grayscale-700">
+            향수를 노트로 나누는 건, 시간이 지날수록 향이 변해가는 <br />{" "}
+            이야기를 담기 위해서예요.
           </p>
         </div>
 
         {/* 향수 */}
-        <div className="flex-shrink-0 px-2 sm:px-4 overflow-hidden">
-          <div className="flex items-start justify-center max-w-full">
-            <div className="w-full py-2 sm:py-4 flex flex-row">
-              <div className="flex-shrink-0 pb-5 pr-3">
-                <img
-                  src={perfumeImage}
-                  className="h-auto"
-                  style={{ width: "clamp(7rem, 38.33vw, 11.5rem)" }}
-                  alt="향수 공병"
-                />
-              </div>
-              <div className="flex-[3] py-6 sm:py-8 md:py-10 relative">
-                <div
-                  className="absolute bottom-12 sm:bottom-16 md:bottom-20 right-1 sm:right-2 flex"
-                  style={{ gap: "clamp(0.5rem, 3.2vw, 1rem)" }}
-                >
-                  <img
-                    src={testTubeImage}
-                    className="h-auto"
-                    style={{ width: "clamp(1.75rem, 10vw, 3rem)" }}
-                    alt="테스트 튜브"
-                  />
-                  <img
-                    src={testTubeImage}
-                    className="h-auto"
-                    style={{ width: "clamp(1.75rem, 10vw, 3rem)" }}
-                    alt="테스트 튜브"
-                  />
-                  <img
-                    src={testTubeImage}
-                    className="h-auto"
-                    style={{ width: "clamp(1.75rem, 10vw, 3rem)" }}
-                    alt="테스트 튜브"
-                  />
-                  <img
-                    src={testTubeImage}
-                    className="h-auto"
-                    style={{ width: "clamp(1.75rem, 10vw, 3rem)" }}
-                    alt="테스트 튜브"
-                  />
-                </div>
-                <img
-                  src={perfumeRackImage}
-                  className="h-auto absolute bottom-6 sm:bottom-8 md:bottom-10 right-0"
-                  style={{ width: "clamp(10rem, 58.33vw, 17.5rem)" }}
-                  alt="실린더 거치대"
-                />
-              </div>
-            </div>
+        <div className="flex flex-row">
+          {/* 이미지 영역 */}
+          <div className="flex-1">
+            <img
+              src={perfumeImage}
+              className="w-full h-auto object-contain"
+              alt="향수 공병"
+            />
           </div>
+
+          {/* 콘텐츠 영역 */}
+          <div className="flex-1">탑 노트</div>
         </div>
 
         {/* 내가 선택한 계열 */}
         <div className="flex flex-col flex-1">
           <div className="flex justify-between items-center">
-            <h3 className="px-4 text-xl">내가 선택한 계열</h3>
+            <h3 className="px-4 text-title3">내가 선택한 계열</h3>
             <button
-              className="border px-3 py-1 rounded-full text-xs mx-4"
+              className="border px-3 py-1 rounded-full text-body3 mx-4 text-grayscale-700"
               onClick={handleReset}
             >
               초기화

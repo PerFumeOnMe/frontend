@@ -1,4 +1,5 @@
 import React from "react";
+import { GoPlus, GoX } from "react-icons/go";
 
 interface NoteSelectionButtonProps {
   noteType: string;
@@ -24,25 +25,22 @@ const NoteSelectionButton = ({
 
   return (
     <button
-      className={`relative flex justify-center items-center py-6 border-1 rounded transition-all duration-200 ${
+      className={`relative flex justify-between items-center border rounded-[8px] transition-all duration-200 ${
         isSelected
-          ? "border-[#FAFAFA] bg-white/60"
-          : "border-[#FAFAFA] bg-white/40 hover:bg-white/60"
+          ? "px-4 py-2 border-main-500 bg-white/60"
+          : "px-4 py-6 border-main-500 bg-[#FBFBFB]/40 border-main-500"
       }`}
       onClick={onClick}
     >
-      <span>
-        {isSelected ? `${selectedValue}` : `+ ${noteType} 노트 선택하기`}
+      <span className="text-body3 text-grayscale-800">
+        {isSelected ? `${selectedValue}` : `${noteType} 노트 선택하기`}
       </span>
 
-      {/* X 버튼 - 선택된 상태일 때만 표시 */}
-      {isSelected && onRemove && (
-        <button
-          onClick={handleRemoveClick}
-          className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full text-sm flex items-center justify-center transition-colors"
-        >
-          ✕
-        </button>
+      {/* 선택되지 않았을 때는 +, 선택되었을 때는 x */}
+      {isSelected && onRemove ? (
+        <GoX size={24} className="text-main-500" onClick={handleRemoveClick} />
+      ) : (
+        <GoPlus size={24} className="text-main-500" />
       )}
     </button>
   );
