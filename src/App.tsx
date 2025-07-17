@@ -19,6 +19,7 @@ import ImageKeywordLoading from "./pages/ImageKeyword/ImageKeywordLoading.tsx";
 import FilterPage from "./pages/FilterPage.tsx";
 import OnboardingRouter from "./pages/Onboarding/index.tsx";
 import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
+import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -56,7 +57,8 @@ const router = createBrowserRouter([
           { path: 'PBTI',
             children: [
               { index: true, element: <PBTIMainPage /> },
-              { path: 'question', element: <PBTIQuestionPage /> }
+              { path: 'question', element: <PBTIQuestionPage /> },
+              { path: 'result', element: <PBTIResultPage />}
             ]
           },
           { 
