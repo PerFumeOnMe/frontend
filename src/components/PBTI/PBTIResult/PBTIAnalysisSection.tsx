@@ -1,5 +1,5 @@
 const PBTIAnalysisSection = () => (
-  <div className="bg-white rounded-2xl p-5 shadow mb-6">
+  <div className="w-full bg-white rounded-2xl p-5 shadow mb-6">
     <h2 className="text-title4 font-bold mb-4">이렇게 해석했어요.</h2>
     <ul className="text-body4 space-y-2">
       <li>버스 출발 2분 전 미리 분사 ➔ 계획형(J) – 준비된 스타일, 일관성과 조화를 중요시함</li>

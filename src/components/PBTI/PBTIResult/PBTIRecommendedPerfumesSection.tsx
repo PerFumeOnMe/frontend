@@ -1,5 +1,5 @@
 const PBTIRecommendedPerfumesSection = () => (
-  <div className="bg-white rounded-2xl p-5 shadow mb-6">
+  <div className="w-full flex flex-col bg-white rounded-2xl p-5 shadow mb-6">
     <h2 className="text-title4 font-bold mb-4">이런 향수가 잘 어울려요</h2>
     <div className="space-y-4">
       {[1, 2, 3].map((id) => (

@@ -10,7 +10,7 @@ import PBTIActionButtons from '../../components/PBTI/PBTIResult/PBTIActionButton
 const PBTIResultPage : React.FC = () => {
 
     return (
-    <div className="min-w-[375px] h-screen bg-[#F4EEFA] flex flex-col items-center font-[Pretandard]">
+    <div className="min-w-[375px] h-full p-3 bg-[#F4EEFA] flex flex-col items-center font-[Pretandard]">
       <PBTIResultHeader />
       <PBTIAnalysisSection />
       <PBTIPerfumeStyleSection />

@@ -2,18 +2,21 @@ import React from 'react';
 
 interface AnswerOptionsProps {
   options: string[];
-  selectedIdx: number | null;
+  progressIdx: number | null;
   onSelect: (idx: number) => void;
 }
 
-const PBTIAnswerOptions: React.FC<AnswerOptionsProps> = ({ options, selectedIdx, onSelect }) => {
+const PBTIAnswerOptions: React.FC<AnswerOptionsProps> = ({ options, progressIdx, onSelect }) => {
   return (
-    <div className="flex gap-4">
+    <div className="flex justify-center gap-4">
       {options.map((option, idx) => (
         <div
           key={idx}
-          className={`flex w-40 h-45 rounded-2xl justify-center text-body3 items-center cursor-pointer transition
-            ${selectedIdx === idx ? 'bg-main-500 text-[#FBFBFB]' : 'bg-purple-50 text-grayscale-1000'}
+          className={`
+            flex w-40 h-45 rounded-2xl justify-center items-center cursor-pointer
+            text-body3 transition-colors duration-700
+            bg-purple-50 text-grayscale-1000
+            hover:bg-[#6401BB] hover:text-[#FBFBFB]
           `}
           onClick={() => onSelect(idx)}
         >
