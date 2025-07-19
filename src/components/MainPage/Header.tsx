@@ -1,4 +1,4 @@
-import { FiSearch, FiHeart, FiBell } from "react-icons/fi";
+import { FiSearch, FiHeart } from "react-icons/fi";
 import logoImage from "../../assets/MainPage/logo.png"
 import { useNavigate } from "react-router-dom";
 
@@ -25,9 +25,6 @@ const Header = () => {
                 </button>
                 <button aria-label="Favorites">
                     <FiHeart className="w-[28px] h-[28px] text-white" />
-                </button>
-                <button aria-label="Notifications">
-                    <FiBell className="w-[28px] h-[28px] text-white" />
                 </button>
             </div>
         </header>
