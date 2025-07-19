@@ -6,7 +6,6 @@ import LoginPage from "./pages/Login/LoginPage.tsx";
 import SignupPage from './pages/Login/SignupPage.tsx';
 import MyPage from './pages/MyPage.tsx';
 import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
-import DiaryPage from './pages/DiaryPage.tsx';
 import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
 import PerfumLabPage from "./pages/PerfumeLabPage.tsx";
@@ -20,6 +19,7 @@ import FilterPage from "./pages/FilterPage.tsx";
 import OnboardingRouter from "./pages/Onboarding/index.tsx";
 import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
+import DiaryPage from "./pages/Diary/DiaryPage.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
