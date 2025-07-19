@@ -12,7 +12,7 @@ export default function Button({
     onSubmit
 }: ButtonProps) {
     return (
-        <div className="absolute bottom-0 left-0 right-0 px-[16px] pb-[24px] bg-white">
+        <div className="absolute bottom-0 left-0 right-0 px-[16px] pb-[24px] bg-transparent">
             <button
                 onClick={isLastStep ? onSubmit : onNext}
                 disabled={!isStepComplete}
