@@ -24,16 +24,16 @@ const PBTIRecommendedPerfume: React.FC<PBTIRecommendedPerfumeProps> = ({
       </div>
 
       {/* 텍스트 파트 */}
-      <div className="flex flex-col justify-start ml-4">
+      <div className="flex flex-col w-full justify-start ml-4">
         {/* 브랜드명과 가격 */}
         <div className="flex flex-col">
-            <div className="flex justify-between items-center text-caption1 text-gray-800">
+            <div className="flex w-full justify-between items-center text-caption1 text-gray-800">
                 <span>{brand}</span>
                 <span className="text-body4 text-gray-700">{price}</span>
             </div>
 
             {/* 제품명 */}
-            <div className="text-body3 font-medium text-gray-1000 mb-1">{name}</div>
+            <div className="text-body3 font-medium text-gray-1000 mb-2">{name}</div>
         </div>
 
         {/* 설명 */}
