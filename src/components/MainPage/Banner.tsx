@@ -40,7 +40,7 @@ interface BannerProps {
 
 const Banner = () => {
     const navigate = useNavigate();
-    const [hasMyPerfume] = useState(true);
+    const [hasMyPerfume] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
@@ -60,8 +60,8 @@ const Banner = () => {
             }`}
             style={{ 
                 backgroundImage: `url(${mainBg})`,
-                backgroundSize: '120%',
-                backgroundPosition: 'center 80%'
+                backgroundSize: hasMyPerfume ? '155%' : '130%',
+                backgroundPosition: hasMyPerfume ? '80% 100%' : '90% 80%'
             }}
         >
             {/* 배경 오버레이 */}
