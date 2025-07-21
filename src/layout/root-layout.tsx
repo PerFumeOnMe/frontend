@@ -8,7 +8,7 @@ const RootLayout = () => {
 
     return (
         <div className="min-w-[375px] w-120 h-screen bg-sky-300 items-center relative">
-            <div className={shouldShowNavbar ? "pb-20" : ""}>
+            <div className={shouldShowNavbar ? "pb-15" : ""}>
                 <Outlet />
             </div>
             {shouldShowNavbar && <Navbar />}

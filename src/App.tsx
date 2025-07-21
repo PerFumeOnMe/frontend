@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import RootLayout from "./layout/root-layout.tsx";
 import MainPage from "./pages/MainPage.tsx";
@@ -49,7 +49,8 @@ const router = createBrowserRouter([
         element: <RootLayout />,
         errorElement: <NotFoundPage />,
         children: [
-          { index: true, element: <MainPage /> },
+          { index: true, element: <Navigate to="/Main" replace /> }, // ✅ 리다이렉트 추가
+          { path: 'Main', element: <MainPage /> },
           { path: 'PBTI', element: <PBTIMainPage /> },
           { path: 'Diary', element: <DiaryPage /> },
           { path: 'MyPage', element: <MyPage /> },

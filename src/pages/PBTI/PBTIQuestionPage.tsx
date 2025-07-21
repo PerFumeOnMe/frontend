@@ -29,7 +29,7 @@ const PBTIQuestionPage: React.FC = () => {
   const currentQuestion = questions[currentIdx];
 
   return (
-    <div className="min-w-[375px] h-screen bg-[#F4EEFA] flex flex-col items-center font-[Pretendard] overflow-hidden">
+    <div className="min-w-[375px] h-screen -mb-20 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard] overflow-hidden">
       <img src={PerfumeOnMeCharacter} className="w-[238px] h-[238px] mt-16" />
 
       {/* AnimatePresence로 감싸고 key를 변경해서 애니메이션 */}
