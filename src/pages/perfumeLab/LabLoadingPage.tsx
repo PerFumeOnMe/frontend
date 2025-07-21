@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import loadingImage from "../assets/PerfumeLab/loading.png";
+import loadingImage from "../../assets/PerfumeLab/loading.png";
 
 const LabLoadingPage = () => {
   const navigate = useNavigate();

@@ -3,15 +3,15 @@ import NotFoundPage from "./pages/NotFoundPage.tsx";
 import RootLayout from "./layout/root-layout.tsx";
 import MainPage from "./pages/MainPage.tsx";
 import LoginPage from "./pages/Login/LoginPage.tsx";
-import SignupPage from "./pages/Login/SignupPage.tsx";
-import MyPage from "./pages/MyPage.tsx";
-import PBTIPage from "./pages/PBTIPage.tsx";
-import DiaryPage from "./pages/DiaryPage.tsx";
+import SignupPage from './pages/Login/SignupPage.tsx';
+import MyPage from './pages/MyPage.tsx';
+import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
+import DiaryPage from './pages/DiaryPage.tsx';
 import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
-import PerfumLabPage from "./pages/PerfumeLabPage.tsx";
-import LabLoadingPage from "./pages/LabLoadingPage.tsx";
-import LabResultPage from "./pages/LabResultPage.tsx";
+import PerfumLabPage from "./pages/perfumeLab/PerfumeLabPage.tsx";
+import LabLoadingPage from "./pages/perfumeLab/LabLoadingPage.tsx";
+import LabResultPage from "./pages/perfumeLab/LabResultPage.tsx";
 import ChatbotPage from "./pages/Chatbot/ChatbotPage.tsx";
 import ChoosePathPage from "./pages/ChoosePathPage.tsx";
 import ImageKeywordPage from "./pages/ImageKeyword/ImageKeywordPage.tsx";
@@ -19,6 +19,8 @@ import ImageKeywordLoading from "./pages/ImageKeyword/ImageKeywordLoading.tsx";
 import FilterPage from "./pages/FilterPage.tsx";
 import AllPerfumePage from "./pages/AllPerfumePage.tsx";
 import OnboardingRouter from "./pages/Onboarding/index.tsx";
+import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
+import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -35,8 +37,8 @@ const router = createBrowserRouter([
     element: <KakaoSignupPage />,
   },
   {
-  path: "/onboarding",
-  element: <OnboardingRouter  />
+    path: "/onboarding",
+    element: <OnboardingRouter />,
   },
   // 아래는 보호 라우트로 감싼 실제 서비스 페이지들
   {
@@ -48,11 +50,18 @@ const router = createBrowserRouter([
         errorElement: <NotFoundPage />,
         children: [
           { index: true, element: <MainPage /> },
-          { path: 'PBTI', element: <PBTIPage /> },
+          { path: 'PBTI', element: <PBTIMainPage /> },
           { path: 'Diary', element: <DiaryPage /> },
           { path: 'MyPage', element: <MyPage /> },
           { path: 'choose-path', element: <ChoosePathPage /> },
           { path: 'filter', element: <FilterPage /> },
+          { path: 'PBTI',
+            children: [
+              { index: true, element: <PBTIMainPage /> },
+              { path: 'question', element: <PBTIQuestionPage /> },
+              { path: 'result', element: <PBTIResultPage />}
+            ]
+          },
           { path: 'all-perfume', element: <AllPerfumePage /> }
         ]
       },
@@ -70,8 +79,8 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: '/Chatbot',
-        element: <ChatbotPage />
+        path: "/Chatbot",
+        element: <ChatbotPage />,
       },
       {
         path: "/lab",
@@ -89,9 +98,9 @@ const router = createBrowserRouter([
             element: <LabResultPage />,
           },
         ],
-      }
-    ]
-  }
+      },
+    ],
+  },
 ]);
 
 function App() {

@@ -1,48 +1,95 @@
 import React from "react";
+import { GoPlus, GoX } from "react-icons/go";
+import type { Note } from "../../types/note";
+import type { NoteOption } from "../../types/noteOptions";
 
 interface NoteSelectionButtonProps {
-  noteType: string;
+  noteType: Note;
   isSelected: boolean;
   selectedValue?: string;
+  selectedNoteData?: NoteOption;
+  noteOptions: NoteOption[];
   onClick: () => void;
   onRemove?: () => void;
 }
 
-const NoteSelectionButton = ({
+const NoteSelectionButton: React.FC<NoteSelectionButtonProps> = ({
   noteType,
   isSelected,
   selectedValue,
+  selectedNoteData,
   onClick,
   onRemove,
-}: NoteSelectionButtonProps) => {
+}) => {
   const handleRemoveClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // 버튼 클릭 이벤트 전파 방지
+    e.stopPropagation();
     if (onRemove) {
       onRemove();
     }
   };
 
+  // 선택된 노트의 표시 정보 가져오기
+  const getDisplayInfo = () => {
+    if (selectedNoteData) {
+      return {
+        name: selectedNoteData.krName,
+        emotion: selectedNoteData.emotion,
+        description: selectedNoteData.description,
+        color: selectedNoteData.color,
+      };
+    }
+    return null;
+  };
+
+  const displayInfo = getDisplayInfo();
+
   return (
     <button
-      className={`relative flex justify-center items-center py-6 border-1 rounded transition-all duration-200 ${
+      className={`relative flex justify-between items-center rounded-[8px] transition-all duration-200 min-h-[72px] px-4 py-3 ${
         isSelected
-          ? "border-[#FAFAFA] bg-white/60"
-          : "border-[#FAFAFA] bg-white/40 hover:bg-white/60"
+          ? "bg-main-10"
+          : "border border-main-500 bg-[#FBFBFB]/40 border-main-500"
       }`}
       onClick={onClick}
     >
-      <span>
-        {isSelected ? `${selectedValue}` : `+ ${noteType} 노트 선택하기`}
-      </span>
+      <div className="flex items-center gap-2 flex-1">
+        {isSelected && displayInfo ? (
+          <div className="flex items-center gap-2 flex-1">
+            <div className="flex flex-col items-start flex-1">
+              {/* 첫 번째 줄: 노트 정보 */}
+              <div className="text-body3 text-grayscale-1000 font-medium">
+                <span>
+                  {noteType} {displayInfo.emotion}{" "}
+                </span>
+                <span
+                  style={{ color: displayInfo.color }}
+                  className="font-semibold"
+                >
+                  {selectedValue} ({displayInfo.name})
+                </span>
+              </div>
 
-      {/* X 버튼 - 선택된 상태일 때만 표시 */}
-      {isSelected && onRemove && (
-        <button
+              {/* 두 번째 줄: 설명 */}
+              <span className="text-body3 text-grayscale-1000 mt-1">
+                {displayInfo.description}
+              </span>
+            </div>
+          </div>
+        ) : (
+          <span className="text-body3 text-grayscale-800">
+            {noteType} 노트 선택하기
+          </span>
+        )}
+      </div>
+
+      {isSelected && onRemove ? (
+        <GoX
+          size={24}
+          className="text-grayscale-400 flex-shrink-0"
           onClick={handleRemoveClick}
-          className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full text-sm flex items-center justify-center transition-colors"
-        >
-          ✕
-        </button>
+        />
+      ) : (
+        <GoPlus size={24} className="text-main-500 flex-shrink-0" />
       )}
     </button>
   );
