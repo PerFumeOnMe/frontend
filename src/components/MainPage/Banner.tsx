@@ -1,40 +1,44 @@
 import { useNavigate } from "react-router-dom";
-import perfumeImage from "../../assets/MainPage/perfume.png";
+import mainBg from "../../assets/MainPage/main.png";
 import Header from "./Header";
+import { SlArrowRight } from "react-icons/sl";
 
 const Banner = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full min-w-[375px] h-[270px] bg-[#FFEDED] flex items-center justify-center mb-6">
-            <div className="absolute top-0 left-0 w-full z-10">
+        <div 
+            className="relative w-full min-w-[375px] h-[300px] bg-cover bg-center"
+            style={{ 
+                backgroundImage: `url(${mainBg})`,
+                backgroundSize: '120%',  // 이미지를 120%로 확대
+                backgroundPosition: 'center 80%'  // 중앙에서 아래쪽으로 더 이동
+            }}
+        >
+            {/* 배경 오버레이 */}
+            <div className="absolute inset-0 bg-black/40" />
+
+            {/* 헤더 */}
+            <div className="relative z-10">
                 <Header />
             </div>
 
-            {/* 향수 이미지 + 텍스트 + 버튼 */}
-            <div className="flex items-center justify-center pt-[56px] h-full">
-                {/* 향수 아이콘 이미지 */}
-                <img
-                    src= {perfumeImage}
-                    className="w-[126.72px] h-[175px] mr-[26px]"
-                />
-
-                {/* 텍스트, 버튼 */}
-                <div className="flex flex-col items-center justify-center text-center mr-[26px]">
-                    <p className="text-[#785F5F] text-[16px] font-bold leading-[140%] mb-[7px]">
-                        퍼퓨온미에서
-                    </p>
-                    <p className="text-[#785F5F] text-[20px] font-bold leading-[140%] mb-4">
-                        나만의 향수를<br />찾아보세요
-                    </p>
-                    <div className="p-[1px] rounded-full bg-gradient-to-r from-white to-[#80498B] shadow-[0_4px_4px_#DF6966]">
-                        <button
-                            onClick={() => navigate("/choose-path")}
-                            className="w-[190px] h-[36px] rounded-full bg-gradient-to-r from-[#FF9999] to-[#B159DA] text-white text-[13px] font-bold"
-                        >
-                            나만의 향수 만들러 가기
-                        </button>
-                    </div>
+            {/* 컨텐츠 */}
+            <div className="relative z-10 px-[16px] pt-[110px]">
+                <h2 className="text-display1 text-grayscale-200">
+                    반가워요! 김조단님
+                </h2>
+                <p className="text-body3 text-grayscale-300 mt-[4px]">
+                    퍼퓸온미에서 당신만의 향기를 찾아보세요
+                </p>
+                <div className="flex justify-end">
+                    <button
+                        onClick={() => navigate("/choose-path")}
+                        className="mt-[9.5px] text-body3 text-grayscale-200 flex items-center"
+                    >
+                        나만의 향수 만들러 가기
+                        <SlArrowRight size={12} />
+                    </button>
                 </div>
             </div>
         </div>
