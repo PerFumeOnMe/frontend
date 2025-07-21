@@ -43,15 +43,15 @@ export default function DetailFilter({ selectedFilters, onFilterSelect }: Detail
             <FilterSection
                 title="사용하는 상황 필터"
                 options={SITUATION_TYPES}
-                selectedId={selectedFilters.situationId}
-                onSelect={(value) => onFilterSelect('situationId', value)}
+                selectedId={selectedFilters.situation}
+                onSelect={(value) => onFilterSelect('situation', value)}
             />
 
             <FilterSection
                 title="계절별 필터"
                 options={SEASON_TYPES}
-                selectedId={selectedFilters.seasonId}
-                onSelect={(value) => onFilterSelect('seasonId', value)}
+                selectedId={selectedFilters.season}
+                onSelect={(value) => onFilterSelect('season', value)}
             />
 
             <FilterSection

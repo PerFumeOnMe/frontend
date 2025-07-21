@@ -13,7 +13,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     };
 
     return (
-        <div className="w-full mb-[24px]">
+        <div className="w-full">
             <div className="px-[16px]">
                 <div className="flex items-center w-full h-[44px] px-[16px] bg-white rounded-[8px] border border-grayscale-700">
                     <img 

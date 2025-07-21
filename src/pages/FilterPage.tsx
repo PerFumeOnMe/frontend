@@ -29,20 +29,34 @@ export default function FilterPage() {
             setStep('detail');
         } else {
             // API 요청 파라미터 구성
-            const requestParams: Partial<FilterParams> = {
+            const requestParams = {
                 ...filters,
                 noteCategoryId: selectedScent ? Number(selectedScent) : undefined
             };
 
-            // 값이 undefined인 필드 제거
-            Object.keys(requestParams).forEach(key => {
-                if (requestParams[key as keyof FilterParams] === undefined) {
-                    delete requestParams[key as keyof FilterParams];
-                }
-            });
+            // 필터가 선택되었는지 확인
+            const hasSelectedFilters = Object.entries(requestParams).some(([key, value]) => 
+                key !== 'page' && key !== 'size' && value !== undefined
+            );
 
-            // 콘솔에 요청 파라미터 출력
-            console.log('Request Parameters:', requestParams);
+            // 필터가 없으면 기본 페이지로, 있으면 필터와 함께 이동
+            if (!hasSelectedFilters) {
+                navigate('/all-perfume');
+            } else {
+                // API 요청 URL 생성
+                const queryParams = new URLSearchParams();
+                Object.entries(requestParams).forEach(([key, value]) => {
+                    if (value !== undefined) {
+                        queryParams.append(key, value.toString());
+                    }
+                });
+
+                // API 호출 URL 콘솔에 출력
+                console.log('API Request URL:', `/fragrances/filter?${queryParams.toString()}`);
+
+                // 모든 향수 페이지로 이동하면서 필터 파라미터 전달
+                navigate(`/all-perfume?${queryParams.toString()}`);
+            }
         }
     };
 
@@ -59,14 +73,6 @@ export default function FilterPage() {
             ...prev,
             [key]: value
         }));
-    };
-
-    // 카테고리와 세부 설정을 포함하여 최소 1개 이상 선택되었는지 확인
-    const hasAnySelection = () => {
-        if (selectedScent !== '') return true;
-        
-        const checkFields: (keyof FilterParams)[] = ['fragranceType', 'gender', 'situationId', 'seasonId', 'priceMin'];
-        return checkFields.some(field => filters[field] !== undefined);
     };
 
     return (
@@ -104,7 +110,7 @@ export default function FilterPage() {
             <div className="fixed bottom-0 left-0 right-0 min-w-[375px]">
                 <Button
                     isLastStep={step === 'detail'}
-                    isStepComplete={step === 'category' ? true : hasAnySelection()}
+                    isStepComplete={true}
                     onNext={handleNext}
                     onSubmit={handleNext}
                 />

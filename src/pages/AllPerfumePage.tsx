@@ -4,6 +4,7 @@ import SearchBar from '../components/AllPerfumePage/SearchBar';
 import AllPerfumeHeader from '../components/AllPerfumePage/AllPerfumeHeader';
 import type { Perfume } from "../types/perfume";
 import PerfumeGrid from '../components/MainPage/PerfumeGrid';
+import SelectedFilters from '../components/AllPerfumePage/SelectedFilters';
 
 // 임시데이터
 const secondMDChoice: Perfume[] = [
@@ -128,8 +129,17 @@ export default function AllPerfumePage() {
             {/* 검색창 */}
             <SearchBar onSearch={handleSearch} />
 
-            {/* 향수 목록 */}
-            <PerfumeGrid perfumes={perfumes} />
+            {/* 선택된 필터 */}
+            <SelectedFilters />
+
+            {/* 향수 목록 또는 메시지 */}
+            {perfumes.length > 0 ? (
+                <PerfumeGrid perfumes={perfumes} />
+            ) : (
+                <div className="flex justify-center items-center pt-[120px] text-body3 text-grayscale-900">
+                    검색 결과에 맞는 향수가 존재하지 않습니다.
+                </div>
+            )}
         </div>
     );
 } 
