@@ -106,15 +106,12 @@ export default function FilterPage() {
                     onFilterSelect={handleFilterSelect}
                 />
             )}
-
-            <div className="fixed bottom-0 left-0 right-0 min-w-[375px]">
-                <Button
+            <Button
                     isLastStep={step === 'detail'}
                     isStepComplete={true}
                     onNext={handleNext}
                     onSubmit={handleNext}
-                />
-            </div>
+            />
         </div>
     );
 } 
