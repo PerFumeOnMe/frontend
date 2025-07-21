@@ -14,7 +14,7 @@ const PerfumeDescription = () => {
         {/* 전체적인 퍼블리실 끝나고 애니메이션 구현 */}
         <DescriptionNote />
       </div>
-      <LastingInfo lastingData={4} />
+      <LastingInfo lastingData="1~2시간" />
     </div>
   );
 };

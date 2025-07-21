@@ -1,5 +1,5 @@
 interface LastingInfoProps {
-  lastingData: number;
+  lastingData: string;
 }
 
 const LastingInfo = ({ lastingData }: LastingInfoProps) => {
@@ -22,9 +22,11 @@ const LastingInfo = ({ lastingData }: LastingInfoProps) => {
     "이 향수는 6~8시간 이상 지속되는 퍼퓸입니다",
   ];
 
-  const level =
-    lastingData >= 0 && lastingData < timeLabels.length ? lastingData : 4;
-  const progressPercentage = (level / (timeLabels.length - 1)) * 100;
+  // API에서 받은 텍스트로 level 찾기
+  const level = timeLabels.findIndex((label) => label === lastingData);
+  const finalLevel = level !== -1 ? level : 4;
+
+  const progressPercentage = (finalLevel / (timeLabels.length - 1)) * 100;
 
   return (
     <div className="w-full">
