@@ -20,6 +20,7 @@ import OnboardingRouter from "./pages/Onboarding/index.tsx";
 import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
 import DiaryPage from "./pages/Diary/DiaryPage.tsx";
+import DiaryWritePage from "./pages/Diary/DiaryWritePage.tsx"; 
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
           { index: true, element: <MainPage /> },
           { path: 'PBTI', element: <PBTIMainPage /> },
           { path: 'Diary', element: <DiaryPage /> },
+          { path: 'Diary/new', element: <DiaryWritePage />},
           { path: 'MyPage', element: <MyPage /> },
           { path: 'choose-path', element: <ChoosePathPage /> },
           { path: 'filter', element: <FilterPage /> },

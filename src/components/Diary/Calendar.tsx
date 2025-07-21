@@ -20,34 +20,35 @@ export default function DiaryCalendar() {
           nextLabel={null}
           prev2Label={null}
           next2Label={null}
-          className="text-white px-4 py-6"
+          
+          className="text-white "
           navigationLabel={({ date }) => (
-            <div className="relative flex items-center justify-center w-full">
-              {/* 왼쪽 화살표 (button → div로 변경) */}
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => console.log("prev month")}
-                className="absolute left-0 text-white text-2xl cursor-pointer"
-              >
-                <IoChevronBack />
-              </div>
-
-              {/* 중앙 년월 */}
-              <span className="text-white text-title2">
-                {moment(date).format("YYYY.MM")}
-              </span>
-
-              {/* 오른쪽 화살표 */}
-              <div
-                role="button"
-                tabIndex={0}
-                onClick={() => console.log("next month")}
-                className="absolute right-0 text-white text-2xl cursor-pointer"
-              >
-                <IoChevronForward />
-              </div>
+          <div className="flex items-center justify-between w-full px-4 py-6">
+            {/* 왼쪽 화살표 */}
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => console.log("prev month")}
+              className="text-white text-2xl cursor-pointer"
+            >
+              <IoChevronBack />
             </div>
+
+            {/* 중앙 년월 */}
+            <span className="text-white text-title2 text-center flex-1">
+              {moment(date).format("YYYY.MM")}
+            </span>
+
+            {/* 오른쪽 화살표 */}
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => console.log("next month")}
+              className="text-white text-2xl cursor-pointer"
+            >
+              <IoChevronForward />
+            </div>
+          </div>
           )}
         />
       </div>
