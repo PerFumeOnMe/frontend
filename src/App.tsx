@@ -50,12 +50,12 @@ const router = createBrowserRouter([
         errorElement: <NotFoundPage />,
         children: [
           { index: true, element: <MainPage /> },
-          { path: 'PBTI', element: <PBTIMainPage /> },
           { path: 'Diary', element: <DiaryPage /> },
           { path: 'MyPage', element: <MyPage /> },
           { path: 'choose-path', element: <ChoosePathPage /> },
           { path: 'filter', element: <FilterPage /> },
-          { path: 'PBTI',
+          { 
+            path: 'PBTI',
             children: [
               { index: true, element: <PBTIMainPage /> },
               { path: 'question', element: <PBTIQuestionPage /> },
