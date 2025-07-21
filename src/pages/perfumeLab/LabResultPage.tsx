@@ -5,11 +5,16 @@ import { useNavigate } from "react-router-dom";
 const LabResultPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-[480px] min-h-screen bg-white px-9 py-6 flex flex-col">
+    <div className="w-[480px] min-h-screen bg-[#F8F0FF] px-9 py-6 flex flex-col items-center gap-6">
       {/* 헤더 */}
-      <h1 className="text-2xl font-bold text-black text-center mb-8">
-        🌿 당신의 향기 해석 결과
-      </h1>
+      <header>
+        <h1 className="text-title1 text-black text-center mb-2">
+          당신만의 향기는?
+        </h1>
+        <p className="text-body3 text-grayscale-700">
+          당신만의 향을 퍼퓨온미를 통해 담아 보세요.
+        </p>
+      </header>
 
       {/* 메인 콘텐츠 */}
       <div className="flex-1 space-y-16">
