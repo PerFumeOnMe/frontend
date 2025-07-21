@@ -17,6 +17,7 @@ import ChoosePathPage from "./pages/ChoosePathPage.tsx";
 import ImageKeywordPage from "./pages/ImageKeyword/ImageKeywordPage.tsx";
 import ImageKeywordLoading from "./pages/ImageKeyword/ImageKeywordLoading.tsx";
 import FilterPage from "./pages/FilterPage.tsx";
+import AllPerfumePage from "./pages/AllPerfumePage.tsx";
 import OnboardingRouter from "./pages/Onboarding/index.tsx";
 import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
@@ -61,14 +62,21 @@ const router = createBrowserRouter([
               { path: 'result', element: <PBTIResultPage />}
             ]
           },
-          { 
-            path: 'image-keyword',
-            children: [
-              { index: true, element: <ImageKeywordPage /> },
-              { path: "loading", element: <ImageKeywordLoading /> },
-            ],
+          { path: 'all-perfume', element: <AllPerfumePage /> }
+        ]
+      },
+      {
+        path: "/image-keyword",
+        children: [
+          {
+            index: true,
+            element: <ImageKeywordPage />,
           },
-        ],
+          {
+            path: "loading",
+            element: <ImageKeywordLoading />,
+          },
+        ]
       },
       {
         path: "/Chatbot",
