@@ -56,7 +56,8 @@ const router = createBrowserRouter([
           { path: 'MyPage', element: <MyPage /> },
           { path: 'choose-path', element: <ChoosePathPage /> },
           { path: 'filter', element: <FilterPage /> },
-          { path: 'PBTI',
+          { 
+            path: 'PBTI',
             children: [
               { index: true, element: <PBTIMainPage /> },
               { path: 'question', element: <PBTIQuestionPage /> },
