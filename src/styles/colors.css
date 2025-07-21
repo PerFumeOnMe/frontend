@@ -47,6 +47,8 @@
   .border-grayscale-300 { border-color: var(--grayscale-300); }
   .border-grayscale-200 { border-color: var(--grayscale-200); }
 
+  .border-main-500 { border-color: var(--main-500); }
+
   .text-error { color: var(--error); }
   .bg-error { background-color: var(--error); }
 
