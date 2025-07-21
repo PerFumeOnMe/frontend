@@ -1,4 +1,5 @@
 import DescriptionNote from "./DescriptionNote";
+import DiffusionInfo from "./diffusionInfo";
 import LastingInfo from "./LastingInfo";
 
 const PerfumeDescription = () => {
@@ -15,6 +16,7 @@ const PerfumeDescription = () => {
         <DescriptionNote />
       </div>
       <LastingInfo lastingData="1~2시간" />
+      <DiffusionInfo activeDiffusion={3} />
     </div>
   );
 };
