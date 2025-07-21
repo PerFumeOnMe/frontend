@@ -1,5 +1,5 @@
 import React from "react";
-import TextTime from "./TextTime";
+import TextTime from "./TimeText";
 
 interface UserMessageProps {
   text: string;
@@ -7,11 +7,11 @@ interface UserMessageProps {
 
 const UserMessage: React.FC<UserMessageProps> = ({ text }) => {
   return (
-    <div className="flex justify-end mt-2 mr-3">
+    <div className="flex justify-end mb-3 mr-3">
       <div className="mr-1 self-end">
         <TextTime time="오후 7:13"/>
       </div>
-      <div className="bg-[#AFAFAF] px-4 py-3 rounded-[5px] max-w-[70%] text-[#000000E5] text-[12px] font-[400]">
+      <div className="bg-[#6401BB] px-3 py-2 rounded-2xl max-w-[264px] text-[#FBFBFB] tracking-tighter text-[14px] font-[400]">
         {text}
       </div>
     </div>
