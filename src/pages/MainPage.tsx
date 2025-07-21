@@ -60,7 +60,7 @@ const MainPage = () => {
     return (
         <div className="min-h-screen bg-white">
             <Banner />
-            <div className="relative -mt-[24px] rounded-t-[24px] bg-white pt-[16px]">
+            <div className="relative -mt-[16px] rounded-t-[16px] bg-white pt-[16px]">
                 <h2 className="text-title3 mb-[7px] px-[16px]">캐실님이 좋아할만한 향수</h2>
                 <PerfumeGrid perfumes={firstMDChoice} />
                 <h2 className="text-title3 mb-[7px] pt-[32px] px-[16px]">요즘 뜨는 향수</h2>

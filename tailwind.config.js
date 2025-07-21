@@ -1,12 +1,20 @@
 module.exports = {
     theme: {
-      extend: {
-        fontFamily: {
-          serif: ['"Noto Serif KR"', 'serif'],
+        extend: {
+            fontFamily: {
+                serif: ['"Noto Serif KR"', 'serif'],
+            },
+            keyframes: {
+                slide: {
+                    '0%': { transform: 'translateX(100%)', opacity: 0 },
+                    '100%': { transform: 'translateX(0)', opacity: 1 }
+                }
+            },
+            animation: {
+                'slide': 'slide 0.7s ease-in-out'
+            }
         },
-      },
     },
-    // 필요 시 content 설정도 함께 확인
     content: ['./src/**/*.{js,ts,jsx,tsx}'],
-  };
+};
   
