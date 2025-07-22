@@ -1,11 +1,11 @@
 import { useState } from "react";
-import SignupHeader from "./SignupHeader";
+import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
 import SignupButton from "./SignupButton";
 import SignupAgreement from "./SignupAgreement";
 import SignupCompleteModal from "./SignupCompleteModal";
 
-export default function SignupAgreementForm({ onNext }: { onNext: () => void }) {
+export default function SignupAgreementForm({  onNext, onBack  }: { onNext: () => void ; onBack: () => void }) {
   const [isAgreed, setIsAgreed] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function SignupAgreementForm({ onNext }: { onNext: () => void }) 
 
   return (
     <div className="min-h-screen flex flex-col bg-white relative z-0">
-      <SignupHeader />
+      <PageHeader title="회원가입" onBack={onBack} />
       <SignupTitle
         title={"약관에 동의하시면\n퍼퓨온미에 가입할 수 있어요."}
         subtitle={"마지막 단계예요"}

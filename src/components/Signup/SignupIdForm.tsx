@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import SignupHeader from "./SignupHeader";
+import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import SignupErrorMessage from "./SignupErrorMessage";
 import SignupButton from "./SignupButton";
 
-export default function SignupIdForm({ onNext }: { onNext: () => void }) {
+export default function SignupIdForm({ onNext, onBack  }: { onNext: () => void ; onBack: () => void }) {
   const [inputId, setInputId] = useState("");
   const [error, setError] = useState("");
   const [isValid, setIsValid] = useState(false);
@@ -38,7 +38,7 @@ export default function SignupIdForm({ onNext }: { onNext: () => void }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <SignupHeader />
+      <PageHeader title="회원가입" onBack={onBack} />
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n아이디가 필요해요."}
         subtitle="영어랑 소문자로만 작성해 주세요."
