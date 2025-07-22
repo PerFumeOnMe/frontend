@@ -1,10 +1,11 @@
+import { useSearchParams } from "react-router-dom";
+
 export default function DiaryWritePage() {
+  const [searchParams] = useSearchParams();
+  const selectedDate = searchParams.get("date") || new Date().toISOString().split("T")[0];
+
   return (
-
-
     //헤더랑 버튼 공용 컴포넌트로 빼서 정리?...
-
-
     <div className="min-w-[375px] w-120 mx-auto h-screen bg-white px-4 py-6 flex flex-col">
       {/*헤더*/}
       <div className="flex items-center mb-6">
@@ -27,8 +28,8 @@ export default function DiaryWritePage() {
       <label className="text-title4 mb-3 text-grayscale-900">언제 경험하셨나요?</label>
       <input
         type="date"
-        className="border border-grayscale-400 rounded-lg p-3 mb-6"
-        defaultValue={new Date().toISOString().split("T")[0]} // 오늘 날짜 기본값
+        className="border border-grayscale-400 rounded-lg p-3 mb-6  [&::-webkit-calendar-picker-indicator]:hidden"
+        defaultValue={selectedDate}
       />
 
       {/*경험*/}

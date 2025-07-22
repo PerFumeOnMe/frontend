@@ -9,14 +9,14 @@ interface CalendarDiaryProps {
   selectedDate: Date;
 }
 export default function CalendarDiary({ selectedDate }: CalendarDiaryProps) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const formattedDate = moment(selectedDate).format("YYYY-MM-DD");
   //우선 빈배열로
   const diaryList: string[] = [];
-
     const handleAddDiary = () => {
-    // 새로운 페이지로 이동
-    navigate("/diary/new"); 
+      const dateParam = moment(selectedDate).format("YYYY-MM-DD");
+      navigate(`/diary/new?date=${dateParam}`); 
+
   };
 
   return(
