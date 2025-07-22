@@ -40,7 +40,7 @@ interface BannerProps {
 
 const Banner = () => {
     const navigate = useNavigate();
-    const [hasMyPerfume] = useState(false);
+    const [hasMyPerfume] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {

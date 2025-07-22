@@ -45,7 +45,7 @@ export default function PerfumeSlider({ perfumes, currentIndex }: PerfumeSliderP
                                     opacity: isCenter ? 1 : 0.5,
                                     transition: 'all 0.7s ease-in-out',
                                     transformOrigin: index === 0 ? 'right center' : 'left center',
-                                    backdropFilter: 'blur(8px)',
+                                    backdropFilter: 'blur(2px)',
                                     background: isCenter 
                                         ? 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%)' 
                                         : 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.15) 100%)',
@@ -59,7 +59,7 @@ export default function PerfumeSlider({ perfumes, currentIndex }: PerfumeSliderP
                                         src={perfume.imageUrl} 
                                         alt={perfume.name}
                                         className={`
-                                            w-[112px] h-[120px] object-contain mx-auto transition-all duration-700
+                                            w-[112px] h-[120px] object-contain mx-auto transition-all duration-700 rounded-[16px]
                                             ${isCenter ? 'opacity-100' : 'opacity-50'}
                                         `}
                                     />
