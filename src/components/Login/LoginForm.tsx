@@ -17,14 +17,18 @@ export default function LoginForm() {
 
   const handleLoginSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputId === "UMC" && inputPassword !== "1234") {
-      setErrorMessage("비밀번호가 일치하지 않습니다.");
-      return;
+      if (inputId !== "UMC"){
+        setErrorMessage("등록되지 않은 아이디입니다.");
+        return;
+      } else if (inputPassword !== "1234"){
+        setErrorMessage("비밀번호가 올바르지 않습니다.");
+        return
+      } else {
+        setErrorMessage("");
+        localStorage.setItem("isLoggedIn", "true");
+        navigate("/", { replace: true });
+      };
     }
-    setErrorMessage("");
-    localStorage.setItem("isLoggedIn", "true");
-    navigate("/", { replace: true });
-  };
 
   return (
     <main className="w-screen h-screen flex items-center justify-center">
@@ -49,7 +53,9 @@ export default function LoginForm() {
                 value={inputPassword}
                 onChange={(e) => setInputPassword(e.target.value)}
               />
-              <LoginErrorMessage message={errorMessage} />
+              <div className="w-full text-left">
+                <LoginErrorMessage message={errorMessage} />
+              </div>
               <LoginButton />
               <Divider />
             </form>
