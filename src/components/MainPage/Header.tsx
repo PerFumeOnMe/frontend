@@ -1,6 +1,6 @@
-import { FiSearch, FiHeart } from "react-icons/fi";
-import logoImage from "../../assets/MainPage/logo.png"
 import { useNavigate } from "react-router-dom";
+import searchIcon from "../../assets/MainPage/search.png";
+import heartIcon from "../../assets/MainPage/heart.png";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -12,19 +12,17 @@ const Header = () => {
     return (
         <header className="flex items-center justify-between px-[16px] pt-[24px] w-full h-[56px]">
             {/* Left: Logo */}
-            <img
-                src={logoImage}
-                alt="SKINT 로고"
-                className="h-[28px] object-contain"
-            />
+            <h1 className="font-serif text-extrabold text-[22px] text-white">
+                PerfuOnMe
+            </h1>
 
             {/* Right: Icons */}
-            <div className="flex items-center gap-[16px]">
+            <div className="flex items-center gap-[8px]">
                 <button aria-label="Search" onClick={handleSearchClick}>
-                    <FiSearch className="w-[28px] h-[28px] text-white" />
+                    <img src={searchIcon} alt="검색" className="w-[32px] h-[32px]" />
                 </button>
                 <button aria-label="Favorites">
-                    <FiHeart className="w-[28px] h-[28px] text-white" />
+                    <img src={heartIcon} alt="찜한 향수" className="w-[32px] h-[32px]" />
                 </button>
             </div>
         </header>
