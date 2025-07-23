@@ -19,17 +19,20 @@ export default function KeywordBubbles({ keywords }: KeywordBubblesProps) {
     return (
         <div className="relative w-[282.87px] h-[240.94px]">
             {bubblePositions.map((position, index) => {
-                const isKeywordBubble = index < 5; // 첫 5개는 키워드 버블
-                const { rotate, size, ...positionStyle } = position;
+                const isKeywordBubble = index < 5;
+                const { rotate, size, left, right, top, bottom } = position;
                 
-                const transform = position.left === '50%'
+                const transform = left === '50%'
                     ? 'translate(-50%, -50%)' + (isKeywordBubble && rotate ? ` rotate(${rotate}deg)` : '')
                     : isKeywordBubble && rotate ? `rotate(${rotate}deg)` : undefined;
 
                 const style: React.CSSProperties = {
                     width: size,
                     height: size,
-                    ...positionStyle,
+                    left,
+                    right,
+                    top,
+                    bottom,
                     position: 'absolute',
                     transform
                 };
@@ -39,11 +42,15 @@ export default function KeywordBubbles({ keywords }: KeywordBubblesProps) {
                         key={index}
                         className={`
                             rounded-full border-[1px] border-[#FBFBFB]/40 bg-[#FBFBFB]/30 flex items-center justify-center
-                            ${isKeywordBubble ? 'text-title4 text-grayscale-1000' : ''}
+                            ${isKeywordBubble ? 'text-title4 text-grayscale-1000 p-2' : ''}
                         `}
                         style={style}
                     >
-                        {isKeywordBubble && keywords[index]}
+                        {isKeywordBubble && (
+                            <span className="text-center break-keep whitespace-pre-line leading-tight">
+                                {keywords[index]}
+                            </span>
+                        )}
                     </div>
                 );
             })}

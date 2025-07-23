@@ -12,8 +12,8 @@ export default function ImageKeywordLoading() {
             // 임시 결과 데이터 생성
             const result = {
                 keywords: keywords,
-                descriptions: "세련됨은 지나치지 않게 절제된 고급스러움을 의미해요...",
-                scenario: "잔잔한 눈이 내리고, 따뜻한 햇살이 얼굴을 감싸오는 장면에에요...",
+                descriptions: "세련됨은 지나치게 달지 않고 절제된 고급스러움을 의미해요.\n유니크함은 흔하지 않은 조합과 개성 있는 향의 선택을 나타내요.\n조용함은 은은한 잔향으로 감정을 차분히 채워주는 향을 말해요.\n겨울은 따뜻하고 포근한 분위기를 품은 향이 잘 어울려요.\n여성은 부드럽고 섬세한 감정을 건드리는 향을 선택했어요.",
+                scenario: "창밖엔 눈이 내리고, 따뜻한 머플러에 얼굴을 묻은 채 조용한 거리를 걷고 있어요.\n바스락거리는 낙엽, 코끝에 닿는 은은한 바닐라와 우디 향, 그 속에서 세련된 당신의 분위기가 더욱 빛나요.\n사람들 속에 섞여 있지만, 뚜렷한 개성과 고요한 존재감이 느껴져요.",
                 characterImageUrl: "https://example.com/character.png",
                 recommendations: []
             };

@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { getBackgroundImage } from '../../utils/imageKeywordBackground';
 import type { ImageKeywordResult } from '../../types/ImageKeyword/imageKeywordResult';
 import KeywordBubbles from '../../components/ImageKeyword/Result/KeywordBubbles';
+import KeywordDescription from '../../components/ImageKeyword/Result/KeywordDescription';
 
 export default function ImageKeywordResultPage() {
     const location = useLocation();
@@ -20,6 +21,9 @@ export default function ImageKeywordResultPage() {
                 <h1 className="text-display1 text-[28px] text-grayscale-1000 mb-[40px]">향기무드 테스트</h1>
                 
                 {result?.keywords && <KeywordBubbles keywords={result.keywords} />}
+                <div className="mt-[36px] w-full">
+                    {result.descriptions && <KeywordDescription descriptions={result.descriptions} />}
+                </div>
             </div>
         </div>
     );
