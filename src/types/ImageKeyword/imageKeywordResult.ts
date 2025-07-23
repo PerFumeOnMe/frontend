@@ -4,7 +4,7 @@ export interface ImageKeywordRequest {
     style: string;       // 스타일
     gender: string;      // 성별
     season: string;      // 계절
-    personality: string; // 성격
+    character: string; // 성격
 }
 
 // 추천 향수 타입

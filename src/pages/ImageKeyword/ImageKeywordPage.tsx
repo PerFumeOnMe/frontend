@@ -38,7 +38,7 @@ const ImageKeywordPage = () => {
             selectedKeywords.style,
             selectedKeywords.gender,
             selectedKeywords.season,
-            selectedKeywords.personality
+            selectedKeywords.character
         ];
 
         navigate('/image-keyword/loading', {
