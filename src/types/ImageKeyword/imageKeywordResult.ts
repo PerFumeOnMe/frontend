@@ -11,6 +11,7 @@ export interface ImageKeywordRequest {
 export interface RecommendedPerfume {
     brand: string;
     name: string;
+    imageUrl: string;
     topNote: string;
     middleNote: string;
     baseNote: string;

@@ -5,6 +5,7 @@ import KeywordBubbles from '../../components/ImageKeyword/Result/KeywordBubbles'
 import KeywordDescription from '../../components/ImageKeyword/Result/KeywordDescription';
 import KeywordScenario from '../../components/ImageKeyword/Result/KeywordScenario';
 import KeywordCharacter from '../../components/ImageKeyword/Result/KeywordCharacter';
+import KeywordRecommendations from '../../components/ImageKeyword/Result/KeywordRecommendation';
 
 export default function ImageKeywordResultPage() {
     const location = useLocation();
@@ -13,7 +14,7 @@ export default function ImageKeywordResultPage() {
 
     return (
         <div 
-            className="w-full min-w-[375px] max-w-[480px] min-h-screen bg-white bg-cover bg-center pb-[40px] overflow-y-auto"
+            className="w-full min-w-[375px] max-w-[480px] min-h-screen bg-white bg-cover bg-center overflow-y-auto"
             style={{ 
                 backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
             }}
@@ -31,6 +32,11 @@ export default function ImageKeywordResultPage() {
                 </div>
                 <div className="mt-[32px] w-full">
                     {result.characterImageUrl && <KeywordCharacter characterImageUrl={result.characterImageUrl} />}
+                </div>
+                <div className="mt-[48px] w-full">
+                    {result.recommendations?.length > 0 && (
+                        <KeywordRecommendations recommendations={result.recommendations} />
+                    )}
                 </div>
             </div>
         </div>
