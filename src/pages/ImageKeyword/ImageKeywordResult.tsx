@@ -3,6 +3,7 @@ import { getBackgroundImage } from '../../utils/imageKeywordBackground';
 import type { ImageKeywordResult } from '../../types/ImageKeyword/imageKeywordResult';
 import KeywordBubbles from '../../components/ImageKeyword/Result/KeywordBubbles';
 import KeywordDescription from '../../components/ImageKeyword/Result/KeywordDescription';
+import KeywordScenario from '../../components/ImageKeyword/Result/KeywordScenario';
 
 export default function ImageKeywordResultPage() {
     const location = useLocation();
@@ -23,6 +24,9 @@ export default function ImageKeywordResultPage() {
                 {result?.keywords && <KeywordBubbles keywords={result.keywords} />}
                 <div className="mt-[36px] w-full">
                     {result.descriptions && <KeywordDescription descriptions={result.descriptions} />}
+                </div>
+                <div className="mt-[32px] w-full">
+                    {result.scenario && <KeywordScenario scenario={result.scenario} />}
                 </div>
             </div>
         </div>
