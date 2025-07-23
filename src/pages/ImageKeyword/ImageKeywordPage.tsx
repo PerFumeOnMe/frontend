@@ -33,9 +33,17 @@ const ImageKeywordPage = () => {
     };
 
     const handleSubmit = () => {
-        // TODO: API 호출
-        console.log('Final keywords:', selectedKeywords);
-        navigate('/image-keyword/loading');
+        const keywordArray = [
+            selectedKeywords.ambience,
+            selectedKeywords.style,
+            selectedKeywords.gender,
+            selectedKeywords.season,
+            selectedKeywords.personality
+        ];
+
+        navigate('/image-keyword/loading', {
+            state: { keywords: keywordArray }
+        });
     };
 
     const handleKeywordSelect = (keyword: string) => {
@@ -47,7 +55,7 @@ const ImageKeywordPage = () => {
 
     const currentCategory = KEYWORD_CATEGORIES[currentStep] as KeywordCategory;
     const isLastStep = currentStep === KEYWORD_CATEGORIES.length - 1;
-    const isStepComplete = Boolean(selectedKeywords[currentCategory]);
+    const isStepComplete = Boolean(selectedKeywords[currentCategory as keyof ImageKeywordRequest]);
 
     return (
         <div className="relative bg-white min-w-[375px] max-w-[480px] min-h-screen w-full">

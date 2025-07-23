@@ -6,7 +6,7 @@ export interface ImageKeywordRequest {
     style: string;
     gender: string;
     season: string;
-    character: string;
+    personality: string;
 }
 
 // 프리뷰 향수 추천 카드
