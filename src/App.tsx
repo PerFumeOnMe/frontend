@@ -21,6 +21,7 @@ import AllPerfumePage from "./pages/AllPerfumePage.tsx";
 import OnboardingRouter from "./pages/Onboarding/index.tsx";
 import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
+import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
             path: "loading",
             element: <ImageKeywordLoading />,
           },
+          {
+            path: "result",
+            element: <ImageKeywordResultPage />,
+          }
         ]
       },
       {
