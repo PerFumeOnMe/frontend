@@ -5,7 +5,7 @@ interface KeywordCharacterProps {
 export default function KeywordCharacter({ characterImageUrl }: KeywordCharacterProps) {
     return (
         <div className="w-full px-[16px]">
-            <div className="w-full rounded-[24px] bg-[#FBFBFB]/25 border-[1px] border-white px-[16px] py-[16px] text-center">
+            <div className="w-full rounded-[24px] bg-[#FBFBFB]/25 border-[1px] border-white px-[16px] py-[16px] text-center items-center justify-center">
                 <h3 className="text-title2 text-grayscale-1000 mb-[8px]">
                     감성 캐릭터
                 </h3>

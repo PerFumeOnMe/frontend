@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import loading from '../../assets/ImageKeyword/loading.png';
+import mainBg from '../../assets/mainPage/main.png';
 
 export default function ImageKeywordLoading() {
     const navigate = useNavigate();
@@ -52,21 +52,29 @@ export default function ImageKeywordLoading() {
             navigate('/image-keyword/result', {
                 state: { result }
             });
-        }, 2000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [navigate, keywords]);
 
     return (
-        <div className="w-full min-w-[375px] max-w-[480px] bg-white flex flex-col items-center justify-center">
+        <div className="w-full min-w-[375px] max-w-[480px] min-h-screen relative overflow-hidden">
+            <div className="absolute inset-0 w-[200%] animate-slide-bg">
                 <img 
-                    src={loading} 
-                    alt="로딩 이미지"
-                    className="w-[295px] h-[240px]"
+                    src={mainBg} 
+                    alt="배경 이미지"
+                    className="w-full h-full object-cover"
                 />
-                <p className="text-title2 text-grayscale-1000">
-                    김성섭님의 이미지를 파악중이에요
+            </div>
+            <div className="absolute inset-0 bg-black/40" />
+            <div className="relative w-full h-full flex flex-col items-center justify-center">
+                <p className="text-title1 text-white mb-[24px]">
+                    김성섭님의 이미지를
                 </p>
+                <p className="text-title1 text-white">
+                    파악중이에요
+                </p>
+            </div>
         </div>
     );
 } 

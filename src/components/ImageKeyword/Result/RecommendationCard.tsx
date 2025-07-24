@@ -24,18 +24,11 @@ export default function RecommendationCard({
     return (
         <div className="w-full">
             <div className="flex gap-[12px]">
-                <div className="relative">
-                    <img 
-                        src={imageUrl} 
-                        alt={name}
-                        className="w-[120px] h-[140px] object-cover rounded-[8px]"
-                    />
-                    <div className="absolute bottom-0 right-0">
-                        <div className="w-[24px] h-[24px] rounded-full bg-primary flex items-center justify-center">
-                            <span className="text-white">♥</span>
-                        </div>
-                    </div>
-                </div>
+                <img 
+                    src={imageUrl} 
+                    alt={name}
+                    className="w-[120px] h-[140px] object-cover rounded-[8px]"
+                />
                 <div className="flex-1">
                     <p className="text-caption1 text-grayscale-800">{brand}</p>
                     <p className="text-title4 text-grayscale-1000 mt-[4px]">{name}</p>
@@ -64,12 +57,11 @@ export default function RecommendationCard({
                         <span className="text-body3 text-grayscale-800">
                             {keyword}
                         </span>
-                        <div className="flex">
-                            {/* 하트 수 하드코딩 된 부분 서버 쪽에서 받아올 수 있는지 이야기해보기 */}
+                        {/* <div className="flex">
                             {Array.from({ length: 2 }).map((_, i) => (
                                 <span key={i} className="text-primary text-grayscale-800">♥</span>
                             ))}
-                        </div>
+                        </div> */}
                         {index < relatedKeywords.length - 1 && (
                             <span className="text-body3 text-grayscale-800">|</span>
                         )}
