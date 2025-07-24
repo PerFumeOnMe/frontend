@@ -1,7 +1,8 @@
 export interface Perfume {
-    imageUrl: string;
+    id: number;
     brand: string;
     name: string;
     price: number;
+    imageUrl: string;
     isLiked: boolean;
 }

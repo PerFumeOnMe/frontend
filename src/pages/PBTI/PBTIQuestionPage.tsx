@@ -1,28 +1,48 @@
-import React from 'react';
-import PBTIHeader from '../../components/PBTI/PBTIHeader';
-import PBTIStartButton from '../../components/PBTI/PBTIStartButton';
-import PBTIInfoCard from '../../components/PBTI/PBTIInfoCard';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import PerfumeOnMeCharacter from '../../assets/PBTI/character.png';
+import PBTIQuestionCard from '../../components/PBTI/PBTIQuestion/PBTIQuestionCard';
+import { PBTIQuestions, type PBTIQuestionType } from '../../assets/constants/PBTI/questions';
+
+const questions : PBTIQuestionType[] = PBTIQuestions;
 
 const PBTIQuestionPage: React.FC = () => {
-  const infoList = [
-    "질문 기반 해석 성향 키워드",
-    "성향 기반 향기 스타일",
-    "나에게 맞는 향수"
-  ];
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [answers, setAnswers] = useState<number[]>([]);
+
+  const navigate = useNavigate();
+
+  const handleSelect = (optionIdx: number) => {
+    const updatedAnswers = [...answers, optionIdx];
+    setAnswers(updatedAnswers);
+
+    if (currentIdx < questions.length - 1) {
+      setCurrentIdx(currentIdx + 1);
+    } else {
+      // 결과 페이지로 이동
+      console.log('제출 완료', updatedAnswers);
+      navigate('/PBTI/result')
+    }
+  };
+
+  const currentQuestion = questions[currentIdx];
 
   return (
-    <div className="min-w-[375px] w-120 h-full bg-[#FBFBFB] flex flex-col items-center font-[Pretandard]">
-      <PBTIHeader />
-      <div className='w-[88%] border-1 border-[#65656C]'></div>
-      <div className='mt-6 text-[18px] text-grayscale-900 font-[600]'>
-        PBTI를 통해 확인할 수 있어요.
+    <div className="min-w-[375px] h-screen -mb-20 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard] overflow-hidden">
+      <img src={PerfumeOnMeCharacter} className="w-[238px] h-[238px] mt-16" />
+
+      {/* AnimatePresence로 감싸고 key를 변경해서 애니메이션 */}
+      <div className="w-full flex justify-center px-4">
+        <AnimatePresence mode="wait">
+          <PBTIQuestionCard
+            progress={(currentIdx)}
+            question={currentQuestion.question}
+            options={currentQuestion.options}
+            onSelect={handleSelect}
+          />
+        </AnimatePresence>
       </div>
-      <div className='flex w-full justify-center m-6 gap-5'>
-        {infoList.map((info, idx) => (
-          <PBTIInfoCard key={idx} info={info} />
-        ))}
-      </div>
-      <PBTIStartButton />
     </div>
   );
 };

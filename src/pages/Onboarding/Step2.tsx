@@ -69,9 +69,9 @@ export default function OnboardingStep2({ onNext, onPrev }: { onNext: () => void
 
 
       </div>
-      <div className="w-full px-4 pt-4">
+
         <BottomButton text="다음" onClick={onNext} disabled={!gender || !age} />
-      </div>
+
     </OnboardingLayout>
   );
 }
