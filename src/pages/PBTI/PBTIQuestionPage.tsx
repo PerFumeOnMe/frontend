@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import PerfumeOnMeCharacter from '../../assets/PBTI/character.png';
+import PerfumeOnMeCharacter from '../../assets/common/character.png';
 import PBTIQuestionCard from '../../components/PBTI/PBTIQuestion/PBTIQuestionCard';
-import { PBTIQuestions, type PBTIQuestionType } from '../../constants/PBTI/questions';
+import { PBTIQuestions, type PBTIQuestionType } from "../../constants/PBTI/questions"
 
 const questions : PBTIQuestionType[] = PBTIQuestions;
 
