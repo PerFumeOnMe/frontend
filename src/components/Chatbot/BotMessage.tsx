@@ -1,6 +1,6 @@
 import React from "react";
 import RecommendationList from "./RecommendationList";
-import BotIcon from "../../assets/Chatbot/PerfumeBot.png";
+import BotIcon from "../../assets/common/character.png";
 import TextTime from "./TimeText";
 
 interface BotMessageProps {
@@ -11,7 +11,7 @@ const BotMessage: React.FC<BotMessageProps> = ({ text }) => (
   <div className="flex items-start ml-2">
     <div className="flex items-center">
       {/* 챗봇 아이콘 */}
-      <div className="flex-shrink-0 w-10 h-10 bg-[#D0D0D0] rounded-full flex items-center justify-center mr-2 overflow-hidden">
+      <div className="flex-shrink-0 w-10 h-10 bg-main-500 rounded-full flex items-center justify-center mr-2 overflow-hidden">
         <img src={BotIcon} alt="bot" className="w-[29px] h-[29px] object-cover" />
       </div>
     </div>
