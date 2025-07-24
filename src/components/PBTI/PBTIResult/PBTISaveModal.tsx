@@ -28,13 +28,13 @@ const PBTISaveModal: React.FC<PBTISaveModalProps> = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 bg-black/[var(--bg-opacity)] [--bg-opacity:50%] flex items-end justify-center mb-20 z-20"
+          className="fixed inset-0 bg-black/[var(--bg-opacity)] [--bg-opacity:50%] flex items-end justify-center z-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="bg-white w-full rounded-t-2xl p-4 text-center"
+            className="bg-white max-w-120 min-w-[375px] w-full mb-15 rounded-t-2xl p-4 text-center"
             variants={modalVariants}
             initial="hidden"
             animate="visible"
