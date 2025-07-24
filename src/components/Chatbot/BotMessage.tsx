@@ -1,6 +1,6 @@
 import React from "react";
 import RecommendationList from "./RecommendationList";
-import BotIcon from "../../assets/Chatbot/PerfumeBot.png";
+import BotIcon from "../../assets/common/character.png";
 import TextTime from "./TimeText";
 
 interface BotMessageProps {
