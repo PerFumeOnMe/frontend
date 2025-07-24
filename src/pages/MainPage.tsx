@@ -1,6 +1,7 @@
 import Banner from "../components/MainPage/Banner";
 import PerfumeGrid from "../components/MainPage/PerfumeGrid";
 import type { Perfume } from "../types/perfume";
+import ChatBotButton from '../components/MainPage/ChatBotButton';
 
 const MainPage = () => {
     const firstMDChoice: Perfume[] = [
@@ -66,6 +67,7 @@ const MainPage = () => {
                 <h2 className="text-title3 mb-[7px] pt-[32px] px-[16px]">요즘 뜨는 향수</h2>
                 <PerfumeGrid perfumes={secondMDChoice} />
             </div>
+            <ChatBotButton />
         </div>
     );
 };

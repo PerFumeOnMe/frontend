@@ -152,4 +152,8 @@
   .bg-main-10 {
     background-color: var(--main-10);
   }
+
+  .border-t-main-10 {
+    border-top-color: var(--main-10);
+  }
 }
