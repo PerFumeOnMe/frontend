@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
-import SignupButton from "./SignupButton";
+import BottomButton from "../common/BottomButton";
 import SignupAgreement from "./SignupAgreement";
 import SignupCompleteModal from "./SignupCompleteModal";
 
@@ -32,9 +32,9 @@ export default function SignupAgreementForm({  onNext, onBack  }: { onNext: () =
         />
     </div>
 
-      <SignupButton disabled={!isAgreed} onClick={handleSubmit}>
+      <BottomButton disabled={!isAgreed} onClick={handleSubmit}>
         회원가입하기
-      </SignupButton>
+      </BottomButton>
       
         {isModalOpen && <SignupCompleteModal />}
     </div>

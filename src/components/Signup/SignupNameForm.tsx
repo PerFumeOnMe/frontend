@@ -2,7 +2,7 @@ import { useState } from "react";
 import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
-import SignupButton from "./SignupButton";
+import BottomButton from "../common/BottomButton";
 
 export default function SignupNameForm({ onNext, onBack }: { onNext: () => void; onBack: ()=> void }) {
   const [name, setName] = useState("");
@@ -22,9 +22,9 @@ export default function SignupNameForm({ onNext, onBack }: { onNext: () => void;
         />
       </div>
       
-      <SignupButton disabled={!name} onClick={onNext}>
+      <BottomButton disabled={!name} onClick={onNext}>
         다음
-      </SignupButton>
+      </BottomButton>
     </div>
   );
 }

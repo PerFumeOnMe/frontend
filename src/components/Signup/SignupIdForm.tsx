@@ -3,7 +3,7 @@ import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import SignupErrorMessage from "./SignupErrorMessage";
-import SignupButton from "./SignupButton";
+import BottomButton from "../common/BottomButton";
 
 export default function SignupIdForm({ onNext, onBack  }: { onNext: () => void ; onBack: () => void }) {
   const [inputId, setInputId] = useState("");
@@ -52,9 +52,9 @@ export default function SignupIdForm({ onNext, onBack  }: { onNext: () => void ;
         <SignupErrorMessage message={error} />
       </div>
 
-      <SignupButton disabled={!isValid} onClick={handleNext}>
+      <BottomButton disabled={!isValid} onClick={handleNext}>
         다음
-      </SignupButton>
+      </BottomButton>
     </div>
   );
 }

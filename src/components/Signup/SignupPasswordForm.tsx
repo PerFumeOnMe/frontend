@@ -3,7 +3,7 @@ import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import SignupErrorMessage from "./SignupErrorMessage";
-import SignupButton from "./SignupButton";
+import BottomButton from "../common/BottomButton";
 
 export default function SignupPasswordForm({ onNext, onBack }: { onNext: () => void; onBack: () => void; }) {
   const [password, setPassword] = useState("");
@@ -68,9 +68,9 @@ export default function SignupPasswordForm({ onNext, onBack }: { onNext: () => v
         </div>
       </div>
 
-      <SignupButton disabled={!isValid} onClick={handleNext}>
+      <BottomButton disabled={!isValid} onClick={handleNext}>
         다음
-      </SignupButton>
+      </BottomButton>
     </div>
   );
 }
