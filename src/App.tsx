@@ -4,7 +4,7 @@ import RootLayout from "./layout/root-layout.tsx";
 import MainPage from "./pages/MainPage.tsx";
 import LoginPage from "./pages/Login/LoginPage.tsx";
 import SignupPage from './pages/Login/SignupPage.tsx';
-import MyPage from './pages/MyPage.tsx';
+import MyPage from './pages/MyPage/MyPage.js';
 import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
 import DiaryPage from './pages/DiaryPage.tsx';
 import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
