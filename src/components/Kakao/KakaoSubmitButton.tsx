@@ -9,7 +9,7 @@ export default function KakaoSubmitButton({ isEnabled, onClick }: Props) {
       type="submit"
       disabled={!isEnabled}
       onClick={onClick}
-      className={`max-w-[361px] w-full text-xl py-[20px] rounded-br-[10px] rounded-bl-[10px] transition font-normal text-[20px] leading-[100%] tracking-[0] ${
+      className={`w-full text-xl py-5 rounded-br-[10px] rounded-bl-[10px] transition font-normal text-[20px] leading-[100%] tracking-[0] ${
         isEnabled ? "bg-[#FEE500] text-black cursor-pointer" : "bg-[#D9D9D9] text-black cursor-not-allowed"
       }`}
     >
