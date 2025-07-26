@@ -1,11 +1,5 @@
 import { Link } from "react-router-dom";
-
-type ButtonProps = {
-  disabled?: boolean;
-  onClick?: () => void;
-  children: React.ReactNode;
-  to?: string;
-};
+import { ButtonProps } from "../../types/bottonButton";
 
 export default function BottomButton({ disabled = false, onClick, children, to }: ButtonProps) {
   const baseClass =
