@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import SignupHeader from "./SignupHeader";
+import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import SignupErrorMessage from "./SignupErrorMessage";
-import SignupButton from "./SignupButton";
+import BottomButton from "../common/BottomButton";
 
-export default function SignupPasswordForm({ onNext }: { onNext: () => void }) {
+export default function SignupPasswordForm({ onNext, onBack }: { onNext: () => void; onBack: () => void; }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -42,7 +42,7 @@ export default function SignupPasswordForm({ onNext }: { onNext: () => void }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <SignupHeader />
+      <PageHeader title="회원가입" onBack={onBack} />
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n비밀번호를 입력해주세요."}
         subtitle="8-20자로 입력해주세요."
@@ -68,9 +68,9 @@ export default function SignupPasswordForm({ onNext }: { onNext: () => void }) {
         </div>
       </div>
 
-      <SignupButton disabled={!isValid} onClick={handleNext}>
+      <BottomButton disabled={!isValid} onClick={handleNext}>
         다음
-      </SignupButton>
+      </BottomButton>
     </div>
   );
 }

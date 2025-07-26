@@ -8,8 +8,8 @@ type LoginInputProps = {
 
 export default function LoginInput({ type, placeholder, value, onChange }: LoginInputProps) {
   return (
-    <div className="w-full ">
-      <label className="flex items-center text-grayscale-900 py-3 px-4 border border-grayscale-700 rounded-2xl">
+    <div className="w-full">
+      <label className="flex items-center text-grayscale-900 py-3 px-4 border border-grayscale-700 bg-white-50 rounded-2xl">
         <input
           type={type}
           value={value}

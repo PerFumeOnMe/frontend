@@ -25,14 +25,17 @@ export default function KakaoSignupForm() {
     { id: 5, label: "별명" },
   ];
 
+
   return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <div className="flex justify-center max-w-120 min-w-[375px] w-full mx-auto min-h-screen bg-white">
-        <div className="w-screen h-screen flex items-center justify-center bg-[#00000066]">
-          <div className="flex flex-col w-full max-w-[361px] bg-white rounded-[20px]">
-            <KakaoHeader />
-            <form className="flex flex-col items-center pt-[2px]">
-              <div className="max-w-[318px]">
+      <div className="flex justify-center w-120 min-w-[375px] mx-auto min-h-screen bg-white">
+        <div className="h-screen w-120 min-w-[375px] flex items-center justify-center bg-[#00000066]">
+          <div className="bg-white rounded-[20px] w-[calc(100%-20%)] mx-[10%] flex flex-col ">
+            <div className="px-5.5">
+              <KakaoHeader />
+            </div>
+            <form className="flex flex-col items-center pt-0.5 w-full">
+              <div className="w-full px-5.5">
                 <KakaoAgreementSection isAllChecked={isAllChecked} onToggle={handleAllCheck} />
                 <KakaoEmailNotice />
                 <KakaoTermsList termsItems={termsItems} isAllChecked={isAllChecked} />
