@@ -1,7 +1,8 @@
 import { useState } from "react";
 import OnboardingLayout from "../../components/Onboarding/OnboardingLayout";
-import BottomButton from "../../components/Onboarding/BottomButton";
+import BottomButton from "../../components/common/BottomButton";
 import OnboardingProgress from "../../components/Onboarding/OnboardingProgress";
+import PageHeader from "../../components/common/PageHeader";
 
 export default function OnboardingStep1({ onNext}: { onNext: () => void }) {
   const [nickname, setNickname] = useState("");
@@ -9,13 +10,7 @@ export default function OnboardingStep1({ onNext}: { onNext: () => void }) {
   return (
     <OnboardingLayout>
       {/* 상단 영역 */}
-      <div className="w-full ml-3 mx-auto pt-7">
-        <div className="relative h-[24px]">
-          <div className="absolute inset-0 flex justify-center items-center">
-            <OnboardingProgress current={1} />
-          </div>
-        </div>
-      </div>
+    <PageHeader centerSlot={<OnboardingProgress current={1} />} />
 
         {/* 타이틀 */}
       <div className="w-full px-4 mx-auto mt-5.5">
@@ -47,7 +42,11 @@ export default function OnboardingStep1({ onNext}: { onNext: () => void }) {
 
 
       {/* 하단 버튼 */}
-    <BottomButton text="다음" onClick={onNext} disabled={!nickname.trim()} />
+      <div className="mt-auto w-full">
+        <BottomButton disabled={!nickname.trim()} onClick={onNext}>
+          다음
+        </BottomButton>
+      </div>
     </OnboardingLayout>
   );
 }
