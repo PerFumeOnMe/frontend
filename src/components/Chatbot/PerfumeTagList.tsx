@@ -5,11 +5,11 @@ interface PerfumeTagListProps {
 }
 
 const PerfumeTagList = ({ tags }: PerfumeTagListProps) => (
-  <div className="fixed w-120 h-7 bottom-0 mb-20 px-3 flex justify-between">
+  <div className="fixed max-w-120 min-w-[375px] bottom-0 mb-23 px-4 flex w-[100%] justify-between gap-1 bg-transparent">
     {tags.map((tag, index) => (
       <span
         key={index}
-        className="inline-flex items-center bg-gray-200 px-1 py-1 rounded-xl text-gray-800 font-bold text-[11px]"
+        className="flex flex-shrink-0 items-center rounded-xl p-2 px-2.5 tracking-tight bg-main-400 text-caption1 text-[#FBFBFB]"
       >
         {tag}
       </span>

@@ -7,11 +7,11 @@ interface WelcomeHeaderProps {
 
 const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({ name, date }) => {
   return (
-    <div className="flex flex-col items-center my-4">
-      <div className="text-center text-lg font-semibold leading-tight">
-        {name}님,<br />반가워요 퍼퓨봇이에요
+    <div className="flex flex-col items-center my-2">
+      <div className="text-center text-title2 text-grayscale-900">
+        {name}님,<br />반가워요 퍼퓨지니에요.
       </div>
-      <div className="mt-4 bg-gray-300 px-10 py-1 text-sm weigh">
+      <div className="mt-1 mb-3 rounded-[20px] bg-[#FBFBFB66] px-2 py-1 tracking-tighter text-[12px] font-[300]">
         {date}
       </div>
     </div>

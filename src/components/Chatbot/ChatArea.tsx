@@ -18,9 +18,9 @@ const ChatArea: React.FC<ChatAreaProps> = ({ messages }) => {
   return (
     <div
       ref={chatRef}
-      className="px-1 py-1 overflow-y-auto bg-[#ffffff] flex-1"
+      className="px-1 py-1 overflow-y-auto pb-1 bg-main-10 flex-1"
     >
-      <WelcomeHeader name="김성섭" date="2025년 7월 06일" />
+      <WelcomeHeader name="김성섭" date="2025.07.06" />
       {messages.map((msg, idx) =>
         msg.type === "user" ? (
           <UserMessage key={idx} text={msg.text} />
