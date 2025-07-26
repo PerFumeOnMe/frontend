@@ -7,6 +7,7 @@ import ScentCard from "../../components/common/ScentCard";
 import { scentOptions } from "../../types/scentOptions";
 import type { Scent } from "../../types/scent";
 import PageHeader from "../../components/common/PageHeader";
+import ErrorToast from "../../components/Onboarding/ErrorToast";
 
 export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
   const [selected, setSelected] = useState<string[]>([]);
@@ -32,17 +33,18 @@ export default function OnboardingStep3({ onPrev }: { onPrev: () => void }) {
         </p>
 
         <div className="mt-6 mb-6 grid grid-cols-3 gap-x-3 gap-y-4">
-          {scentOptions.map(({ id, svg, description }) => (
+          {scentOptions.map(({ id, png, description }) => (
             <ScentCard
               key={id}
               id={id}
-              svg={svg}
+              png={png}
               description={description}
               selected={selected.includes(id)}
               onClick={() => toggle(id)}
             />
           ))}
         </div>
+        <ErrorToast />
       </div>
 
       <div className="mt-auto w-full">
