@@ -36,7 +36,7 @@ export interface PerfumeDetail {
   priceList: PriceInfo[];
   keyword: string;
   description: string;
-  notes: PerfumeNotes;
+  note: PerfumeNotes;
   fragnanceType: fragnanceType;
   gender: string;
   locations: string[];

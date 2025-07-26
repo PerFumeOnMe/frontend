@@ -11,10 +11,10 @@ const ExtraInfo = ({ gender, locations, seasons }: ExtraInfoProps) => {
 
   const locationOptions = [
     "일상용",
-    "데이트/로맨틱",
-    "무거운 향",
     "출근/오피스용",
+    "데이트/로맨틱",
     "파티/야간용",
+    "무거운 향",
     "가벼운 향",
   ];
 

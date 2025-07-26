@@ -1,26 +1,108 @@
-const NoteCard = ({ note }: { note: string }) => {
+interface CardData {
+  id: string;
+  title: string;
+  ingredients: string[];
+  keywords: string[];
+  description: string;
+}
+
+const NoteCard = ({
+  note,
+  isActive,
+  position,
+  onClick,
+}: {
+  note: CardData;
+  isActive: boolean;
+  position: "left" | "center" | "right";
+  onClick: () => void;
+}) => {
+  // 3D 회전 스타일 계산
+  const getCardStyle = () => {
+    const baseTransition =
+      "transition-all duration-1000 cubic-bezier(0.4,0,0.2,1) transform-gpu";
+
+    if (isActive) {
+      return `z-50 scale-100 rotate-y-0 rotate-0 translate-x-0 translate-y-5 ${baseTransition}`;
+    }
+
+    switch (position) {
+      case "left":
+        return `z-10 scale-100 rotate-16 translate-x-30 translate-y-4 opacity-50 ${baseTransition}`;
+      case "right":
+        return `z-10 scale-100 -rotate-16 -translate-x-30 translate-y-4 opacity-50 ${baseTransition}`;
+      default:
+        return `z-20 scale-100 rotate-y-0 rotate-0 translate-x-0 translate-y-0 ${baseTransition}`;
+    }
+  };
+
+  // 카드 배경 스타일 계산
+  const getCardBackground = () => {
+    return "bg-white";
+  };
+
   return (
-    <div className="w-55 h-45 p-5 flex flex-col items-center rounded-lg shadow-[0_2px_10px_-1px_rgba(0,0,0,0.12)]">
-      <span className="w-full border-b border-grayscale-400 pb-2.5 text-body3 text-center">
-        {note}
-      </span>
-      <div className="pt-2.5 flex flex-col items-center gap-2">
-        {/* 원료 및 연상단어의 내용은 API 연결 후 map으로 받아올 수 있도록 수정 */}
-        <div className="flex items-center gap-2">
-          <p className="text-body3 text-grayscale-900 font-semibold">원료</p>
-          <span className="text-body3 text-grayscale-900">피오니</span>
-          <span className="text-body3 text-grayscale-900">자스민</span>
+    <div
+      className={`
+        w-55 h-45 p-5 rounded-lg cursor-pointer
+        shadow-[0_2px_10px_-1px_rgba(0,0,0,0.12)]
+        hover:shadow-[0_4px_15px_-1px_rgba(0,0,0,0.15)]
+        ${getCardStyle()}
+        ${getCardBackground()}
+      `}
+      onClick={onClick}
+      style={{
+        transformStyle: "preserve-3d",
+        backfaceVisibility: "visible",
+      }}
+    >
+      <div className="flex flex-col items-center h-full">
+        {/* 제목과 구분선 */}
+        <div className="w-full text-center mb-3">
+          <h3
+            className={`
+            w-full border-b border-grayscale-400 pb-2.5 text-body3 text-center
+            transition-colors duration-300
+          `}
+          >
+            {note.title}
+          </h3>
         </div>
-        <div className="flex items-center gap-2">
-          <p className="text-body3 text-grayscale-900 font-semibold">
-            연상 단어
+
+        {/* 원료 */}
+        <div className="w-full">
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            <span className="text-body3 text-grayscale-900 font-semibold">
+              원료
+            </span>
+            {note.ingredients.map((ingredient, index) => (
+              <span key={index} className="text-body3 text-grayscale-900">
+                {ingredient}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* 연상단어 */}
+        <div className="w-full">
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            <span className="text-body3 text-grayscale-900 font-semibold">
+              연상단어
+            </span>
+            {note.keywords.map((keyword, index) => (
+              <span key={index} className="text-body3 text-grayscale-900">
+                {keyword}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* 설명 */}
+        <div className="flex-1 flex items-center justify-center text-center">
+          <p className="text-caption1 text-grayscale-900 text-center mt-1">
+            {note.description}
           </p>
-          <span className="text-body3 text-grayscale-900">싱그러움</span>
-          <span className="text-body3 text-grayscale-900">햇살</span>
         </div>
-        <p className="text-caption1 text-grayscale-900 text-center mt-1">
-          아침 햇살 아래 주방에서 자몽이 들어간 과일 샐러드를 먹는 순간
-        </p>
       </div>
     </div>
   );

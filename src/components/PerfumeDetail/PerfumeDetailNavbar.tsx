@@ -1,7 +1,14 @@
 import heartFilledImage from "../../assets/MainPage/heart_filled.png";
 import heartEmptyImage from "../../assets/MainPage/heart_empty.png";
+import { useState } from "react";
 
 const PerfumeDetailNavbar = () => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleHeartClick = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <nav
       className="
@@ -14,8 +21,12 @@ const PerfumeDetailNavbar = () => {
       z-50
     "
     >
-      <button>
-        <img src={heartFilledImage} alt="Heart Filled" className="w-10 h-10" />
+      <button onClick={handleHeartClick}>
+        <img
+          src={isLiked ? heartFilledImage : heartEmptyImage}
+          alt={isLiked ? "Heart Filled" : "Heart Empty"}
+          className="w-10 h-10"
+        />
       </button>
       <button className="text-title4 bg-main-500 w-70 h-12 rounded-2xl text-white">
         공식 홈페이지
