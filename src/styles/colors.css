@@ -1,5 +1,6 @@
 :root {
   --grayscale-1000: #1c1c1e;
+  --grayscale-1000-f2: #1C1C1EF2;
   --grayscale-900: #343437;
   --grayscale-800: #4C4C52;
   --grayscale-700: #65656C;
@@ -21,6 +22,10 @@
   .text-grayscale-1000 {
     color: var(--grayscale-1000);
   }
+    .text-grayscale-1000-f2 {
+    color: var(--grayscale-1000-f2);
+  }
+  
   .text-grayscale-900 {
     color: var(--grayscale-900);
   }
@@ -48,6 +53,9 @@
 
   .bg-grayscale-1000 {
     background-color: var(--grayscale-1000);
+  }
+  .bg-grayscale-1000-f2 {
+    background-color: var(--grayscale-1000-f2);
   }
   .bg-grayscale-900 {
     background-color: var(--grayscale-900);
