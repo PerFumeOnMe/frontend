@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import PerfumeOnMeCharacter from '../../assets/PBTI/character.png';
+import PerfumeOnMeCharacter from '../../assets/common/character.png';
 import PBTIQuestionCard from '../../components/PBTI/PBTIQuestion/PBTIQuestionCard';
-import { PBTIQuestions, type PBTIQuestionType } from '../../assets/constants/PBTI/questions';
+import { PBTIQuestions, type PBTIQuestionType } from "../../constants/PBTI/questions"
 
 const questions : PBTIQuestionType[] = PBTIQuestions;
 
@@ -29,7 +29,7 @@ const PBTIQuestionPage: React.FC = () => {
   const currentQuestion = questions[currentIdx];
 
   return (
-    <div className="min-w-[375px] h-screen bg-[#F4EEFA] flex flex-col items-center font-[Pretendard] overflow-hidden">
+    <div className="min-w-[375px] h-screen -mb-20 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard] overflow-hidden">
       <img src={PerfumeOnMeCharacter} className="w-[238px] h-[238px] mt-16" />
 
       {/* AnimatePresence로 감싸고 key를 변경해서 애니메이션 */}

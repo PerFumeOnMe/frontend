@@ -37,19 +37,12 @@ const BottomSheetModal = ({
       {/* 모달 컨테이너 */}
       <div className="fixed inset-0 z-50 flex items-end justify-center sm:px-0">
         <div
-          className="w-120 min-w-[375px] bg-white rounded-t-lg shadow-2xl animate-slide-up"
+          className="w-120 min-w-[375px] bg-white rounded-t-[16px] shadow-2xl animate-slide-up"
           onPointerDownCapture={stop}
         >
-          {/* 핸들 */}
-          <div className="flex justify-center py-2">
-            <div className="w-12 h-1 bg-gray-300 rounded-full" />
-          </div>
-
           {/* 헤더 */}
           <div className="relative flex items-center px-4 py-3">
-            <h2 className="flex-1 text-center text-lg font-semibold">
-              {title}
-            </h2>
+            <h2 className="flex-1 text-center text-title2 m-2">{title}</h2>
             <button
               aria-label="close"
               onClick={onClose}

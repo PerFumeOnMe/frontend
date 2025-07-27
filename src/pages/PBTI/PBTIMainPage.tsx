@@ -12,7 +12,7 @@ const PBTIMainPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-w-[375px] w-full h-screen bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
+    <div className="min-w-[375px] w-full h-screen -mb-20 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
       <PBTIHeader />
       <div className="flex flex-col mt-10 gap-5 w-[90%] h-fit relative">
         {infoList.map((info, idx) => (

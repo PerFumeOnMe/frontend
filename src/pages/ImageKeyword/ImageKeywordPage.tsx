@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ImageKeywordHeader from '../../components/ImageKeyword/ImageKeywordHeader';
 import ImageKeywordContent from '../../components/ImageKeyword/ImageKeywordContent';
-import ImageKeywordButton from '../../components/ImageKeyword/ImageKeywordButton';
+import Button from '../../components/ImageKeyword/Button';
 import ImageKeywordModal from '../../components/ImageKeyword/ImageKeywordModal';
 import { KEYWORD_CATEGORIES, CATEGORY_KOREAN } from '../../types/ImageKeyword/imageKeyword.const';
 import type { KeywordCategory } from '../../types/ImageKeyword/imageKeyword.type';
@@ -33,9 +33,17 @@ const ImageKeywordPage = () => {
     };
 
     const handleSubmit = () => {
-        // TODO: API 호출
-        console.log('Final keywords:', selectedKeywords);
-        navigate('/image-keyword/loading');
+        const keywordArray = [
+            selectedKeywords.ambience,
+            selectedKeywords.style,
+            selectedKeywords.gender,
+            selectedKeywords.season,
+            selectedKeywords.character
+        ];
+
+        navigate('/image-keyword/loading', {
+            state: { keywords: keywordArray }
+        });
     };
 
     const handleKeywordSelect = (keyword: string) => {
@@ -47,10 +55,10 @@ const ImageKeywordPage = () => {
 
     const currentCategory = KEYWORD_CATEGORIES[currentStep] as KeywordCategory;
     const isLastStep = currentStep === KEYWORD_CATEGORIES.length - 1;
-    const isStepComplete = Boolean(selectedKeywords[currentCategory]);
+    const isStepComplete = Boolean(selectedKeywords[currentCategory as keyof ImageKeywordRequest]);
 
     return (
-        <div className="relative bg-white min-h-screen w-full">
+        <div className="relative bg-white min-w-[375px] max-w-[480px] min-h-screen w-full">
             <ImageKeywordHeader
                 step={currentStep + 1}
                 onClose={handleClose}
@@ -61,7 +69,7 @@ const ImageKeywordPage = () => {
                 selectedKeywords={selectedKeywords}
                 onKeywordSelect={handleKeywordSelect}
             />
-            <ImageKeywordButton
+            <Button
                 isLastStep={isLastStep}
                 isStepComplete={isStepComplete}
                 onNext={handleNext}

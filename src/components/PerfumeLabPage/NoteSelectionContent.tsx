@@ -1,23 +1,25 @@
 import type { Note } from "../../types/note";
 
+interface NoteOption {
+  id: string;
+  description: string;
+  img: string;
+  krName: string;
+}
+
 interface NoteSelectionContentProps {
   selectedNote: Note;
   onNoteSelected: (noteType: Note, selectedValue: string) => void;
+  noteOptions: Record<Note, NoteOption[]>;
 }
 
 const NoteSelectionContent = ({
   selectedNote,
   onNoteSelected,
+  noteOptions,
 }: NoteSelectionContentProps) => {
-  // 각 노트 타입별 옵션들
-  const noteOptions: { [key: string]: string[] } = {
-    베이스: ["시트러스", "플로럴", "우디", "머스크", "바닐라", "앰버"],
-    미들: ["로즈", "라벤더", "베르가못", "페퍼민트", "재스민", "일랑일랑"],
-    탑: ["레몬", "오렌지", "자몽", "유칼립투스", "페퍼", "핑크페퍼"],
-  };
-
-  const handleOptionSelect = (option: string) => {
-    onNoteSelected(selectedNote, option);
+  const handleOptionSelect = (optionId: string) => {
+    onNoteSelected(selectedNote, optionId);
   };
 
   // 현재 선택된 노트의 옵션들 가져오기
@@ -26,11 +28,27 @@ const NoteSelectionContent = ({
   const getSubtitle = () => {
     switch (selectedNote) {
       case "베이스":
-        return "베이스 노트는 향수의 여운입니다. 시간이 흐를수록 은은하게 퍼지며, 향기의 정체성과 기억을 조용히 각인시킵니다.";
+        return (
+          <>
+            베이스 노트는 향수의 여운입니다. 시간이 흐를수록 은은하게 퍼지며,{" "}
+            <br />
+            향기의 정체성과 기억을 조용히 각인시킵니다.
+          </>
+        );
       case "미들":
-        return "미들 노트는 향수의 중심이 되는 향이에요. 탑 노트가 사라진 후 퍼지며, 향의 분위기와 성격을 결정하죠.";
+        return (
+          <>
+            미들 노트는 향수의 중심이 되는 향이에요. <br /> 탑 노트가 사라진 후
+            퍼지며, 향의 분위기와 성격을 결정하죠.
+          </>
+        );
       case "탑":
-        return "탑 노트는 향수의 첫인상입니다. 처음 뿌렸을 때 가장 먼저 느껴지는 향입니다.";
+        return (
+          <>
+            탑 노트는 향수를 뿌리자마자 퍼지는 첫인상의 향이에요. <br />
+            가볍고 상쾌하며 순간적으로 '와! 좋다'는 느낌을 줘요.
+          </>
+        );
       default:
         return "";
     }
@@ -38,17 +56,33 @@ const NoteSelectionContent = ({
 
   return (
     <>
-      <p className="text-gray-600 text-xs mb-4">{getSubtitle()}</p>
+      <p className="text-title3">{selectedNote} 노트란?</p>
+      <p className="text-gray-700 text-caption1 mb-4">{getSubtitle()}</p>
 
-      {/* 향수 노트 그리드 */}
+      {/* 향수 노트 그리드 (온보딩 Step3의 ScentCard 스타일 적용) */}
       <div className="grid grid-cols-3 gap-3">
-        {currentOptions.map((option, index) => (
+        {currentOptions.map((option) => (
           <button
-            key={index}
-            onClick={() => handleOptionSelect(option)}
-            className="bg-gray-100 hover:bg-gray-200 rounded-lg aspect-square flex items-center justify-center text-gray-700 text-sm font-medium transition-colors"
+            key={option.id}
+            onClick={() => handleOptionSelect(option.id)}
+            className="w-full block rounded-[8px] overflow-hidden border text-caption2 text-center transition-colors duration-150 border-grayscale-500 text-grayscale-900 hover:border-main-500 hover:text-main-500"
           >
-            {option}
+            <div className="relative w-full h-20">
+              <img
+                src={option.img}
+                alt={option.id}
+                className="w-full h-full object-cover block"
+              />
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                <span className="text-white text-body3">
+                  {option.id}
+                  <br />({option.krName})
+                </span>
+              </div>
+            </div>
+            <div className="bg-white px-1 py-2 h-9 flex items-center justify-center text-caption2">
+              <p className="line-clamp-2">{option.description}</p>
+            </div>
           </button>
         ))}
       </div>

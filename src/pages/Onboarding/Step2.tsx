@@ -1,8 +1,8 @@
 import { useState } from "react";
 import OnboardingLayout from "../../components/Onboarding/OnboardingLayout";
-import TopBackButton from "../../components/Onboarding/TopBackButton";
-import BottomButton from "../../components/Onboarding/BottomButton";
+import BottomButton from "../../components/common/BottomButton";
 import OnboardingProgress from "../../components/Onboarding/OnboardingProgress";
+import PageHeader from "../../components/common/PageHeader";
 
 export default function OnboardingStep2({ onNext, onPrev }: { onNext: () => void; onPrev: () => void }) {
   const [gender, setGender] = useState<string>("상관없음");
@@ -14,14 +14,7 @@ export default function OnboardingStep2({ onNext, onPrev }: { onNext: () => void
   return (
     <OnboardingLayout>
       {/* 상단 영역 */}
-      <div className="w-full ml-[11px] mx-auto pt-[26px]">
-        <div className="relative h-[24px]">
-          <TopBackButton onClick={onPrev}/>
-          <div className="absolute inset-0 flex justify-center items-center">
-            <OnboardingProgress current={2} />
-          </div>
-        </div>
-      </div>
+    <PageHeader onBack={onPrev} centerSlot={<OnboardingProgress current={2} />} />
 
       <div className="w-full px-4 mx-auto mt-[22px] flex flex-col items-start gap-6">
         <div>
@@ -69,9 +62,11 @@ export default function OnboardingStep2({ onNext, onPrev }: { onNext: () => void
 
 
       </div>
-
-        <BottomButton text="다음" onClick={onNext} disabled={!gender || !age} />
-
+      <div className="mt-auto w-full">
+        <BottomButton disabled={!gender || !age} onClick={onNext}>
+          다음
+        </BottomButton>
+      </div>
     </OnboardingLayout>
   );
 }

@@ -1,6 +1,6 @@
 const PBTIResultHeader = () => (
-  <div className="text-center my-6">
-    <h1 className="text-title2 font-bold text-purple-700 mb-2">
+  <div className="flex flex-col w-full justify-center items-center text-center my-6">
+    <h1 className="w-55 text-title2 font-bold text-purple-700 mb-2">
       당신은 어디서든 존재감을 뿜내는 리더 타입!
     </h1>
     <p className="text-body4 text-gray-500">
