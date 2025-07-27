@@ -12,6 +12,19 @@ export default function DiaryWritePage() {
   const [experience, setExperience] = useState("");
   const isFormValid = perfume.trim() !== "" && experience.trim() !== "";
 
+  const handleSave = () => {
+    const saved = JSON.parse(sessionStorage.getItem("diaryData") || "{}");
+    const currentList = saved[selectedDate] || [];
+    const newDiary = {
+      fragranceName: perfume,
+      content: experience,
+    };
+    saved[selectedDate] = [...currentList, newDiary];
+    sessionStorage.setItem("diaryData", JSON.stringify(saved));
+    alert("임시 저장 완료..");
+    window.history.back(); 
+  };
+
   return (
     <div className="w-full min-h-screen bg-white flex flex-col sm:max-w-120 sm:min-w-[375px] mx-auto">
       <PageHeader title="퍼퓸다이어리" onBack={() => window.history.back()} />
@@ -51,10 +64,7 @@ export default function DiaryWritePage() {
       </div>
 
       <div className="mt-auto w-full">
-        <BottomButton
-          disabled={!isFormValid}
-          onClick={() => console.log("저장", { perfume, experience })}
-        >
+        <BottomButton disabled={!isFormValid} onClick={handleSave}>
           저장
         </BottomButton>
       </div>

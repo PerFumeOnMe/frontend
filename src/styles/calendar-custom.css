@@ -102,3 +102,12 @@
   color: #CDCDD0;
   margin: auto;
 }
+.has-diary abbr {
+  background: #FBFBFBE5 !important; 
+  color: #6401BB !important;
+}
+
+.react-calendar__tile--now {
+  background: none !important;
+  color: inherit !important;
+}
