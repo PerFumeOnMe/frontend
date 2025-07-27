@@ -1,60 +1,38 @@
 import Calendar from "react-calendar";
 import moment from "moment";
 import CalendarDiary from "./CalendarDiary";
-import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { useState } from "react";
+import "react-calendar/dist/Calendar.css";
+import "../../styles/calendar-custom.css";
 
 export default function DiaryCalendar() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
+  const hasDiary = (date: Date) => false; // 현재는 전부 없다고 처리
+
   return (
-    <div className="min-w-[375px] w-120 mx-auto bg-main-500 h-screen flex flex-col">
+    <div className="min-w-[375px] w-full max-w-[480px] mx-auto bg-main-500 h-screen flex flex-col">
       {/* 달력 영역 */}
-      <div className="flex-[0.71] bg-main-500 ">
+      <div className="flex-[0.55] bg-main-500">
         <Calendar
-          onClickDay={(date) => setSelectedDate(date)}
+          onClickDay={setSelectedDate}
           value={selectedDate}
+          locale="ko-KR"
+          calendarType="iso8601"
           formatDay={(locale, date) => moment(date).format("D")}
           showNeighboringMonth={false}
-          prevLabel={null}
-          nextLabel={null}
           prev2Label={null}
           next2Label={null}
-          
-          className="text-white "
           navigationLabel={({ date }) => (
-          <div className="flex items-center justify-between w-full px-4 py-6">
-            {/* 왼쪽 화살표 */}
-            <div
-              role="button"
-              tabIndex={0}
-              onClick={() => console.log("prev month")}
-              className="text-white text-2xl cursor-pointer"
-            >
-              <IoChevronBack />
-            </div>
-
-            {/* 중앙 년월 */}
-            <span className="text-white text-title2 text-center flex-1">
+            <div className="text-white text-center text-lg font-bold">
               {moment(date).format("YYYY.MM")}
-            </span>
-
-            {/* 오른쪽 화살표 */}
-            <div
-              role="button"
-              tabIndex={0}
-              onClick={() => console.log("next month")}
-              className="text-white text-2xl cursor-pointer"
-            >
-              <IoChevronForward />
             </div>
-          </div>
           )}
         />
       </div>
 
-      {/* 달력 아래 컨텐츠 영역 */}
-      <div className="bg-white flex-[0.29] overflow-y-auto rounded-t-3xl p-4">
+      {/* 달력 아래 컨텐츠 */}
+      <div className="bg-white flex-[0.45] overflow-y-auto rounded-t-3xl p-4">
         <CalendarDiary selectedDate={selectedDate} />
       </div>
     </div>
