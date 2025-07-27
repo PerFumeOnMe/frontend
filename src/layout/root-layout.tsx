@@ -3,7 +3,7 @@ import Navbar from "../components/common/Navbar.tsx";
 
 const RootLayout = () => {
     const location = useLocation();
-    const hideNavbarPaths = ['/image-keyword', '/choose-path', '/all-perfume', '/filter'];
+    const hideNavbarPaths = ['/image-keyword', '/choose-path', '/all-perfume', '/filter','/diary/new'];
     const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
 
     return (
