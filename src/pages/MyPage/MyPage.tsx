@@ -5,10 +5,12 @@ import MyPageProfileSection from "../../components/MyPage/MyPageProfileSection";
 const MyPage = () => {
     
     return(
-        <div className="max-w-120 m-w-[375px] w-full h-[5000px] bg-[#F4EEFA] p-4 font-[Pretendard]">
-            <MyPageHeader/>
-            <MyPageProfileSection/>
-            <FavoritesAndRecommendations/>
+        <div className="min-h-screen w-full bg-[#F4EEFA] font-[Pretendard]">
+            <div className="max-w-120 min-w-[375px] flex flex-col w-full h-full p-4">
+                <MyPageHeader />
+                <MyPageProfileSection />
+                <FavoritesAndRecommendations />
+            </div>
         </div>
     )
 }
