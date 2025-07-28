@@ -5,6 +5,7 @@ import ScentCard from "../../components/common/ScentCard";
 import { scentOptions } from "../../types/scentOptions";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineExclamation } from "react-icons/ai";
+import GoBackIcon from "../../assets/MyPage/GoBackArrowButton.svg"
 
 export default function EditScentPreferences() {
   const [selected, setSelected] = useState<string[]>([]);
@@ -35,37 +36,46 @@ export default function EditScentPreferences() {
 
   return (
     <OnboardingLayout>
-      <Toaster position="bottom-center" />
-
-      <div className="w-full px-4 mx-auto mt-[22px]">
-        <h2 className="text-title2 text-grayscale-1000 ">
-          선호하는 향을<br />3가지 선택해 주세요.
-        </h2>
-        <p className="text-grayscale-600 text-body3 mt-2 ">
-          이제 회원님의 향을 찾아드릴게요.
-        </p>
-
-        <div className="mt-6 mb-6 grid grid-cols-3 gap-x-3 gap-y-4">
-          {scentOptions.map(({ id, png, description }) => (
-            <ScentCard
-              key={id}
-              id={id}
-              png={png}
-              description={description}
-              selected={selected.includes(id)}
-              onClick={() => toggle(id)}
-            />
-          ))}
+      <div className="font-[Pretandard]">
+        <Toaster position="bottom-center" />
+  
+        <div className="w-full px-4 mx-auto mt-[22px]">
+          <div className="flex flex-col items-center relative">
+            <div className="flex justify-center items-center">
+              <button onClick={() => (window.location.href = "/mypage")} className="hover: cursor-pointer">
+                <img src={GoBackIcon} className="absolute top-0 left-0 pl-2" />
+              </button>
+              <div className="text-title3 text-grayscale-1000 ">
+                선호하는 향 수정
+              </div>
+            </div>
+            <div className="text-grayscale-1000 text-title3 mt-3 ">
+              선호하는 향을 3가지 선택해 주세요.
+            </div>
+          </div>
+  
+          <div className="mt-6 mb-6 grid grid-cols-3 gap-x-3 gap-y-4">
+            {scentOptions.map(({ id, png, description }) => (
+              <ScentCard
+                key={id}
+                id={id}
+                png={png}
+                description={description}
+                selected={selected.includes(id)}
+                onClick={() => toggle(id)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="mt-auto w-full">
-        <BottomButton
-          disabled={selected.length !== 3}
-          onClick={() => (window.location.href = "/Main")}
-        >
-          확인
-        </BottomButton>
+  
+        <div className="pb-3 w-full">
+          <BottomButton
+            disabled={selected.length !== 3}
+            onClick={() => (window.location.href = "/mypage")}
+          >
+            수정하기
+          </BottomButton>
+        </div>
       </div>
     </OnboardingLayout>
   );
