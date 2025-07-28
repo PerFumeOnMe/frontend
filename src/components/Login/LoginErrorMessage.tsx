@@ -4,5 +4,5 @@ type Props = {
 
 export default function LoginErrorMessage({ message }: Props) {
   if (!message) return null;
-  return <p className="flex items-center text-red-600 text-xs">{message}</p>;
+  return <p className="text-error text-caption1">{message}</p>;
 }

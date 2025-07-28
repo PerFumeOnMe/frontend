@@ -1,6 +1,6 @@
 import type { ScentCardProps } from "../../types/scent";
 
-export default function ScentCard({ id, svg, description, selected, onClick }: ScentCardProps) {
+export default function ScentCard({ id, png, description, selected, onClick }: ScentCardProps) {
   return (
     <button
       onClick={onClick}
@@ -9,7 +9,7 @@ export default function ScentCard({ id, svg, description, selected, onClick }: S
       }`}
     >
       <div className="relative w-full h-[65%]">
-        <img src={svg} alt={id} className="w-full h-full object-cover block" />
+        <img src={png} alt={id} className="w-full h-full object-cover block" />
       </div>
       <div className="bg-white px-1 py-2 h-[36%] flex items-center justify-center text-caption2">
         <p className="line-clamp-2">{description}</p>
