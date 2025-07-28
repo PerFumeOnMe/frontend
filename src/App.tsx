@@ -3,8 +3,8 @@ import NotFoundPage from "./pages/NotFoundPage.tsx";
 import RootLayout from "./layout/root-layout.tsx";
 import MainPage from "./pages/MainPage.tsx";
 import LoginPage from "./pages/Login/LoginPage.tsx";
-import SignupPage from "./pages/Login/SignupPage.tsx";
-import MyPage from "./pages/MyPage.tsx";
+import SignupPage from './pages/Login/SignupPage.tsx';
+import MyPage from './pages/MyPage/MyPage.tsx';
 import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
 import DiaryPage from "./pages/DiaryPage.tsx";
 import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
@@ -23,6 +23,7 @@ import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
 import PerfumeDetailPage from "./pages/PerfumeDetailPage.tsx";
 import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx";
+import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -55,7 +56,12 @@ const router = createBrowserRouter([
           { path: 'Main', element: <MainPage /> },
           { path: 'PBTI', element: <PBTIMainPage /> },
           { path: 'Diary', element: <DiaryPage /> },
-          { path: 'MyPage', element: <MyPage /> },
+          { path: 'MyPage',
+            children: [
+              { index: true, element: <MyPage /> },
+              { path: "EditScentPreferences", element : <EditScentPreferences/>}
+            ]
+          },
           { path: 'choose-path', element: <ChoosePathPage /> },
           { path: 'filter', element: <FilterPage /> },
           { 
