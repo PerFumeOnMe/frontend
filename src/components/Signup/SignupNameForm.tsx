@@ -3,8 +3,9 @@ import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import BottomButton from "../common/BottomButton";
+import type { StepNavigationProps } from "../../types/Login/signupTypes";
 
-export default function SignupNameForm({ onNext, onBack }: { onNext: () => void; onBack: ()=> void }) {
+export default function SignupNameForm({ onNext, onBack }:StepNavigationProps) {
   const [name, setName] = useState("");
 
   return (
