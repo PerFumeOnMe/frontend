@@ -2,9 +2,9 @@ export interface Perfume {
   id: number;
   brand: string;
   name: string;
-  price: number;
+  minPrice: number;
   imageUrl: string;
-  isLiked: boolean;
+  liked: boolean;
 }
 
 export interface PriceInfo {

@@ -8,7 +8,7 @@ interface PerfumeCardProps {
 }
 
 const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
-    const { imageUrl, brand, name, price, isLiked: initialIsLiked } = perfume;
+    const { imageUrl, brand, name, minPrice, liked: initialIsLiked } = perfume;
     const [isLiked, setIsLiked] = useState(initialIsLiked);
     
     const handleLikeClick = (e: React.MouseEvent) => {
@@ -37,7 +37,7 @@ const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
             </div>
             <p className="text-caption2 text-grayscale-800 mb-[-2]">{brand}</p>
             <p className="text-body3 text-grayscale-1000 mb-[-2]">{name}</p>
-            <p className="text-body4 text-grayscale-900">{price.toLocaleString()}원~</p>
+            <p className="text-body4 text-grayscale-900">{minPrice.toLocaleString()}원~</p>
         </div>
     );
 };
