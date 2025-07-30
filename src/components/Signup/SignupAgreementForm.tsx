@@ -4,15 +4,43 @@ import SignupTitle from "./SignupTitle";
 import BottomButton from "../common/BottomButton";
 import SignupAgreement from "./SignupAgreement";
 import SignupCompleteModal from "./SignupCompleteModal";
+import type { SignupAgreementFormProps } from "../../types/Login/signupTypes";
+import { postSignup } from "../../apis/User";
+import type { RequestSignupDto } from "../../types/apis/User";
 
-export default function SignupAgreementForm({  onNext, onBack  }: { onNext: () => void ; onBack: () => void }) {
+export default function SignupAgreementForm({
+  name,
+  loginId,
+  password,
+  setIdError, 
+  onNext,
+  onBack,
+}: SignupAgreementFormProps & { setIdError: (msg: string) => void }) {
   const [isAgreed, setIsAgreed] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSubmit = () => {
-    if (isAgreed) {
+  const handleSubmit = async () => {
+    if (!isAgreed) return;
+
+    const requestBody: RequestSignupDto = { name, loginId, password };
+
+    try {
+      const res = await postSignup(requestBody);
+      console.log("회원가입 성공:", res);
+      setIdError(""); 
       setIsModalOpen(true);
+    } catch (err: any) {
+      const code = err?.response?.data?.code;
+      const result = err?.response?.data?.result;
+
+      if (code === "MEMBER4001") {
+        setIdError("중복된 아이디입니다.");
+      } else if (code === "COMMON400") {
+        setIdError(result?.loginId || "");
+      } else {
+      console.error("회원가입 예외 오류:", err);
+    }
     }
   };
 
@@ -30,14 +58,13 @@ export default function SignupAgreementForm({  onNext, onBack  }: { onNext: () =
           isDropdownOpen={isDropdownOpen}
           setIsDropdownOpen={setIsDropdownOpen}
         />
-    </div>
+      </div>
 
       <BottomButton disabled={!isAgreed} onClick={handleSubmit}>
         회원가입하기
       </BottomButton>
-      
-        {isModalOpen && <SignupCompleteModal />}
-    </div>
 
+      {isModalOpen && <SignupCompleteModal />}
+    </div>
   );
 }
