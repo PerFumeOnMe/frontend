@@ -1,4 +1,4 @@
-import logo from '../../assets/Login/logo.svg';
+import logo from '../../assets/Login/logo.png';
 
 export default function LoginTitle() {
   return (

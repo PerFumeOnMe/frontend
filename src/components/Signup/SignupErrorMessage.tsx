@@ -1,4 +1,6 @@
-export default function SignupErrorMessage({ message }: { message: string }) {
+import type { SignupErrorMessageProps  } from "../../types/Login/signupTypes";
+
+export default function SignupErrorMessage({ message }:  SignupErrorMessageProps ) {
   if (!message) return null;
   return (
     <div className="px-4 w-full mx-auto">

@@ -59,7 +59,7 @@ const MainPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white font-[Pretendard]">
             <Banner />
             <div className="relative -mt-[16px] rounded-t-[16px] bg-white pt-[16px]">
                 <h2 className="text-title3 mb-[7px] px-[16px]">캐실님이 좋아할만한 향수</h2>
