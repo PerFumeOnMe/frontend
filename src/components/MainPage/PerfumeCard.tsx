@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Perfume } from "../../types/perfume";
-import { addToFavorites } from "../../apis/Fragrance";
+import { addToFavorites, removeFromFavorites } from "../../apis/Fragrance";
 import heartFilledImage from "../../assets/MainPage/heart_filled.png";
 import heartEmptyImage from "../../assets/MainPage/heart_empty.png";
 
@@ -22,8 +22,12 @@ const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
                 console.error('Failed to add to favorites:', error);
             }
         }else {
-            // 좋아요 취소 로직 추가
-            alert("좋아요 취소");
+            try {
+                await removeFromFavorites(perfume.id);
+                setIsLiked(false);
+            } catch (error) {
+                console.error('Failed to remove from favorites:', error);
+            }
         }
     };
 

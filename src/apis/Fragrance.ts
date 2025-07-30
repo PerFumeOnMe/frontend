@@ -36,3 +36,15 @@ export const addToFavorites = async (fragranceId: number): Promise<FavoriteRespo
         throw error;
     }
 };
+
+export const removeFromFavorites = async (fragranceId: number): Promise<FavoriteResponse> => {
+    try {
+        const res = await axiosInstance.delete<FavoriteResponse>(
+            `/fragrances/${fragranceId}/favorites`
+        );
+        return res.data;
+    } catch (error) {
+        console.error('Failed to remove from favorites:', error);
+        throw error;
+    }
+}

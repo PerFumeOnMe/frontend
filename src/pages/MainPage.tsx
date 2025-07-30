@@ -24,7 +24,7 @@ const MainPage = () => {
                 const trendingData = await getTrending();
                 setTrending(trendingData.result);
             } catch (error) {
-                console.error('Failed to fetch MD choice:', error);
+                console.error('Failed to fetch:', error);
             }
         };
         fetchData();
