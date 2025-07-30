@@ -3,21 +3,17 @@
   max-width: 100% !important;
   background: transparent !important;
   border: none !important;
-  margin-top: 24px;
-}
-
-.react-calendar__navigation {
-  margin-bottom: 8px;
+  margin-top:  1.5rem; 
 }
 
 .react-calendar__navigation button {
-  width: 12px;
-  height: 24px;
-  margin-top: 4px;
+  width: 0.75rem;
+  height:  1.5rem;
+  margin-top:  0.25rem;
   opacity: 1;
   color: white;
   background: none;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1;
 }
 
@@ -35,11 +31,8 @@
 
 .react-calendar__navigation__label {
   font-family: 'Pretendard', sans-serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 20px;
+  font-size: 1.125rem; 
   line-height: 150%;
-  letter-spacing: 0;
   text-align: center;
   color: white;
 }
@@ -52,15 +45,15 @@
   font-family: 'Pretendard', sans-serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 150%;
   letter-spacing: 0;
-  margin-bottom: 12px;
-  padding: 0 16px;
+  margin-bottom: 0.75rem;
+  padding: 0 1rem;
 }
 
 .react-calendar__month-view__days {
-  padding: 0 16px;
+  padding: 0 1rem;
   row-gap: 9px;
 }
 
@@ -88,14 +81,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 36px;
-  height: 36px;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: 50%;
   background: #FBFBFB66;
   font-family: 'Pretendard', sans-serif;
   font-weight: 500;
   font-style: normal;
-  font-size: 14px;
+  font-size:  0.875rem;
   line-height: 150%;
   letter-spacing: -0.02em;
   text-align: center;

@@ -2,7 +2,6 @@ import moment from "moment";
 import "moment/dist/locale/ko";
 import { IoAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-
 moment.locale("ko");
 
 interface CalendarDiaryProps {
@@ -31,7 +30,7 @@ export default function CalendarDiary({ selectedDate, diaryData }: CalendarDiary
         diaryList.map((diary, idx) => (
           <div
             key={idx}
-            className="bg-main-10 rounded-lg h-20 px-4 flex flex-col justify-center mb-3 mt-3"
+            className="bg-main-10 rounded-lg h-20 px-4 flex flex-col justify-center my-3"
           >
             <p className="text-body3 text-grayscale-1000">{diary.fragranceName}</p>
             <p className="text-body4 text-grayscale-1000 mt-1">{diary.content}</p>
