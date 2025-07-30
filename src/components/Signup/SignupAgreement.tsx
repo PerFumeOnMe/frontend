@@ -1,20 +1,14 @@
 import SignupDropdown from "./SignupDropdown";
-import upIcon from "../../assets/Login/up_shape.svg";
-import downIcon from "../../assets/Login/down_shape.svg";
-
-type Props = {
-  isAgreed: boolean;
-  setIsAgreed: (val: boolean) => void;
-  isDropdownOpen: boolean;
-  setIsDropdownOpen: (val: boolean) => void;
-};
+import upIcon from "../../assets/Login/up_shape.png";
+import downIcon from "../../assets/Login/down_shape.png";
+import type { SignupAgreementProps  } from "../../types/Login/signupTypes";
 
 export default function SignupAgreement({
   isAgreed,
   setIsAgreed,
   isDropdownOpen,
   setIsDropdownOpen,
-}: Props) {
+}: SignupAgreementProps ) {
   return (
     <section className="w-full px-4 mx-auto ">
       <div className="flex items-center justify-between">

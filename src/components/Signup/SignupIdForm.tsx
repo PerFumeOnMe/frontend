@@ -4,8 +4,9 @@ import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import SignupErrorMessage from "./SignupErrorMessage";
 import BottomButton from "../common/BottomButton";
+import type { StepNavigationProps } from "../../types/Login/signupTypes";
 
-export default function SignupIdForm({ onNext, onBack  }: { onNext: () => void ; onBack: () => void }) {
+export default function SignupIdForm({ onNext, onBack  }: StepNavigationProps ) {
   const [inputId, setInputId] = useState("");
   const [error, setError] = useState("");
   const [isValid, setIsValid] = useState(false);
