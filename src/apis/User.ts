@@ -12,7 +12,7 @@ export const postSignin = async ( body : RequestSigninDto ):Promise<SigninRespon
     const res = await axiosInstance.post("/auth/login",body,);
     const data = res.data.result
     const accessToken = res.headers['authorization']?.split(" ")[1]
-
+    
     return {
         accessToken,
         data
