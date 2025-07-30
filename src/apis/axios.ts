@@ -9,11 +9,17 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     (config) => {
         // localStorage에서 현재 토큰 값을 가져옴
-        const accessToken = localStorage.getItem(LOCAL_STORAGE_KEY.accessToken);
+        const rawAccessToken = localStorage.getItem(LOCAL_STORAGE_KEY.accessToken);
+
+        // ✅ 따옴표로 감싸져있으므로 이를 제거
+        const accessToken = rawAccessToken?.replace(/^"(.*)"$/, '$1');
         
         // 토큰이 존재할 때만 Authorization 헤더 추가
         if (accessToken) {
             config.headers.Authorization = `Bearer ${accessToken}`;
+            console.log("✅ Authorization 헤더 추가됨:", config.headers.Authorization);
+        } else {
+            console.warn("⚠️ accessToken 없음, Authorization 헤더 미포함");
         }
         
         // 기본 헤더 설정
