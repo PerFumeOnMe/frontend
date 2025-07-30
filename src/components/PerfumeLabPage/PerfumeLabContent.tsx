@@ -6,7 +6,7 @@ import Header from "./Header";
 import type { Note } from "../../types/note";
 import { noteOptions } from "../../types/noteOptions";
 import perfumeImage from "../../assets/PerfumeLab/perfume.png";
-import PerfumeDisplay from "./PerfumeDisplay";
+import PerfumeDisplay from "./Result/PerfumeResultDisplay";
 import NoteSelectionSection from "./NoteSelectionSection";
 import ActionButton from "./ActionButton";
 import bgImage from "../../assets/PerfumeLab/PerfumeLabBgImage.png";

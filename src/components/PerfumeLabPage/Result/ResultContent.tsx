@@ -1,8 +1,14 @@
+import PerfumeDisplay from "./PerfumeResultDisplay";
 import ContentBox from "./ContentBox";
+import perfumeImage from "../../../assets/PerfumeLab/perfume.png";
 
 const ResultContent = () => {
   return (
     <div className="w-full gap-6 flex flex-col items-center">
+      <div className="w-full  bg-[#FBFBFB]/30 rounded-3xl p-5 text-center border border-white shadow-[0_-10px_10px_-3px_rgba(0,0,0,0.02),0_10px_10px_-3px_rgba(0,0,0,0.02)]">
+        <PerfumeDisplay perfumeImage={perfumeImage} />
+      </div>
+
       <ContentBox
         title="🖼️ 시각적 키워드 요약"
         content="#상큼한첫인상 #감성적중심 
@@ -33,7 +39,7 @@ const ResultContent = () => {
                 하지만 곧 섬세하고 부드러운 내면이 드러나고
                 마지막엔 단단하고 흔들림 없는 중심이 느껴집니다."
         caption="당신은 사람들에게
-                “기분 좋은 여운이 오래 남는 사람”으로 기억됩니다."
+                기분 좋은 여운이 오래 남는 사람으로 기억됩니다."
       />
       <ContentBox
         title="🎁 당신에게 어울리는 향수 추천"

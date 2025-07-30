@@ -1,4 +1,8 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import RootLayout from "./layout/root-layout.tsx";
 import MainPage from "./pages/MainPage.tsx";
@@ -23,6 +27,7 @@ import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
 import PerfumeDetailPage from "./pages/PerfumeDetailPage.tsx";
 import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx";
+import PerfumeLabLayout from "./layout/perfumelab-layout.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -52,22 +57,22 @@ const router = createBrowserRouter([
         errorElement: <NotFoundPage />,
         children: [
           { index: true, element: <Navigate to="/Main" replace /> }, // ✅ 리다이렉트 추가
-          { path: 'Main', element: <MainPage /> },
-          { path: 'PBTI', element: <PBTIMainPage /> },
-          { path: 'Diary', element: <DiaryPage /> },
-          { path: 'MyPage', element: <MyPage /> },
-          { path: 'choose-path', element: <ChoosePathPage /> },
-          { path: 'filter', element: <FilterPage /> },
-          { 
-            path: 'PBTI',
+          { path: "Main", element: <MainPage /> },
+          { path: "PBTI", element: <PBTIMainPage /> },
+          { path: "Diary", element: <DiaryPage /> },
+          { path: "MyPage", element: <MyPage /> },
+          { path: "choose-path", element: <ChoosePathPage /> },
+          { path: "filter", element: <FilterPage /> },
+          {
+            path: "PBTI",
             children: [
               { index: true, element: <PBTIMainPage /> },
               { path: "question", element: <PBTIQuestionPage /> },
               { path: "result", element: <PBTIResultPage /> },
             ],
           },
-          { path: 'all-perfume', element: <AllPerfumePage /> }
-        ]
+          { path: "all-perfume", element: <AllPerfumePage /> },
+        ],
       },
       {
         path: "/image-keyword",
@@ -83,8 +88,8 @@ const router = createBrowserRouter([
           {
             path: "result",
             element: <ImageKeywordResultPage />,
-          }
-        ]
+          },
+        ],
       },
       {
         path: "/Chatbot",
@@ -92,6 +97,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/lab",
+        element: <PerfumeLabLayout />,
         children: [
           {
             index: true,

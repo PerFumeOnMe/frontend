@@ -24,10 +24,6 @@ const LabResultPage = () => {
           당신만의 향을 퍼퓨온미를 통해 담아 보세요.
         </p>
       </header>
-
-      {/* 향수공방 결과 이미지 */}
-      <div>향수공방 결과 넣기</div>
-
       {/* 결과 요약 */}
       <ResultContent />
 
