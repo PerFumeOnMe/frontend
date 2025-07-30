@@ -4,9 +4,9 @@ import RootLayout from "./layout/root-layout.tsx";
 import MainPage from "./pages/MainPage.tsx";
 import LoginPage from "./pages/Login/LoginPage.tsx";
 import SignupPage from './pages/Login/SignupPage.tsx';
-import MyPage from './pages/MyPage.tsx';
+import MyPage from './pages/MyPage/MyPage.tsx';
 import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
-import DiaryPage from './pages/DiaryPage.tsx';
+import DiaryPage from "./pages/DiaryPage.tsx";
 import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
 import PerfumLabPage from "./pages/perfumeLab/PerfumeLabPage.tsx";
@@ -21,7 +21,9 @@ import AllPerfumePage from "./pages/AllPerfumePage.tsx";
 import OnboardingRouter from "./pages/Onboarding/index.tsx";
 import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
+import PerfumeDetailPage from "./pages/PerfumeDetailPage.tsx";
 import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx";
+import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -54,16 +56,21 @@ const router = createBrowserRouter([
           { path: 'Main', element: <MainPage /> },
           { path: 'PBTI', element: <PBTIMainPage /> },
           { path: 'Diary', element: <DiaryPage /> },
-          { path: 'MyPage', element: <MyPage /> },
+          { path: 'MyPage',
+            children: [
+              { index: true, element: <MyPage /> },
+              { path: "EditScentPreferences", element : <EditScentPreferences/>}
+            ]
+          },
           { path: 'choose-path', element: <ChoosePathPage /> },
           { path: 'filter', element: <FilterPage /> },
           { 
             path: 'PBTI',
             children: [
               { index: true, element: <PBTIMainPage /> },
-              { path: 'question', element: <PBTIQuestionPage /> },
-              { path: 'result', element: <PBTIResultPage />}
-            ]
+              { path: "question", element: <PBTIQuestionPage /> },
+              { path: "result", element: <PBTIResultPage /> },
+            ],
           },
           { path: 'all-perfume', element: <AllPerfumePage /> }
         ]
@@ -105,6 +112,10 @@ const router = createBrowserRouter([
             element: <LabResultPage />,
           },
         ],
+      },
+      {
+        path: "/perfume/detail",
+        element: <PerfumeDetailPage />,
       },
     ],
   },
