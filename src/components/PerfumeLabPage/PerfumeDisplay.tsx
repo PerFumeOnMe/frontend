@@ -1,27 +1,20 @@
+import React from "react";
+import { usePerfumeLab } from "../../contexts/PerfumeLabContext";
 import { noteOptions } from "../../types/noteOptions";
 import type { Note } from "../../types/note";
 
-interface SelectedNotes {
-  베이스: { id: string; description: string };
-  미들: { id: string; description: string };
-  탑: { id: string; description: string };
-}
-
 interface PerfumeDisplayProps {
-  selectedNotes: SelectedNotes;
   perfumeImage: string;
 }
 
-// noteOptions에서 이미지 정보를 가져오는 헬퍼 함수
 const getNoteImage = (noteType: Note, noteId: string): string | undefined => {
   const note = noteOptions[noteType]?.find((option) => option.id === noteId);
   return note?.img;
 };
 
-const PerfumeDisplay: React.FC<PerfumeDisplayProps> = ({
-  selectedNotes,
-  perfumeImage,
-}) => {
+const PerfumeDisplay: React.FC<PerfumeDisplayProps> = ({ perfumeImage }) => {
+  const { selectedNotes } = usePerfumeLab();
+
   const hasBaseNote = selectedNotes.베이스?.id;
   const hasMiddleNote = selectedNotes.미들?.id;
   const hasTopNote = selectedNotes.탑?.id;
