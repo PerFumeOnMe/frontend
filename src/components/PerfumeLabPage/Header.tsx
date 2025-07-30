@@ -1,4 +1,4 @@
-import { SlArrowLeft } from "react-icons/sl";
+import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -10,9 +10,9 @@ const Header = () => {
         onClick={() => navigate("/")}
         className="absolute left-4 top-1/2 -translate-y-1/2"
       >
-        <SlArrowLeft className="w-5 h-5" />
+        <RxCross2 className="w-6 h-6 text-grayscale-500" />
       </button>
-      <h1 className="text-title3 text-grayscale-1000 text-center w-full">
+      <h1 className="text-title3 text-grayscale-200 text-center w-full">
         향수공방
       </h1>
     </div>

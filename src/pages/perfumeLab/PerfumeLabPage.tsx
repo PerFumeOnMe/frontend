@@ -5,6 +5,7 @@ import { useState } from "react";
 import type { Note } from "../../types/note";
 import { noteOptions } from "../../types/noteOptions";
 import perfumeImage from "../../assets/PerfumeLab/perfume.png";
+import bgImage from "../../assets/PerfumeLab/PerfumeLabBgImage.png";
 import Header from "../../components/PerfumeLabPage/Header";
 import PerfumeDisplay from "../../components/PerfumeLabPage/PerfumeDisplay";
 import NoteSelectionSection from "../../components/PerfumeLabPage/NoteSelectionSection";
@@ -95,18 +96,24 @@ const PerfumLabPage = () => {
   };
 
   return (
-    <div className="min-w-[375px] w-120 bg-gradient-to-b from-[#F4EEFA] to-[#FBFBFB] flex flex-col items-center">
+    <div
+      className="min-w-[375px] w-120 bg-white flex flex-col items-center"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-white/45 via-transparent to-white/20"></div>
       <Header />
 
       <div className="w-full flex-1 flex flex-col px-4 gap-10">
         {/* 인트로 텍스트 */}
         <div className="w-full flex flex-col gap-1">
-          <h1 className="text-title3 text-grayscale-1000">
-            이미지와 맞는 향수를 만들어봅시다.
+          <h1 className="text-title3 text-grayscale-200">
+            나와 맞는 향수를 만들어봅시다.
           </h1>
-          <p className="text-caption1 text-grayscale-700">
-            향수를 노트로 나누는 건, 시간이 지날수록 향이 변해가는 <br />{" "}
-            이야기를 담기 위해서예요.
+          <p className="text-caption1 text-grayscale-300">
+            향수를 노트로 나누는 건, 시간이 지날수록 향이 변해가는 이야기를{" "}
+            <br /> 담기 위해서예요.
           </p>
         </div>
 
