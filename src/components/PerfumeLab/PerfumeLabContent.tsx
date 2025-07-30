@@ -10,6 +10,7 @@ import PerfumeDisplay from "./Result/PerfumeResultDisplay";
 import NoteSelectionSection from "./NoteSelectionSection";
 import ActionButton from "./ActionButton";
 import bgImage from "../../assets/PerfumeLab/PerfumeLabBgImage.png";
+import PerfumeMakingDisplay from "./PerfumeMakingDisplay";
 
 const PerfumeLabContent = () => {
   const { modal, modalTitle, handleModalClose, handleNoteSelected } =
@@ -38,7 +39,7 @@ const PerfumeLabContent = () => {
         </div>
 
         {/* 향수 디스플레이 */}
-        <PerfumeDisplay perfumeImage={perfumeImage} />
+        <PerfumeMakingDisplay perfumeImage={perfumeImage} />
 
         {/* 하단 카드 영역 - 절대 위치로 화면 전체 너비 사용 */}
         <div className="min-w-[375px] absolute bottom-0 left-0 right-0 z-10 flex justify-center">
