@@ -20,6 +20,7 @@ const PBTIResultPage: React.FC = () => {
   console.log("넘어온 result:", result);
 
   const recommendation = result.recommendation;
+  const perfumeRecommends = result.perfumeRecommend;
   const keywords = result.keywords;
   const perfumeStyle = result.perfumeStyle;
   const scentPoint = result.scentPoint
@@ -28,6 +29,7 @@ const PBTIResultPage: React.FC = () => {
   console.log("추천",recommendation)
   console.log("키워드",keywords)
   console.log("향수스타일",perfumeStyle)
+  console.log("향수 추천", perfumeRecommends)
   console.log("향수 포인트",scentPoint)
   console.log("요약", summary)
 
@@ -40,12 +42,17 @@ const PBTIResultPage: React.FC = () => {
   };
 
   return (
-    <div className="min-w-[375px] h-full p-3 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
+    <div className="min-w-[375px] m-h-screen p-3 pb-22 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
       <PBTIResultHeader />
-      <PBTIAnalysisSection keywordArray={keywords} />
-      <PBTIPerfumeStyleSection />
-      <PBTIPerfumeTypeSection />
-      <PBTISummarySection />
+      <PBTIAnalysisSection 
+        keywordArrayData={keywords}
+      />
+      <PBTIPerfumeStyleSection
+        description={perfumeStyle.description}
+        notes={perfumeStyle.notes}
+      />
+      <PBTIPerfumeTypeSection data={scentPoint} />
+      <PBTISummarySection summary={summary}/>
       <PBTIRecommendedPerfumesSection />
       <PBTIActionButtons onSaveClick={handleSaveClick} />
 

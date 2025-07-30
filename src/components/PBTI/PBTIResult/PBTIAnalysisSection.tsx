@@ -25,18 +25,22 @@ interface keywordInterface {
 }
 
 interface PBTIAnalysisSectionProps {
-  keywordArray: keywordInterface[];
+  keywordArrayData: keywordInterface[];
 }
 
-const PBTIAnalysisSection: React.FC<PBTIAnalysisSectionProps> = (keywordArray) => (
+const PBTIAnalysisSection: React.FC<PBTIAnalysisSectionProps> = ({ keywordArrayData }) => {
+
+  return(
   <div className="w-full flex flex-col justify-center items-center bg-[#FBFBFB] rounded-2xl p-5 shadow mb-6">
     <h2 className="text-title4 text-[18px] font-[600] mb-2">이렇게 해석했어요.</h2>
     <div className="flex flex-col justify-center items-center gap-2 w-full">
-      {keywordArray.map((item, index) => (
-        <PBTIAnalysis key={index} question={item.question} analysis={item.analysis} />
+      {keywordArrayData.map((item, index) => (
+        <PBTIAnalysis key={index} question={item.keyword} analysis={item.keywordDescription} />
       ))}
     </div>
   </div>
-);
+  )
+}
+  
 
 export default PBTIAnalysisSection;
