@@ -1,5 +1,5 @@
 import { axiosInstance } from '../apis/axios';
-import type { MdChoiceResponse, TrendingResponse } from '../types/apis/Fragrance';
+import type { MdChoiceResponse, TrendingResponse, FavoriteResponse } from '../types/apis/Fragrance';
 
 export const getMdChoice = async (): Promise<MdChoiceResponse> => {
     try {
@@ -24,3 +24,15 @@ export const getTrending = async (): Promise<TrendingResponse> => {
         throw error;
     }
 }
+
+export const addToFavorites = async (fragranceId: number): Promise<FavoriteResponse> => {
+    try {
+        const res = await axiosInstance.post<FavoriteResponse>(
+            `/fragrances/${fragranceId}/favorites`
+        );
+        return res.data;
+    } catch (error) {
+        console.error('Failed to add to favorites:', error);
+        throw error;
+    }
+};

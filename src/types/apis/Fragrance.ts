@@ -10,3 +10,7 @@ export type ResponseMdChoiceDto = {
 export type MdChoiceResponse = CommonResponse<ResponseMdChoiceDto>;
 
 export type TrendingResponse = CommonResponse<Perfume[]>;
+
+export type FavoriteResponse = CommonResponse<{
+    fragranceId: number;
+}>;

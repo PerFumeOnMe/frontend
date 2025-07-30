@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Perfume } from "../../types/perfume";
+import { addToFavorites } from "../../apis/Fragrance";
 import heartFilledImage from "../../assets/MainPage/heart_filled.png";
 import heartEmptyImage from "../../assets/MainPage/heart_empty.png";
 
@@ -11,9 +12,19 @@ const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
     const { imageUrl, brand, name, minPrice, liked: initialIsLiked } = perfume;
     const [isLiked, setIsLiked] = useState(initialIsLiked);
     
-    const handleLikeClick = (e: React.MouseEvent) => {
+    const handleLikeClick = async (e: React.MouseEvent) => {
         e.preventDefault(); // 버블링 방지
-        setIsLiked(prev => !prev);
+        if (!isLiked) {
+            try {
+                await addToFavorites(perfume.id);
+                setIsLiked(true);
+            } catch (error) {
+                console.error('Failed to add to favorites:', error);
+            }
+        }else {
+            // 좋아요 취소 로직 추가
+            alert("좋아요 취소");
+        }
     };
 
     return (
