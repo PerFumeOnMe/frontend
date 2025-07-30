@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import ResultContent from "../../components/PerfumeLabPage/Result/ResultContent";
+import ResultContent from "../../components/PerfumeLab/Result/ResultContent";
 import ResultButton from "../../components/ImageKeyword/Result/ResultButton";
 import SaveNameModal from "../../components/ImageKeyword/Result/SaveNameModal";
 import SaveCompleteModal from "../../components/ImageKeyword/Result/SaveCompleteModal";

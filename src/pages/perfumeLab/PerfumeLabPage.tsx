@@ -1,4 +1,4 @@
-import PerfumeLabContent from "../../components/PerfumeLabPage/PerfumeLabContent";
+import PerfumeLabContent from "../../components/PerfumeLab/PerfumeLabContent";
 
 const PerfumeLabPage = () => {
   return <PerfumeLabContent />;
