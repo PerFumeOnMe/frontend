@@ -6,7 +6,7 @@ import LoginPage from "./pages/Login/LoginPage.tsx";
 import SignupPage from './pages/Login/SignupPage.tsx';
 import MyPage from './pages/MyPage/MyPage.tsx';
 import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
-import ProtectedRoute from "./components/common/ProtectedRoute.tsx";
+import ProtectedRoute from "./layout/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
 import PerfumLabPage from "./pages/perfumeLab/PerfumeLabPage.tsx";
 import LabLoadingPage from "./pages/perfumeLab/LabLoadingPage.tsx";
@@ -25,6 +25,7 @@ import DiaryWritePage from "./pages/Diary/DiaryWritePage.tsx";
 import PerfumeDetailPage from "./pages/PerfumeDetailPage.tsx";
 import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx";
 import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -125,9 +126,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="w-full h-screen bg-amber-200 flex justify-center">
-      <RouterProvider router={router} />
-    </div>
+    <AuthProvider>
+      <div className="w-full h-screen bg-amber-200 flex justify-center">
+        <RouterProvider router={router} />
+      </div>
+    </AuthProvider>
   );
 }
 
