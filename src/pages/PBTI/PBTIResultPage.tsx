@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from "react-router-dom";
 import PBTISaveModal from '../../components/PBTI/PBTIResult/PBTISaveModal';
 import PBTIResultHeader from '../../components/PBTI/PBTIResult/PBTIResultHeader';
 import PBTIAnalysisSection from '../../components/PBTI/PBTIResult/PBTIAnalysisSection';
@@ -12,6 +13,23 @@ const PBTIResultPage: React.FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalStep, setModalStep] = useState<1 | 2>(1);
   const [perfumeName, setPerfumeName] = useState("");
+  const location = useLocation();
+  const { answers, result } = location.state || {};
+
+  console.log("넘어온 answers:", answers);
+  console.log("넘어온 result:", result);
+
+  const recommendation = result.recommendation;
+  const keywords = result.keywords;
+  const perfumeStyle = result.perfumeStyle;
+  const scentPoint = result.scentPoint
+  const summary = result.summary
+
+  console.log("추천",recommendation)
+  console.log("키워드",keywords)
+  console.log("향수스타일",perfumeStyle)
+  console.log("향수 포인트",scentPoint)
+  console.log("요약", summary)
 
   const handleSaveClick = () => setModalOpen(true);
   const handleSaveConfirm = () => setModalStep(2);
@@ -24,7 +42,7 @@ const PBTIResultPage: React.FC = () => {
   return (
     <div className="min-w-[375px] h-full p-3 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
       <PBTIResultHeader />
-      <PBTIAnalysisSection />
+      <PBTIAnalysisSection keywordArray={keywords} />
       <PBTIPerfumeStyleSection />
       <PBTIPerfumeTypeSection />
       <PBTISummarySection />

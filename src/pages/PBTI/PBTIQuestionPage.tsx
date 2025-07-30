@@ -24,16 +24,25 @@ const PBTIQuestionPage: React.FC = () => {
       setCurrentIdx(currentIdx + 1);
     } else {
       // 마지막 질문 완료 - API 전송
+      console.log(updatedAnswers)
       setIsSubmitting(true);
       
       try {
-        // API 요청 body 구성 (RequestPbtiQuestion 타입에 맞게)
+        // API 요청 body 구성
         const requestBody: RequestPbtiQuestion = {
-          answers: updatedAnswers
-          // API 타입에 따라 다른 필드들이 필요할 수 있음
+            qOne: updatedAnswers[0].toString(),
+            qTwo: updatedAnswers[1].toString(),
+            qThree: updatedAnswers[2].toString(),
+            qFour: updatedAnswers[3].toString(),
+            qFive: updatedAnswers[4].toString(),
+            qSix: updatedAnswers[5].toString(),
+            qSeven: updatedAnswers[6].toString(),
+            qEight: updatedAnswers[7].toString(),
         };
 
         const result = await postPBTIResult(requestBody);
+
+        console.log("조회 결과", result)
         
         // 결과와 함께 결과 페이지로 이동
         navigate('/PBTI/result', { 
