@@ -6,7 +6,6 @@ import LoginPage from "./pages/Login/LoginPage.tsx";
 import SignupPage from './pages/Login/SignupPage.tsx';
 import MyPage from './pages/MyPage/MyPage.tsx';
 import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
-import DiaryPage from "./pages/DiaryPage.tsx";
 import ProtectedRoute from "./layout/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
 import PerfumLabPage from "./pages/perfumeLab/PerfumeLabPage.tsx";
@@ -21,6 +20,8 @@ import AllPerfumePage from "./pages/AllPerfumePage.tsx";
 import OnboardingRouter from "./pages/Onboarding/index.tsx";
 import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
+import DiaryPage from "./pages/Diary/DiaryPage.tsx";
+import DiaryWritePage from "./pages/Diary/DiaryWritePage.tsx"; 
 import PerfumeDetailPage from "./pages/PerfumeDetailPage.tsx";
 import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx";
 import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
           { path: 'Main', element: <MainPage /> },
           { path: 'PBTI', element: <PBTIMainPage /> },
           { path: 'Diary', element: <DiaryPage /> },
+          { path: 'Diary/new', element: <DiaryWritePage />},
           { path: 'MyPage',
             children: [
               { index: true, element: <MyPage /> },

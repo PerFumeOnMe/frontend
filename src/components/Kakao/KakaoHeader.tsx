@@ -4,7 +4,7 @@ export default function KakaoHeader() {
       <div className="w-14 h-13.5 bg-[#C5C5C57D]" />
       <div className="flex flex-col justify-center">
         <span className="text-title5">퍼퓨온미</span>
-        <span className="text-title6 text-[#00000080]">퍼퓨온미</span>
+        <span className="text-title6 text-black-50">퍼퓨온미</span>
       </div>
     </header>
   );

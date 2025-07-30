@@ -1,16 +1,11 @@
-interface InputProps {
-  type?: string;
-  placeholder?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import type { SignupInputProps } from "../../types/Login/signupTypes";
 
 export default function SignupInput({
   type = "text",
   placeholder,
   value,
   onChange,
-}: InputProps) {
+}: SignupInputProps) {
   const isFilled = value.trim().length > 0;
 
   return (
