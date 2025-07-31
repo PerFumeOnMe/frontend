@@ -3,6 +3,7 @@ import OnboardingLayout from "../../components/Onboarding/OnboardingLayout";
 import BottomButton from "../../components/common/BottomButton";
 import OnboardingProgress from "../../components/Onboarding/OnboardingProgress";
 import PageHeader from "../../components/common/PageHeader";
+import { FiPlus } from "react-icons/fi";
 
 export default function OnboardingStep1({ onNext}: { onNext: () => void }) {
   const [nickname, setNickname] = useState("");
@@ -23,9 +24,9 @@ export default function OnboardingStep1({ onNext}: { onNext: () => void }) {
         <div className="flex items-center gap-4 mb-10">
           <div className="relative">
             <div className="w-20 h-20 rounded-full bg-grayscale-300" />
-            <button className="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-main-500 text-white text-sm flex items-center justify-center">
-              +
-            </button>
+              <button className="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-main-500 text-white text-sm flex items-center justify-center">
+                <FiPlus  className="w-4 h-4" />
+              </button>
           </div>
 
           <div className="flex-1">
