@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Slider } from "./Slider";
 import { useNavigate } from "react-router-dom";
+import { usePerfumeLab } from "../../contexts/PerfumeLabContext";
 
 const VolumeSelectionContent = () => {
   const [topNote, setTopNote] = useState(0);
@@ -8,15 +9,33 @@ const VolumeSelectionContent = () => {
   const [baseNote, setBaseNote] = useState(0);
 
   const navigate = useNavigate();
+  const { handleVolumeSelected, handleResultView } = usePerfumeLab();
 
   // 이벤트 전파 차단 헬퍼
   const stop = (e: React.SyntheticEvent) => e.stopPropagation();
 
-  // 슬라이더 핸들러 – state만 수정
+  // 슬라이더 핸들러 – state와 context 둘 다 업데이트
   const handleNoteChange = (type: "top" | "middle" | "base", value: number) => {
-    if (type === "top") setTopNote(value);
-    if (type === "middle") setMiddleNote(value);
-    if (type === "base") setBaseNote(value);
+    if (type === "top") {
+      setTopNote(value);
+      handleVolumeSelected("탑", value);
+    }
+    if (type === "middle") {
+      setMiddleNote(value);
+      handleVolumeSelected("미들", value);
+    }
+    if (type === "base") {
+      setBaseNote(value);
+      handleVolumeSelected("베이스", value);
+    }
+  };
+
+  // 결과보기 버튼 클릭 시
+  const handleSubmit = () => {
+    // Context에 데이터 저장
+    handleResultView();
+    // 로딩 페이지로 이동
+    navigate("/lab/loading");
   };
 
   return (
@@ -35,7 +54,6 @@ const VolumeSelectionContent = () => {
       </div>
 
       {/* 슬라이더 영역 */}
-      {/* 추후에 실린더 입력값의 총합이 10을 넘으면 결과를 보지 못하도록 수정할 것! */}
       <div className="space-y-6">
         <div className="flex items-center justify-between gap-4 mb-4">
           <h1 className="text-xl font-semibold w-28">Top Note</h1>
@@ -72,7 +90,7 @@ const VolumeSelectionContent = () => {
       {/* 확인 버튼 */}
       <button
         className="w-full py-3 rounded-2xl bg-main-500 text-grayscale-200"
-        onClick={() => navigate("/lab/loading")}
+        onClick={handleSubmit}
       >
         결과보기
       </button>

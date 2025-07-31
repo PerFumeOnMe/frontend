@@ -45,16 +45,26 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
             const { accessToken, data } = await postSignin(signinData);
 
             if (data){
-                const newAccessToken : string = accessToken
-                const newRefreshToken : string = data.refreshToken;
+                // 원시 토큰 값
+                const rawAccessToken: string = accessToken;
+                const rawRefreshToken: string = data.refreshToken;
 
-                setAccessTokenInStorage(newAccessToken);
-                setRefreshTokenInStorage(newRefreshToken);
+                console.log("typeof token:", typeof rawAccessToken); // string이어야 함
+                console.log("token:", rawAccessToken); // 🔍 여기
 
-                setAccessToken(newAccessToken);
-                setRefreshToken(newRefreshToken);
-                alert("로그인 성공")
-                window.location.href = "/"
+                // ✅ 양쪽 쌍따옴표 감싸져 있으면 제거
+                const cleanedAccessToken = rawAccessToken.replace(/^"(.*)"$/, '$1');
+                const cleanedRefreshToken = rawRefreshToken.replace(/^"(.*)"$/, '$1');
+
+                // ✅ 저장 및 상태 업데이트
+                setAccessTokenInStorage(cleanedAccessToken);
+                setRefreshTokenInStorage(cleanedRefreshToken);
+
+                setAccessToken(cleanedAccessToken);
+                setRefreshToken(cleanedRefreshToken);
+
+                alert("로그인 성공");
+                window.location.href = "/";
             }
         } catch (error){
             console.error("로그인 오류",error)
