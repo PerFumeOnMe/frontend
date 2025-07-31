@@ -3,14 +3,12 @@ import Navbar from "../components/common/Navbar.tsx";
 
 const RootLayout = () => {
     const location = useLocation();
-    const hideNavbarPaths = ['/image-keyword', '/choose-path', '/all-perfume', '/filter'];
+    const hideNavbarPaths = ['/image-keyword', '/choose-path', '/all-perfume', '/filter','/diary/new'];
     const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
 
     return (
         <div className="min-w-[375px] w-120 h-screen bg-sky-300 items-center relative">
-            <div className={shouldShowNavbar ? "pb-15" : ""}>
-                <Outlet />
-            </div>
+            <Outlet />
             {shouldShowNavbar && <Navbar />}
         </div>
     );

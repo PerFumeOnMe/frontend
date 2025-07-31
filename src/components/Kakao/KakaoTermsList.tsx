@@ -1,22 +1,12 @@
-type TermsItem = {
-  id: number;
-  label: string;
-  hasLink?: boolean;
-};
+import type { KakaoTermsListProps } from "../../types/Login/kakaoSignupTypes";
 
-type Props = {
-  termsItems: TermsItem[];
-  isAllChecked: boolean;
-  onToggle: () => void;
-};
-
-export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: Props) {
+export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: KakaoTermsListProps,TermsItem) {
   return (
     <section className="pt-6 space-y-2 mx-auto">
       <div className="flex items-start justify-between px-2 cursor-pointer" onClick={onToggle}>
         <div className="flex items-start gap-1.5">
           <svg
-            className={`w-4 h-4 ${isAllChecked ? "text-[#FEE500]" : "text-[#C5C5C5]"}`}
+            className={`w-4 h-4 ${isAllChecked ? "text-[#FEE500]" : "text-grayscale-550"}`}
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -24,7 +14,7 @@ export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: P
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
-          <span className=" text-[#838383] text-title10">
+          <span className=" text-grayscale-550 text-title10">
             [필수] 카카오 개인정보 제3자 제공 동의
           </span>
         </div>
@@ -40,7 +30,7 @@ export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: P
         {["닉네임", "계정", "전화번호", "별명"].map((label, index, arr) => (
           <div
             key={label}
-            className={`flex items-center gap-1.5 min-h-5 text-title10 text-[#838383] ${
+            className={`flex items-center gap-1.5 min-h-5 text-title10 text-grayscale-550 ${
               index === arr.length - 1 ? "mb-12.5" : ""
             }`}
           >

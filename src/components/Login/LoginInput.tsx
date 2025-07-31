@@ -1,10 +1,4 @@
-type LoginInputProps = {
-  type: string;
-  icon: string;
-  placeholder: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import type { LoginInputProps } from "../../types/Login/loginTypes";
 
 export default function LoginInput({ type, placeholder, value, onChange }: LoginInputProps) {
   return (

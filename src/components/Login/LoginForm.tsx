@@ -1,4 +1,5 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginTitle from "./LoginTitle";
 import LoginInput from "./LoginInput";
@@ -8,27 +9,60 @@ import Divider from "./Divider";
 import SocialLogin from "./SocialLogin";
 import SignupGuide from "./SignupGuide";
 import LoginBg from "../../assets/Login/LoginBg.png";
+import { postSignin } from "../../apis/User";
+import { useAuth } from "../../context/AuthContext";
 
 export default function LoginForm() {
+  const { login } = useAuth();
   const navigate = useNavigate();
-  const [inputId, setInputId] = useState<string>("");
-  const [inputPassword, setInputPassword] = useState<string>("");
+  const [inputId, setInputId] = useState<string>("umc123");
+  const [inputPassword, setInputPassword] = useState<string>("asdf1234");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleLoginSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      if (inputId !== "UMC"){
-        setErrorMessage("등록되지 않은 아이디입니다.");
-        return;
-      } else if (inputPassword !== "1234"){
-        setErrorMessage("비밀번호가 올바르지 않습니다.");
-        return
-      } else {
-        setErrorMessage("");
-        localStorage.setItem("isLoggedIn", "true");
-        navigate("/", { replace: true });
-      };
+    
+    try {
+      await login({ loginId : inputId, password : inputPassword});
+      setErrorMessage("");
+      navigate("/", { replace: true });
+    } catch (error) {
+      alert("로그인 실패!")
     }
+    
+
+    /*
+    try {
+      const { accessToken, data } = await postSignin({ loginId : inputId, password : inputPassword});
+      const refreshToekn = data.refreshToken
+      
+      console.log("해더 엑세스 토큰? : ", accessToken)
+      console.log("데이터? : ", refreshToekn)
+      
+      localStorage.setItem( "accessToken", accessToken )
+      localStorage.setItem( "refreshToekn", refreshToekn )
+    
+      setErrorMessage("");
+      localStorage.setItem("isLoggedIn", "true");
+      navigate("/", { replace: true });
+    } catch (error) {
+      alert(error?.message);
+    }*/
+
+    {/*
+    if (inputId !== "UMC"){
+      setErrorMessage("등록되지 않은 아이디입니다.");
+      return;
+    } else if (inputPassword !== "1234"){
+      setErrorMessage("비밀번호가 올바르지 않습니다.");
+      return
+    } else {
+      setErrorMessage("");
+      localStorage.setItem("isLoggedIn", "true");
+      navigate("/", { replace: true });
+    };*/}
+  
+  }
 
   return (
     <main className="w-screen h-screen flex items-center justify-center">
