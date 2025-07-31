@@ -25,10 +25,10 @@ const PerfumeDetailNavbar = () => {
         <img
           src={isLiked ? heartFilledImage : heartEmptyImage}
           alt={isLiked ? "Heart Filled" : "Heart Empty"}
-          className="w-10 h-10"
+          className="w-10 h-10 mr-10"
         />
       </button>
-      <button className="text-title4 bg-main-500 w-70 h-12 rounded-2xl text-white">
+      <button className="text-title4 bg-main-500 w-full h-12 rounded-2xl text-white">
         공식 홈페이지
       </button>
     </nav>
