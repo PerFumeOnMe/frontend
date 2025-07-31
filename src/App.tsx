@@ -1,4 +1,8 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
 import RootLayout from "./layout/root-layout.tsx";
 import MainPage from "./pages/MainPage.tsx";
@@ -24,6 +28,7 @@ import DiaryPage from "./pages/Diary/DiaryPage.tsx";
 import DiaryWritePage from "./pages/Diary/DiaryWritePage.tsx"; 
 import PerfumeDetailPage from "./pages/PerfumeDetailPage.tsx";
 import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx";
+import PerfumeLabLayout from "./layout/perfumelab-layout.tsx";
 import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 
@@ -75,8 +80,8 @@ const router = createBrowserRouter([
               { path: "result", element: <PBTIResultPage /> },
             ],
           },
-          { path: 'all-perfume', element: <AllPerfumePage /> }
-        ]
+          { path: "all-perfume", element: <AllPerfumePage /> },
+        ],
       },
       {
         path: "/image-keyword",
@@ -92,8 +97,8 @@ const router = createBrowserRouter([
           {
             path: "result",
             element: <ImageKeywordResultPage />,
-          }
-        ]
+          },
+        ],
       },
       {
         path: "/Chatbot",
@@ -101,6 +106,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/lab",
+        element: <PerfumeLabLayout />,
         children: [
           {
             index: true,
