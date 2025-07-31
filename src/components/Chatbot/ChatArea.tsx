@@ -3,12 +3,15 @@ import UserMessage from "./UserMessage";
 import BotMessage from "./BotMessage";
 import WelcomeHeader from "./WelcomeHeader";
 import type { Message } from "../../pages/Chatbot/ChatbotPage";
+import SkeletonMessage from "./SkeletonMessage";
 
 interface ChatAreaProps {
   messages: Message[];
+  isLoading: boolean; // 👈 로딩 여부 전달받기
 }
 
-const ChatArea: React.FC<ChatAreaProps> = ({ messages }) => {
+
+const ChatArea: React.FC<ChatAreaProps> = ({ messages, isLoading }) => {
   const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -28,6 +31,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ messages }) => {
           <BotMessage key={idx} text={msg.text} />
         )
       )}
+      {isLoading && <SkeletonMessage />} {/* 👈 스켈레톤 메시지 표시 */}
     </div>
   );
 };
