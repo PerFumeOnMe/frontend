@@ -12,5 +12,7 @@ export type RequestChatbotHistory = {
 }
 
 export type ResponseChatbotHistory = {
-
+    userMessage: string,
+    botResponse: string,
+    createdAt : Date,
 }
