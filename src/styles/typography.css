@@ -20,7 +20,33 @@
   .text-title4 {
     @apply text-[16px] font-semibold leading-[150%];
   }
+ 
+  /* 카카오로그인부분 */
+  .text-title5 {
+    @apply text-[14px] font-medium;
+     font-family: 'Roboto';
+    }
+  .text-title6 {
+    @apply text-[10px] font-medium;
+     font-family: 'Roboto';
+    }
 
+  .text-title7 {
+    @apply text-[14px] font-bold leading-[36px] align-middle;
+    font-family: 'Roboto';
+}
+  .text-title8 {
+    @apply text-[10px] font-medium leading-[16px] align-middle;
+    font-family: 'Roboto';
+  }
+  .text-title9 {
+    @apply text-[10px] font-medium leading-[36px] align-middle;
+    font-family: 'Roboto';
+  }
+.text-title10 {
+  @apply text-[13px] font-normal leading-[100%];
+}
+  
 
   /* Body */
   .text-body1 {

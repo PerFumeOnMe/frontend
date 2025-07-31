@@ -1,0 +1,106 @@
+.react-calendar {
+  width: 100% !important;
+  max-width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  margin-top:  1.5rem; 
+}
+
+.react-calendar__navigation button {
+  width: 0.75rem;
+  height:  1.5rem;
+  margin-top:  0.25rem;
+  opacity: 1;
+  color: white;
+  background: none;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus,
+.react-calendar__navigation button:enabled:active,
+.react-calendar__navigation__label:enabled:hover,
+.react-calendar__navigation__label:enabled:focus,
+.react-calendar__navigation__label:enabled:active {
+  background: none !important;
+  color: white !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.react-calendar__navigation__label {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 1.125rem; 
+  line-height: 150%;
+  text-align: center;
+  color: white;
+}
+
+.react-calendar__month-view__weekdays {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  text-align: center;
+  color: white !important;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.125rem;
+  line-height: 150%;
+  letter-spacing: 0;
+  margin-bottom: 0.75rem;
+  padding: 0 1rem;
+}
+
+.react-calendar__month-view__days {
+  padding: 0 1rem;
+  row-gap: 9px;
+}
+
+.react-calendar__tile {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.react-calendar__tile--active {
+  background: none !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: none !important;
+  color: inherit !important;
+  outline: none !important;
+}
+
+.react-calendar__tile abbr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: #FBFBFB66;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size:  0.875rem;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #CDCDD0;
+  margin: auto;
+}
+.has-diary abbr {
+  background: #FBFBFBE5 !important; 
+  color: #6401BB !important;
+}
+
+.react-calendar__tile--now {
+  background: none !important;
+  color: inherit !important;
+}

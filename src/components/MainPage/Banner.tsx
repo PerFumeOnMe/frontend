@@ -13,32 +13,32 @@ const MY_PERFUMES: Perfume[] = [
         imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/617/230907006220617.jpg?RS=600&SP=1",
         brand: "LOIVIE",
         name: "오 드 퍼퓸 피오니 앤 화이트 머스크",
-        price: 320000,
-        isLiked: true
+        minPrice: 320000,
+        liked: true
     },
     {
         id: 2,
         imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/895/231117007082895.jpg?RS=600&SP=1",
         brand: "LOIVIE",
         name: "오 드 퍼퓸 망고 앤 민트 리브",
-        price: 320000,
-        isLiked: false
+        minPrice: 320000,
+        liked: false
     },
     {
         id: 3,
         imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/157/230922006452157.jpg?RS=600&SP=1",
         brand: "LOIVIE",
         name: "오 드 퍼퓸 휘그 앤 시더우드",
-        price: 320000,
-        isLiked: false
+        minPrice: 320000,
+        liked: false
     }
 ];
 
 interface BannerProps {
-    hasPerfume?: boolean;
+    userName: string;
 }
 
-const Banner = () => {
+export default function Banner({ userName }: BannerProps) {
     const navigate = useNavigate();
     const [hasMyPerfume] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -77,7 +77,7 @@ const Banner = () => {
                 <div className="relative z-10 flex flex-col">
                     <div className="px-[16px] pt-[24px]">
                         <h2 className="text-title2 text-grayscale-200">
-                            반가워요! 김조단님
+                            반가워요! {userName}님
                         </h2>
                         <p className="text-body3 text-grayscale-300 mt-[4px]">
                             오늘도 나와 맞는 향수를 찾아 보아요.
@@ -101,7 +101,7 @@ const Banner = () => {
             ) : (
                 <div className="relative z-10 px-[16px] pt-[120px]">
                     <h2 className="text-display1 text-grayscale-200">
-                        반가워요! 김조단님
+                        반가워요! {userName}님
                     </h2>
                     <p className="text-body3 text-grayscale-300 mt-[4px]">
                         퍼퓸온미에서 당신만의 향기를 찾아보세요
@@ -119,6 +119,4 @@ const Banner = () => {
             )}
         </div>
     );
-};
-
-export default Banner;
+}
