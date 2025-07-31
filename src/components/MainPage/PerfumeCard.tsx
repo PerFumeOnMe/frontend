@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Perfume } from "../../types/perfume";
+import { addToFavorites, removeFromFavorites } from "../../apis/Fragrance";
 import heartFilledImage from "../../assets/MainPage/heart_filled.png";
 import heartEmptyImage from "../../assets/MainPage/heart_empty.png";
 
@@ -8,12 +9,26 @@ interface PerfumeCardProps {
 }
 
 const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
-    const { imageUrl, brand, name, price, isLiked: initialIsLiked } = perfume;
+    const { imageUrl, brand, name, minPrice, liked: initialIsLiked } = perfume;
     const [isLiked, setIsLiked] = useState(initialIsLiked);
     
-    const handleLikeClick = (e: React.MouseEvent) => {
+    const handleLikeClick = async (e: React.MouseEvent) => {
         e.preventDefault(); // 버블링 방지
-        setIsLiked(prev => !prev);
+        if (!isLiked) {
+            try {
+                await addToFavorites(perfume.id);
+                setIsLiked(true);
+            } catch (error) {
+                console.error('Failed to add to favorites:', error);
+            }
+        }else {
+            try {
+                await removeFromFavorites(perfume.id);
+                setIsLiked(false);
+            } catch (error) {
+                console.error('Failed to remove from favorites:', error);
+            }
+        }
     };
 
     return (
@@ -37,7 +52,7 @@ const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
             </div>
             <p className="text-caption2 text-grayscale-800 mb-[-2]">{brand}</p>
             <p className="text-body3 text-grayscale-1000 mb-[-2]">{name}</p>
-            <p className="text-body4 text-grayscale-900">{price.toLocaleString()}원~</p>
+            <p className="text-body4 text-grayscale-900">{minPrice.toLocaleString()}원~</p>
         </div>
     );
 };
