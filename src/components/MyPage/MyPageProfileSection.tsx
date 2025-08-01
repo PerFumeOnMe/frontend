@@ -8,17 +8,19 @@ import type { ResponseUserInfoDto } from "../../types/apis/User";
 type MyPageProfileSectionProps = {
     onClickSetting: () => void;
     userInfo: ResponseUserInfoDto | null;
+    isLoading: boolean
 };
 
-const MyPageProfileSection = ({ onClickSetting, userInfo }: MyPageProfileSectionProps) => {
-    const isLoading = !userInfo;
+const MyPageProfileSection = ({ onClickSetting, userInfo, isLoading }: MyPageProfileSectionProps) => {
+    const isLoadingData = isLoading;
 
     return (
         <div className="w-full flex flex-col justify-center items-center p-4 mt-4 bg-main-10">
-            {isLoading ? (
+            {isLoadingData ? (
                 <>
                     <SkeletonMyPageProfileImage />
                     <SkeletonMyPageUserInfo />
+                    <EditPreferredScentButton onClickSetting={onClickSetting} />
                 </>
             ) : (
                 <>

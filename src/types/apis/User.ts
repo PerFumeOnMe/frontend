@@ -41,7 +41,7 @@ export type ResponseUserProfileImageDto = CommonResponse<object>
 
 // 유저 정보 조회
 export type ResponseUserInfoDto = CommonResponse<{
-  nickNmae : string,
+  nickName : string,
   imageUrl : string,
   preferredNotes : string[]
 }>

@@ -4,7 +4,11 @@ import Favorites from "./Favorites";
 import RecommendationsResultSection from "./RecommendationsResultSection";
 import MyPageTabButton from "./MyPageTabButton"; // 경로는 상황에 맞게 조정하세요
 
-const FavoritesAndRecommendations: React.FC = () => {
+interface FavoritesAndRecommendationsProps {
+  isLoading: boolean;
+}
+
+const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = ({ isLoading }) => {
   const [favOrRecommend, setFavOrRecommend] = useState(true);
   const [isSortModalOpen, setIsSortModalOpen] = useState(false);
   const [sortOption, setSortOption] = useState("향수공방"); // 초기 정렬 기준 텍스트
@@ -59,7 +63,7 @@ const FavoritesAndRecommendations: React.FC = () => {
         )}
       </div>
 
-      {favOrRecommend ? <Favorites /> : <RecommendationsResultSection />}
+      {favOrRecommend ? <Favorites isLoading={isLoading} /> : <RecommendationsResultSection isLoading={isLoading}/>}
     </div>
   );
 };
