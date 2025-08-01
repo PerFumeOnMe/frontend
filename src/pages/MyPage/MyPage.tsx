@@ -8,6 +8,7 @@ import { getUserInfo } from "../../apis/User";
 
 const MyPage = () => {
     const [userInfo, setUserInfo] = useState<ResponseUserInfoDto | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const navigate = useNavigate();
     
     const handleClick = () => {
@@ -19,13 +20,16 @@ const MyPage = () => {
             try {
                 const data = await getUserInfo();
                 setUserInfo(data);
+                console.log(data)
             } catch (error) {
                 console.error("유저 정보 조회 실패", error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
         fetchUserInfo();
-    }, [])
+    }, []);
     
     return(
         <div className="min-h-screen w-full bg-[#F4EEFA] font-[Pretendard]">
@@ -33,9 +37,12 @@ const MyPage = () => {
                 <MyPageHeader />
                 <MyPageProfileSection
                     onClickSetting={handleClick}
-                    userInfo={userInfo}    
+                    userInfo={userInfo}
+                    isLoading={isLoading}
                 />
-                <FavoritesAndRecommendations />
+                <FavoritesAndRecommendations
+                    isLoading={isLoading}
+                />
             </div>
         </div>
     )
