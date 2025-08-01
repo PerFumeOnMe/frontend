@@ -43,7 +43,7 @@ const ChatbotPage: React.FC = () => {
 
 
   return (
-    <div className="min-w-[375px] w-120 h-full bg-main-10 flex flex-col font-[Pretandard]">
+    <div className="min-w-[375px] w-120 min-h-screen h-full bg-main-10 flex flex-col font-[Pretandard]">
       <div className='pb-20'>
         <Header />
         <ChatArea messages={messages} isLoading={isLoading} />
