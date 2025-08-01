@@ -8,11 +8,17 @@ import {
 import type { ReactNode } from "react";
 import type { Note } from "../types/note";
 import { noteOptions } from "../types/noteOptions";
+import { postWorkshopPreview } from "../apis/Workshop";
+import type {
+  RequestWorkshopDto,
+  ResponseWorkshopDto,
+} from "../types/apis/Workshop";
 
 type ModalType = "note" | "volume" | null;
 
 interface SelectedNote {
   id: string;
+  krName: string;
   description: string;
   volume: number;
 }
@@ -29,27 +35,13 @@ interface ModalState {
   selectedNote: string;
 }
 
-// 백엔드로 보낼 데이터 형식
-interface PerfumeData {
-  topNote: string;
-  topNoteVolume: number;
-  middleNote: string;
-  middleNoteVolume: number;
-  baseNote: string;
-  baseNoteVolume: number;
-}
-
-interface CompletedPerfume extends PerfumeData {
-  id?: string;
-  name?: string;
-  createdAt?: string;
-}
-
 interface PerfumeLabContextType {
   // States
   selectedNotes: SelectedNotes;
-  completedPerfume: CompletedPerfume | null;
+  completedPerfume: ResponseWorkshopDto["result"] | null;
   modal: ModalState;
+  isLoading: boolean;
+  error: string | null;
 
   // Computed values
   allNotesSelected: boolean;
@@ -64,15 +56,15 @@ interface PerfumeLabContextType {
   handleVolumeSelected: (noteType: Note, volume: number) => void;
   handleNoteRemove: (noteType: Note) => void;
   handleReset: () => void;
-  handleResultView: () => void;
+  handleResultView: () => Promise<void>;
 
   // Data transformation
-  getPerfumeDataForAPI: () => PerfumeData;
-  setCompletedPerfume: (perfume: CompletedPerfume) => void;
+  getPerfumeDataForAPI: () => RequestWorkshopDto;
 }
 
 const INITIAL_NOTE_STATE: SelectedNote = {
   id: "",
+  krName: "",
   description: "",
   volume: 0,
 };
@@ -101,16 +93,15 @@ export const usePerfumeLab = () => {
   return context;
 };
 
-interface PerfumeLabProviderProps {
-  children: ReactNode;
-}
-
-export const PerfumeLabProvider = ({ children }: PerfumeLabProviderProps) => {
+export const PerfumeLabProvider = ({ children }: { children: ReactNode }) => {
   const [selectedNotes, setSelectedNotes] =
     useState<SelectedNotes>(INITIAL_NOTES_STATE);
-  const [completedPerfume, setCompletedPerfume] =
-    useState<CompletedPerfume | null>(null);
+  const [completedPerfume, setCompletedPerfume] = useState<
+    ResponseWorkshopDto["result"] | null
+  >(null);
   const [modal, setModal] = useState<ModalState>(INITIAL_MODAL_STATE);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Computed values
   const allNotesSelected = useMemo(
@@ -132,42 +123,30 @@ export const PerfumeLabProvider = ({ children }: PerfumeLabProviderProps) => {
   );
 
   const modalTitle = useMemo(() => {
-    if (modal.type === "note") {
-      return `${modal.selectedNote} 노트 선택`;
-    }
-    if (modal.type === "volume") {
-      return "용량 설정하기";
-    }
+    if (modal.type === "note") return `${modal.selectedNote} 노트 선택`;
+    if (modal.type === "volume") return "용량 설정하기";
     return "";
   }, [modal.type, modal.selectedNote]);
 
-  // 백엔드 형식으로 데이터 변환
-  const getPerfumeDataForAPI = useCallback((): PerfumeData => {
-    return {
-      topNote: selectedNotes.탑.id,
+  const getPerfumeDataForAPI = useCallback(
+    (): RequestWorkshopDto => ({
+      topNote: selectedNotes.탑.krName,
       topNoteVolume: selectedNotes.탑.volume,
-      middleNote: selectedNotes.미들.id,
+      middleNote: selectedNotes.미들.krName,
       middleNoteVolume: selectedNotes.미들.volume,
-      baseNote: selectedNotes.베이스.id,
+      baseNote: selectedNotes.베이스.krName,
       baseNoteVolume: selectedNotes.베이스.volume,
-    };
-  }, [selectedNotes]);
+    }),
+    [selectedNotes]
+  );
 
   // Actions
   const handleNoteSelect = useCallback((note: Note) => {
-    setModal({
-      isOpen: true,
-      type: "note",
-      selectedNote: note,
-    });
+    setModal({ isOpen: true, type: "note", selectedNote: note });
   }, []);
 
   const handleVolumeSelect = useCallback(() => {
-    setModal({
-      isOpen: true,
-      type: "volume",
-      selectedNote: "",
-    });
+    setModal({ isOpen: true, type: "volume", selectedNote: "" });
   }, []);
 
   const handleModalClose = useCallback(() => {
@@ -186,11 +165,11 @@ export const PerfumeLabProvider = ({ children }: PerfumeLabProviderProps) => {
           [noteType]: {
             ...prev[noteType],
             id: selectedNoteData.id,
+            krName: selectedNoteData.krName,
             description: selectedNoteData.description,
           },
         }));
       }
-
       setModal(INITIAL_MODAL_STATE);
     },
     []
@@ -199,10 +178,7 @@ export const PerfumeLabProvider = ({ children }: PerfumeLabProviderProps) => {
   const handleVolumeSelected = useCallback((noteType: Note, volume: number) => {
     setSelectedNotes((prev) => ({
       ...prev,
-      [noteType]: {
-        ...prev[noteType],
-        volume,
-      },
+      [noteType]: { ...prev[noteType], volume },
     }));
   }, []);
 
@@ -216,42 +192,44 @@ export const PerfumeLabProvider = ({ children }: PerfumeLabProviderProps) => {
   const handleReset = useCallback(() => {
     setSelectedNotes(INITIAL_NOTES_STATE);
     setCompletedPerfume(null);
+    setError(null);
   }, []);
 
-  const handleResultView = useCallback(() => {
+  const handleResultView = useCallback(async () => {
     if (!allNotesSelected || !allVolumesSelected) {
       alert("모든 노트와 용량을 선택해주세요.");
       return;
     }
 
-    // 완성된 향수 정보를 상태에 저장 (결과 페이지에서 사용)
-    const perfumeData = getPerfumeDataForAPI();
-    const completed: CompletedPerfume = {
-      ...perfumeData,
-      // 나중에 API 연결시 사용할 필드들
-      // id: result.id,
-      // name: result.name,
-      // createdAt: result.createdAt,
-    };
+    setIsLoading(true);
+    setError(null);
 
-    setCompletedPerfume(completed);
+    try {
+      const response = await postWorkshopPreview(getPerfumeDataForAPI());
 
-    console.log("결과 페이지로 전달될 데이터:", completed);
+      if (response.isSuccess) {
+        setCompletedPerfume(response.result);
+      } else {
+        setError(response.message || "향수 정보를 가져오는데 실패했습니다.");
+      }
+    } catch (err) {
+      console.error("API 호출 실패:", err);
+      setError("향수 정보를 가져오는데 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsLoading(false);
+    }
   }, [allNotesSelected, allVolumesSelected, getPerfumeDataForAPI]);
 
   const contextValue = useMemo(
     () => ({
-      // States
       selectedNotes,
       completedPerfume,
       modal,
-
-      // Computed values
+      isLoading,
+      error,
       allNotesSelected,
       allVolumesSelected,
       modalTitle,
-
-      // Actions
       handleNoteSelect,
       handleVolumeSelect,
       handleModalClose,
@@ -260,15 +238,14 @@ export const PerfumeLabProvider = ({ children }: PerfumeLabProviderProps) => {
       handleNoteRemove,
       handleReset,
       handleResultView,
-
-      // Data transformation
       getPerfumeDataForAPI,
-      setCompletedPerfume,
     }),
     [
       selectedNotes,
       completedPerfume,
       modal,
+      isLoading,
+      error,
       allNotesSelected,
       allVolumesSelected,
       modalTitle,

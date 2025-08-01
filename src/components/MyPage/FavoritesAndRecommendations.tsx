@@ -8,7 +8,7 @@ interface FavoritesAndRecommendationsProps {
   isLoading: boolean;
 }
 
-const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = ({ isLoading }) => {
+const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = ({ isLoading = true }) => {
   const [favOrRecommend, setFavOrRecommend] = useState(true);
   const [isSortModalOpen, setIsSortModalOpen] = useState(false);
   const [sortOption, setSortOption] = useState("향수공방"); // 초기 정렬 기준 텍스트
@@ -63,7 +63,9 @@ const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = 
         )}
       </div>
 
-      {favOrRecommend ? <Favorites isLoading={isLoading} /> : <RecommendationsResultSection isLoading={isLoading}/>}
+      {favOrRecommend
+        ? <Favorites isLoading={isLoading} />
+        : <RecommendationsResultSection isLoading={isLoading} />}
     </div>
   );
 };

@@ -1,13 +1,15 @@
-import { useState } from "react";
 import PageHeader from "../common/PageHeader";
 import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import BottomButton from "../common/BottomButton";
-import type { StepNavigationProps } from "../../types/Login/signupTypes";
+import type { SignupNameFormProps } from "../../types/Login/signupTypes";
 
-export default function SignupNameForm({ onNext, onBack }:StepNavigationProps) {
-  const [name, setName] = useState("");
-
+export default function SignupNameForm({
+  name,
+  setName,
+  onNext,
+  onBack,
+}: SignupNameFormProps) {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <PageHeader title="회원가입" onBack={onBack} />
@@ -22,7 +24,7 @@ export default function SignupNameForm({ onNext, onBack }:StepNavigationProps) {
           placeholder="이름을 입력해주세요!"
         />
       </div>
-      
+
       <BottomButton disabled={!name} onClick={onNext}>
         다음
       </BottomButton>

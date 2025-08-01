@@ -24,4 +24,26 @@ export interface SignupAgreementProps {
   setIsAgreed: (val: boolean) => void;
   isDropdownOpen: boolean;
   setIsDropdownOpen: (val: boolean) => void;
+
+}
+
+export interface SignupNameFormProps extends StepNavigationProps {
+  name: string;
+  setName: (val: string) => void;
+}
+
+export interface SignupIdFormProps extends StepNavigationProps {
+  loginId: string;
+  setLoginId: (val: string) => void;
+}
+
+export interface SignupPasswordFormProps extends StepNavigationProps {
+  password: string;
+  setPassword: (val: string) => void;
+}
+
+export interface SignupAgreementFormProps extends StepNavigationProps {
+  name: string;
+  loginId: string;
+  password: string;
 }
