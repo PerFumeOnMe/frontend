@@ -6,7 +6,7 @@ export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: K
       <div className="flex items-start justify-between px-2 cursor-pointer" onClick={onToggle}>
         <div className="flex items-start gap-1.5">
           <svg
-            className={`w-4 h-4 ${isAllChecked ? "text-[#FEE500]" : "text-grayscale-550"}`}
+            className={`w-4 h-4 ${isAllChecked ? "text-[#FEE500]" : "text-black-40"}`}
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -14,7 +14,7 @@ export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: K
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
-          <span className=" text-grayscale-550 text-title10">
+          <span className=" text-black-40 text-title10">
             [필수] 카카오 개인정보 제3자 제공 동의
           </span>
         </div>
@@ -26,7 +26,7 @@ export default function KakaoTermsList({ termsItems, isAllChecked, onToggle }: K
         </a>
       </div>
 
-      <div className="space-y-1.5 pl-8">
+      <div className="space-y-1.5 pl-8 text-black-40">
         {["닉네임", "계정", "전화번호", "별명"].map((label, index, arr) => (
           <div
             key={label}
