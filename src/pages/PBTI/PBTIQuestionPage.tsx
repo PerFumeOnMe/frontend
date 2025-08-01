@@ -39,7 +39,7 @@ const PBTIQuestionPage: React.FC = () => {
             qSeven: updatedAnswers[6].toString(),
             qEight: updatedAnswers[7].toString(),
         };
-
+        
         const result = await postPBTIResult(requestBody);
 
         console.log("조회 결과", result)
