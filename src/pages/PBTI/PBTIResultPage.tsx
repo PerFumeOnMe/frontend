@@ -8,6 +8,7 @@ import PBTIPerfumeTypeSection from '../../components/PBTI/PBTIResult/PBTIPerfume
 import PBTISummarySection from '../../components/PBTI/PBTIResult/PBTISummarySection';
 import PBTIRecommendedPerfumesSection from '../../components/PBTI/PBTIResult/PBTIRecommendedPerfumesSection';
 import PBTIActionButtons from '../../components/PBTI/PBTIResult/PBTIActionButtons';
+import PBTIResultLineRecommendation from '../../components/PBTI/PBTIResult/PBTIResultLineRecommendation';
 
 const PBTIResultPage: React.FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -44,6 +45,9 @@ const PBTIResultPage: React.FC = () => {
   return (
     <div className="min-w-[375px] m-h-screen p-3 pb-22 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
       <PBTIResultHeader />
+      <PBTIResultLineRecommendation
+        LineRecommendation={recommendation}
+      />
       <PBTIAnalysisSection 
         keywordArrayData={keywords}
       />
