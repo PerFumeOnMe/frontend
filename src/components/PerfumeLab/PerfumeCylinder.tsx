@@ -1,5 +1,5 @@
 import React from "react";
-import { usePerfumeLab } from "../../contexts/PerfumeLabContext";
+import { usePerfumeLab } from "../../context/PerfumeLabContext";
 import PerfumeRack from "../../assets/PerfumeLab/rack.png";
 import CylinderItem from "./CylinderItem";
 

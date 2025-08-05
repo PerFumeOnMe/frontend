@@ -1,4 +1,4 @@
-import { usePerfumeLab } from "../../contexts/PerfumeLabContext";
+import { usePerfumeLab } from "../../context/PerfumeLabContext";
 import BottomSheetModal from "./BottomSheetModal";
 import NoteSelectionContent from "./NoteSelectionContent";
 import VolumeSelectionContent from "./VolumeSelectionContent";

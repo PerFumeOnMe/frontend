@@ -1,5 +1,5 @@
 import React from "react";
-import { usePerfumeLab } from "../../contexts/PerfumeLabContext";
+import { usePerfumeLab } from "../../context/PerfumeLabContext";
 
 const ActionButton: React.FC = () => {
   const {
