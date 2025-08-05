@@ -3,12 +3,14 @@ import SortModalArrowIcon from "../../assets/MyPage/SortModalArrow.svg";
 import Favorites from "./Favorites";
 import RecommendationsResultSection from "./RecommendationsResultSection";
 import MyPageTabButton from "./MyPageTabButton"; // 경로는 상황에 맞게 조정하세요
+import type { UserFavoriteContentDto } from "../../types/apis/User";
 
 interface FavoritesAndRecommendationsProps {
   isLoading: boolean;
+  favoritesPerfumeList : UserFavoriteContentDto[]
 }
 
-const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = ({ isLoading = true }) => {
+const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = ({ isLoading = true , favoritesPerfumeList = null }) => {
   const [favOrRecommend, setFavOrRecommend] = useState(true);
   const [isSortModalOpen, setIsSortModalOpen] = useState(false);
   const [sortOption, setSortOption] = useState("향수공방"); // 초기 정렬 기준 텍스트
@@ -64,7 +66,7 @@ const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = 
       </div>
 
       {favOrRecommend
-        ? <Favorites isLoading={isLoading} />
+        ? <Favorites isLoading={isLoading} PerfumeList={favoritesPerfumeList} />
         : <RecommendationsResultSection isLoading={isLoading} />}
     </div>
   );

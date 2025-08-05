@@ -3,11 +3,12 @@ import FavoritesAndRecommendations from "../../components/MyPage/FavoritesAndRec
 import MyPageHeader from "../../components/MyPage/MyPageHeader";
 import MyPageProfileSection from "../../components/MyPage/MyPageProfileSection";
 import { useNavigate } from "react-router-dom";
-import type { ResponseUserInfoDto } from "../../types/apis/User";
-import { getUserInfo } from "../../apis/User";
+import type { ResponseUserFavoritesListDto, ResponseUserInfoDto, UserFavoriteContentDto } from "../../types/apis/User";
+import { getFavoritesList, getUserInfo } from "../../apis/User";
 
 const MyPage = () => {
     const [userInfo, setUserInfo] = useState<ResponseUserInfoDto | null>(null);
+    const [userFavoritesPerfume, setUserFavoritesPerfume] = useState<UserFavoriteContentDto[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const navigate = useNavigate();
     
@@ -30,6 +31,23 @@ const MyPage = () => {
 
         fetchUserInfo();
     }, []);
+
+    useEffect(() => {
+        const fetchFavoritesPerfumeInfo = async () => {
+            try {
+                const data = await getFavoritesList({page : 0, size : 6});
+                const favoritesPerfumeData = data.result.content
+                setUserFavoritesPerfume(favoritesPerfumeData);
+                console.log(data)
+            } catch (error) {
+                console.error("즐겨찾기한 향수 정보를 불러오는 과정에서 오류가 발생했습니다.", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchFavoritesPerfumeInfo();
+    }, []);
     
     return(
         <div className="min-h-screen w-full bg-[#F4EEFA] font-[Pretendard]">
@@ -42,6 +60,7 @@ const MyPage = () => {
                 />
                 <FavoritesAndRecommendations
                     isLoading={isLoading}
+                    favoritesPerfumeList={userFavoritesPerfume}
                 />
             </div>
         </div>

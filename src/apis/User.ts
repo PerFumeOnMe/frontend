@@ -12,6 +12,7 @@ import {
     type ResponseUserInfoDto,
     type RequestUserFavoritesListDto,
     type ResponseUserFavoritesListDto,
+    type UserFavoriteContentDto,
 } from "../types/apis/User";
 import { axiosInstance } from "./axios";
 
@@ -84,11 +85,15 @@ export const deleteUserAccount = async () => {
 
 // 즐겨찾기 목록 조회 API
 export const getFavoritesList = async ( body : RequestUserFavoritesListDto ):Promise<ResponseUserFavoritesListDto> => {
-    const { data } = await axiosInstance.get(
-        '/users/me', {
-            params : body
-        }
-    )
-
-    return data
+    try {
+        const res = await axiosInstance.get<ResponseUserFavoritesListDto>(
+            '/users/favorites', {
+                params : body
+            }
+        )
+        return res.data
+    } catch (error) {
+        console.log("즐겨찾기 목록을 조회하는 과정에서 오류가 발생했습니다.", error)
+        throw error
+    }
 }
