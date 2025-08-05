@@ -19,7 +19,7 @@ interface PerfumeTypeSectionProps {
 
 const PBTIPerfumeTypeSection: React.FC<PerfumeTypeSectionProps> = ({ data }) => (
   <div className="w-full flex flex-col bg-[#FBFBFB] justify-center items-center rounded-2xl p-5 shadow mb-6">
-    <h2 className="text-[18px] text-grayscale-1000 text-title3 font-semibold mb-2">당신에게 어울리는 향기 스타일 원형</h2>
+    <h2 className="text-[18px] text-grayscale-1000 text-title3 font-semibold mb-2">🧭 당신에게 어울리는 향기 스타일 원형</h2>
 
     <div className="flex h-full justify-center gap-6">
       {/* Type 열 */}
