@@ -66,6 +66,7 @@ export default function KeywordRecommendation({ recommendations }: KeywordRecomm
                 <ResultButton 
                     label="홈으로" 
                     onClick={() => navigate('/')}
+                    disabled={false}
                 />
             </div>
 
