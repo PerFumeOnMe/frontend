@@ -1,50 +1,7 @@
 import { useState, useCallback } from "react";
 import NoteCard from "./NoteCard";
 import type { PerfumeDetail } from "../../types/perfume";
-
-// 목업 데이터 (실제 API 데이터 구조와 동일)
-const MOCK_PERFUME_DATA: PerfumeDetail = {
-  id: 1,
-  brand: "로이비 (LOIVIE)",
-  name: "오 드 퍼퓸 피오니 앤 화이트 머스크",
-  priceList: [{ mlcount: 50, price: 109000 }],
-  keyword: "새하얀 이불,흰 비누,햇볕에 말린 수건",
-  description:
-    "기분 좋게 바스락 거리는 \n흰 셔츠를 입고 나선 \n바쁜 아침 도시의 거리 \n\n모던한 아름다움으로 \n자신감 넘치는 오늘의 나",
-  note: {
-    top: {
-      ingredients: ["카시스", "자몽"],
-      keywords: "포도잼, 검은베리주스",
-      description:
-        "아침 식빵에 바른 포도잼과 \n냉장고에서 꺼낸 진한 검은베리주스에서 풍기는 \n달콤한 과일 향",
-    },
-    middle: {
-      ingredients: ["피오니", "불가리안 로즈"],
-      keywords: "생화다발, 면원피스",
-      description:
-        "꽃집에서 막 꺼낸 생화다발과 \n햇빛에 말린 면원피스에서 풍기는 \n자연스러운 꽃내음",
-    },
-    base: {
-      ingredients: ["화이트 머스크", "붓꽃"],
-      keywords: "섬유유연제, 빨래바구니",
-      description:
-        "갓 세탁한 옷을 꺼낸 빨래바구니 속, \n섬유유연제 냄새가 은은하게 퍼지는 \n순간의 향",
-    },
-  },
-  fragnanceType: {
-    lastingPower: "4~6시간",
-    diffusionRange: 4,
-    diffusionPower: "강함",
-  },
-  gender: "여성용",
-  locations: ["데이트 / 로맨틱용"],
-  seasons: ["봄"],
-  homePageUrl:
-    "https://www.sivillage.com/goods/initDetailGoods.siv?goods_no=2306807079",
-  imageURL:
-    "https://image.sivillage.com/upload/C00001/goods/org/617/230907006220617.jpg?RS=600&SP=1",
-  liked: false,
-};
+import { usePerfumeNotes } from "../../hooks/usePerfumeDetail";
 
 interface CardData {
   id: string;
@@ -55,20 +12,18 @@ interface CardData {
 }
 
 const DescriptionNote = ({
-  perfumeData = MOCK_PERFUME_DATA,
   initialActiveIndex = 1, // TOP을 기본값으로
 }: {
   perfumeData?: PerfumeDetail;
   initialActiveIndex?: number;
 }) => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+  const { note } = usePerfumeNotes();
 
   const transformNoteData = useCallback((): CardData[] => {
-    if (!perfumeData?.note) {
+    if (!note) {
       return [];
     }
-
-    const { note } = perfumeData;
 
     return [
       {
@@ -93,7 +48,7 @@ const DescriptionNote = ({
         description: note.middle.description,
       },
     ];
-  }, [perfumeData]);
+  }, [note]);
 
   const handleCardClick = useCallback(
     (clickedCardId: string) => {
@@ -165,6 +120,7 @@ const DescriptionNote = ({
                     zIndex: position === "center" ? 50 : 10,
                   }}
                 >
+                  {/* 내용이 카드 사이즈를 넘어갈 경우를 대비한 디자인 수정은 추후에 진행 예정 */}
                   <NoteCard
                     note={card}
                     isActive={isActive}

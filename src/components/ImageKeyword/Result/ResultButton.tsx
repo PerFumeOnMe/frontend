@@ -19,8 +19,8 @@ export default function ResultButton({
             className={`
                 flex-1 h-[48px] ${bgClass} ${disabledClass} text-title3 text-grayscale-200 rounded-[16px] flex items-center justify-center
             `}
-        >
-            {label}
-        </button>
-    );
-} 
+    >
+      {label}
+    </button>
+  );
+}

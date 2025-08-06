@@ -19,15 +19,28 @@ const analysisData = [
   }
 ];
 
-const PBTIAnalysisSection: React.FC = () => (
+interface keywordInterface {
+  keyword : string,
+  keywordDescription : string,
+}
+
+interface PBTIAnalysisSectionProps {
+  keywordArrayData: keywordInterface[];
+}
+
+const PBTIAnalysisSection: React.FC<PBTIAnalysisSectionProps> = ({ keywordArrayData }) => {
+
+  return(
   <div className="w-full flex flex-col justify-center items-center bg-[#FBFBFB] rounded-2xl p-5 shadow mb-6">
-    <h2 className="text-title4 text-[18px] font-[600] mb-2">이렇게 해석했어요.</h2>
-    <div className="flex flex-col justify-center items-center gap-2 w-full">
-      {analysisData.map((item, index) => (
-        <PBTIAnalysis key={index} question={item.question} analysis={item.analysis} />
+    <h2 className="text-title4 text-[18px] font-[600] mb-2">🔍 이렇게 해석했어요</h2>
+    <div className="flex flex-col justify-center items-center gap-4 w-full">
+      {keywordArrayData.map((item, index) => (
+        <PBTIAnalysis key={index} question={item.keyword} analysis={item.keywordDescription} />
       ))}
     </div>
   </div>
-);
+  )
+}
+  
 
 export default PBTIAnalysisSection;

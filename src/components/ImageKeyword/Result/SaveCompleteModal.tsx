@@ -2,7 +2,9 @@ interface SaveCompleteModalProps {
   onConfirm: () => void;
 }
 
-export default function SaveCompleteModal({ onConfirm }: SaveCompleteModalProps) {
+export default function SaveCompleteModal({
+  onConfirm,
+}: SaveCompleteModalProps) {
   return (
     <>
       <div className="fixed inset-0 bg-black/40" />

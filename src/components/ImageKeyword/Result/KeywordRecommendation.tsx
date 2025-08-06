@@ -8,7 +8,7 @@ import SaveCompleteModal from './SaveCompleteModal';
 import { postImageKeywordSave } from '../../../apis/ImageKeyword';
 
 interface KeywordRecommendationProps {
-    recommendations: RecommendedPerfume[];
+  recommendations: RecommendedPerfume[];
 }
 
 export default function KeywordRecommendation({ recommendations }: KeywordRecommendationProps) {

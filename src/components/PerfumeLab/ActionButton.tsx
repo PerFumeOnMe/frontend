@@ -1,16 +1,14 @@
-interface ActionButtonProps {
-  allNotesSelected: boolean;
-  selectedVolume: string;
-  onVolumeSelect: () => void;
-  onResultView: () => void;
-}
+import React from "react";
+import { usePerfumeLab } from "../../context/PerfumeLabContext";
 
-const ActionButton: React.FC<ActionButtonProps> = ({
-  allNotesSelected,
-  selectedVolume,
-  onVolumeSelect,
-  onResultView,
-}) => {
+const ActionButton: React.FC = () => {
+  const {
+    allNotesSelected,
+    allVolumesSelected,
+    handleVolumeSelect,
+    handleResultView,
+  } = usePerfumeLab();
+
   return (
     <div className="w-full mt-1">
       {!allNotesSelected ? (
@@ -20,17 +18,17 @@ const ActionButton: React.FC<ActionButtonProps> = ({
         >
           용량 설정하기
         </button>
-      ) : !selectedVolume ? (
+      ) : !allVolumesSelected ? (
         <button
           className="w-full py-3 rounded-2xl bg-main-500 text-grayscale-200"
-          onClick={onVolumeSelect}
+          onClick={handleVolumeSelect}
         >
           용량 설정하기
         </button>
       ) : (
         <button
           className="w-full py-3 rounded-2xl bg-main-500 text-grayscale-200"
-          onClick={onResultView}
+          onClick={handleResultView}
         >
           결과보기
         </button>

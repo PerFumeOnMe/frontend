@@ -4,24 +4,29 @@ import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import SignupErrorMessage from "./SignupErrorMessage";
 import BottomButton from "../common/BottomButton";
-import type { StepNavigationProps } from "../../types/Login/signupTypes";
+import type { SignupPasswordFormProps } from "../../types/Login/signupTypes";
 
-export default function SignupPasswordForm({ onNext, onBack }: StepNavigationProps) {
-  const [password, setPassword] = useState("");
+export default function SignupPasswordForm({
+  password,
+  setPassword,
+  onNext,
+  onBack,
+}: SignupPasswordFormProps) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [errorType, setErrorType] = useState<"format" | "match" | "">("");
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    const formatValid = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/.test(password);
+    const formatValid =
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&#]{8,20}$/.test(password);
 
     if (!password && !confirmPassword) {
       setError("");
       setErrorType("");
       setIsValid(false);
     } else if (!formatValid) {
-      setError("글자수를 확인해주세요.");
+      setError("비밀번호 양식이 올바르지 않습니다.");
       setErrorType("format");
       setIsValid(false);
     } else if (password !== confirmPassword) {
@@ -46,7 +51,7 @@ export default function SignupPasswordForm({ onNext, onBack }: StepNavigationPro
       <PageHeader title="회원가입" onBack={onBack} />
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n비밀번호를 입력해주세요."}
-        subtitle="8-20자로 입력해주세요."
+        subtitle="8-20자, 영문/숫자/특수문자 조합"
       />
       <div className="flex-1 flex flex-col gap-8">
         <div>
@@ -60,10 +65,10 @@ export default function SignupPasswordForm({ onNext, onBack }: StepNavigationPro
         </div>
         <div>
           <SignupInput
-            type="text"
+            type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="비밀번호를 다시 한 번 입력해주세요!"
+            placeholder="비밀번호를 다시 한번 입력해주세요!"
           />
           {errorType === "match" && <SignupErrorMessage message={error} />}
         </div>

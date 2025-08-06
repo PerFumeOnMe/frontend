@@ -4,32 +4,38 @@ import SignupTitle from "./SignupTitle";
 import SignupInput from "./SignupInput";
 import SignupErrorMessage from "./SignupErrorMessage";
 import BottomButton from "../common/BottomButton";
-import type { StepNavigationProps } from "../../types/Login/signupTypes";
+import type { SignupIdFormProps } from "../../types/Login/signupTypes";
 
-export default function SignupIdForm({ onNext, onBack  }: StepNavigationProps ) {
-  const [inputId, setInputId] = useState("");
+interface ExtendedSignupIdFormProps extends SignupIdFormProps {
+  idError: string;
+  setIdError: (msg: string) => void;
+}
+
+export default function SignupIdForm({
+  loginId,
+  setLoginId,
+  idError,
+  setIdError,
+  onNext,
+  onBack,
+}: ExtendedSignupIdFormProps) {
   const [error, setError] = useState("");
   const [isValid, setIsValid] = useState(false);
 
-  const takenIds = ["umcuser", "perfume01", "testid"];
-
   useEffect(() => {
-    const formatValid = /^[a-z_]{5,16}$/.test(inputId);
+    const formatValid = /^[a-z0-9_]{5,16}$/.test(loginId);
 
-    if (inputId === "") {
+    if (loginId === "") {
       setError("");
       setIsValid(false);
     } else if (!formatValid) {
       setError("올바른 아이디를 입력해주세요.");
       setIsValid(false);
-    } else if (takenIds.includes(inputId)) {
-      setError("중복된 아이디입니다.");
-      setIsValid(false);
     } else {
       setError("");
       setIsValid(true);
     }
-  }, [inputId]);
+  }, [loginId]);
 
   const handleNext = () => {
     if (isValid) {
@@ -46,11 +52,14 @@ export default function SignupIdForm({ onNext, onBack  }: StepNavigationProps ) 
       />
       <div className="flex-1">
         <SignupInput
-          value={inputId}
-          onChange={(e) => setInputId(e.target.value)}
+          value={loginId}
+          onChange={(e) => {
+            setLoginId(e.target.value);
+            setIdError(""); 
+          }}
           placeholder="아이디를 입력해주세요!"
         />
-        <SignupErrorMessage message={error} />
+        <SignupErrorMessage message={error || idError} />
       </div>
 
       <BottomButton disabled={!isValid} onClick={handleNext}>

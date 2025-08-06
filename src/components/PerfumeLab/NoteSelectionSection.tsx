@@ -1,27 +1,13 @@
 import React from "react";
+import { usePerfumeLab } from "../../context/PerfumeLabContext";
 import NoteSelectionButton from "./NoteSelectionButton";
 import { noteOptions } from "../../types/noteOptions";
 import type { Note } from "../../types/note";
 
-interface SelectedNotes {
-  베이스: { id: string; description: string };
-  미들: { id: string; description: string };
-  탑: { id: string; description: string };
-}
+const NoteSelectionSection: React.FC = () => {
+  const { selectedNotes, handleNoteSelect, handleNoteRemove, handleReset } =
+    usePerfumeLab();
 
-interface NoteSelectionSectionProps {
-  selectedNotes: SelectedNotes;
-  onNoteSelect: (note: Note) => void;
-  onNoteRemove: (noteType: Note) => void;
-  onReset: () => void;
-}
-
-const NoteSelectionSection: React.FC<NoteSelectionSectionProps> = ({
-  selectedNotes,
-  onNoteSelect,
-  onNoteRemove,
-  onReset,
-}) => {
   const noteTypes: Note[] = ["베이스", "미들", "탑"];
 
   return (
@@ -30,7 +16,7 @@ const NoteSelectionSection: React.FC<NoteSelectionSectionProps> = ({
         <h3 className="text-title3">내가 선택한 계열</h3>
         <button
           className="border px-3 py-1 rounded-full text-body3 text-grayscale-700"
-          onClick={onReset}
+          onClick={handleReset}
         >
           초기화
         </button>
@@ -51,8 +37,8 @@ const NoteSelectionSection: React.FC<NoteSelectionSectionProps> = ({
                 : undefined
             }
             noteOptions={noteOptions[noteType]}
-            onClick={() => onNoteSelect(noteType)}
-            onRemove={() => onNoteRemove(noteType)}
+            onClick={() => handleNoteSelect(noteType)}
+            onRemove={() => handleNoteRemove(noteType)}
           />
         ))}
       </div>

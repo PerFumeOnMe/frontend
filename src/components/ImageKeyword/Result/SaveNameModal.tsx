@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 
 interface SaveNameModalProps {
-    onSubmit: (name: string) => void;
-    onClose: () => void;
+  onSubmit: (name: string) => void;
+  onClose: () => void;
 }
 
 export default function SaveNameModal({ onSubmit, onClose }: SaveNameModalProps) {

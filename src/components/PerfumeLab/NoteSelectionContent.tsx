@@ -1,4 +1,5 @@
 import type { Note } from "../../types/note";
+import { usePerfumeLab } from "../../context/PerfumeLabContext";
 
 interface NoteOption {
   id: string;
@@ -18,12 +19,17 @@ const NoteSelectionContent = ({
   onNoteSelected,
   noteOptions,
 }: NoteSelectionContentProps) => {
+  const { selectedNotes } = usePerfumeLab(); // context에서 선택된 노트들 가져오기
+
   const handleOptionSelect = (optionId: string) => {
     onNoteSelected(selectedNote, optionId);
   };
 
   // 현재 선택된 노트의 옵션들 가져오기
   const currentOptions = noteOptions[selectedNote] || [];
+
+  // context에서 현재 선택된 값 가져오기
+  const selectedValue = selectedNotes[selectedNote]?.id;
 
   const getSubtitle = () => {
     switch (selectedNote) {
@@ -61,30 +67,38 @@ const NoteSelectionContent = ({
 
       {/* 향수 노트 그리드 (온보딩 Step3의 ScentCard 스타일 적용) */}
       <div className="grid grid-cols-3 gap-3">
-        {currentOptions.map((option) => (
-          <button
-            key={option.id}
-            onClick={() => handleOptionSelect(option.id)}
-            className="w-full block rounded-[8px] overflow-hidden border text-caption2 text-center transition-colors duration-150 border-grayscale-500 text-grayscale-900 hover:border-main-500 hover:text-main-500"
-          >
-            <div className="relative w-full h-20">
-              <img
-                src={option.img}
-                alt={option.id}
-                className="w-full h-full object-cover block"
-              />
-              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                <span className="text-white text-body3">
-                  {option.id}
-                  <br />({option.krName})
-                </span>
+        {currentOptions.map((option) => {
+          const isSelected = selectedValue === option.id;
+
+          return (
+            <button
+              key={option.id}
+              onClick={() => handleOptionSelect(option.id)}
+              className={`w-full block rounded-[8px] overflow-hidden border text-caption2 text-center transition-colors duration-150 ${
+                isSelected
+                  ? "border-main-500 text-main-500"
+                  : "border-grayscale-500 text-grayscale-900 hover:border-main-500 hover:text-main-500" // 기본 상태
+              }`}
+            >
+              <div className="relative w-full h-20">
+                <img
+                  src={option.img}
+                  alt={option.id}
+                  className="w-full h-full object-cover block"
+                />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <span className="text-white text-body3">
+                    {option.id}
+                    <br />({option.krName})
+                  </span>
+                </div>
               </div>
-            </div>
-            <div className="bg-white px-1 py-2 h-9 flex items-center justify-center text-caption2">
-              <p className="line-clamp-2">{option.description}</p>
-            </div>
-          </button>
-        ))}
+              <div className="bg-white px-1 py-2 h-9 flex items-center justify-center text-caption2">
+                <p className="line-clamp-2">{option.description}</p>
+              </div>
+            </button>
+          );
+        })}
       </div>
     </>
   );

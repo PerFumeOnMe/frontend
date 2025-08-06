@@ -11,16 +11,29 @@ const scentData = {
   ]
 };
 
-const PBTIPerfumeStyleSection = () => (
+interface perfumeRecommendation {
+  category : string;
+  categoryDescription : string
+}
+interface perfumeStyle {
+  description: string
+  notes : perfumeRecommendation[]
+}
+
+const PBTIPerfumeStyleSection:React.FC<perfumeStyle> = ({ description, notes }) => {
+  console.log("향수 스타일 데이터", description)
+
+  return (
   <div className="w-full flex flex-col justify-center items-center bg-[#FBFBFB] rounded-2xl p-5 shadow mb-6">
-    <h2 className="text-title3 font-semibold mb-1.5">당신에게 어울리는 향기 스타일</h2>
-    <div className="text-body3 font-medium mb-1.5">"{scentData.summary}"</div>
+    <h2 className="text-title3 font-semibold mb-1.5">🌸 당신에게 어울리는 향기 스타일</h2>
+    <div className="text-body2 text-grayscael-900 text-center mb-1.5">"{description}"</div>
     <div className="flex flex-col justify-center items-center gap-2 w-full">
-      {scentData.details.map((item, index) => (
-        <PBTIPerfumeStyle key={index} note={item.note} description={item.description} />
+      {notes.map((item, index) => (
+        <PBTIPerfumeStyle key={index} note={item.category} description={item.categoryDescription} />
       ))}
     </div>
   </div>
-);
+  )
+};
 
 export default PBTIPerfumeStyleSection;
