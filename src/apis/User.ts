@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
     type RequestSigninDto,
     type RequestSignupDto,
@@ -13,6 +12,7 @@ import {
     type RequestUserFavoritesListDto,
     type ResponseUserFavoritesListDto,
     type UserFavoriteContentDto,
+    type ResponseUserInfo,
 } from "../types/apis/User";
 import { axiosInstance } from "./axios";
 
@@ -66,10 +66,12 @@ export const patchUserProfileImage = async ( body : RequestUserProfileImageDto )
 };
 
 // 프로필 조회 API
-export const getUserInfo = async ():Promise<ResponseUserInfoDto> => {
-    const { data } = await axiosInstance.get(
+export const getUserInfo = async ():Promise<ResponseUserInfo> => {
+    const res = await axiosInstance.get<ResponseUserInfoDto>(
         '/users/me'
     )
+
+    const data = res.data.result
 
     return data
 }

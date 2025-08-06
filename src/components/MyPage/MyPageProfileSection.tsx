@@ -3,15 +3,41 @@ import SkeletonMyPageUserInfo from "./SkeletonMyPageUserInfo";
 import MyPageUserInfo from "./MyPageUserInfo";
 import MyPageProfileImage from "./MyPageProfileImage";
 import EditPreferredScentButton from "./EditPreferredScentButton";
-import type { ResponseUserInfoDto } from "../../types/apis/User";
+import type { ResponseUserInfo, ResponseUserInfoDto } from "../../types/apis/User";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "../../apis/User";
 
 type MyPageProfileSectionProps = {
     onClickSetting: () => void;
-    userInfo: ResponseUserInfoDto | null;
-    isLoading: boolean
 };
 
-const MyPageProfileSection = ({ onClickSetting, userInfo, isLoading }: MyPageProfileSectionProps) => {
+const MyPageProfileSection = ({ onClickSetting }: MyPageProfileSectionProps) => {
+    const [userInfo, setUserInfo] = useState<ResponseUserInfo | undefined>(undefined);
+    const [userProfileImageURL, setUserProfileImageURL] = useState<string | undefined>(undefined);
+    const [userNickName, setUserNickName] = useState<string | undefined>(undefined)
+    const [userPrefferedScant, setUserPrefferedScant] = useState<string[] | undefined>([])
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const data = await getUserInfo();
+                setUserInfo(data);
+                setUserNickName(data.nickName)
+                setUserProfileImageURL(data.imageUrl)
+                setUserPrefferedScant(data.preferredNotes)
+
+            } catch (error) {
+                console.error("유저 정보 조회 실패", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchUserInfo();
+    }, []);
+    
     const isLoadingData = isLoading;
 
     return (
@@ -24,8 +50,8 @@ const MyPageProfileSection = ({ onClickSetting, userInfo, isLoading }: MyPagePro
                 </>
             ) : (
                 <>
-                    <MyPageProfileImage />
-                    <MyPageUserInfo />
+                    <MyPageProfileImage profileURL={userProfileImageURL} />
+                    <MyPageUserInfo UserNickName={userNickName} UserPrefferedScant={userPrefferedScant} />
                     <EditPreferredScentButton onClickSetting={onClickSetting} />
                 </>
             )}
