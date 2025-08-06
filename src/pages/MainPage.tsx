@@ -21,8 +21,8 @@ const MainPage = () => {
                 setMdChoice(data.result.content);
                 setUserName(data.result.name);
                 setNickName(data.result.nickname);
-                const trendingData = await getTrending();
-                setTrending(trendingData.result);
+                // const trendingData = await getTrending();
+                // setTrending(trendingData.result);
             } catch (error) {
                 console.error('Failed to fetch:', error);
             }
@@ -37,7 +37,7 @@ const MainPage = () => {
                 <h2 className="text-title3 mb-[7px] px-[16px]">{userName}님이 좋아할만한 향수</h2>
                 <PerfumeGrid perfumes={MdChoice} />
                 <h2 className="text-title3 mb-[7px] pt-[32px] px-[16px]">요즘 뜨는 향수</h2>
-                <PerfumeGrid perfumes={trending} />
+                {/* <PerfumeGrid perfumes={trending} /> */}
             </div>
             <ChatBotButton />
         </div>

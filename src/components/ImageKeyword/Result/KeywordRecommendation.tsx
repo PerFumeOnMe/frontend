@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import type { RecommendedPerfume } from '../../../types/ImageKeyword/imageKeywordResult';
+import type { RecommendedPerfume } from '../../../types/ImageKeyword/imageKeyword';
 import RecommendationCard from './RecommendationCard';
 import ResultButton from './ResultButton';
 import { useState } from 'react';
