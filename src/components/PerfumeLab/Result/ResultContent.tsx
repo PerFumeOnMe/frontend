@@ -1,7 +1,7 @@
 import PerfumeDisplay from "./PerfumeResultDisplay";
 import ContentBox from "./ContentBox";
 import perfumeImage from "../../../assets/PerfumeLab/perfume.png";
-import { usePerfumeLab } from "../../../contexts/PerfumeLabContext";
+import { usePerfumeLab } from "../../../context/PerfumeLabContext";
 import { useEffect } from "react";
 
 const ResultContent = () => {

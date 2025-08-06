@@ -1,5 +1,5 @@
 import React from "react";
-import { usePerfumeLab } from "../../contexts/PerfumeLabContext";
+import { usePerfumeLab } from "../../context/PerfumeLabContext";
 import NoteSelectionButton from "./NoteSelectionButton";
 import { noteOptions } from "../../types/noteOptions";
 import type { Note } from "../../types/note";
