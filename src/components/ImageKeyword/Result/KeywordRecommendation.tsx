@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { RecommendedPerfume } from '../../../types/ImageKeyword/imageKeyword';
 import RecommendationCard from './RecommendationCard';
 import ResultButton from './ResultButton';
-import { useState } from 'react';
-import SaveCompleteModal from './SaveCompleteModal';
 import SaveNameModal from './SaveNameModal';
+import SaveCompleteModal from './SaveCompleteModal';
+import { postImageKeywordSave } from '../../../apis/ImageKeyword';
 
 interface KeywordRecommendationProps {
     recommendations: RecommendedPerfume[];
@@ -12,9 +13,33 @@ interface KeywordRecommendationProps {
 
 export default function KeywordRecommendation({ recommendations }: KeywordRecommendationProps) {
     const navigate = useNavigate();
-    const [showModal, setShowModal] = useState(false);
+    const [showSaveModal, setShowSaveModal] = useState(false);
     const [showCompleteModal, setShowCompleteModal] = useState(false);
-    const [perfumeName, setPerfumeName] = useState('');
+    const [isSaving, setIsSaving] = useState(false);
+
+    const handleSave = async (savedName: string) => {
+        try {
+            setIsSaving(true);
+            const response = await postImageKeywordSave({ savedName });
+            
+            if (response.isSuccess) {
+                setShowSaveModal(false);
+                setShowCompleteModal(true);
+            } else {
+                alert(response.message);
+            }
+        } catch (error) {
+            console.error('Failed to save result:', error);
+            alert('저장에 실패했습니다.');
+        } finally {
+            setIsSaving(false);
+        }
+    };
+
+    const handleComplete = () => {
+        setShowCompleteModal(false);
+        navigate('/');
+    };
 
     return (
         <div className="w-full rounded-t-[24px] bg-[#FBFBFB]/40 border-[1px] border-white px-[25px] py-[16px]">
@@ -28,41 +53,32 @@ export default function KeywordRecommendation({ recommendations }: KeywordRecomm
                 {recommendations.map((perfume, index) => (
                     <RecommendationCard
                         key={index}
-                        brand={perfume.brand}
-                        name={perfume.name}
-                        notes={{
-                            topNote: perfume.topNote,
-                            middleNote: perfume.middleNote,
-                            baseNote: perfume.baseNote
-                        }}
-                        description={perfume.description}
-                        imageUrl={perfume.imageUrl || '/perfumes/default.png'}
-                        relatedKeywords={perfume.relatedKeywords}
+                        {...perfume}
                     />
                 ))}
             </div>
             <div className="flex justify-center gap-[16px] mt-[24px] mb-[16px]">
-                <ResultButton label="저장하기" onClick={() => setShowModal(true)} />
-                <ResultButton label="홈으로" onClick={() => navigate('/')} />
+                <ResultButton 
+                    label="저장하기" 
+                    onClick={() => setShowSaveModal(true)}
+                    disabled={isSaving}
+                />
+                <ResultButton 
+                    label="홈으로" 
+                    onClick={() => navigate('/')}
+                />
             </div>
 
-            {showModal && (
+            {showSaveModal && (
                 <SaveNameModal
-                    onClose={() => setShowModal(false)}
-                    onSubmit={(name) => {
-                        setPerfumeName(name);
-                        setShowModal(false);
-                        setShowCompleteModal(true);
-                    }}
+                    onSubmit={handleSave}
+                    onClose={() => setShowSaveModal(false)}
                 />
             )}
 
             {showCompleteModal && (
                 <SaveCompleteModal
-                    onConfirm={() => {
-                        setShowCompleteModal(false);
-                        navigate('/');
-                    }}
+                    onConfirm={handleComplete}
                 />
             )}
         </div>

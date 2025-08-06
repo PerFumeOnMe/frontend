@@ -1,22 +1,20 @@
-interface Note {
-    topNote: string;
-    middleNote: string;
-    baseNote: string;
-}
-
 interface RecommendationCardProps {
     brand: string;
     name: string;
-    notes: Note;
+    topNote: string;
+    middleNote: string;
+    baseNote: string;
     description: string;
-    imageUrl: string;
     relatedKeywords: string[];
+    imageUrl: string;
 }
 
 export default function RecommendationCard({
     brand,
     name,
-    notes,
+    topNote,
+    middleNote,
+    baseNote,
     description,
     imageUrl,
     relatedKeywords
@@ -35,15 +33,15 @@ export default function RecommendationCard({
                     <div className="mt-[8px] space-y-[4px]">
                         <div className="flex items-center gap-[8px]">
                             <span className="text-body4 text-grayscale-1000">탑 노트</span>
-                            <span className="text-caption1 text-grayscale-800">{notes.topNote}</span>
+                            <span className="text-caption1 text-grayscale-800">{topNote}</span>
                         </div>
                         <div className="flex items-center gap-[8px]">
                             <span className="text-body4 text-grayscale-1000">미들 노트</span>
-                            <span className="text-caption1 text-grayscale-800">{notes.middleNote}</span>
+                            <span className="text-caption1 text-grayscale-800">{middleNote}</span>
                         </div>
                         <div className="flex items-center gap-[8px]">
                             <span className="text-body4 text-grayscale-1000">베이스 노트</span>
-                            <span className="text-caption1 text-grayscale-800">{notes.baseNote}</span>
+                            <span className="text-caption1 text-grayscale-800">{baseNote}</span>
                         </div>
                     </div>
                 </div>
@@ -57,11 +55,6 @@ export default function RecommendationCard({
                         <span className="text-body3 text-grayscale-800">
                             {keyword}
                         </span>
-                        {/* <div className="flex">
-                            {Array.from({ length: 2 }).map((_, i) => (
-                                <span key={i} className="text-primary text-grayscale-800">♥</span>
-                            ))}
-                        </div> */}
                         {index < relatedKeywords.length - 1 && (
                             <span className="text-body3 text-grayscale-800">|</span>
                         )}

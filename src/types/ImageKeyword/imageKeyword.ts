@@ -29,12 +29,12 @@ export type ImageKeywordResult = {
 }
 
 // 이미지 키워드 저장 요청 타입
-export interface SaveImageKeywordRequest {
+export type SaveImageKeywordRequest = {
     savedName: string;
 }
 
 // 이미지 키워드 저장 결과 타입
-export interface SaveImageKeywordResult {
+export type SaveImageKeywordResult = {
     imageKeywordId: number;
     savedName: string;
     createdAt: string;
