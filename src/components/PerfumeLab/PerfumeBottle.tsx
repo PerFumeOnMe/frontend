@@ -1,5 +1,5 @@
 import React from "react";
-import { usePerfumeLab } from "../../context/PerfumeLabContext";
+import { usePerfumeLab } from "../../hooks/PerfumeLab/usePerfumeLab";
 import { noteOptions } from "../../types/noteOptions";
 import type { Note } from "../../types/note";
 import BaseMask from "../../assets/PerfumeLab/masks/base_mask.png";

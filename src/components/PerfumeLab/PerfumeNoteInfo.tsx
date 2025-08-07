@@ -1,5 +1,5 @@
 import React from "react";
-import { usePerfumeLab } from "../../context/PerfumeLabContext";
+import { usePerfumeLab } from "../../hooks/PerfumeLab/usePerfumeLab";
 
 interface PerfumeNoteInfoProps {
   className?: string;

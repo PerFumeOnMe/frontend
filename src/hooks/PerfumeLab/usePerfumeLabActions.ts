@@ -39,6 +39,7 @@ export const usePerfumeLabActions = ({
   allNotesSelected,
   allVolumesSelected,
 }: UsePerfumeLabActionsProps) => {
+  // API 데이터 변환 함수
   const getPerfumeDataForAPI = useCallback(
     (): RequestWorkshopDto => ({
       topNote: selectedNotes.탑.krName,
@@ -51,6 +52,7 @@ export const usePerfumeLabActions = ({
     [selectedNotes]
   );
 
+  // 노트 선택 모달 열기
   const handleNoteSelect = useCallback(
     (note: Note) => {
       setModal({ isOpen: true, type: "note", selectedNote: note });
@@ -58,14 +60,17 @@ export const usePerfumeLabActions = ({
     [setModal]
   );
 
+  // 용량 선택 모달 열기
   const handleVolumeSelect = useCallback(() => {
     setModal({ isOpen: true, type: "volume", selectedNote: "" });
   }, [setModal]);
 
+  // 모달 닫기
   const handleModalClose = useCallback(() => {
     setModal(INITIAL_MODAL_STATE);
   }, [setModal]);
 
+  // 노트 선택 완료
   const handleNoteSelected = useCallback(
     (noteType: Note, selectedValue: string) => {
       const selectedNoteData = noteOptions[noteType].find(
@@ -88,6 +93,7 @@ export const usePerfumeLabActions = ({
     [setSelectedNotes, setModal]
   );
 
+  // 용량 선택 완료
   const handleVolumeSelected = useCallback(
     (noteType: Note, volume: number) => {
       setSelectedNotes((prev) => ({
@@ -98,6 +104,7 @@ export const usePerfumeLabActions = ({
     [setSelectedNotes]
   );
 
+  // 노트 제거
   const handleNoteRemove = useCallback(
     (noteType: Note) => {
       setSelectedNotes((prev) => ({
@@ -108,13 +115,16 @@ export const usePerfumeLabActions = ({
     [setSelectedNotes]
   );
 
+  // 전체 초기화
   const handleReset = useCallback(() => {
     setSelectedNotes(INITIAL_NOTES_STATE);
     setCompletedPerfume(null);
     setError(null);
   }, [setSelectedNotes, setCompletedPerfume, setError]);
 
+  // 결과 조회 (API 호출)
   const handleResultView = useCallback(async () => {
+    // 유효성 검사
     if (!allNotesSelected || !allVolumesSelected) {
       alert("모든 노트와 용량을 선택해주세요.");
       return;
@@ -124,16 +134,27 @@ export const usePerfumeLabActions = ({
     setError(null);
 
     try {
-      const response = await postWorkshopPreview(getPerfumeDataForAPI());
+      // API 호출
+      const requestData = getPerfumeDataForAPI();
+      const response = await postWorkshopPreview(requestData);
 
-      if (response.isSuccess) {
+      if (response.isSuccess && response.result) {
         setCompletedPerfume(response.result);
       } else {
         setError(response.message || "향수 정보를 가져오는데 실패했습니다.");
       }
     } catch (err) {
       console.error("API 호출 실패:", err);
-      setError("향수 정보를 가져오는데 실패했습니다. 다시 시도해주세요.");
+
+      // 에러 메시지 처리
+      let errorMessage =
+        "향수 정보를 가져오는데 실패했습니다. 다시 시도해주세요.";
+
+      if (err instanceof Error) {
+        errorMessage = err.message || errorMessage;
+      }
+
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }

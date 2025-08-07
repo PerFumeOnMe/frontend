@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Slider } from "./Slider";
 import { useNavigate } from "react-router-dom";
-import { usePerfumeLab } from "../../context/PerfumeLabContext";
+import { usePerfumeLab } from "../../hooks/PerfumeLab/usePerfumeLab";
 
 const VolumeSelectionContent = () => {
   const [topNote, setTopNote] = useState(0);

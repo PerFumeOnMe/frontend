@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  type ReactNode,
-} from "react";
-import type { Note } from "../types/note";
+import { createContext, useState, useMemo, type ReactNode } from "react";
 import type {
   ResponseWorkshopDto,
   RequestWorkshopDto,
@@ -17,8 +10,9 @@ import {
 } from "../constants/PerfumeLab/PerfumeLab";
 import { usePerfumeLabActions } from "../hooks/PerfumeLab/usePerfumeLabActions";
 import { usePerfumeLabComputed } from "../hooks/PerfumeLab/usePerfumeLabComputed";
+import type { Note } from "../types/note";
 
-interface PerfumeLabContextType {
+export interface PerfumeLabContextType {
   // States
   selectedNotes: SelectedNotes;
   completedPerfume: ResponseWorkshopDto["result"] | null;
@@ -43,19 +37,11 @@ interface PerfumeLabContextType {
   getPerfumeDataForAPI: () => RequestWorkshopDto;
 }
 
-const PerfumeLabContext = createContext<PerfumeLabContextType | undefined>(
+export const PerfumeLab = createContext<PerfumeLabContextType | undefined>(
   undefined
 );
 
-export const usePerfumeLab = () => {
-  const context = useContext(PerfumeLabContext);
-  if (!context) {
-    throw new Error("usePerfumeLab must be used within a PerfumeLabProvider");
-  }
-  return context;
-};
-
-export const PerfumeLabProvider = ({ children }: { children: ReactNode }) => {
+const PerfumeLabProvider = ({ children }: { children: ReactNode }) => {
   // State management
   const [selectedNotes, setSelectedNotes] =
     useState<SelectedNotes>(INITIAL_NOTES_STATE);
@@ -109,8 +95,8 @@ export const PerfumeLabProvider = ({ children }: { children: ReactNode }) => {
   );
 
   return (
-    <PerfumeLabContext.Provider value={contextValue}>
-      {children}
-    </PerfumeLabContext.Provider>
+    <PerfumeLab.Provider value={contextValue}>{children}</PerfumeLab.Provider>
   );
 };
+
+export default PerfumeLabProvider;
