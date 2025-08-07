@@ -1,11 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import choosePageImage from "../assets/MainPage/choose_page_image.png";
+import returnIcon from "../assets/Login/ReturnShape.png";
 
 const ChoosePathPage = () => {
     const navigate = useNavigate();
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#F4EEFA] to-[#FBFBFB] flex items-center">
+            <button
+                onClick={() => navigate(-1)}
+                className="absolute top-[24px] left-[11px] w-[24px] h-[24px] flex items-center justify-center"
+            >
+                <img
+                    src={returnIcon}
+                    alt="뒤로가기"
+                    className="ml-[6px] mt-[3px] mb-[1.33px]"
+                />
+            </button>
             <div className="w-full px-[16px] flex flex-col items-center">
                 {/* 이미지 */}
                 <img 

@@ -16,10 +16,10 @@
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-50%);
+        transform: translateX(-100%);
     }
 }
 
 .animate-slide-bg {
-    animation: slide-bg 3s linear;
+    animation: slide-bg 15s linear infinite;
 }

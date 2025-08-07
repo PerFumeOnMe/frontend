@@ -1,16 +1,14 @@
-import type { CommonResponseCode, ImageKeywordErrorCode } from './imageKeyword.type';
-
-// 키워드 입력 폼
-export interface ImageKeywordRequest {
-    ambience: string;
-    style: string;
-    gender: string;
-    season: string;
-    character: string;
+// 이미지 키워드 요청 타입
+export type ImageKeyword = {
+    ambience: string;    // 분위기
+    style: string;       // 스타일
+    gender: string;      // 성별
+    season: string;      // 계절
+    personality: string; // 성격
 }
 
-// 프리뷰 향수 추천 카드
-export interface ImageKeywordRecommendation {
+// 추천 향수 타입
+export type RecommendedPerfume = {
     brand: string;
     name: string;
     topNote: string;
@@ -18,47 +16,27 @@ export interface ImageKeywordRecommendation {
     baseNote: string;
     description: string;
     relatedKeywords: string[];
+    imageUrl: string;
 }
 
-// 프리뷰 결과 응답
-export interface ImageKeywordPreviewResult {
+// 이미지 키워드 결과 타입
+export type ImageKeywordResult = {
     keywords: string[];
     descriptions: string;
     scenario: string;
     characterImageUrl: string;
-    recommendations: ImageKeywordRecommendation[];
+    recommendations: RecommendedPerfume[];
 }
 
-// API 성공 응답
-export interface ApiSuccessResponse<T> {
-    isSuccess: true;
-    code: CommonResponseCode;
-    message: string;
-    result: T;
-}
-
-// API 에러 응답
-export interface ApiErrorResponse {
-    resultType: "FAIL";
-    error: {
-        errorCode: ImageKeywordErrorCode;
-        reason: string;
-        data: Record<string, any>;
-    };
-    success: null;
-}
-
-// 저장 요청
-export interface ImageKeywordSaveRequest {
+// 이미지 키워드 저장 요청 타입
+export type SaveImageKeywordRequest = {
     savedName: string;
 }
 
-// 저장 응답 결과
-export interface ImageKeywordSaveResult {
+// 이미지 키워드 저장 결과 타입
+export type SaveImageKeywordResult = {
     imageKeywordId: number;
     savedName: string;
     createdAt: string;
 }
 
-// API 응답 타입
-export type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;

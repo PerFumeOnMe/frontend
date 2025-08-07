@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { getBackgroundImage } from '../../utils/imageKeywordBackground';
-import type { ImageKeywordResult } from '../../types/ImageKeyword/imageKeywordResult';
+import type { ImageKeywordResult } from '../../types/ImageKeyword/imageKeyword';
 import KeywordBubbles from '../../components/ImageKeyword/Result/KeywordBubbles';
 import KeywordDescription from '../../components/ImageKeyword/Result/KeywordDescription';
 import KeywordScenario from '../../components/ImageKeyword/Result/KeywordScenario';
@@ -9,8 +9,19 @@ import KeywordRecommendations from '../../components/ImageKeyword/Result/Keyword
 
 export default function ImageKeywordResultPage() {
     const location = useLocation();
-    const result = location.state?.result as ImageKeywordResult;
-    const backgroundImage = result ? getBackgroundImage(result.keywords[0]) : undefined;
+    const result = location.state?.result as ImageKeywordResult | undefined;
+
+    if (!result || !result.keywords || result.keywords.length === 0) {
+        return (
+            <div className="w-full min-w-[375px] max-w-[480px] min-h-screen flex items-center justify-center">
+                <p className="text-body1 text-grayscale-800">
+                    결과 데이터를 불러오지 못했어요. 홈으로 돌아가주세요.
+                </p>
+            </div>
+        );
+    }
+
+    const backgroundImage = getBackgroundImage(result.keywords[0]);
 
     return (
         <div 
