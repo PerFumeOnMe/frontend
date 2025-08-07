@@ -66,7 +66,7 @@ const middleNoteOptions: NoteOption[] = [
   {
     id: "rose",
     emotion: "🌹",
-    krName: "로즈",
+    krName: "장미",
     description: "장미꽃, 로즈워터, 꽃잎 목욕 등 로맨틱한 플로럴 향",
     color: "#A95B6D",
     img: "/src/assets/PerfumeLab/scents/rose.jpg",
