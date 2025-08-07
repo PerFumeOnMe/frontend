@@ -61,7 +61,7 @@ const FavoritesAndRecommendations: React.FC = () => {
 
       {favOrRecommend
         ? <Favorites/>
-        : <RecommendationsResultSection isLoading={isLoading} />}
+        : <RecommendationsResultSection/>}
     </div>
   );
 };

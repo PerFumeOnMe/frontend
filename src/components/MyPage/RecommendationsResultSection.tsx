@@ -1,7 +1,15 @@
+import { useEffect, useState } from "react";
 import MyPageRecommendationCard from "./MyPageRecommendationCard";
 import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
 
-const RecommendationsResultSection: React.FC<{ isLoading?: boolean }> = ({ isLoading = false }) => {
+const RecommendationsResultSection: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true)
+
+  /*useEffect(() => {
+    const 
+  },[])*/
+
+  
   return (
     <div className="flex flex-col w-full">
       {isLoading
