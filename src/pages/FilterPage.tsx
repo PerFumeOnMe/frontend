@@ -92,7 +92,7 @@ export default function FilterPage() {
                             <ScentCard
                                 key={scent.id}
                                 id={scent.id}
-                                svg={scent.svg}
+                                png={scent.png}
                                 description={scent.description}
                                 selected={selectedScent === scent.id}
                                 onClick={() => handleScentToggle(scent.id)}

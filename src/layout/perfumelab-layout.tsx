@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { PerfumeLabProvider } from "../contexts/PerfumeLabContext";
+import { PerfumeLabProvider } from "../context/PerfumeLabContext";
 
 const PerfumeLabLayout = () => {
   return (

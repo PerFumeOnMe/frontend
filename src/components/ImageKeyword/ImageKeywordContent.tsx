@@ -1,6 +1,6 @@
 import { KEYWORD_CATEGORIES, CATEGORY_KOREAN, KEYWORD_OPTIONS } from '../../types/ImageKeyword/imageKeyword.const';
 import type { KeywordCategory } from '../../types/ImageKeyword/imageKeyword.type';
-import type { ImageKeywordRequest } from '../../types/ImageKeyword/imageKeyword';
+import type { ImageKeywordPreviewRequestDto } from '../../types/apis/ImageKeyword';
 
 // 각 단계별 설명 텍스트 정의
 const STEP_CONTENT = {
@@ -20,7 +20,7 @@ const STEP_CONTENT = {
         question: "당신이 빛이 나는 계절은 언제인가요?",
         description: "맞춤형 향수를 위해 여러 정보들이 필요합니다."
     },
-    character: {
+    personality: {
         question: "당신의 성격은 어떠신가요?",
         description: "맞춤형 향수를 위해 여러 정보들이 필요합니다."
     }
@@ -28,7 +28,7 @@ const STEP_CONTENT = {
 
 interface ImageKeywordContentProps {
     currentStep: number;
-    selectedKeywords: Partial<ImageKeywordRequest>;
+    selectedKeywords: Partial<ImageKeywordPreviewRequestDto>;
     onKeywordSelect: (keyword: string) => void;
 }
 

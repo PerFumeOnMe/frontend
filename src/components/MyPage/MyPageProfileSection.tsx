@@ -1,27 +1,36 @@
-import type { ResponseUserInfoDto } from "../../types/apis/User";
-import EditPreferredScentButton from "./EditPreferredScentButton";
-import MyPageProfileImage from "./MyPageProfileImage";
+import SkeletonMyPageProfileImage from "./SkeletonMyPageProfileImage";
+import SkeletonMyPageUserInfo from "./SkeletonMyPageUserInfo";
 import MyPageUserInfo from "./MyPageUserInfo";
+import MyPageProfileImage from "./MyPageProfileImage";
+import EditPreferredScentButton from "./EditPreferredScentButton";
+import type { ResponseUserInfoDto } from "../../types/apis/User";
 
 type MyPageProfileSectionProps = {
     onClickSetting: () => void;
     userInfo: ResponseUserInfoDto | null;
+    isLoading: boolean
 };
 
-const MyPageProfileSection = ({ onClickSetting, userInfo } : MyPageProfileSectionProps) => {
-    if (!userInfo) return null; // 로딩 중 또는 데이터 없음 처리 로딩창 추가하기
+const MyPageProfileSection = ({ onClickSetting, userInfo, isLoading }: MyPageProfileSectionProps) => {
+    const isLoadingData = isLoading;
 
-    if (userInfo) {
-        console.log(userInfo)
-    }
-
-    return(
+    return (
         <div className="w-full flex flex-col justify-center items-center p-4 mt-4 bg-main-10">
-            <MyPageProfileImage />
-            <MyPageUserInfo />
-            <EditPreferredScentButton onClickSetting={onClickSetting}/>
+            {isLoadingData ? (
+                <>
+                    <SkeletonMyPageProfileImage />
+                    <SkeletonMyPageUserInfo />
+                    <EditPreferredScentButton onClickSetting={onClickSetting} />
+                </>
+            ) : (
+                <>
+                    <MyPageProfileImage />
+                    <MyPageUserInfo />
+                    <EditPreferredScentButton onClickSetting={onClickSetting} />
+                </>
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default MyPageProfileSection;

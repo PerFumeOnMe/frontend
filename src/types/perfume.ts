@@ -24,7 +24,7 @@ export interface PerfumeNotes {
   base: NoteDetail;
 }
 
-export interface fragnanceType {
+export interface fragranceType {
   lastingPower: string;
   diffusionRange: number;
   diffusionPower: string;
@@ -38,7 +38,7 @@ export interface PerfumeDetail {
   keyword: string;
   description: string;
   note: PerfumeNotes;
-  fragnanceType: fragnanceType;
+  fragranceType: fragranceType;
   gender: string;
   locations: string[];
   seasons: string[];

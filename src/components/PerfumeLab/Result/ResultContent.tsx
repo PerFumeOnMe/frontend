@@ -1,8 +1,18 @@
 import PerfumeDisplay from "./PerfumeResultDisplay";
 import ContentBox from "./ContentBox";
 import perfumeImage from "../../../assets/PerfumeLab/perfume.png";
+import { usePerfumeLab } from "../../../context/PerfumeLabContext";
+import { useEffect } from "react";
 
 const ResultContent = () => {
+  const { completedPerfume } = usePerfumeLab();
+
+  useEffect(() => {
+    if (completedPerfume) {
+      console.log("Completed Perfume:", completedPerfume);
+    }
+  }, [completedPerfume]);
+
   return (
     <div className="w-full gap-6 flex flex-col items-center">
       <div className="w-full  bg-[#FBFBFB]/30 rounded-3xl p-5 text-center border border-white shadow-[0_-10px_10px_-3px_rgba(0,0,0,0.02),0_10px_10px_-3px_rgba(0,0,0,0.02)]">

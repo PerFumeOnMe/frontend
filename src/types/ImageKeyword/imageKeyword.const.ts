@@ -6,7 +6,7 @@ export const KEYWORD_CATEGORIES = [
     'style', 
     'gender', 
     'season', 
-    'character'
+    'personality'
 ] as const;
 
 // 분위기 키워드 옵션
@@ -53,7 +53,7 @@ export const SEASON_OPTIONS = [
 ] as const;
 
 // 성격 키워드 옵션
-export const CHARACTER_OPTIONS = [
+export const PERSONALITY_OPTIONS = [
     "조용한",
     "논리적인",
     "개성강한",
@@ -72,7 +72,7 @@ export const KEYWORD_OPTIONS: Record<KeywordCategory, readonly string[]> = {
     style: STYLE_OPTIONS,
     gender: GENDER_OPTIONS,
     season: SEASON_OPTIONS,
-    character: CHARACTER_OPTIONS,
+    personality: PERSONALITY_OPTIONS,
 } as const;
 
 // 카테고리 한글 매핑
@@ -81,5 +81,5 @@ export const CATEGORY_KOREAN: Record<KeywordCategory, string> = {
     style: '스타일',
     gender: '성별',
     season: '계절',
-    character: '성격',
+    personality: '성격',
 } as const; 

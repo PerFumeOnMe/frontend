@@ -1,16 +1,18 @@
 import type { CommonResponse } from "../apis/common";
-import type { Perfume } from "../perfume";
+import type { Perfume, PerfumeDetail } from "../perfume";
 
 export type ResponseMdChoiceDto = {
-    content: Perfume[];
-    name: string;
-    nickname: string;
-}
+  content: Perfume[];
+  name: string;
+  nickname: string;
+};
 
 export type MdChoiceResponse = CommonResponse<ResponseMdChoiceDto>;
 
 export type TrendingResponse = CommonResponse<Perfume[]>;
 
 export type FavoriteResponse = CommonResponse<{
-    fragranceId: number;
+  fragranceId: number;
 }>;
+
+export type ResponseFragranceDetailDto = CommonResponse<PerfumeDetail>;
