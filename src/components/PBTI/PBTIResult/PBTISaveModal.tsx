@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { postSavePBTI } from "../../../apis/PBTI";
 
 type PBTISaveModalProps = {
   isOpen: boolean;
@@ -24,6 +25,21 @@ const PBTISaveModal: React.FC<PBTISaveModalProps> = ({
   onSave,
   onClose,
 }) => {
+
+  const handleSaveButton = () => {
+    try {
+      const res = postSavePBTI({ savedName : perfumeName}) ;
+
+      console.log("저장에 성공했습니다.",res)
+
+      return res
+    } catch (error) {
+      console.log("PBTI 결과 저장중 오류가 발생했습니다.", error)
+    } finally {
+      onSave()
+    }
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -55,7 +71,7 @@ const PBTISaveModal: React.FC<PBTISaveModalProps> = ({
                 />
                 <button
                   className="w-full bg-main-500 text-white py-3 mb-3 rounded-2xl font-semibold"
-                  onClick={onSave}
+                  onClick={handleSaveButton}
                 >
                   저장하기
                 </button>
