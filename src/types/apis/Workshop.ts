@@ -24,3 +24,13 @@ export type ResponseWorkshopDto = CommonResponse<{
   tendency: string;
   recommendedFragranceJson: PerfumeDetail[];
 }>;
+
+export type RequestWorkshopSaveDto = {
+  savedName: string;
+};
+
+export type ResponseWorkshopSaveDto = CommonResponse<{
+  workshopId: number;
+  savedName: string;
+  createdAt: string;
+}>;
