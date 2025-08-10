@@ -1,4 +1,3 @@
-// CalendarDiary.tsx
 import moment from "moment";
 import "moment/dist/locale/ko";
 import { IoAdd } from "react-icons/io5";
