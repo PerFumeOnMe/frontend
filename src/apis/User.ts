@@ -47,10 +47,12 @@ export const postSignup = async ( body : RequestSignupDto ):Promise<ResponseSign
 
 // 유저 선호 향 수정 API
 export const patchUserNotes = async ( body : RequestUserNotesDto ):Promise<ResponseUserNotesDto> => {
-    const { data } = await axiosInstance.patch(
+    const res = await axiosInstance.patch(
         '/users/me/notes',
         body,
     );
+
+    const data = res.data
 
     return data;
 };

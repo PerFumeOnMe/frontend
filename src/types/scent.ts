@@ -4,6 +4,13 @@ export type Scent = {
   png: string;
 };
 
+export type EditScent = {
+  id: number
+  name: string
+  description: string
+  png: string
+}
+
 export type ScentCardProps = {
   id: string;
   png: string;

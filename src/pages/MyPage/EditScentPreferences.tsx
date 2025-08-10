@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OnboardingLayout from "../../components/Onboarding/OnboardingLayout";
 import BottomButton from "../../components/common/BottomButton";
 import ScentCard from "../../components/common/ScentCard"; 
@@ -6,10 +6,13 @@ import { scentOptions } from "../../types/scentOptions";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineExclamation } from "react-icons/ai";
 import GoBackIcon from "../../assets/MyPage/GoBackArrowButton.svg"
+import { patchUserNotes } from "../../apis/User";
+import { useNavigate } from "react-router-dom";
 
 export default function EditScentPreferences() {
-  const [selected, setSelected] = useState<string[]>([]);
-  const toggle = (id: string) => {
+  const [selected, setSelected] = useState<number[]>([]);
+  const navigate = useNavigate();
+  const toggle = (id: number) => {
     if (selected.includes(id)) {
       setSelected(selected.filter((s) => s !== id));
     } else if (selected.length < 3) {
@@ -34,9 +37,30 @@ export default function EditScentPreferences() {
     }
   };
 
+  const handlePatchButton = async () => {
+    try {
+      const noteCategoryId = selected
+      const ok = await patchUserNotes({ noteCategoryId : noteCategoryId });
+      if (ok) {
+        toast.success("선호 향이 저장되었습니다.");
+        navigate("/mypage");
+      } else {
+        toast.error("저장에 실패했습니다. 다시 시도해 주세요.");
+      
+      }
+    } catch (e) {
+      toast.error("저장 중 오류가 발생했습니다.");
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    console.log(selected)
+  },[selected])
+
   return (
     <OnboardingLayout>
-      <div className="font-[Pretandard]">
+      <div className="font-[Pretandard] pb-16">
         <Toaster position="bottom-center" />
   
         <div className="w-full px-4 mx-auto mt-[22px]">
@@ -55,10 +79,10 @@ export default function EditScentPreferences() {
           </div>
   
           <div className="mt-6 mb-6 grid grid-cols-3 gap-x-3 gap-y-4">
-            {scentOptions.map(({ id, png, description }) => (
+            {scentOptions.map(({ id, name, png, description }) => (
               <ScentCard
                 key={id}
-                id={id}
+                id={name}
                 png={png}
                 description={description}
                 selected={selected.includes(id)}
@@ -71,7 +95,7 @@ export default function EditScentPreferences() {
         <div className="pb-3 w-full">
           <BottomButton
             disabled={selected.length !== 3}
-            onClick={() => (window.location.href = "/mypage")}
+            onClick={handlePatchButton}
           >
             수정하기
           </BottomButton>

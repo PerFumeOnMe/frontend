@@ -57,8 +57,10 @@ export const patchPBTIName = async (
 
 /// 마이페이지 PBTI 목록 조회
 export const getPBTIList = async (): Promise<PbtiListResult[]> => {
-  const { data }: { data: ApiResponsePbtiListResult } = await axiosInstance.get("/pbti/result/list");
-  return data.result;
+  const res = await axiosInstance.get<ApiResponsePbtiListResult>("/pbti/result/list");
+  const data = res.data.result
+  
+  return data;
 };
 
 /// PBTI 결과 삭제

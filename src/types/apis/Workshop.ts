@@ -24,3 +24,11 @@ export type ResponseWorkshopDto = CommonResponse<{
   tendency: string;
   recommendedFragranceJson: PerfumeDetail[];
 }>;
+
+export type WorkShopListResponseDTO = CommonResponse<WorkShopMyPerfume[]>
+
+export type WorkShopMyPerfume = {
+  brand : number,
+  name : string,
+  imageUrl : string,
+}

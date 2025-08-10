@@ -1,5 +1,5 @@
 import { axiosInstance } from '../apis/axios';
-import type { MdChoiceResponse, TrendingResponse, FavoriteResponse } from '../types/apis/Fragrance';
+import type { MdChoiceResponse, TrendingResponse, FavoriteResponse, FragranceMyPerfumeResult, myPerfume } from '../types/apis/Fragrance';
 
 export const getMdChoice = async (): Promise<MdChoiceResponse> => {
     try {

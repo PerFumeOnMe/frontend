@@ -11,7 +11,7 @@ const MyPage = () => {
     };
     
     return(
-        <div className="min-h-screen w-full bg-[#F4EEFA] font-[Pretendard]">
+        <div className="min-h-screen w-full bg-[#F4EEFA] font-[Pretendard] pb-16">
             <div className="max-w-120 min-w-[375px] flex flex-col w-full h-full p-4">
                 <MyPageHeader />
                 <MyPageProfileSection
