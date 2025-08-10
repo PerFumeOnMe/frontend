@@ -1,22 +1,50 @@
+// CalendarDiary.tsx
 import moment from "moment";
 import "moment/dist/locale/ko";
 import { IoAdd } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { axiosInstance } from "../../apis/axios"; 
 moment.locale("ko");
 
 interface CalendarDiaryProps {
   selectedDate: Date;
-  diaryData: { [key: string]: any[] }; 
+  diaryData: { [key: string]: any[] };
 }
 
 export default function CalendarDiary({ selectedDate, diaryData }: CalendarDiaryProps) {
   const navigate = useNavigate();
   const dateKey = moment(selectedDate).format("YYYY-MM-DD");
-  const diaryList = diaryData[dateKey] || [];
+
+  const [diaryList, setDiaryList] = useState<any[]>([]);
 
   const handleAddDiary = () => {
     navigate(`/diary/new?date=${dateKey}`);
   };
+
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const { data } = await axiosInstance.get(`/diary/daily/${dateKey}`);
+        console.log("일별 조회 응답:", data);
+
+        if (!alive) return;
+
+        const payload = data?.result;
+        const list = Array.isArray(payload) ? payload : payload ? [payload] : [];
+        const normalized = list.map((d: any) => ({
+          fragranceName: d?.fragranceName ?? d?.name ?? "",
+          content: d?.content ?? d?.text ?? "",
+        }));
+        setDiaryList(normalized.filter(d => d.fragranceName || d.content));
+      } catch (e) {
+        setDiaryList([]);
+      }
+    })();
+    return () => { alive = false; };
+  }, [dateKey]);
 
   return (
     <div className="w-full mx-auto bg-white">
@@ -37,13 +65,13 @@ export default function CalendarDiary({ selectedDate, diaryData }: CalendarDiary
           </div>
         ))}
 
-        <button
-          onClick={handleAddDiary}
-          className="w-full h-20 px-4 border border-main-500 rounded-lg text-body3 text-grayscale-800 flex items-center justify-between"
-        >
-          향수 일기를 작성해 주세요!
-          <IoAdd className="text-main-500 mr-8 text-2xl" />
-        </button>
+      <button
+        onClick={handleAddDiary}
+        className="w-full h-20 px-4 border border-main-500 rounded-lg text-body3 text-grayscale-800 flex items-center justify-between"
+      >
+        향수 일기를 작성해 주세요!
+        <IoAdd className="text-main-500 mr-8 text-2xl" />
+      </button>
     </div>
   );
 }
