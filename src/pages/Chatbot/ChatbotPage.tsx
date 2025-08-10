@@ -3,8 +3,9 @@ import Header from '../../components/Chatbot/Header';
 import ChatArea from '../../components/Chatbot/ChatArea';
 import InputBox from '../../components/Chatbot/InputBox';
 import PerfumeTagList from '../../components/Chatbot/PerfumeTagList';
+import { postChatbot } from '../../apis/Chatbot';
+import type { RequestChatbotMessage, ResponseChatbotMessage } from '../../types/apis/Chatbot';
 
-// ChatbotPage.tsx
 export interface Message {
   type: "user" | "bot";
   text: string;
@@ -19,28 +20,41 @@ const perfumeTags = [
 const ChatbotPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { type: "bot", text: "복잡하게 찾지 말고 한 번에 검색을 통하여 원하는 향수를 찾아보세요!\n저는 지하주차장 냄새가 은근 괜찮더라구요. 지하주차장 냄새랑 비슷한 향수를 찾곤 합니다 :)  " },
-    //{ type: "user", text: "메니큐어 냄새가 좋던데, 메니큐어 냄새랑 비슷한 향수를 추천해줘." },
-    //{ type: "bot", text: "메니큐어 향을 좋아하는 분들을 위한 향수 추천 요약..." },
+    {
+      type: "bot",
+      text: "복잡하게 찾지 말고 한 번에 검색을 통하여 원하는 향수를 찾아보세요!\n저는 지하주차장 냄새가 은근 괜찮더라구요. 지하주차장 냄새랑 비슷한 향수를 찾곤 합니다 :)  "
+    },
   ]);
 
-  const handleSend = (text: string) => {
+  const handleSend = async (text: string) => {
+    // 유저 메시지 추가
     setMessages((prev) => [...prev, { type: "user", text }]);
-    // 실제 챗봇 응답 로직 추가 필요
     setIsLoading(true);
-    // 예시용 딜레이 응답
-    setTimeout(() => {
+
+    try {
+      // API 요청
+      const body: RequestChatbotMessage = { message: text };
+      const response: ResponseChatbotMessage = await postChatbot(body);
+
+      console.log(response.result)
+
+      // 챗봇 응답 메시지 추가
       setMessages((prev) => [
         ...prev,
-        { type: "bot", text: "당연하죠! 우선, 어떤 향을 좋아하는지 알려주세요!" },
+        { type: "bot", text: response.result } // 응답 필드명은 실제 API 스펙에 맞게 수정
       ]);
+    } catch (error) {
+      console.error(error);
+      setMessages((prev) => [
+        ...prev,
+        { type: "bot", text: "죄송합니다. 서버와 연결할 수 없습니다." }
+      ]);
+    } finally {
       setIsLoading(false);
-    }, 3000); // 2초 후 응답
+    }
   };
 
   const hasUserMessage = messages.some(msg => msg.type === "user");
-      
-
 
   return (
     <div className="min-w-[375px] w-120 h-full bg-main-10 flex flex-col font-[Pretandard]">

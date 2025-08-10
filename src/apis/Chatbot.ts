@@ -3,8 +3,9 @@ import { axiosInstance } from "./axios"
 
 
 export const postChatbot = async ( body : RequestChatbotMessage ):Promise<ResponseChatbotMessage> => {
-    const { data } = await axiosInstance.post("/chatbot", body);
-
+    const res = await axiosInstance.post("/chatbot", body);
+    const data = res.data
+    
     return data
 }
 
