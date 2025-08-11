@@ -12,6 +12,7 @@
   --grayscale-200: #e7e7e9;
   --error: #be1b2e;
   --white: #fbfbfb;
+  --white-20: #FBFBFB33;
   --white-50: #fbfbfb80;
   --main-600: #490189;
   --main-500: #6401bb;
@@ -124,6 +125,11 @@
     border-color: var(--grayscale-200);
   }
 
+  .placeholder-grayscale-200::placeholder {
+    color: var(--grayscale-200);
+  }
+
+
   .bg-brand-yellow {
     background-color: var(--yellow-500) !important;
   }
@@ -173,6 +179,9 @@
   }
   .bg-white {
     background-color: var(--white);
+  }
+  .bg-white-20 {
+    background-color: var(--white-20);
   }
   .bg-white-50 {
     background-color: var(--white-50);

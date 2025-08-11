@@ -73,4 +73,11 @@
   .text-caption2 {
     @apply text-[10px] font-light leading-[150%];
   }
+
+  .text-logo {
+  @apply text-[24px] font-extrabold leading-[150%] tracking-[0.02em] text-center align-middle;
+  font-family: 'Noto Serif KR';
 }
+
+}
+
