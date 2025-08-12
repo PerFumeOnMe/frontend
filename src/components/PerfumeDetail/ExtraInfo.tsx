@@ -1,9 +1,9 @@
 import CategorySection from "./CategorySection";
 
 interface ExtraInfoProps {
-  gender: string; // "여성용", "남성용", "남녀공용" 등
-  locations: string[]; // ["일상용", "파티/야간용", "출근/오피스용"] 등 - 장소 관련 모든 데이터
-  seasons: string[]; // ["봄", "여름"] 등
+  gender: string;
+  locations: string[];
+  seasons: string[];
 }
 
 const ExtraInfo = ({ gender, locations, seasons }: ExtraInfoProps) => {
@@ -20,6 +20,22 @@ const ExtraInfo = ({ gender, locations, seasons }: ExtraInfoProps) => {
 
   const seasonOptions = ["봄", "여름", "가을", "겨울"];
 
+  const locationMapping: { [key: string]: string } = {
+    일상용: "일상용",
+    "출근 / 오피스용": "출근/오피스용",
+    "데이트 / 로맨틱용": "데이트/로맨틱",
+    "파티 / 야간용": "파티/야간용",
+    "무거운 향": "무거운 향",
+    "가벼운 향": "가벼운 향",
+  };
+
+  const mapLocations = (inputLocations: string[]): string[] => {
+    return inputLocations
+      .map((location) => locationMapping[location] || location)
+      .filter((location) => locationOptions.includes(location));
+  };
+  const mappedLocations = mapLocations(locations);
+
   return (
     <div className="w-full">
       <div className="grid grid-cols-5 gap-3">
@@ -32,12 +48,12 @@ const ExtraInfo = ({ gender, locations, seasons }: ExtraInfoProps) => {
           />
         </div>
 
-        {/* 장소 (통합) */}
+        {/* 장소 */}
         <div className="col-span-3">
           <CategorySection
             title="장소"
             items={locationOptions}
-            activeItems={locations}
+            activeItems={mappedLocations}
             isGrid={true}
           />
         </div>

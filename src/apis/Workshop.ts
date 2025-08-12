@@ -1,8 +1,10 @@
 import type {
   RequestWorkshopDto,
+  RequestWorkshopSaveDto,
   ResponseWorkshopDto,
   WorkShopListResponseDTO,
   WorkShopMyPerfume,
+  ResponseWorkshopSaveDto,
 } from "../types/apis/Workshop";
 import { axiosInstance } from "./axios";
 
@@ -26,3 +28,10 @@ export const getWorkShopMyPerfumeList = async () : Promise<WorkShopMyPerfume[] |
         throw error
     }
 }
+export const postWorkshopSave = async (
+  body: RequestWorkshopSaveDto
+): Promise<ResponseWorkshopSaveDto> => {
+  const response = await axiosInstance.post("/workshop/save", body);
+
+  return response.data;
+};

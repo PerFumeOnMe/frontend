@@ -6,12 +6,12 @@ import Button from '../../components/ImageKeyword/Button';
 import ImageKeywordModal from '../../components/ImageKeyword/ImageKeywordModal';
 import { KEYWORD_CATEGORIES, CATEGORY_KOREAN } from '../../types/ImageKeyword/imageKeyword.const';
 import type { KeywordCategory } from '../../types/ImageKeyword/imageKeyword.type';
-import type { ImageKeywordRequest } from '../../types/ImageKeyword/imageKeyword';
+import type { ImageKeywordPreviewRequestDto } from '../../types/apis/ImageKeyword';
 
-const ImageKeywordPage = () => {
+export default function ImageKeywordPage() {
     const navigate = useNavigate();
     const [currentStep, setCurrentStep] = useState(0);
-    const [selectedKeywords, setSelectedKeywords] = useState<Partial<ImageKeywordRequest>>({});
+    const [selectedKeywords, setSelectedKeywords] = useState<Partial<ImageKeywordPreviewRequestDto>>({});
     const [showModal, setShowModal] = useState(false);
 
     const handleClose = () => {
@@ -32,17 +32,17 @@ const ImageKeywordPage = () => {
         }
     };
 
-    const handleSubmit = () => {
-        const keywordArray = [
-            selectedKeywords.ambience,
-            selectedKeywords.style,
-            selectedKeywords.gender,
-            selectedKeywords.season,
-            selectedKeywords.character
-        ];
-
+    const handleSubmit = async () => {
         navigate('/image-keyword/loading', {
-            state: { keywords: keywordArray }
+            state: {
+                keywords: [
+                    selectedKeywords.ambience,
+                    selectedKeywords.style,
+                    selectedKeywords.gender,
+                    selectedKeywords.season,
+                    selectedKeywords.personality
+                ]
+            }
         });
     };
 
@@ -55,7 +55,7 @@ const ImageKeywordPage = () => {
 
     const currentCategory = KEYWORD_CATEGORIES[currentStep] as KeywordCategory;
     const isLastStep = currentStep === KEYWORD_CATEGORIES.length - 1;
-    const isStepComplete = Boolean(selectedKeywords[currentCategory as keyof ImageKeywordRequest]);
+    const isStepComplete = Boolean(selectedKeywords[currentCategory as keyof ImageKeywordPreviewRequestDto]);
 
     return (
         <div className="relative bg-white min-w-[375px] max-w-[480px] min-h-screen w-full">
@@ -84,5 +84,3 @@ const ImageKeywordPage = () => {
         </div>
     );
 }
-
-export default ImageKeywordPage;

@@ -22,6 +22,7 @@ export type ResponseWorkshopDto = CommonResponse<{
   centerImpression: string;
   lastImpression: string;
   tendency: string;
+  remembered: string;
   recommendedFragranceJson: PerfumeDetail[];
 }>;
 
@@ -32,3 +33,12 @@ export type WorkShopMyPerfume = {
   name : string,
   imageUrl : string,
 }
+export type RequestWorkshopSaveDto = {
+  savedName: string;
+};
+
+export type ResponseWorkshopSaveDto = CommonResponse<{
+  workshopId: number;
+  savedName: string;
+  createdAt: string;
+}>;

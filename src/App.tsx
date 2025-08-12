@@ -7,8 +7,8 @@ import NotFoundPage from "./pages/NotFoundPage.tsx";
 import RootLayout from "./layout/root-layout.tsx";
 import MainPage from "./pages/MainPage.tsx";
 import LoginPage from "./pages/Login/LoginPage.tsx";
-import SignupPage from './pages/Login/SignupPage.tsx';
-import MyPage from './pages/MyPage/MyPage.tsx';
+import SignupPage from "./pages/Login/SignupPage.tsx";
+import MyPage from "./pages/MyPage/MyPage.tsx";
 import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
 import ProtectedRoute from "./layout/ProtectedRoute.tsx";
 import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
@@ -25,12 +25,13 @@ import OnboardingRouter from "./pages/Onboarding/index.tsx";
 import PBTIQuestionPage from "./pages/PBTI/PBTIQuestionPage.tsx";
 import PBTIResultPage from "./pages/PBTI/PBTIResultPage.tsx";
 import DiaryPage from "./pages/Diary/DiaryPage.tsx";
-import DiaryWritePage from "./pages/Diary/DiaryWritePage.tsx"; 
+import DiaryWritePage from "./pages/Diary/DiaryWritePage.tsx";
 import PerfumeDetailPage from "./pages/PerfumeDetailPage.tsx";
 import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx";
 import PerfumeLabLayout from "./layout/perfumelab-layout.tsx";
 import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
+import KakaoCallback from "./pages/Login/KakaoCallback.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
     path: "/kakao",
     element: <KakaoSignupPage />,
   },
+    {
+    path: "/oauth/kakao/callback",
+    element: <KakaoCallback />,
+  },
   {
     path: "/onboarding",
     element: <OnboardingRouter />,
@@ -60,20 +65,24 @@ const router = createBrowserRouter([
         errorElement: <NotFoundPage />,
         children: [
           { index: true, element: <Navigate to="/Main" replace /> }, // ✅ 리다이렉트 추가
-          { path: 'Main', element: <MainPage /> },
-          { path: 'PBTI', element: <PBTIMainPage /> },
-          { path: 'Diary', element: <DiaryPage /> },
-          { path: 'Diary/new', element: <DiaryWritePage />},
-          { path: 'MyPage',
+          { path: "Main", element: <MainPage /> },
+          { path: "PBTI", element: <PBTIMainPage /> },
+          { path: "Diary", element: <DiaryPage /> },
+          { path: "Diary/new", element: <DiaryWritePage /> },
+          {
+            path: "MyPage",
             children: [
               { index: true, element: <MyPage /> },
-              { path: "EditScentPreferences", element : <EditScentPreferences/>}
-            ]
+              {
+                path: "EditScentPreferences",
+                element: <EditScentPreferences />,
+              },
+            ],
           },
-          { path: 'choose-path', element: <ChoosePathPage /> },
-          { path: 'filter', element: <FilterPage /> },
-          { 
-            path: 'PBTI',
+          { path: "choose-path", element: <ChoosePathPage /> },
+          { path: "filter", element: <FilterPage /> },
+          {
+            path: "PBTI",
             children: [
               { index: true, element: <PBTIMainPage /> },
               { path: "question", element: <PBTIQuestionPage /> },
@@ -123,7 +132,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/perfume/detail",
+        path: "/perfume/detail/:id",
         element: <PerfumeDetailPage />,
       },
     ],

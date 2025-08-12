@@ -4,20 +4,46 @@ import CalendarDiary from "./CalendarDiary";
 import { useState, useEffect } from "react";
 import "react-calendar/dist/Calendar.css";
 import "../../styles/calendar-custom.css";
+import { axiosInstance } from "../../apis/axios"; 
 
 export default function DiaryCalendar() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [diaryData, setDiaryData] = useState<{ [key: string]: any }>({});
-
-  useEffect(() => {
-    const saved = JSON.parse(sessionStorage.getItem("diaryData") || "{}");
-    setDiaryData(saved);
-  }, []);
+  const [markedDates, setMarkedDates] = useState<Set<string>>(new Set());
+  const [activeStartDate, setActiveStartDate] = useState<Date>(new Date());
 
   const hasDiary = (date: Date) => {
     const dateKey = moment(date).format("YYYY-MM-DD");
-    return !!diaryData[dateKey];
+    return markedDates.has(dateKey);
   };
+
+  useEffect(() => {
+    const fetchMonthly = async () => {
+      try {
+        const year = activeStartDate.getFullYear();
+        const month = activeStartDate.getMonth() + 1; 
+
+        const { data } = await axiosInstance.get(
+          `/diary/monthly/${year}/${month}`
+        );
+        console.log("월별 다이어리 조회 응답:", data);
+
+        if (data?.isSuccess && Array.isArray(data?.result)) {
+          const next = new Set<string>();
+          for (const item of data.result) {
+            const d = moment(item?.date).format("YYYY-MM-DD");
+            if (d) next.add(d);
+          }
+          setMarkedDates(next);
+        } else {
+          setMarkedDates(new Set());
+        }
+      } catch (err) {
+        setMarkedDates(new Set());
+      }
+    };
+
+    fetchMonthly();
+  }, [activeStartDate]);
 
   return (
     <div className="min-w-[375px] w-full max-w-[480px] mx-auto bg-main-500 h-screen flex flex-col">
@@ -37,9 +63,12 @@ export default function DiaryCalendar() {
               {moment(date).format("YYYY.MM")}
             </div>
           )}
+          onActiveStartDateChange={({ activeStartDate }) => {
+            if (activeStartDate) setActiveStartDate(activeStartDate);
+          }}
           tileClassName={({ date, view }) => {
             if (view === "month" && hasDiary(date)) {
-              return "has-diary";
+              return "has-diary"; 
             }
             return "";
           }}
@@ -48,7 +77,7 @@ export default function DiaryCalendar() {
 
       {/* 달력 아래 컨텐츠 */}
       <div className="bg-white flex-[0.45] overflow-y-auto rounded-t-3xl p-4">
-        <CalendarDiary selectedDate={selectedDate} diaryData={diaryData} />
+        <CalendarDiary selectedDate={selectedDate} diaryData={{}} />
       </div>
     </div>
   );

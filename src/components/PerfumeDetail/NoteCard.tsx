@@ -11,11 +11,13 @@ const NoteCard = ({
   isActive,
   position,
   onClick,
+  maxHeight,
 }: {
   note: CardData;
   isActive: boolean;
   position: "left" | "center" | "right";
   onClick: () => void;
+  maxHeight: number;
 }) => {
   // 3D 회전 스타일 계산
   const getCardStyle = () => {
@@ -38,13 +40,14 @@ const NoteCard = ({
 
   // 카드 배경 스타일 계산
   const getCardBackground = () => {
+    console.log(maxHeight);
     return "bg-white";
   };
 
   return (
     <div
       className={`
-        w-55 h-45 p-5 rounded-lg cursor-pointer
+        w-55 p-5 rounded-lg cursor-pointer
         shadow-[0_2px_10px_-1px_rgba(0,0,0,0.12)]
         hover:shadow-[0_4px_15px_-1px_rgba(0,0,0,0.15)]
         ${getCardStyle()}
@@ -54,9 +57,10 @@ const NoteCard = ({
       style={{
         transformStyle: "preserve-3d",
         backfaceVisibility: "visible",
+        height: `${maxHeight}px`, // 동적 높이 적용
       }}
     >
-      <div className="flex flex-col items-center h-full">
+      <div className="flex flex-col items-center justify-center h-min">
         {/* 제목과 구분선 */}
         <div className="w-full text-center mb-3">
           <h3
@@ -69,39 +73,46 @@ const NoteCard = ({
           </h3>
         </div>
 
-        {/* 원료 */}
-        <div className="w-full">
-          <div className="flex items-center justify-center gap-2 flex-wrap">
-            <span className="text-body3 text-grayscale-900 font-semibold">
-              원료
-            </span>
-            {note.ingredients.map((ingredient, index) => (
-              <span key={index} className="text-body3 text-grayscale-900">
-                {ingredient}
+        <div className="flex-1 flex flex-col items-center justify-center gap-2">
+          <div className="w-full">
+            <div className="flex items-start justify-center flex-wrap">
+              <span className="text-body3 text-grayscale-900 font-semibold mr-3 flex-shrink-0">
+                원료
               </span>
-            ))}
+              {note.ingredients.map((ingredient, index) => (
+                <span
+                  key={index}
+                  className="text-body3 text-grayscale-900 mr-1"
+                >
+                  {ingredient}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* 연상단어 */}
-        <div className="w-full">
-          <div className="flex items-center justify-center gap-2 flex-wrap">
-            <span className="text-body3 text-grayscale-900 font-semibold">
-              연상단어
-            </span>
-            {note.keywords.map((keyword, index) => (
-              <span key={index} className="text-body3 text-grayscale-900">
-                {keyword}
+          {/* 연상단어 */}
+          <div className="w-full">
+            <div className="flex items-start justify-center flex-wrap">
+              <span className="text-body3 text-grayscale-900 font-semibold mr-3 flex-shrink-0">
+                연상단어
               </span>
-            ))}
+              {note.keywords.map((keyword, index) => (
+                <span
+                  key={index}
+                  className="text-body3 text-grayscale-900 mr-1"
+                >
+                  {keyword}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* 설명 */}
-        <div className="flex-1 flex items-center justify-center text-center">
-          <p className="text-caption1 text-grayscale-900 text-center mt-1">
-            {note.description}
-          </p>
+          {/* 설명 */}
+          <div className="flex items-center justify-center text-center">
+            <p className="text-caption1 text-grayscale-900 text-center mt-1">
+              {note.description}
+            </p>
+          </div>
         </div>
       </div>
     </div>

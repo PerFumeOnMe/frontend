@@ -79,14 +79,14 @@ export default function EditScentPreferences() {
           </div>
   
           <div className="mt-6 mb-6 grid grid-cols-3 gap-x-3 gap-y-4">
-            {scentOptions.map(({ id, name, png, description }) => (
+            {scentOptions.map(({ id, png, description, noteCategoryId }) => (
               <ScentCard
                 key={id}
-                id={name}
+                id={id}
                 png={png}
                 description={description}
-                selected={selected.includes(id)}
-                onClick={() => toggle(id)}
+                selected={selected.includes(noteCategoryId)}
+                onClick={() => toggle(noteCategoryId)}
               />
             ))}
           </div>

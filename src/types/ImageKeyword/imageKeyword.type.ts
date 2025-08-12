@@ -4,7 +4,7 @@ import {
     STYLE_OPTIONS,
     GENDER_OPTIONS,
     SEASON_OPTIONS,
-    CHARACTER_OPTIONS,
+    PERSONALITY_OPTIONS,
 } from './imageKeyword.const';
 
 // API 응답 코드 정의
@@ -19,4 +19,4 @@ export type AmbienceType = typeof AMBIENCE_OPTIONS[number];
 export type StyleType = typeof STYLE_OPTIONS[number];
 export type GenderType = typeof GENDER_OPTIONS[number];
 export type SeasonType = typeof SEASON_OPTIONS[number];
-export type CharacterType = typeof CHARACTER_OPTIONS[number];
+export type PersonalityType = typeof PERSONALITY_OPTIONS[number];
