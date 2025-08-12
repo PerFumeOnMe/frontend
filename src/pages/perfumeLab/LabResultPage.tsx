@@ -4,12 +4,38 @@ import ResultContent from "../../components/PerfumeLab/Result/ResultContent";
 import ResultButton from "../../components/ImageKeyword/Result/ResultButton";
 import SaveNameModal from "../../components/ImageKeyword/Result/SaveNameModal";
 import SaveCompleteModal from "../../components/ImageKeyword/Result/SaveCompleteModal";
+import { postWorkshopSave } from "../../apis/Workshop";
 
 const LabResultPage = () => {
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
-  const [perfumeName, setPerfumeName] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async (savedName: string) => {
+    try {
+      setIsSaving(true);
+      const response = await postWorkshopSave({ savedName });
+
+      if (response.isSuccess) {
+        setShowSaveModal(false);
+        setShowCompleteModal(true);
+      } else {
+        alert(response.message);
+      }
+    } catch (error) {
+      console.error("Failed to save result:", error);
+      alert("저장에 실패했습니다.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleComplete = () => {
+    setShowCompleteModal(false);
+    navigate("/");
+  };
+
   return (
     <div
       className="min-h-screen bg-[#F8F0FF] px-5 py-6 flex flex-col items-center gap-6
@@ -29,28 +55,25 @@ const LabResultPage = () => {
 
       {/* 하단 버튼들 */}
       <div className="flex justify-center gap-4 w-full">
-        <ResultButton label="저장하기" onClick={() => setShowModal(true)} />
-        <ResultButton label="홈으로" onClick={() => navigate("/")} />
+        <ResultButton
+          label="저장하기"
+          onClick={() => setShowSaveModal(true)}
+          disabled={isSaving}
+        />
+        <ResultButton
+          label="홈으로"
+          onClick={() => navigate("/")}
+          disabled={false}
+        />
       </div>
-      {showModal && (
+      {showSaveModal && (
         <SaveNameModal
-          onClose={() => setShowModal(false)}
-          onSubmit={(name) => {
-            setPerfumeName(name);
-            setShowModal(false);
-            setShowCompleteModal(true);
-          }}
+          onSubmit={handleSave}
+          onClose={() => setShowSaveModal(false)}
         />
       )}
 
-      {showCompleteModal && (
-        <SaveCompleteModal
-          onConfirm={() => {
-            setShowCompleteModal(false);
-            navigate("/");
-          }}
-        />
-      )}
+      {showCompleteModal && <SaveCompleteModal onConfirm={handleComplete} />}
     </div>
   );
 };
