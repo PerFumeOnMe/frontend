@@ -28,3 +28,14 @@ export type PerfumeRequestDto = {
     page: number;
     size: number;
 }
+
+export type MyPerfume = {
+  brand: string;
+  name: string;
+  imageUrl: string;
+}
+
+export type MyPerfumeResponseDto = CommonResponse<{
+  exists: boolean;
+  myPerfumeList: MyPerfume[];
+}>

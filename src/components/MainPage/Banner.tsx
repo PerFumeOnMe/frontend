@@ -3,65 +3,38 @@ import { useNavigate } from "react-router-dom";
 import mainBg from "../../assets/MainPage/main.png";
 import Header from "./Header";
 import { SlArrowRight } from "react-icons/sl";
-import type { Perfume } from "../../types/perfume";
 import PerfumeSlider from "./PerfumeSlider";
-
-// 임시 데이터: 나만의 향수 목록
-const MY_PERFUMES: Perfume[] = [
-    {
-        id: 1,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/617/230907006220617.jpg?RS=600&SP=1",
-        brand: "LOIVIE",
-        name: "오 드 퍼퓸 피오니 앤 화이트 머스크",
-        minPrice: 320000,
-        liked: true
-    },
-    {
-        id: 2,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/895/231117007082895.jpg?RS=600&SP=1",
-        brand: "LOIVIE",
-        name: "오 드 퍼퓸 망고 앤 민트 리브",
-        minPrice: 320000,
-        liked: false
-    },
-    {
-        id: 3,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/157/230922006452157.jpg?RS=600&SP=1",
-        brand: "LOIVIE",
-        name: "오 드 퍼퓸 휘그 앤 시더우드",
-        minPrice: 320000,
-        liked: false
-    }
-];
+import type { MyPerfume } from "../../types/apis/Fragrance";
 
 interface BannerProps {
     userName: string;
+    exists: boolean;
+    myPerfumes: MyPerfume[];
 }
 
-export default function Banner({ userName }: BannerProps) {
+export default function Banner({ userName, exists, myPerfumes }: BannerProps) {
     const navigate = useNavigate();
-    const [hasMyPerfume] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        if (!hasMyPerfume) return;
+        if (!exists || !myPerfumes || myPerfumes.length === 0) return;
 
         const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % MY_PERFUMES.length);
+            setCurrentIndex((prev) => (prev + 1) % myPerfumes.length);
         }, 4000);
 
         return () => clearInterval(interval);
-    }, [hasMyPerfume]);
+    }, [exists, myPerfumes]);
 
     return (
         <div 
             className={`relative w-full min-w-[375px] bg-cover bg-center overflow-hidden ${
-                hasMyPerfume ? 'h-[424px]' : 'h-[300px]'
+                exists ? 'h-[424px]' : 'h-[300px]'
             }`}
             style={{ 
                 backgroundImage: `url(${mainBg})`,
-                backgroundSize: hasMyPerfume ? '155%' : '130%',
-                backgroundPosition: hasMyPerfume ? '80% 100%' : '90% 80%'
+                backgroundSize: exists ? '155%' : '130%',
+                backgroundPosition: exists ? '80% 100%' : '90% 80%'
             }}
         >
             {/* 배경 오버레이 */}
@@ -73,7 +46,7 @@ export default function Banner({ userName }: BannerProps) {
             </div>
 
             {/* 컨텐츠 */}
-            {hasMyPerfume ? (
+            {exists ? (
                 <div className="relative z-10 flex flex-col">
                     <div className="px-[16px] pt-[24px]">
                         <h2 className="text-title2 text-grayscale-200">
@@ -85,7 +58,7 @@ export default function Banner({ userName }: BannerProps) {
                     </div>
 
                     {/* 향수 슬라이드 */}
-                    <PerfumeSlider perfumes={MY_PERFUMES} currentIndex={currentIndex} />
+                    <PerfumeSlider perfumes={myPerfumes} currentIndex={currentIndex} />
 
                     {/* 나만의 향수 다시 만들기 버튼 */}
                     <div className="flex justify-end px-[16px]">

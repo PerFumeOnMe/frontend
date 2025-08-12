@@ -6,6 +6,7 @@ import type {
   ResponseFragranceDetailDto,
   PerfumeResponseDto,
 } from "../types/apis/Fragrance";
+import type { MyPerfumeResponseDto } from "../types/apis/Fragrance";
 
 export const getMdChoice = async (): Promise<MdChoiceResponse> => {
   try {
@@ -82,6 +83,18 @@ export const getAllPerfumes = async (page: number = 0, size: number = 12) => {
     return res.data;
   } catch (error) {
     console.error("Failed to fetch all perfumes:", error);
+    throw error;
+  }
+};
+
+export const getMyPerfumes = async (): Promise<MyPerfumeResponseDto> => {
+  try {
+    const res = await axiosInstance.get<MyPerfumeResponseDto>(
+      "/fragrances/my-perfume"
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch my perfumes:", error);
     throw error;
   }
 };
