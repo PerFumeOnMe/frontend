@@ -1,5 +1,5 @@
 import type { Note } from "../../types/note";
-import { usePerfumeLab } from "../../context/PerfumeLabContext";
+import { usePerfumeLab } from "../../hooks/PerfumeLab/usePerfumeLab";
 
 interface NoteOption {
   id: string;

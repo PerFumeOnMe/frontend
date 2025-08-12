@@ -22,5 +22,6 @@ export type ResponseWorkshopDto = CommonResponse<{
   centerImpression: string;
   lastImpression: string;
   tendency: string;
+  remembered: string;
   recommendedFragranceJson: PerfumeDetail[];
 }>;
