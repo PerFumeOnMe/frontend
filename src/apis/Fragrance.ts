@@ -1,4 +1,4 @@
-import { axiosInstance } from "../apis/axios";
+import { axiosInstance } from '../apis/axios';
 import type {
   MdChoiceResponse,
   TrendingResponse,

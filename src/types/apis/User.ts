@@ -40,11 +40,13 @@ export type RequestUserProfileImageDto = {
 export type ResponseUserProfileImageDto = CommonResponse<object>
 
 // 유저 정보 조회
-export type ResponseUserInfoDto = CommonResponse<{
+export type ResponseUserInfoDto = CommonResponse<ResponseUserInfo>
+
+export type ResponseUserInfo = {
   nickName : string,
   imageUrl : string,
   preferredNotes : string[]
-}>
+}
 
 // 회원탈퇴 API
 //export type Response

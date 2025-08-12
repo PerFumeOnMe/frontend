@@ -2,20 +2,16 @@ import { useState } from "react";
 import SortModalArrowIcon from "../../assets/MyPage/SortModalArrow.svg";
 import Favorites from "./Favorites";
 import RecommendationsResultSection from "./RecommendationsResultSection";
-import MyPageTabButton from "./MyPageTabButton"; // 경로는 상황에 맞게 조정하세요
+import MyPageTabButton from "./MyPageTabButton";
 
-interface FavoritesAndRecommendationsProps {
-  isLoading: boolean;
-}
-
-const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = ({ isLoading = true }) => {
+const FavoritesAndRecommendations: React.FC = () => {
   const [favOrRecommend, setFavOrRecommend] = useState(true);
-  const [isSortModalOpen, setIsSortModalOpen] = useState(false);
-  const [sortOption, setSortOption] = useState("향수공방"); // 초기 정렬 기준 텍스트
+  const [isRecommendationOptionModalOpen, setIsRecommendationOptionModalOpen] = useState(false);
+  const [recommendationOption, setRecommendationOption] = useState("향수공방"); // 초기 정렬 기준 텍스트
 
   const handleSortOptionClick = (option: string) => {
-    setSortOption(option);
-    setIsSortModalOpen(false); // 선택 후 모달 닫기
+    setRecommendationOption(option);
+    setIsRecommendationOptionModalOpen(false); // 선택 후 모달 닫기
   };
 
   return (
@@ -38,15 +34,15 @@ const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = 
         {/* 정렬 버튼 */}
         {!favOrRecommend && ( // 추천결과에서만 보이게
           <div className="relative">
-            <button onClick={() => setIsSortModalOpen(!isSortModalOpen)}>
+            <button onClick={() => setIsRecommendationOptionModalOpen(!isRecommendationOptionModalOpen)}>
               <div className="flex w-23 justify-between border border-grayscale-400 bg-[#FBFBFB]/60 text-body4 text-grayscale-900 rounded-xl px-3 py-2">
-                {sortOption}
+                {recommendationOption}
                 <img src={SortModalArrowIcon} alt="정렬 아이콘" className="w-4 h-4 ml-1" />
               </div>
             </button>
 
             {/* 드롭다운 메뉴 */}
-            {isSortModalOpen && (
+            {isRecommendationOptionModalOpen && (
               <div className="absolute w-23 flex flex-col border border-grayscale-400 bg-white rounded-xl shadow-lg z-10 overflow-hidden">
                 {["향수공방", "키워드", "PBTI"].map((option) => (
                   <div
@@ -64,8 +60,8 @@ const FavoritesAndRecommendations: React.FC<FavoritesAndRecommendationsProps> = 
       </div>
 
       {favOrRecommend
-        ? <Favorites isLoading={isLoading} />
-        : <RecommendationsResultSection isLoading={isLoading} />}
+        ? <Favorites/>
+        : <RecommendationsResultSection option={recommendationOption} />}
     </div>
   );
 };

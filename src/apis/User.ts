@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
     type RequestSigninDto,
     type RequestSignupDto,
@@ -12,6 +11,8 @@ import {
     type ResponseUserInfoDto,
     type RequestUserFavoritesListDto,
     type ResponseUserFavoritesListDto,
+    type UserFavoriteContentDto,
+    type ResponseUserInfo,
 } from "../types/apis/User";
 import { axiosInstance } from "./axios";
 
@@ -46,10 +47,12 @@ export const postSignup = async ( body : RequestSignupDto ):Promise<ResponseSign
 
 // 유저 선호 향 수정 API
 export const patchUserNotes = async ( body : RequestUserNotesDto ):Promise<ResponseUserNotesDto> => {
-    const { data } = await axiosInstance.patch(
+    const res = await axiosInstance.patch(
         '/users/me/notes',
         body,
     );
+
+    const data = res.data
 
     return data;
 };
@@ -65,10 +68,12 @@ export const patchUserProfileImage = async ( body : RequestUserProfileImageDto )
 };
 
 // 프로필 조회 API
-export const getUserInfo = async ():Promise<ResponseUserInfoDto> => {
-    const { data } = await axiosInstance.get(
+export const getUserInfo = async ():Promise<ResponseUserInfo> => {
+    const res = await axiosInstance.get<ResponseUserInfoDto>(
         '/users/me'
     )
+
+    const data = res.data.result
 
     return data
 }
@@ -84,11 +89,15 @@ export const deleteUserAccount = async () => {
 
 // 즐겨찾기 목록 조회 API
 export const getFavoritesList = async ( body : RequestUserFavoritesListDto ):Promise<ResponseUserFavoritesListDto> => {
-    const { data } = await axiosInstance.get(
-        '/users/me', {
-            params : body
-        }
-    )
-
-    return data
+    try {
+        const res = await axiosInstance.get<ResponseUserFavoritesListDto>(
+            '/users/favorites', {
+                params : body
+            }
+        )
+        return res.data
+    } catch (error) {
+        console.log("즐겨찾기 목록을 조회하는 과정에서 오류가 발생했습니다.", error)
+        throw error
+    }
 }

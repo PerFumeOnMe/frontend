@@ -1,9 +1,13 @@
-const MyPageProfileImage = () => {
+interface MyPageProfileImageProps {
+    profileURL : string | undefined
+}
+
+const MyPageProfileImage = ({ profileURL } : MyPageProfileImageProps) => {
     
     return(
         <div className="w-[100px] h-[100px] mt-4 relative">
             <div className="w-[100px] h-[100px] rounded-full bg-black">
-                <img src="" />
+                <img src={profileURL ? profileURL : undefined} alt="이미지가 없습니다!" />
             </div>
             <button className="absolute bottom-0 right-0">
                 <svg width="24" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,6 +1,6 @@
 import type { Scent } from "./scent";
 
-export const scentOptions: (Scent & { noteCategoryId: number | null })[] = [
+export const scentOptions: (Scent & { noteCategoryId: number })[] = [
   {
     id: "citrus",
     description: "레몬, 오렌지, 감귤류의 상쾌하고 경쾌한 향",
@@ -91,4 +91,4 @@ export const scentOptions: (Scent & { noteCategoryId: number | null })[] = [
     png: "/src/assets/Onboarding/iris.png",
     noteCategoryId: 40,
   },
-];
+]
