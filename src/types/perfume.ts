@@ -1,4 +1,4 @@
-export interface Perfume {
+export type Perfume = {
   id: number;
   brand: string;
   name: string;

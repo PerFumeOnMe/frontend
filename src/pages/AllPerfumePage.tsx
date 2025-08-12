@@ -1,123 +1,100 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../components/AllPerfumePage/SearchBar';
 import AllPerfumeHeader from '../components/AllPerfumePage/AllPerfumeHeader';
 import type { Perfume } from "../types/perfume";
 import PerfumeGrid from '../components/MainPage/PerfumeGrid';
 import SelectedFilters from '../components/AllPerfumePage/SelectedFilters';
-
-// 임시데이터
-const secondMDChoice: Perfume[] = [
-    {
-        id: 1,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/617/230907006220617.jpg?RS=600&SP=1",
-        brand: "로이비 (LOIVIE)",
-        name: "오 드 퍼퓸 피오니 앤 화이트 머스크",
-        minPrice: 109000,
-        liked: false
-    },
-    {
-        id: 2,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/895/231117007082895.jpg?RS=600&SP=1",
-        brand: "로이비 (LOIVIE)",
-        name: "오 드 퍼퓸 망고 앤 민트 리브",
-        minPrice: 109000,
-        liked: false
-    },
-    {
-        id: 3,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/157/230922006452157.jpg?RS=600&SP=1",
-        brand: "로이비 (LOIVIE)",
-        name: "오 드 퍼퓸 휘그 앤 시더우드",
-        minPrice: 109000,
-        liked: false
-    },
-    {
-        id: 4,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/737/230522005192737.jpg?RS=600&SP=1",
-        brand: "로이비 (LOIVIE)",
-        name: "오 드 퍼퓸 베르가못 앤 화이트 로즈",
-        minPrice: 109000,
-        liked: false
-    },
-    {
-        id: 5,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/814/230907006175814.jpg?RS=600&SP=1",
-        brand: "로이비 (LOIVIE)",
-        name: "오 드 퍼퓸 로터스 앤 인센스",
-        minPrice: 109000,
-        liked: false
-    },
-    {
-        id: 6,
-        imageUrl: "https://image.sivillage.com/upload/C00001/s3/goods/org/716/240604019552716.jpg?RS=600&SP=1",
-        brand: "로이비 (LOIVIE)",
-        name: "오 드 퍼퓸 타임 앤 모스",
-        minPrice: 109000,
-        liked: false
-    },
-    {
-        id: 7,
-        imageUrl: "https://image.sivillage.com/upload/C00001/goods/org/739/230522005192739.jpg?RS=600&SP=1",
-        brand: "로이비 (LOIVIE)",
-        name: "오 드 퍼퓸 클로브 앤 바닐라",
-        minPrice: 109000,
-        liked: false
-    },
-    {
-        id: 8,
-        imageUrl: "https://image.sivillage.com/upload/C00001/s3/goods/org/850/250522083980850.jpg?RS=600&SP=1",
-        brand: "딥티크 (DIPTYQUE)",
-        name: "오 드 퍼퓸 플레르 드 뽀",
-        minPrice: 289000,
-        liked: false
-    },
-    {
-        id: 9,
-        imageUrl: "https://image.sivillage.com/upload/C00001/s3/goods/org/242/250522083981242.jpg?RS=600&SP=1",
-        brand: "딥티크 (DIPTYQUE)",
-        name: "오 드 뚜왈렛 오 데 썽",
-        minPrice: 183000,
-        liked: false
-    },
-    {
-        id: 10,
-        imageUrl: "https://image.sivillage.com/upload/C00001/s3/goods/org/847/250522083980847.jpg?RS=600&SP=1",
-        brand: "딥티크 (DIPTYQUE)",
-        name: "오 드 퍼퓸 오르페옹",
-        minPrice: 289000,
-        liked: false
-    }
-];
+import { getAllPerfumes } from '../apis/Fragrance';
 
 export default function AllPerfumePage() {
     const navigate = useNavigate();
-    const [perfumes, setPerfumes] = useState<Perfume[]>(secondMDChoice);
+    const [perfumes, setPerfumes] = useState<Perfume[]>([]);
+    const [loading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(12);
+    const [hasNext, setHasNext] = useState(false);
+    const [fetchingNext, setFetchingNext] = useState(false);
+    const sentinelRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        const fetchPerfumes = async () => {
+            try {
+                setIsLoading(true);
+                setError(null);
+                const res = await getAllPerfumes(0, size);
+                if (res.isSuccess) {
+                    setPerfumes(res.result.content);
+                    setHasNext(res.result.hasNext);
+                    setPage(1);
+                } else {
+                    setError(res.message);
+                }
+            } catch (err) {
+                console.error(err);
+                setError("향수 목록을 불러오는데 실패했습니다.");
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchPerfumes();
+    }, [size]);
+
+    // 다음 페이지 로드
+    const fetchNextPage = useCallback(async () => {
+        if (!hasNext || fetchingNext) return;
+        try {
+            setFetchingNext(true);
+            const res = await getAllPerfumes(page, size);
+            if (res.isSuccess) {
+                setPerfumes(prev => [...prev, ...res.result.content]);
+                setHasNext(res.result.hasNext);
+                setPage(page + 1);
+            } else {
+                setHasNext(false);
+                setError(res.message);
+            }
+        } catch (err) {
+            console.error(err);
+            setHasNext(false);
+            setError("향수 목록을 불러오는데 실패했습니다.");
+        } finally {
+            setFetchingNext(false);
+        }
+    }, [page, size, hasNext, fetchingNext]);
+
+    // 인터섹션 옵저버
+    useEffect(() => {
+        if (!sentinelRef.current) return;
+        if (!hasNext) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) fetchNextPage();
+            },
+            {root: null, rootMargin: "200px 0px", threshold: 0}
+        );
+
+        observer.observe(sentinelRef.current);
+        return () => observer.disconnect();
+    }, [fetchNextPage, hasNext]);
+    
     const handleFilterClick = () => {
         navigate('/filter');
     };
 
     const handleSearch = (searchTerm: string) => {
         if (!searchTerm) {
-            // 검색어가 없으면 전체 목록 표시
-            setPerfumes(secondMDChoice);
             return;
         }
-
         // 검색어가 있으면 이름으로 필터링
-        const filteredPerfumes = secondMDChoice.filter(perfume => 
+        const filteredPerfumes = perfumes.filter(perfume => 
             perfume.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             perfume.brand.toLowerCase().includes(searchTerm.toLowerCase())
         );
         
-        // 검색 파라미터 콘솔에 출력
-        console.log('Search Parameters:', {
-            name: searchTerm,
-            page: 0,
-            size: 10
-        });
-
         setPerfumes(filteredPerfumes);
     };
 
@@ -133,8 +110,24 @@ export default function AllPerfumePage() {
             <SelectedFilters />
 
             {/* 향수 목록 또는 메시지 */}
-            {perfumes.length > 0 ? (
-                <PerfumeGrid perfumes={perfumes} />
+            {loading ? (
+                <div className="flex justify-center items-center pt-[120px]">
+                    로딩 중...
+                </div>
+            ) : error ? (
+                <div className="flex justify-center items-center pt-[120px] text-body3 text-red-500">
+                    {error}
+                </div>
+            ) : perfumes.length > 0 ? (
+                <>
+                    <PerfumeGrid perfumes={perfumes} />
+                    {hasNext && (
+                        <div ref={sentinelRef} className="h-12 flex items-center justify-center">
+                            {fetchingNext && <span className="text-sm text-gray-500">불러오는 중…</span>}
+                        </div>
+                    )}
+                </>
+                
             ) : (
                 <div className="flex justify-center items-center pt-[120px] text-body3 text-grayscale-900">
                     검색 결과에 맞는 향수가 존재하지 않습니다.

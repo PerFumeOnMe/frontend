@@ -16,3 +16,15 @@ export type FavoriteResponse = CommonResponse<{
 }>;
 
 export type ResponseFragranceDetailDto = CommonResponse<PerfumeDetail>;
+
+// 모든 향수 조회 응답 타입
+export type PerfumeResponseDto = CommonResponse<{
+  content: Perfume[];
+  hasNext: boolean;
+}>
+
+// 모든 향수 조회 요청 파라미터 타입
+export type PerfumeRequestDto = {
+    page: number;
+    size: number;
+}
