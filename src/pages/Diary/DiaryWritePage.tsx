@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import PageHeader from "../../components/common/PageHeader";
 import BottomButton from "../../components/common/BottomButton";
+import { axiosInstance } from "../../apis/axios";
 
 export default function DiaryWritePage() {
   const [searchParams] = useSearchParams();
@@ -12,17 +13,26 @@ export default function DiaryWritePage() {
   const [experience, setExperience] = useState("");
   const isFormValid = perfume.trim() !== "" && experience.trim() !== "";
 
-  const handleSave = () => {
-    const saved = JSON.parse(sessionStorage.getItem("diaryData") || "{}");
-    const currentList = saved[selectedDate] || [];
-    const newDiary = {
-      fragranceName: perfume,
-      content: experience,
-    };
-    saved[selectedDate] = [...currentList, newDiary];
-    sessionStorage.setItem("diaryData", JSON.stringify(saved));
-    alert("임시 저장 완료..");
-    window.history.back(); 
+  const handleSave = async () => {
+    try {
+      const response = await axiosInstance.post("/diary/write", {
+        fragranceName: perfume,
+        date: selectedDate,
+        content: experience,
+      });
+
+      console.log("다이어리 추가 응답:", response.data);
+
+      if (response.data.isSuccess) {
+        alert(response.data.message);
+        window.history.back();
+      } else {
+        alert(response.data.message || "저장 실패");
+      }
+    } catch (error) {
+      console.error("다이어리 저장 오류:", error);
+      alert("다이어리 저장 중 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -49,6 +59,7 @@ export default function DiaryWritePage() {
           type="date"
           className="border border-grayscale-400 rounded-lg p-3 mb-4 [&::-webkit-calendar-picker-indicator]:hidden"
           defaultValue={selectedDate}
+          readOnly
         />
 
         {/* 경험 */}
