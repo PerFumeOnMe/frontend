@@ -39,3 +39,14 @@ export type MyPerfumeResponseDto = CommonResponse<{
   exists: boolean;
   myPerfumeList: MyPerfume[];
 }>
+
+export type SearchRequestDto = {
+  keyword: string;
+  page: number;
+  size: number;
+}
+
+export type SearchResponseDto = CommonResponse<{
+  content: Perfume[];
+  hasNext: boolean;
+}>

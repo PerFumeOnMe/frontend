@@ -5,6 +5,7 @@ import type {
   FavoriteResponse,
   ResponseFragranceDetailDto,
   PerfumeResponseDto,
+  SearchResponseDto,
 } from "../types/apis/Fragrance";
 import type { MyPerfumeResponseDto } from "../types/apis/Fragrance";
 
@@ -98,3 +99,16 @@ export const getMyPerfumes = async (): Promise<MyPerfumeResponseDto> => {
     throw error;
   }
 };
+
+export const searchPerfumes = async (keyword: string, page: number = 0, size: number = 12) => {
+  try {
+    const res = await axiosInstance.get<SearchResponseDto>(
+      "/fragrances/allow/search",
+      {params: { keyword, page, size }}
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to search perfumes:", error);
+    throw error;
+  }
+}

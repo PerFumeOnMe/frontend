@@ -5,7 +5,7 @@ import AllPerfumeHeader from '../components/AllPerfumePage/AllPerfumeHeader';
 import type { Perfume } from "../types/perfume";
 import PerfumeGrid from '../components/MainPage/PerfumeGrid';
 import SelectedFilters from '../components/AllPerfumePage/SelectedFilters';
-import { getAllPerfumes } from '../apis/Fragrance';
+import { getAllPerfumes, searchPerfumes } from '../apis/Fragrance';
 
 export default function AllPerfumePage() {
     const navigate = useNavigate();
@@ -13,90 +13,87 @@ export default function AllPerfumePage() {
     const [loading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    // 무한스크롤
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(12);
     const [hasNext, setHasNext] = useState(false);
     const [fetchingNext, setFetchingNext] = useState(false);
     const sentinelRef = useRef<HTMLDivElement | null>(null);
 
+    // 검색
+    const [keyword, setKeyword] = useState("");
+
+    // 공용 로더
+    const loadPage = useCallback(async (p: number, append: boolean) => {
+        setError(null);
+        const q = keyword.trim();
+        const isSearch = q.length >= 2;
+
+        const res = isSearch
+            ? await searchPerfumes(q, p, size)
+            : await getAllPerfumes(p, size);
+
+        if (res.isSuccess) {
+            const content = res.result.content ?? [];
+            setPerfumes(prev => (append ? [...prev, ...content] : content));
+            setHasNext(res.result.hasNext);
+            setPage(p + 1);
+        } else {
+            setHasNext(false);
+            setError(res.message);
+        }
+    }, [keyword, size]);
+
+    // 초기 로드 & keyword 변경 시 첫 페이지부터 재조회
     useEffect(() => {
-        const fetchPerfumes = async () => {
+        (async () => {
             try {
                 setIsLoading(true);
-                setError(null);
-                const res = await getAllPerfumes(0, size);
-                if (res.isSuccess) {
-                    setPerfumes(res.result.content);
-                    setHasNext(res.result.hasNext);
-                    setPage(1);
-                } else {
-                    setError(res.message);
-                }
+                setPerfumes([]);
+                setPage(0);
+                await loadPage(0, false);
             } catch (err) {
                 console.error(err);
                 setError("향수 목록을 불러오는데 실패했습니다.");
             } finally {
                 setIsLoading(false);
             }
-        }
-        fetchPerfumes();
-    }, [size]);
+        })();
+    }, [keyword, loadPage]);
 
     // 다음 페이지 로드
     const fetchNextPage = useCallback(async () => {
         if (!hasNext || fetchingNext) return;
         try {
             setFetchingNext(true);
-            const res = await getAllPerfumes(page, size);
-            if (res.isSuccess) {
-                setPerfumes(prev => [...prev, ...res.result.content]);
-                setHasNext(res.result.hasNext);
-                setPage(page + 1);
-            } else {
-                setHasNext(false);
-                setError(res.message);
-            }
+            await loadPage(page, true);
         } catch (err) {
             console.error(err);
-            setHasNext(false);
             setError("향수 목록을 불러오는데 실패했습니다.");
         } finally {
             setFetchingNext(false);
         }
-    }, [page, size, hasNext, fetchingNext]);
+    }, [page, hasNext, fetchingNext, loadPage]);
 
     // 인터섹션 옵저버
     useEffect(() => {
-        if (!sentinelRef.current) return;
-        if (!hasNext) return;
-
+        if (!sentinelRef.current || !hasNext) return;
         const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) fetchNextPage();
-            },
+            (entries) => entries[0].isIntersecting && fetchNextPage(),
             {root: null, rootMargin: "200px 0px", threshold: 0}
         );
 
         observer.observe(sentinelRef.current);
         return () => observer.disconnect();
     }, [fetchNextPage, hasNext]);
-    
-    const handleFilterClick = () => {
-        navigate('/filter');
-    };
+    const handleFilterClick = () => navigate('/filter');
 
-    const handleSearch = (searchTerm: string) => {
-        if (!searchTerm) {
-            return;
-        }
-        // 검색어가 있으면 이름으로 필터링
-        const filteredPerfumes = perfumes.filter(perfume => 
-            perfume.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            perfume.brand.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        
-        setPerfumes(filteredPerfumes);
-    };
+    const handleSearch = (term: string) => {
+        setKeyword(term);
+    }
+
+    const isSearch = keyword.trim().length >= 2;
+    const isEmpty = isSearch && perfumes.length === 0;
 
     return (
         <div className="min-h-screen bg-white">
