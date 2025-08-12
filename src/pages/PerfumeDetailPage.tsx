@@ -24,8 +24,8 @@ const PerfumeDetailPage = () => {
 
   return (
     <PerfumeDetailProvider fragranceId={Number(id)}>
-      <div className="min-w-[375px] w-120 h-screen bg-white flex justify-center">
-        <div className="pb-20 w-full">
+      <div className="min-w-[375px] w-120 min-h-screen bg-white flex justify-center">
+        <div className="pb-5 w-full">
           <div className="flex flex-col items-center gap-7">
             <PerfumeDetailHeader />
             <PerfumeBasicInfo />
