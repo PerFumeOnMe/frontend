@@ -6,7 +6,7 @@ import { getFragranceDetail, getMdChoice, getMyPerfumes } from "../apis/Fragranc
 import ChatBotButton from '../components/MainPage/ChatBotButton';
 import { useAuth } from "../context/AuthContext";
 import { TRENDING_IDS } from "../constants/Trending/trending";
-import type { MyPerfume } from "../types/apis/Fragrance";
+import type { MyPerfume, ResponseFragranceDetailDto } from "../types/apis/Fragrance";
 
 const MainPage = () => {
     const { accessToken } = useAuth();
@@ -58,14 +58,16 @@ const MainPage = () => {
                     setTrendError(null);
 
                     const settled = await Promise.allSettled(
-                        TRENDING_IDS.map((id) => getFragranceDetail(id))
+                        TRENDING_IDS.map(id => getFragranceDetail(id))
                     );
 
                     const items: Perfume[] = settled
-                        .filter((r): r is PromiseFulfilledResult<any> => r.status === "fulfilled" && r.value?.isSuccess)
-                        .map((r) => {
-                            const s = r.value.result;
-                            const p: Perfume = {
+                        .filter((result): result is PromiseFulfilledResult<ResponseFragranceDetailDto> => 
+                            result.status === 'fulfilled' && result.value.isSuccess
+                        )
+                        .map(result => {
+                            const s = result.value.result;
+                            return {
                                 id: s.id,
                                 brand: s.brand,
                                 name: s.name,
@@ -73,7 +75,6 @@ const MainPage = () => {
                                 imageUrl: s.imageURL,
                                 liked: !!s.liked,
                             };
-                            return p;
                         });
 
                     if (!cancelled) setTrending(items);

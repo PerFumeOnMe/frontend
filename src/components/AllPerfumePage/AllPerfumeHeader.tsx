@@ -47,7 +47,7 @@ export default function AllPerfumeHeader({ onFilterClick }: AllPerfumeHeaderProp
         <header className="flex items-center justify-between px-[16px] pt-[24px] pb-[24px] w-full">
             {/* 왼쪽: 뒤로가기 */}
             <button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate('/')}
                 className="w-[24px] h-[24px] flex items-center justify-center"
                 aria-label="뒤로가기"
             >
