@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { getBackgroundImage } from '../../utils/imageKeywordBackground';
 import type { ImageKeywordResult } from '../../types/ImageKeyword/imageKeyword';
 import KeywordBubbles from '../../components/ImageKeyword/Result/KeywordBubbles';
@@ -6,10 +7,26 @@ import KeywordDescription from '../../components/ImageKeyword/Result/KeywordDesc
 import KeywordScenario from '../../components/ImageKeyword/Result/KeywordScenario';
 import KeywordCharacter from '../../components/ImageKeyword/Result/KeywordCharacter';
 import KeywordRecommendations from '../../components/ImageKeyword/Result/KeywordRecommendation';
+import { getMdChoice } from '../../apis/Fragrance';
 
 export default function ImageKeywordResultPage() {
     const location = useLocation();
     const result = location.state?.result as ImageKeywordResult | undefined;
+    
+    //useContext에 name이 없어서 임시로 mainpage에서 가져오도록 함
+    const [userName, setUserName] = useState<string>("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getMdChoice();
+                setUserName(data.result.name);
+            } catch (error) {
+                console.error('Failed to fetch:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     if (!result || !result.keywords || result.keywords.length === 0) {
         return (
@@ -31,7 +48,7 @@ export default function ImageKeywordResultPage() {
             }}
         >
             <div className="flex flex-col items-center justify-center pt-[24px]">
-                <h1 className="text-title2 text-grayscale-900">김성섭님의</h1>
+                <h1 className="text-title2 text-grayscale-900">{userName}님의</h1>
                 <h1 className="text-display1 text-[28px] text-grayscale-1000 mb-[40px]">향기무드 테스트</h1>
                 
                 {result?.keywords && <KeywordBubbles keywords={result.keywords} />}

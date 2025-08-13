@@ -2,6 +2,13 @@ interface KeywordDescriptionProps {
     descriptions: string;
 }
 
+const formatText = (text: string) => {
+    return text.split('.')
+        .map(sentence => sentence.trim())
+        .filter(Boolean)
+        .join('.\n') + '.';
+};
+
 export default function KeywordDescription({ descriptions }: KeywordDescriptionProps) {
     return (
         <div className="w-full px-[16px]">
@@ -13,7 +20,7 @@ export default function KeywordDescription({ descriptions }: KeywordDescriptionP
                     퍼퓸온미가 해석한 당신의 감성은 이런 느낌이에요
                 </p>
                 <p className="text-body3 text-grayscale-900 whitespace-pre-line break-keep">
-                    {descriptions}
+                    {formatText(descriptions)}
                 </p>
             </div>
         </div>
