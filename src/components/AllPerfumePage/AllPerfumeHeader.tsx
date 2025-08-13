@@ -7,7 +7,7 @@ import {
     SITUATION_TYPES, 
     SEASON_TYPES,
     NOTE_CATEGORIES 
-} from '../../types/filter';
+} from '../../constants/filter';
 
 interface AllPerfumeHeaderProps {
     onFilterClick?: () => void;
@@ -25,10 +25,10 @@ export default function AllPerfumeHeader({ onFilterClick }: AllPerfumeHeaderProp
                 return GENDER_TYPES.find(type => type.id === value)?.label;
             case 'fragranceType':
                 return FRAGRANCE_TYPES.find(type => type.id === value)?.label;
-            case 'situation':
-                return SITUATION_TYPES.find(type => type.id === value)?.label;
-            case 'season':
-                return SEASON_TYPES.find(type => type.id === value)?.label;
+            case 'situationId':
+                return SITUATION_TYPES.find(type => type.id === Number(value))?.label;
+            case 'seasonId':
+                return SEASON_TYPES.find(type => type.id === Number(value))?.label;
             case 'noteCategoryId':
                 return NOTE_CATEGORIES.find(category => category.id.toString() === value)?.label;
             default:
@@ -38,7 +38,7 @@ export default function AllPerfumeHeader({ onFilterClick }: AllPerfumeHeaderProp
 
     // 필터 선택 여부 확인 (라벨이 있는 경우만 필터로 인정)
     const hasFilters = Array.from(params.entries()).some(([key, value]) => {
-        if (key === 'page' || key === 'size') return false;
+        if (key === 'page' || key === 'size' || key === 'keyword') return false;
         if (key === 'priceMin' || key === 'priceMax') return true;
         return getFilterLabel(key, value) !== undefined;
     });

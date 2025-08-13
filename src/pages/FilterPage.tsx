@@ -16,22 +16,21 @@ export default function FilterPage() {
         size: 10
     });
 
-    const handleScentToggle = (id: string) => {
+    const handleScentToggle = (id: string, noteCategoryId: number) => {
         setSelectedScent(selectedScent === id ? '' : id);
+        setFilters(prev => ({
+            ...prev,
+            noteCategoryId: selectedScent === id ? undefined : noteCategoryId
+        }));
     };
 
     const handleNext = () => {
         if (step === 'category') {
-            setFilters(prev => ({
-                ...prev,
-                noteCategoryId: selectedScent ? Number(selectedScent) : undefined
-            }));
             setStep('detail');
         } else {
             // API 요청 파라미터 구성
             const requestParams = {
-                ...filters,
-                noteCategoryId: selectedScent ? Number(selectedScent) : undefined
+                ...filters
             };
 
             // 필터가 선택되었는지 확인
@@ -95,7 +94,7 @@ export default function FilterPage() {
                                 png={scent.png}
                                 description={scent.description}
                                 selected={selectedScent === scent.id}
-                                onClick={() => handleScentToggle(scent.id)}
+                                onClick={() => handleScentToggle(scent.id, scent.noteCategoryId)}
                             />
                         ))}
                     </div>

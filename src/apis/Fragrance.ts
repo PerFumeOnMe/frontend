@@ -6,6 +6,8 @@ import type {
   ResponseFragranceDetailDto,
   PerfumeResponseDto,
   SearchResponseDto,
+  FilterRequestDto,
+  FilterResponseDto,
 } from "../types/apis/Fragrance";
 import type { MyPerfumeResponseDto } from "../types/apis/Fragrance";
 
@@ -112,3 +114,16 @@ export const searchPerfumes = async (keyword: string, page: number = 0, size: nu
     throw error;
   }
 }
+
+export const getFilteredPerfumes = async (params: FilterRequestDto) => {
+  try {
+    const res = await axiosInstance.get<FilterResponseDto>(
+      "/fragrances/allow/filter",
+      { params }
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch filtered perfumes:", error);
+    throw error;
+  }
+};

@@ -1,14 +1,17 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from '../components/AllPerfumePage/SearchBar';
 import AllPerfumeHeader from '../components/AllPerfumePage/AllPerfumeHeader';
 import type { Perfume } from "../types/perfume";
 import PerfumeGrid from '../components/MainPage/PerfumeGrid';
 import SelectedFilters from '../components/AllPerfumePage/SelectedFilters';
-import { getAllPerfumes, searchPerfumes } from '../apis/Fragrance';
+import { getAllPerfumes, getFilteredPerfumes, searchPerfumes } from '../apis/Fragrance';
 
 export default function AllPerfumePage() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    
     const [perfumes, setPerfumes] = useState<Perfume[]>([]);
     const [loading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -23,15 +26,53 @@ export default function AllPerfumePage() {
     // 검색
     const [keyword, setKeyword] = useState("");
 
+    // URL에 필터 있는지 판단
+    const hasFilterParams = (() => {
+        const keys = ['noteCategoryId', 'gender', 'fragranceType', 'situationId', 'seasonId', 'priceMin', 'priceMax'];
+        return keys.some(k => {
+            const v = params.get(k);
+            return v !== null && v !== '';
+        })
+    })();
+
+    // URL -> FilterParams 변환
+    const buildFilterParams = (p: number) => {
+        const n = (k: string) => {
+            const v = params.get(k);
+            if (v === null || v === '') return undefined;
+            const num = Number(v);
+            return Number.isFinite(num) ? num : undefined;
+        };
+        const s = (k: string) => {
+            const v = params.get(k);
+            return v && v.length ? v : undefined;
+        };
+
+        return {
+            noteCategoryId: n('noteCategoryId'),
+            gender: s('gender') as 'MALE' | 'FEMALE' | 'NEUTRAL',
+            fragranceType: s('fragranceType') as 'PERFUME' | 'EAU_DE_PERFUME' | 'EAU_DE_TOILETTE' | 'EAU_DE_COLOGNE' | 'SHOWER_COLOGNE',
+            situationId: n('situationId'),
+            seasonId: n('seasonId'),
+            priceMin: n('priceMin'),
+            priceMax: n('priceMax'),
+            page: p,
+            size,
+        };
+    };
+
     // 공용 로더
     const loadPage = useCallback(async (p: number, append: boolean) => {
         setError(null);
         const q = keyword.trim();
         const isSearch = q.length >= 2;
+        const isFilter = !isSearch && hasFilterParams;
 
         const res = isSearch
             ? await searchPerfumes(q, p, size)
-            : await getAllPerfumes(p, size);
+            : isFilter
+                ? await getFilteredPerfumes(buildFilterParams(p))
+                : await getAllPerfumes(p, size);
 
         if (res.isSuccess) {
             const content = res.result.content ?? [];
@@ -42,7 +83,7 @@ export default function AllPerfumePage() {
             setHasNext(false);
             setError(res.message);
         }
-    }, [keyword, size]);
+    }, [keyword, size, location.search]);
 
     // 초기 로드 & keyword 변경 시 첫 페이지부터 재조회
     useEffect(() => {
@@ -59,7 +100,7 @@ export default function AllPerfumePage() {
                 setIsLoading(false);
             }
         })();
-    }, [keyword, loadPage]);
+    }, [keyword, loadPage, location.search]);
 
     // 다음 페이지 로드
     const fetchNextPage = useCallback(async () => {
@@ -69,6 +110,7 @@ export default function AllPerfumePage() {
             await loadPage(page, true);
         } catch (err) {
             console.error(err);
+            setHasNext(false);
             setError("향수 목록을 불러오는데 실패했습니다.");
         } finally {
             setFetchingNext(false);
@@ -86,6 +128,7 @@ export default function AllPerfumePage() {
         observer.observe(sentinelRef.current);
         return () => observer.disconnect();
     }, [fetchNextPage, hasNext]);
+    
     const handleFilterClick = () => navigate('/filter');
 
     const handleSearch = (term: string) => {

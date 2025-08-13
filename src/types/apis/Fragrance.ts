@@ -1,4 +1,5 @@
 import type { CommonResponse } from "../apis/common";
+import type { FilterParams } from "../filter";
 import type { Perfume, PerfumeDetail } from "../perfume";
 
 export type ResponseMdChoiceDto = {
@@ -47,6 +48,13 @@ export type SearchRequestDto = {
 }
 
 export type SearchResponseDto = CommonResponse<{
+  content: Perfume[];
+  hasNext: boolean;
+}>
+
+export type FilterRequestDto = FilterParams;
+
+export type FilterResponseDto = CommonResponse<{
   content: Perfume[];
   hasNext: boolean;
 }>
