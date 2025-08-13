@@ -10,7 +10,6 @@ export default defineConfig({
     tailwindcss(),
     svgr(
       {
-      exportAsDefault: true,
       svgrOptions: {
         icon: true,
       },
