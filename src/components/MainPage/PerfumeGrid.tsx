@@ -9,9 +9,9 @@ const PerfumeGrid = ({perfumes}: PerfumeGridProps) => {
     return (
         <div className="px-[16px] mt-[8px]">
             <div className="grid grid-cols-3 gap-x-[12px] gap-y-[12px]">
-                {perfumes.map((perfume, index) => (
+                {perfumes.map((perfume) => (
                     <PerfumeCard 
-                        key={index}
+                        key={perfume.id}
                         perfume={perfume}
                     />
                 ))}

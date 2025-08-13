@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import searchImage from "../../assets/MainPage/search.png";
+import searchImage from "../../assets/MainPage/search2.png";
 
 interface SearchBarProps {
     onSearch: (searchTerm: string) => void;

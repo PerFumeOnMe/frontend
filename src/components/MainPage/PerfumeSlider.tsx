@@ -1,7 +1,8 @@
+import type { MyPerfume } from "../../types/apis/Fragrance";
 import type { Perfume } from "../../types/perfume";
 
 interface PerfumeSliderProps {
-    perfumes: Perfume[];
+    perfumes: MyPerfume[];
     currentIndex: number;
 }
 
@@ -65,7 +66,7 @@ export default function PerfumeSlider({ perfumes, currentIndex }: PerfumeSliderP
                                     />
                                     <div className={isCenter ? 'opacity-100 w-[112px]' : 'opacity-50 w-[112px]'}>
                                         <p className="text-caption2 text-white pt-[8px]">{perfume.brand}</p>
-                                        <p className="mt-[4px] text-body3 text-white pb-[15px]">{perfume.name}</p>
+                                        <p className="mt-[4px] text-body3 text-white pb-[15px] truncate">{perfume.name}</p>
                                     </div>
                                 </div>
                             </div>

@@ -33,7 +33,7 @@ axiosInstance.interceptors.request.use(
     }
 );
 
-// 응답 인터셉터: 401 에러 처리 등
+// 응답 인터셉터: 401, 400 에러 처리 등
 axiosInstance.interceptors.response.use(
     (response) => {
         return response;
@@ -44,9 +44,18 @@ axiosInstance.interceptors.response.use(
             // 토큰이 만료되었거나 유효하지 않은 경우
             localStorage.removeItem(LOCAL_STORAGE_KEY.accessToken);
             localStorage.removeItem(LOCAL_STORAGE_KEY.refreshToken);
-            
-            // 로그인 페이지로 리다이렉트 (선택사항)
-            // window.location.href = '/login';
+        }
+        
+        // 400 Bad Request 에러 처리 - 특정 URL 패턴에 대해서만 조용히 처리
+        if (error.response?.status === 400 && error.config.url.includes('/fragrances/allow/')) {
+            return Promise.resolve({ 
+                data: { 
+                    isSuccess: false, 
+                    code: 'COMMON400', 
+                    message: '향수를 찾을 수 없습니다.',
+                    result: null 
+                } 
+            });
         }
         
         return Promise.reject(error);

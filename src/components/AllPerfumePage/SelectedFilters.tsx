@@ -5,15 +5,15 @@ import {
     SITUATION_TYPES, 
     SEASON_TYPES,
     NOTE_CATEGORIES 
-} from '../../types/filter';
+} from '../../constants/filter';
 
 // 필터 순서와 표시 이름 정의
 const FILTER_ORDER = [
     { key: 'noteCategoryId', label: '카테고리' },
     { key: 'fragranceType', label: '향수 타입' },
     { key: 'gender', label: '성별' },
-    { key: 'situation', label: '상황' },
-    { key: 'season', label: '계절' },
+    { key: 'situationId', label: '상황' },
+    { key: 'seasonId', label: '계절' },
     { key: 'priceMin', label: '가격' }
 ] as const;
 
@@ -32,17 +32,21 @@ export default function SelectedFilters() {
 
     // 필터 값을 표시 텍스트로 변환
     const getDisplayText = (key: string, value: string) => {
+        console.log('getDisplayText:', { key, value });
         switch (key) {
             case 'gender':
                 return GENDER_TYPES.find(type => type.id === value)?.label;
             case 'fragranceType':
                 return FRAGRANCE_TYPES.find(type => type.id === value)?.label;
-            case 'season':
-                return SEASON_TYPES.find(type => type.id === value)?.label;
-            case 'situation':
-                return SITUATION_TYPES.find(type => type.id === value)?.label;
-            case 'noteCategoryId':
-                return NOTE_CATEGORIES.find(category => category.id.toString() === value)?.label;
+            case 'seasonId':
+                return SEASON_TYPES.find(type => type.id === Number(value))?.label;
+            case 'situationId':
+                return SITUATION_TYPES.find(type => type.id === Number(value))?.label;
+            case 'noteCategoryId': {
+                const noteId = params.get('noteCategoryId');
+                if (!noteId || noteId === 'NaN') return null;
+                return NOTE_CATEGORIES.find(category => category.id === Number(noteId))?.label;
+            }
             case 'priceMin':
                 return getPriceRangeText(params.get('priceMin'), params.get('priceMax'));
             default:
@@ -70,7 +74,8 @@ export default function SelectedFilters() {
         }
         if (!value) return null;
         
-        const displayText = getDisplayText(key, value) || value;
+        const displayText = getDisplayText(key, value);
+        if (!displayText) return null;
 
         return {
             key,

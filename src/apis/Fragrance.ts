@@ -4,7 +4,12 @@ import type {
   TrendingResponse,
   FavoriteResponse,
   ResponseFragranceDetailDto,
+  PerfumeResponseDto,
+  SearchResponseDto,
+  FilterRequestDto,
+  FilterResponseDto,
 } from "../types/apis/Fragrance";
+import type { MyPerfumeResponseDto } from "../types/apis/Fragrance";
 
 export const getMdChoice = async (): Promise<MdChoiceResponse> => {
   try {
@@ -68,6 +73,57 @@ export const getFragranceDetail = async (
     return res.data;
   } catch (error) {
     console.error("Failed to fetch fragrance detail:", error);
+    throw error;
+  }
+};
+
+export const getAllPerfumes = async (page: number = 0, size: number = 12) => {
+  try {
+    const res = await axiosInstance.get<PerfumeResponseDto>(
+      "/fragrances/allow/all",
+      {params: { page, size }}
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch all perfumes:", error);
+    throw error;
+  }
+};
+
+export const getMyPerfumes = async (): Promise<MyPerfumeResponseDto> => {
+  try {
+    const res = await axiosInstance.get<MyPerfumeResponseDto>(
+      "/fragrances/my-perfume"
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch my perfumes:", error);
+    throw error;
+  }
+};
+
+export const searchPerfumes = async (keyword: string, page: number = 0, size: number = 12) => {
+  try {
+    const res = await axiosInstance.get<SearchResponseDto>(
+      "/fragrances/allow/search",
+      {params: { keyword, page, size }}
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to search perfumes:", error);
+    throw error;
+  }
+}
+
+export const getFilteredPerfumes = async (params: FilterRequestDto) => {
+  try {
+    const res = await axiosInstance.get<FilterResponseDto>(
+      "/fragrances/allow/filter",
+      { params }
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch filtered perfumes:", error);
     throw error;
   }
 };

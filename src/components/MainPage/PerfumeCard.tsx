@@ -60,7 +60,7 @@ const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
       <p className="text-caption2 text-grayscale-800 mb-[-2]">{brand}</p>
       <p className="text-body3 text-grayscale-1000 mb-[-2]">{name}</p>
       <p className="text-body4 text-grayscale-900">
-        {minPrice.toLocaleString()}원~
+        {minPrice ? `${minPrice.toLocaleString()}원~` : '가격 정보 없음'}
       </p>
     </div>
   );
