@@ -48,7 +48,8 @@ export default function DiaryWritePage() {
           type="text"
           value={perfume}
           onChange={(e) => setPerfume(e.target.value)}
-          className="border border-grayscale-400 rounded-lg p-3 mb-4"
+          className="border border-grayscale-400 rounded-lg p-3 mb-4
+                     focus:outline-none focus:ring-0 focus:shadow-none focus:border-grayscale-400"
         />
 
         {/* 날짜 선택 */}
@@ -57,7 +58,8 @@ export default function DiaryWritePage() {
         </label>
         <input
           type="date"
-          className="border border-grayscale-400 rounded-lg p-3 mb-4 [&::-webkit-calendar-picker-indicator]:hidden"
+          className="border border-grayscale-400 rounded-lg p-3 mb-4 [&::-webkit-calendar-picker-indicator]:hidden
+                     focus:outline-none focus:ring-0 focus:shadow-none focus:border-grayscale-400"
           defaultValue={selectedDate}
           readOnly
         />
@@ -69,7 +71,8 @@ export default function DiaryWritePage() {
         <textarea
           value={experience}
           onChange={(e) => setExperience(e.target.value)}
-          className="border border-grayscale-700 rounded-lg p-3 flex-1 resize-none placeholder:text-body3"
+          className="border border-grayscale-700 rounded-lg p-3 flex-1 resize-none placeholder:text-body3
+                     focus:outline-none focus:ring-0 focus:shadow-none focus:border-grayscale-700"
           placeholder="어떤 경험을 하셨는지 적어주세요!"
         ></textarea>
       </div>
