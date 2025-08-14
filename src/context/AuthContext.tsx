@@ -63,7 +63,7 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
                 setAccessToken(cleanedAccessToken);
                 setRefreshToken(cleanedRefreshToken);
 
-                alert("로그인 성공");
+            //    alert("로그인 성공");
                 window.location.href = "/";
             }
         } catch (error){
