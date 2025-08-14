@@ -10,6 +10,7 @@ const resolvedBaseURL = isHttps && isHttpAbsolute ? "/api" : base;
 
 export const axiosInstance = axios.create({
   baseURL: resolvedBaseURL,
+  withCredentials: true,
 });
 
 // 요청 인터셉터: 매 요청마다 실시간으로 토큰을 확인하고 추가
