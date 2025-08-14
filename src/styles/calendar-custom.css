@@ -112,3 +112,8 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none; 
 }
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+  cursor: default;
+}

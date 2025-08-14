@@ -24,7 +24,7 @@ export default function DiaryWritePage() {
       console.log("다이어리 추가 응답:", response.data);
 
       if (response.data.isSuccess) {
-        alert(response.data.message);
+    //    alert(response.data.message);
         window.history.back();
       } else {
         alert(response.data.message || "저장 실패");
