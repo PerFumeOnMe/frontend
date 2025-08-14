@@ -1,9 +1,16 @@
 import axios from "axios";
 import { LOCAL_STORAGE_KEY } from "../constants/apis/key";
 
+const base = import.meta.env.VITE_PERFUMEONME_API_URL ?? "/api";
+
+// 생산(https) 환경에서 http 절대주소를 쓰려고 하면 자동으로 /api 로 대체
+const isHttps = typeof window !== "undefined" && window.location.protocol === "https:";
+const isHttpAbsolute = /^http:\/\//i.test(base);
+const resolvedBaseURL = isHttps && isHttpAbsolute ? "/api" : base;
+
 export const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_PERFUMEONME_API_URL,
-})
+  baseURL: resolvedBaseURL,
+});
 
 // 요청 인터셉터: 매 요청마다 실시간으로 토큰을 확인하고 추가
 axiosInstance.interceptors.request.use(
