@@ -25,7 +25,7 @@ const LabLoadingPage = () => {
       </div>
       <div className="absolute inset-0 bg-black/40" />
       <div className="relative w-full h-full flex flex-col items-center justify-center -mt-[100px]">
-        <p className="text-title1 text-white mb-[24px]">김성섭님만의</p>
+        <p className="text-title1 text-white mb-[24px]">김진성님만의</p>
         <p className="text-title1 text-white">향수를 찾고 있어요</p>
       </div>
     </div>
