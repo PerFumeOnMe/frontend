@@ -1,0 +1,222 @@
+:root {
+  --grayscale-1000: #1c1c1e;
+  --grayscale-1000-f2: #1c1c1ef2;
+  --grayscale-900: #343437;
+  --grayscale-800: #4c4c52;
+  --grayscale-700: #65656c;
+  --grayscale-600: #7e7e86;
+  --grayscale-500: #98989f;
+  --grayscale-400: #b2b2b8;
+  --grayscale-300: #cdcdd0;
+  --grayscale-250 :#D9D9D9;
+  --grayscale-200: #e7e7e9;
+  --error: #be1b2e;
+  --white: #fbfbfb;
+  --white-20: #FBFBFB33;
+  --white-50: #fbfbfb80;
+  --main-600: #490189;
+  --main-500: #6401bb;
+  --main-400: #8001ee;
+  --main-10: #f8f0ff;
+  --yellow-500: #FEE500;
+  --black-30: #0000004D;
+  --black-40: #00000066;
+  --black-50: #00000080;
+}
+
+@layer base {
+  .text-grayscale-1000 {
+    color: var(--grayscale-1000);
+  }
+  .text-grayscale-1000-f2 {
+    color: var(--grayscale-1000-f2);
+  }
+
+  .text-grayscale-900 {
+    color: var(--grayscale-900);
+  }
+  .text-grayscale-800 {
+    color: var(--grayscale-800);
+  }
+  .text-grayscale-700 {
+    color: var(--grayscale-700);
+  }
+  .text-grayscale-600 {
+    color: var(--grayscale-600);
+  }
+  .text-grayscale-550 {
+    color: var(--grayscale-550);
+  }
+  .text-grayscale-500 {
+    color: var(--grayscale-500);
+  }
+  .text-grayscale-400 {
+    color: var(--grayscale-400);
+  }
+  .text-grayscale-300 {
+    color: var(--grayscale-300);
+  }
+  .text-grayscale-200 {
+    color: var(--grayscale-200);
+  }
+
+  .bg-grayscale-1000 {
+    background-color: var(--grayscale-1000);
+  }
+  .bg-grayscale-1000-f2 {
+    background-color: var(--grayscale-1000-f2);
+  }
+  .bg-grayscale-900 {
+    background-color: var(--grayscale-900);
+  }
+  .bg-grayscale-800 {
+    background-color: var(--grayscale-800);
+  }
+  .bg-grayscale-700 {
+    background-color: var(--grayscale-700);
+  }
+  .bg-grayscale-600 {
+    background-color: var(--grayscale-600);
+  }
+  .bg-grayscale-500 {
+    background-color: var(--grayscale-500);
+  }
+  .bg-grayscale-400 {
+    background-color: var(--grayscale-400);
+  }
+  .bg-grayscale-300 {
+    background-color: var(--grayscale-300);
+  }
+  .bg-grayscale-250 {
+    background-color: var(--grayscale-250);
+  }
+  .bg-grayscale-200 {
+    background-color: var(--grayscale-200);
+  }
+
+  .border-grayscale-1000 {
+    border-color: var(--grayscale-1000);
+  }
+  .border-grayscale-900 {
+    border-color: var(--grayscale-900);
+  }
+  .border-grayscale-800 {
+    border-color: var(--grayscale-800);
+  }
+  .border-grayscale-700 {
+    border-color: var(--grayscale-700);
+  }
+  .border-grayscale-600 {
+    border-color: var(--grayscale-600);
+  }
+  .border-grayscale-550 {
+    border-color: var(--grayscale-550);
+  }
+  .border-grayscale-500 {
+    border-color: var(--grayscale-500);
+  }
+  .border-grayscale-400 {
+    border-color: var(--grayscale-400);
+  }
+  .border-grayscale-300 {
+    border-color: var(--grayscale-300);
+  }
+  .border-grayscale-200 {
+    border-color: var(--grayscale-200);
+  }
+
+  .placeholder-grayscale-200::placeholder {
+    color: var(--grayscale-200);
+  }
+
+
+  .bg-brand-yellow {
+    background-color: var(--yellow-500) !important;
+  }
+  .border-brand-yellow {
+    border-color: var(--yellow-500) !important;
+  }
+
+  .border-black-30 {
+    border-color: var(--black-30);
+  }
+  .border-black-40 {
+    border-color: var(--black-40);
+  }
+  .text-black-40 {
+    color: var(--black-40);
+  }
+  .bg-black-40{
+    background-color: var(--black-40)
+  }
+
+  .text-black-50 {
+    color: var(--black-50);
+  }
+
+  .border-main-600 {
+    border-color: var(--main-600);
+  }
+  .border-main-500 {
+    border-color: var(--main-500);
+  }
+  .border-main-400 {
+    border-color: var(--main-400);
+  }
+  .border-main-10 {
+    border-color: var(--main-10);
+  }
+
+  .text-error {
+    color: var(--error);
+  }
+  .bg-error {
+    background-color: var(--error);
+  }
+
+  .text-white {
+    color: var(--white);
+  }
+  .bg-white {
+    background-color: var(--white);
+  }
+  .bg-white-20 {
+    background-color: var(--white-20);
+  }
+  .bg-white-50 {
+    background-color: var(--white-50);
+  }
+
+  .text-main-600 {
+    color: var(--main-600);
+  }
+  .text-main-500 {
+    color: var(--main-500);
+  }
+  .text-main-400 {
+    color: var(--main-400);
+  }
+  .text-main-10 {
+    color: var(--main-10);
+  }
+  .bg-main-600 {
+    background-color: var(--main-600);
+  }
+  .bg-main-500 {
+    background-color: var(--main-500);
+  }
+  .bg-main-400 {
+    background-color: var(--main-400);
+  }
+  .bg-main-10 {
+    background-color: var(--main-10);
+  }
+
+  .border-t-main-10 {
+    border-top-color: var(--main-10);
+  }
+
+  .hover\:bg-main-600:hover {
+    background-color: var(--main-600);
+  }
+}
