@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import chatBotIcon from '../../assets/mainPage/chat_bot.png';
+import chatBotIcon from '../../assets/MainPage/chat_bot.png';
 
 export default function ChatBotButton() {
     const navigate = useNavigate();
