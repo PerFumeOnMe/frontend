@@ -16,14 +16,25 @@ const ContentBox = ({ title, content, caption, perfumes }: ContentBoxProps) => {
 
   return (
     <div className="w-full bg-[#FBFBFB]/30 rounded-3xl p-5 text-center border border-white shadow-[0_-10px_10px_-3px_rgba(0,0,0,0.02),0_10px_10px_-3px_rgba(0,0,0,0.02)]">
-      <h2 className="text-title3 mb-2 whitespace-pre-line">{title}</h2>
+      <h2
+        className="text-title3 mb-2 whitespace-pre-line leading-relaxed"
+        style={{ wordBreak: "keep-all", overflowWrap: "break-word" }}
+      >
+        {title}
+      </h2>
       {content && (
-        <p className="text-body3 text-grayscale-900 whitespace-pre-line">
+        <p
+          className="text-body3 text-grayscale-900 whitespace-pre-line leading-relaxed"
+          style={{ wordBreak: "keep-all", overflowWrap: "break-word" }}
+        >
           {formatContent(content)}
         </p>
       )}
       {caption && (
-        <p className="text-caption1 mt-2 whitespace-pre-line">
+        <p
+          className="text-caption1 mt-2 whitespace-pre-line leading-relaxed"
+          style={{ wordBreak: "keep-all", overflowWrap: "break-word" }}
+        >
           {formatContent(caption)}
         </p>
       )}
