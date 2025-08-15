@@ -15,7 +15,7 @@ const PerfumeCard = ({ perfume }: PerfumeCardProps) => {
             <img
               src={perfume.imageUrl}
               alt={`${perfume.name}`}
-              className="w-21 h-25 object-contain"
+              className="w-21 h-25 object-cover rounded-lg"
             />
           ) : (
             <div className="w-21 h-25 bg-gray-200 flex items-center justify-center text-gray-400">
