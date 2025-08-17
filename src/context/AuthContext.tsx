@@ -55,7 +55,7 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
 
                 console.log("typeof token:", typeof rawAccessToken); // string이어야 함
                 console.log("token:", rawAccessToken); // 🔍 여기
-                console.log("사용자 이름 : ",data.name)
+                console.log("사용자 이름 : ", data.name)
 
                 // ✅ 양쪽 쌍따옴표 감싸져 있으면 제거
                 const cleanedAccessToken = rawAccessToken.replace(/^"(.*)"$/, '$1');
