@@ -67,8 +67,7 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
                 setAccessToken(cleanedAccessToken);
                 setRefreshToken(cleanedRefreshToken);
 
-                            setName(data.name ?? null); 
-
+                setName(data.name ?? null); 
                 alert("로그인 성공");
                 window.location.href = "/";
             }
