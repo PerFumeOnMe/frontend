@@ -8,6 +8,7 @@ import { postLogout, postSignin } from "../apis/User";
 interface AuthContextType {
     accessToken : string | null;
     refreshToken : string | null;
+    name: string | null;
     login : (signinData : RequestSigninDto ) => Promise<void>;
     logout : () => Promise<void>
 }
@@ -15,6 +16,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>({
     accessToken : null,
     refreshToken : null,
+    name: null,
     login : async () => {},
     logout : async () => {},
 });
@@ -40,6 +42,8 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
         getRefreshTokenFromStorage(), // 지연 초기화
     )
 
+    const [name, setName] = useState<string|null>(null); 
+
     const login = async (signinData: RequestSigninDto) => {
         try {
             const { accessToken, data } = await postSignin(signinData);
@@ -63,7 +67,8 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
                 setAccessToken(cleanedAccessToken);
                 setRefreshToken(cleanedRefreshToken);
 
-            //    alert("로그인 성공");
+                setName(data.name ?? null); 
+                alert("로그인 성공");
                 window.location.href = "/";
             }
         } catch (error){
@@ -79,7 +84,8 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
             removeRefreshTokenFromStorage();
 
             setAccessToken(null);
-            setRefreshToken(null);
+            setRefreshToken(null);        
+            setName(null); 
 
             alert("로그아웃 성공")
         } catch (error) {
@@ -89,7 +95,7 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
     }
 
     return (
-        <AuthContext.Provider value={{ accessToken, refreshToken, login, logout }}>
+        <AuthContext.Provider value={{ accessToken, refreshToken, name, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
