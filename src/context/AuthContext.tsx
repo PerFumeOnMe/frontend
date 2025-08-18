@@ -5,6 +5,22 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { LOCAL_STORAGE_KEY } from "../constants/apis/key";
 import { postLogout, postSignin } from "../apis/User";
 
+// 에러 메시지 매핑 유틸
+const mapLoginErrorMessage = (err: any): string => {
+  const code =
+    err?.response?.data?.error?.errorCode ||
+    err?.response?.data?.code ||
+    err?.response?.status;
+
+  if (code === "MEMBER4003") {
+    return "등록되지 않은 아이디입니다.";
+  }
+  if (code === "MEMBER4002") {
+    return "비밀번호가 올바르지 않습니다.";
+  }
+  return "아이디 또는 비밀번호가 올바르지 않습니다.";
+};
+
 interface AuthContextType {
     accessToken : string | null;
     refreshToken : string | null;
@@ -91,14 +107,15 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
                     setNameInStorage(nextName);
                 }
                 setName(nextName);
-
-                alert("로그인 성공");
+            //  alert("로그인 성공");
             }
-        } catch (error){
-            console.error("로그인 오류",error)
-            alert("로그인 실패")
-        }
-    }
+            } catch (error: any) {
+            console.error("로그인 오류", error);
+            const message = mapLoginErrorMessage(error);
+
+            throw new Error(message);
+            }
+        };
 
     const logout = async() => {
         try {
