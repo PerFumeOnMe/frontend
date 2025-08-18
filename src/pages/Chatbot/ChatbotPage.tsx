@@ -14,9 +14,9 @@ export interface Message {
 }
 
 const perfumeTags = [
-  "#오늘같은날씨어떤향수뿌릴까?",
-  "#비온뒤새벽에나는향같은향수",
-  "#향수의역사"
+  "오늘같은날씨어떤향수뿌릴까?",
+  "비온뒤새벽에나는향같은향수",
+  "향수의역사"
 ];
 
 const ChatbotPage: React.FC = () => {
@@ -72,6 +72,21 @@ const ChatbotPage: React.FC = () => {
 
   const cancelLeave = () => setLeaveOpen(false);
 
+  const handleTagSend = async (text: string) => {
+    if (!text.trim() || isLoading) return; // ✅ 빈 문자열/로딩 중 가드
+    setMessages(prev => [...prev, { type: "user", text }]);
+    setIsLoading(true);
+    try {
+      const body: RequestChatbotMessage = { message: text };
+      const response: ResponseChatbotMessage = await postChatbot(body);
+      setMessages(prev => [...prev, { type: "bot", text: response.result }]);
+    } catch (e) {
+      setMessages(prev => [...prev, { type: "bot", text: "죄송합니다. 서버와 연결할 수 없습니다." }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     const onBeforeUnload = (e: BeforeUnloadEvent) => {
       if (hasUserMessage) {
@@ -89,7 +104,14 @@ const ChatbotPage: React.FC = () => {
       <div className='flex-1 min-h-0'>
         <ChatArea messages={messages} isLoading={isLoading} />
       </div>
-      {!hasUserMessage && <PerfumeTagList tags={perfumeTags} />}
+      {!hasUserMessage && (
+        <PerfumeTagList
+          tags={perfumeTags}
+          onTagClick={(tag) => handleTagSend(tag)}   // ✅ 태그 클릭 → 바로 전송
+          disabled={isLoading}                    // (선택) 로딩 중 중복 전송 방지
+          className='mb-17'
+        />
+      )}
       <InputBox onSend={handleSend} />
       
       {/* 확인 모달 */}
