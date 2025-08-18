@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import type { PropsWithChildren, ReactElement } from "react";
 import type { RequestSigninDto } from "../types/apis/User";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -34,6 +34,12 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
         removeItem: removeRefreshTokenFromStorage
     } = useLocalStorage(LOCAL_STORAGE_KEY.refreshToken);
     
+    const {
+        getItem: getNameFromStorage,
+        setItem: setNameInStorage,
+        removeItem: removeNameFromStorage,
+    } = useLocalStorage(LOCAL_STORAGE_KEY.userName ?? "userName");
+
     const [accessToken, setAccessToken] = useState<string|null>(
         getAccessTokenFromStorage(), // 지연 초기화
     )
@@ -42,7 +48,15 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
         getRefreshTokenFromStorage(), // 지연 초기화
     )
 
-    const [name, setName] = useState<string|null>(null); 
+    const [name, setName] = useState<string|null>(null);
+
+    useEffect(() => {
+        const storedName = getNameFromStorage();
+        if (storedName) {
+            setName(storedName);
+        }
+
+    }, []);
 
     const login = async (signinData: RequestSigninDto) => {
         try {
@@ -53,22 +67,30 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
                 const rawAccessToken: string = accessToken;
                 const rawRefreshToken: string = data.refreshToken;
 
-                console.log("typeof token:", typeof rawAccessToken); // string이어야 함
-                console.log("token:", rawAccessToken); // 🔍 여기
-                console.log("사용자 이름 : ", data.name)
+                //console.log("typeof token:", typeof rawAccessToken); // string이어야 함
+                //console.log("token:", rawAccessToken); // 🔍 여기
+                //console.log("사용자 이름 : ", data.name)
 
                 // ✅ 양쪽 쌍따옴표 감싸져 있으면 제거
                 const cleanedAccessToken = rawAccessToken.replace(/^"(.*)"$/, '$1');
                 const cleanedRefreshToken = rawRefreshToken.replace(/^"(.*)"$/, '$1');
 
-                // ✅ 저장 및 상태 업데이트
+                // 기존 값 클린업
+                removeAccessTokenFromStorage();
+                removeRefreshTokenFromStorage();
+                removeNameFromStorage();
+
+                // 저장 & 상태 반영
                 setAccessTokenInStorage(cleanedAccessToken);
                 setRefreshTokenInStorage(cleanedRefreshToken);
-
                 setAccessToken(cleanedAccessToken);
                 setRefreshToken(cleanedRefreshToken);
-
-                setName(data.name ?? null);
+                
+                const nextName = data.name ?? null;
+                if (nextName) {
+                    setNameInStorage(nextName);
+                }
+                setName(nextName);
 
                 alert("로그인 성공");
             }
@@ -83,6 +105,7 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
             await postLogout();
             removeAccessTokenFromStorage()
             removeRefreshTokenFromStorage();
+            removeNameFromStorage();
 
             setAccessToken(null);
             setRefreshToken(null);        

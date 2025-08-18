@@ -15,6 +15,8 @@ interface ChatAreaProps {
 const ChatArea: React.FC<ChatAreaProps> = ({ messages, isLoading }) => {
   const { name } = useAuth()
   const chatRef = useRef<HTMLDivElement>(null);
+  const today = new Date();
+  const formattedDate = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, "0")}.${String(today.getDate()).padStart(2, "0")}`;
 
   useEffect(() => {
     chatRef.current?.scrollTo(0, chatRef.current.scrollHeight);
@@ -25,7 +27,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ messages, isLoading }) => {
       ref={chatRef}
       className="px-3 py-1 overflow-y-auto pb-1 bg-main-10 flex-1"
     >
-      <WelcomeHeader name={name} date="2025.07.06" />
+      <WelcomeHeader name={name} date={formattedDate} />
       {messages.map((msg, idx) =>
         msg.type === "user" ? (
           <UserMessage key={idx} text={msg.text} />
