@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
   { to: "/Main", label: "홈", Icon: HomeIcon },
-  { to: "/PBTI", label: "공방", Icon: PBTIIcon },
+  { to: "/PBTI", label: "PBTI", Icon: PBTIIcon },
   { to: "/Diary", label: "일기", Icon: DiaryIcon },
   { to: "/MyPage", label: "마이", Icon: MyPageIcon },
 ];
