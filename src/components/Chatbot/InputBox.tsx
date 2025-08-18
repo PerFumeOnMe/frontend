@@ -16,7 +16,7 @@ const InputBox: React.FC<InputBoxProps> = ({ onSend }) => {
   };
 
   return (
-    <div className="fixed bottom-0 inset-x-0 mx-auto w-full max-w-120 h-20 bg-[#FBFBFB]/90">
+    <div className="sticky bottom-0 w-full max-w-120 h-20 bg-[#FBFBFB]/90">
       <div className="h-full flex px-[15px] py-4 relative">
         <input
           type="text"
