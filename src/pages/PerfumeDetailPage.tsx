@@ -12,6 +12,10 @@ const PerfumeDetailPage = () => {
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       if (!id) return;
 
