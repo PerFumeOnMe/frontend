@@ -71,7 +71,6 @@ export const AuthProvider = ({children}:PropsWithChildren): ReactElement => {
                 setName(data.name ?? null);
 
                 alert("로그인 성공");
-                window.location.href = "/";
             }
         } catch (error){
             console.error("로그인 오류",error)

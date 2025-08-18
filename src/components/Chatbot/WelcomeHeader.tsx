@@ -1,7 +1,7 @@
 import React from "react";
 
 interface WelcomeHeaderProps {
-  name: string;
+  name: string | null;
   date: string;
 }
 
