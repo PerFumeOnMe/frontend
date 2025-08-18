@@ -4,6 +4,7 @@ import BotMessage from "./BotMessage";
 import WelcomeHeader from "./WelcomeHeader";
 import type { Message } from "../../pages/Chatbot/ChatbotPage";
 import SkeletonMessage from "./SkeletonMessage";
+import { useAuth } from '../../context/AuthContext';
 
 interface ChatAreaProps {
   messages: Message[];
@@ -12,6 +13,7 @@ interface ChatAreaProps {
 
 
 const ChatArea: React.FC<ChatAreaProps> = ({ messages, isLoading }) => {
+  const { name } = useAuth()
   const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,9 +23,9 @@ const ChatArea: React.FC<ChatAreaProps> = ({ messages, isLoading }) => {
   return (
     <div
       ref={chatRef}
-      className="px-1 py-1 overflow-y-auto pb-1 bg-main-10 flex-1"
+      className="px-3 py-1 overflow-y-auto pb-1 bg-main-10 flex-1"
     >
-      <WelcomeHeader name="김성섭" date="2025.07.06" />
+      <WelcomeHeader name={name} date="2025.07.06" />
       {messages.map((msg, idx) =>
         msg.type === "user" ? (
           <UserMessage key={idx} text={msg.text} />
