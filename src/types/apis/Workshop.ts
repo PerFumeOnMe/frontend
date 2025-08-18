@@ -33,12 +33,15 @@ export type WorkShopMyPerfume = {
   name : string,
   imageUrl : string,
 }
+
 export type RequestWorkshopSaveDto = {
   savedName: string;
 };
 
-export type ResponseWorkshopSaveDto = CommonResponse<{
+export type ResponseWorkshopSaveDto = CommonResponse<WorkshopSaveDto[]>;
+
+export type WorkshopSaveDto = {
   workshopId: number;
   savedName: string;
   createdAt: string;
-}>;
+}
