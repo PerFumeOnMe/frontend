@@ -23,6 +23,7 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.2",
     "tailwindcss": "^4.1.10",
+    "use-scroll-restoration": "^1.0.0",
     "vite-plugin-svgr": "^4.3.0"
   },
   "devDependencies": {
