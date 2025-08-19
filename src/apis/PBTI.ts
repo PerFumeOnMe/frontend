@@ -58,7 +58,7 @@ export const patchPBTIName = async (
 /// 마이페이지 PBTI 목록 조회
 export const getPBTIList = async (): Promise<PbtiListResult[]> => {
   const res = await axiosInstance.get<ApiResponsePbtiListResult>("/pbti/result/list");
-  const data = res.data.result
+  const data = res.data.result.result;
   
   return data;
 };
