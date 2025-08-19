@@ -162,7 +162,7 @@ const DescriptionNote = ({
             className="relative w-55"
             style={{
               transformStyle: "preserve-3d",
-              height: `${maxHeight + 50}px`,
+              height: `${maxHeight + 60}px`,
               top: "25px",
             }}
           >
@@ -209,7 +209,7 @@ const DescriptionNote = ({
                     isActive={cardPos.isActive}
                     position={cardPos.position}
                     onClick={() => handleCardClick(card.id)}
-                    maxHeight={maxHeight}
+                    maxHeight={maxHeight + 10}
                   />
                 </div>
               );
