@@ -57,7 +57,7 @@ const PBTIResultPage: React.FC = () => {
       />
       <PBTIPerfumeTypeSection data={scentPoint} />
       <PBTISummarySection summary={summary}/>
-      <PBTIRecommendedPerfumesSection />
+      <PBTIRecommendedPerfumesSection perfumeRecommends={perfumeRecommends} />
       <PBTIActionButtons onSaveClick={handleSaveClick} />
 
       {/* 모달 분리 */}
