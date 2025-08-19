@@ -7,7 +7,7 @@ import ChatBotButton from '../components/MainPage/ChatBotButton';
 import { useAuth } from "../context/AuthContext";
 import { TRENDING_IDS } from "../constants/Trending/trending";
 import type { MyPerfume, ResponseFragranceDetailDto } from "../types/apis/Fragrance";
-import SkeletonPerfumeCard from "../components/common/SkeletonPerfumeCard";
+import SkeletonPerfumeGrid from "../components/common/SkeletonPerfumeGrid";
 
 const MainPage = () => {
     const { accessToken } = useAuth();
@@ -108,26 +108,14 @@ const MainPage = () => {
             <div className="relative -mt-[16px] rounded-t-[16px] bg-white pt-[16px]">
                 <h2 className="text-title3 mb-[7px] px-[16px]">{userName}님이 좋아할만한 향수</h2>
                 {mdChoiceLoading ? (
-                    <div className="px-[16px] mt-[8px]">
-                        <div className="grid grid-cols-3 gap-x-[12px] gap-y-[12px]">
-                            {Array.from({ length: 6 }).map((_, index) => (
-                                <SkeletonPerfumeCard key={`md-skeleton-${index}`} />
-                            ))}
-                        </div>
-                    </div>
+                    <SkeletonPerfumeGrid count={6} keyPrefix="md-skeleton" />
                 ) : (
                     <PerfumeGrid perfumes={MdChoice} />
                 )}
                 
                 <h2 className="text-title3 mb-[7px] pt-[32px] px-[16px]">요즘 뜨는 향수</h2>
                 {trendingLoading ? (
-                    <div className="px-[16px] mt-[8px]">
-                        <div className="grid grid-cols-3 gap-x-[12px] gap-y-[12px]">
-                            {Array.from({ length: 6 }).map((_, index) => (
-                                <SkeletonPerfumeCard key={`trending-skeleton-${index}`} />
-                            ))}
-                        </div>
-                    </div>
+                    <SkeletonPerfumeGrid count={6} keyPrefix="trending-skeleton" />
                 ) : (
                     <PerfumeGrid perfumes={trending} />
                 )}
