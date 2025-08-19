@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import PerfumeOnMeCharacter from '../../assets/common/character.png';
+import PBTILOGO from '../../assets/PBTI/PBTILOGO.gif';
 import PBTIQuestionCard from '../../components/PBTI/PBTIQuestion/PBTIQuestionCard';
 import { PBTIQuestions, type PBTIQuestionType } from "../../constants/PBTI/questions";
 import { postPBTIResult } from '../../apis/PBTI';
@@ -63,7 +63,7 @@ const PBTIQuestionPage: React.FC = () => {
 
   return (
     <div className="min-w-[375px] h-screen -mb-20 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard] overflow-hidden">
-      <img src={PerfumeOnMeCharacter} className="w-[238px] h-[238px] mt-16" />
+      <img src={PBTILOGO} className="w-[376px] h-[360px] -mt-16" />
 
       <div className="w-full flex justify-center px-4">
         <AnimatePresence mode="wait">
