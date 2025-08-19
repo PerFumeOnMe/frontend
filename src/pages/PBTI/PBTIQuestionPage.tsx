@@ -28,6 +28,9 @@ const PBTIQuestionPage: React.FC = () => {
     // 마지막 질문 완료 ->> 로딩으로 이동
     setIsSubmitting(true);
     console.log(updatedAnswers)
+
+    //다음 테스트에서 tip 새로 뽑기 위해 초기화
+    sessionStorage.removeItem("pbti_visibleTips");
     navigate('/PBTI/loading', {
       state: { answers: updatedAnswers },
     });

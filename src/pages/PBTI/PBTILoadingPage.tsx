@@ -7,7 +7,7 @@ import { tips } from "../../constants/PBTI/ment";
 import { postPBTIResult } from "../../apis/PBTI";
 import type { RequestPbtiQuestion } from "../../types/apis/PBTI";
 
-function shuffle<T>(arr: T[]): T[] {
+function shuffle<T>(arr: readonly T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -75,8 +75,21 @@ export default function PBTILoadingPage() {
   }, [answers, navigate]);
 
   // 캐러셀
-  const order = useMemo(() => shuffle([0, 1, 2, 3]), []);
-  const visibleTips = useMemo(() => order.map((i) => tips[i]), [order]);
+const [visibleTips] = useState(() => {
+  const cached = sessionStorage.getItem("pbti_visibleTips");
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached) as typeof tips;
+      return parsed;
+    } catch {
+      // 
+    }
+  }
+  const picked = shuffle(tips).slice(0, Math.min(4, tips.length));
+
+  sessionStorage.setItem("pbti_visibleTips", JSON.stringify(picked));
+  return picked;
+});
 
   const slides = useMemo(
     () => (visibleTips.length ? [...visibleTips, visibleTips[0]] : []),
