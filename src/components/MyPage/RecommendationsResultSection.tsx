@@ -4,7 +4,7 @@ import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
 import { getPBTIList } from "../../apis/PBTI";
 import { getMyPageWorkShopList } from "../../apis/Workshop";
 import { getImageKeywordMyPerfumeList } from "../../apis/Image-Keyword";
-import type { WorkShopMyPerfume, WorkshopSaveDto } from "../../types/apis/Workshop";
+import type { WorkshopSaveDto } from "../../types/apis/Workshop";
 import type { ImageKeywordResult } from "../../types/apis/Image-Keyword";
 import type { PbtiListResult } from "../../types/apis/PBTI";
 import MyPageKeywordRecommendationCard from "./MyPageKeywordRecommendationCard";
@@ -14,10 +14,14 @@ interface RecommendationsResultSectionProps {
   option: string;
 }
 
-const RecommendationsResultSection: React.FC<RecommendationsResultSectionProps> = ({ option }) => {
+const RecommendationsResultSection: React.FC<
+  RecommendationsResultSectionProps
+> = ({ option }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [perfumeLab, setPerfumeLab] = useState<WorkshopSaveDto[]>([]);
-  const [keywordPerfume, setKeywordPerfume] = useState<ImageKeywordResult[]>([]);
+  const [keywordPerfume, setKeywordPerfume] = useState<ImageKeywordResult[]>(
+    []
+  );
   const [PBTIPerfume, setPBTIPerfume] = useState<PbtiListResult[]>([]);
 
   useEffect(() => {
@@ -37,7 +41,6 @@ const RecommendationsResultSection: React.FC<RecommendationsResultSectionProps> 
         setPerfumeLab(labRes);
         setKeywordPerfume(keywordRes);
         setPBTIPerfume(pbtiRes);
-
       } catch (error) {
         console.error("데이터를 불러오는 중 오류 발생:", error);
       } finally {
@@ -69,7 +72,9 @@ const RecommendationsResultSection: React.FC<RecommendationsResultSectionProps> 
   return (
     <div className="flex flex-col w-full">
       {isLoading
-        ? Array.from({ length: 3 }).map((_, idx) => <SkeletonRecommendationCard key={idx} />)
+        ? Array.from({ length: 3 }).map((_, idx) => (
+            <SkeletonRecommendationCard key={idx} />
+          ))
         : renderCards()}
     </div>
   );

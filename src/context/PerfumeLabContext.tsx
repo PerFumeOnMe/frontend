@@ -35,6 +35,9 @@ export interface PerfumeLabContextType {
   handleReset: () => void;
   handleResultView: () => Promise<void>;
   getPerfumeDataForAPI: () => RequestWorkshopDto;
+  setCompletedPerfume: React.Dispatch<
+    React.SetStateAction<ResponseWorkshopDto["result"] | null>
+  >;
 }
 
 export const PerfumeLab = createContext<PerfumeLabContextType | undefined>(
@@ -82,6 +85,7 @@ const PerfumeLabProvider = ({ children }: { children: ReactNode }) => {
 
       // Actions
       ...actions,
+      setCompletedPerfume,
     }),
     [
       selectedNotes,
@@ -91,6 +95,7 @@ const PerfumeLabProvider = ({ children }: { children: ReactNode }) => {
       error,
       computed,
       actions,
+      setCompletedPerfume,
     ]
   );
 
