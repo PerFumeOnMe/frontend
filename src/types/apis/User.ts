@@ -6,11 +6,14 @@ export type RequestSigninDto = {
   password : string;
 }
 
-export type ResponseSigninDto = CommonResponse<{
+export type ResponseSigninDto = CommonResponse<LoginResult>
+
+export type LoginResult = {
   refreshToken: string,
   userId: number,
   social: string
-}>
+  name: string
+}
 
 export type SigninResponseWithToken = ResponseSigninDto & { accessToken: string };
 

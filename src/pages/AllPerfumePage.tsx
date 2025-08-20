@@ -6,6 +6,7 @@ import type { Perfume } from "../types/perfume";
 import PerfumeGrid from '../components/MainPage/PerfumeGrid';
 import SelectedFilters from '../components/AllPerfumePage/SelectedFilters';
 import { getAllPerfumes, getFilteredPerfumes, searchPerfumes } from '../apis/Fragrance';
+import SkeletonPerfumeGrid from '../components/common/SkeletonPerfumeGrid';
 
 export default function AllPerfumePage() {
     const navigate = useNavigate();
@@ -151,9 +152,7 @@ export default function AllPerfumePage() {
 
             {/* 향수 목록 또는 메시지 */}
             {loading ? (
-                <div className="flex justify-center items-center pt-[120px]">
-                    로딩 중...
-                </div>
+                <SkeletonPerfumeGrid count={12} keyPrefix="initial-skeleton" />
             ) : error ? (
                 <div className="flex justify-center items-center pt-[120px] text-body3 text-red-500">
                     {error}
@@ -163,7 +162,9 @@ export default function AllPerfumePage() {
                     <PerfumeGrid perfumes={perfumes} />
                     {hasNext && (
                         <div ref={sentinelRef} className="h-12 flex items-center justify-center">
-                            {fetchingNext && <span className="text-sm text-gray-500">불러오는 중…</span>}
+                            {fetchingNext && (
+                                <SkeletonPerfumeGrid count={3} keyPrefix="loading-skeleton" />
+                            )}
                         </div>
                     )}
                 </>

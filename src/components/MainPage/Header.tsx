@@ -8,6 +8,10 @@ const Header = () => {
     const handleSearchClick = () => {
         navigate("/all-perfume");
     };
+
+    const handleHeartClick = () => {
+        navigate("/myPage");
+    };
     
     return (
         <header className="flex items-center justify-between px-[16px] pt-[24px] w-full h-[56px]">
@@ -21,7 +25,7 @@ const Header = () => {
                 <button aria-label="Search" onClick={handleSearchClick}>
                     <img src={searchIcon} alt="검색" className="w-[32px] h-[32px]" />
                 </button>
-                <button aria-label="Favorites">
+                <button aria-label="Favorites" onClick={handleHeartClick}>
                     <img src={heartIcon} alt="찜한 향수" className="w-[32px] h-[32px]" />
                 </button>
             </div>

@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePerfumeLab } from "../../hooks/PerfumeLab/usePerfumeLab";
 import mainBg from "../../assets/MainPage/main.png";
+import { useAuth } from "../../context/AuthContext";
 
 const LabLoadingPage = () => {
   const navigate = useNavigate();
   const { isLoading, completedPerfume, error } = usePerfumeLab();
+  const { name } = useAuth();
 
   useEffect(() => {
     if (error) {
@@ -48,7 +50,7 @@ const LabLoadingPage = () => {
       `}</style>
       <div className="absolute inset-0 bg-black/40" />
       <div className="relative w-full h-full flex flex-col items-center justify-center -mt-[100px]">
-        <p className="text-title1 text-white mb-[24px]">김성섭님만의</p>
+        <p className="text-title1 text-white mb-[24px]">{name}님만의</p>
         <p className="text-title1 text-white mb-8">향수를 찾고 있어요</p>
       </div>
     </div>

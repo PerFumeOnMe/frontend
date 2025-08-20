@@ -2,12 +2,15 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import mainBg from '../../assets/MainPage/main.png';
 import { postImageKeywordPreview } from '../../apis/ImageKeyword';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ImageKeywordLoading() {
     const navigate = useNavigate();
     const location = useLocation();
     const keywords = location.state?.keywords;
+    const { name } = useAuth();
 
+    // 키워드 결과 가져오기
     useEffect(() => {
         const fetchResult = async () => {
             if (!keywords || keywords.length < 5) {
@@ -59,7 +62,7 @@ export default function ImageKeywordLoading() {
             <div className="absolute inset-0 bg-black/40" />
             <div className="relative w-full h-full flex flex-col items-center justify-center -mt-[100px]">
                 <p className="text-title1 text-white mb-[24px]">
-                    김성섭님의 이미지를
+                    {name}님의 이미지를
                 </p>
                 <p className="text-title1 text-white">
                     파악중이에요

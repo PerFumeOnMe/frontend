@@ -5,14 +5,16 @@ import Header from "./Header";
 import { SlArrowRight } from "react-icons/sl";
 import PerfumeSlider from "./PerfumeSlider";
 import type { MyPerfume } from "../../types/apis/Fragrance";
+import PerfumeSliderSkeleton from "./PerfumeSliderSkeleton";
 
 interface BannerProps {
-    userName: string;
-    exists: boolean;
-    myPerfumes: MyPerfume[];
+  userName: string;
+  exists: boolean;
+  myPerfumes: MyPerfume[];
+  sliderLoading?: boolean; // ✅ 추가
 }
 
-export default function Banner({ userName, exists, myPerfumes }: BannerProps) {
+export default function Banner({ userName, exists, myPerfumes, sliderLoading = false }: BannerProps) {
     const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -27,16 +29,16 @@ export default function Banner({ userName, exists, myPerfumes }: BannerProps) {
     }, [exists, myPerfumes]);
 
     return (
-        <div 
+        <div
             className={`relative w-full min-w-[375px] bg-cover bg-center overflow-hidden ${
-                exists ? 'h-[424px]' : 'h-[300px]'
+                exists ? "h-[424px]" : "h-[300px]"
             }`}
-            style={{ 
+            style={{
                 backgroundImage: `url(${mainBg})`,
-                backgroundSize: exists ? '155%' : '130%',
-                backgroundPosition: exists ? '80% 100%' : '90% 80%'
+                backgroundSize: exists ? "155%" : "130%",
+                backgroundPosition: exists ? "80% 100%" : "90% 80%",
             }}
-        >
+            >
             {/* 배경 오버레이 */}
             <div className="absolute inset-0 bg-black/40" />
 
@@ -46,48 +48,79 @@ export default function Banner({ userName, exists, myPerfumes }: BannerProps) {
             </div>
 
             {/* 컨텐츠 */}
-            {exists ? (
+            {sliderLoading ? (
+                // 🔹 로딩 상태 → exist=true UI 강제
                 <div className="relative z-10 flex flex-col">
-                    <div className="px-[16px] pt-[24px]">
-                        <h2 className="text-title2 text-grayscale-200">
-                            반가워요! {userName}님
-                        </h2>
-                        <p className="text-body3 text-grayscale-300 mt-[4px]">
-                            오늘도 나와 맞는 향수를 찾아 보아요.
-                        </p>
-                    </div>
-
-                    {/* 향수 슬라이드 */}
-                    <PerfumeSlider perfumes={myPerfumes} currentIndex={currentIndex} />
-
-                    {/* 나만의 향수 다시 만들기 버튼 */}
-                    <div className="flex justify-end px-[16px]">
-                        <button
-                            onClick={() => navigate("/choose-path")}
-                            className="mt-[16px] text-body4 text-grayscale-300 flex items-center"
-                        >
-                            나만의 향수 만들러 가기
-                            <SlArrowRight size={12} />
-                        </button>
-                    </div>
-                </div>
-            ) : (
-                <div className="relative z-10 px-[16px] pt-[120px]">
-                    <h2 className="text-display1 text-grayscale-200">
-                        반가워요! {userName}님
+                <div className="px-[16px] pt-[24px]">
+                    <h2 className="text-title2 text-grayscale-200">
+                    반가워요! {userName}님
                     </h2>
                     <p className="text-body3 text-grayscale-300 mt-[4px]">
-                        퍼퓸온미에서 당신만의 향기를 찾아보세요
+                    오늘도 나와 맞는 향수를 찾아 보아요.
                     </p>
-                    <div className="flex justify-end">
-                        <button
-                            onClick={() => navigate("/choose-path")}
-                            className="mt-[9.5px] text-body3 text-grayscale-200 flex items-center"
-                        >
-                            나만의 향수 만들러 가기
-                            <SlArrowRight size={12} />
-                        </button>
-                    </div>
+                </div>
+
+                {/* PerfumeSlider 로딩 중일 때 스켈레톤 */}
+                <div className="px-[16px] mt-4">
+                    <PerfumeSliderSkeleton /> {/* 👈 원하는 스켈레톤 컴포넌트 */}
+                </div>
+
+                <div className="flex justify-end px-[16px]">
+                    <button
+                    onClick={() => navigate("/choose-path")}
+                    className="mt-[2px] text-body4 text-grayscale-300 flex items-center"
+                    >
+                    나만의 향수 만들러 가기
+                    <SlArrowRight size={12} />
+                    </button>
+                </div>
+                </div>
+            ) : exists ? (
+                // 🔹 로딩 끝났고 exist=true
+                <div className="relative z-10 flex flex-col">
+                <div className="px-[16px] pt-[24px]">
+                    <h2 className="text-title2 text-grayscale-200">
+                    반가워요! {userName}님
+                    </h2>
+                    <p className="text-body3 text-grayscale-300 mt-[4px]">
+                    오늘도 나와 맞는 향수를 찾아 보아요.
+                    </p>
+                </div>
+
+                <PerfumeSlider
+                    perfumes={myPerfumes}
+                    currentIndex={currentIndex}
+                    isLoading={false}
+                />
+
+                <div className="flex justify-end px-[16px]">
+                    <button
+                    onClick={() => navigate("/choose-path")}
+                    className="mt-[2px] text-body4 text-grayscale-300 flex items-center"
+                    >
+                    나만의 향수 만들러 가기
+                    <SlArrowRight size={12} />
+                    </button>
+                </div>
+                </div>
+            ) : (
+                // 🔹 로딩 끝났고 exist=false
+                <div className="relative z-10 px-[16px] pt-[120px]">
+                <h2 className="text-display1 text-grayscale-200">
+                    반가워요! {userName}님
+                </h2>
+                <p className="text-body3 text-grayscale-300 mt-[4px]">
+                    퍼퓸온미에서 당신만의 향기를 찾아보세요
+                </p>
+                <div className="flex justify-end">
+                    <button
+                    onClick={() => navigate("/choose-path")}
+                    className="mt-[9.5px] text-body3 text-grayscale-200 flex items-center"
+                    >
+                    나만의 향수 만들러 가기
+                    <SlArrowRight size={12} />
+                    </button>
+                </div>
                 </div>
             )}
         </div>
