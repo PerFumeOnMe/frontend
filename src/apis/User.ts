@@ -1,8 +1,8 @@
+import type { AxiosResponse } from "axios";
 import {
     type RequestSigninDto,
     type RequestSignupDto,
     type ResponseSignupDto,
-    type ResponseSigninDto,
     type SigninResponseWithToken,
     type RequestUserNotesDto,
     type ResponseUserNotesDto,
@@ -11,15 +11,16 @@ import {
     type ResponseUserInfoDto,
     type RequestUserFavoritesListDto,
     type ResponseUserFavoritesListDto,
-    type UserFavoriteContentDto,
     type ResponseUserInfo,
+    type ResponseSigninDto,
+    type LoginResult,
 } from "../types/apis/User";
 import { axiosInstance } from "./axios";
 
 /// 로그인 
 export const postSignin = async ( body : RequestSigninDto ):Promise<SigninResponseWithToken> => {
-    const res = await axiosInstance.post("/auth/login", body);
-    const data = res.data.result
+    const res: AxiosResponse<ResponseSigninDto> = await axiosInstance.post("/auth/login", body);
+    const data = res.data.result as LoginResult
     const accessToken = res.headers['authorization']?.split(" ")[1]
     
     return {

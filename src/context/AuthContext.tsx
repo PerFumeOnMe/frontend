@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { PropsWithChildren, ReactElement } from "react";
-import type { RequestSigninDto } from "../types/apis/User";
+import type { LoginResult, RequestSigninDto, ResponseUserInfo } from "../types/apis/User";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { LOCAL_STORAGE_KEY } from "../constants/apis/key";
 import { postLogout, postSignin, getUserInfo } from "../apis/User";
@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): ReactElement => {
 
   const login = async (signinData: RequestSigninDto) => {
     try {
-      const { accessToken, data } = await postSignin(signinData);
+      const { data, accessToken } = await postSignin(signinData);
 
       if (data) {
         // 원시 토큰 값
@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): ReactElement => {
 
         // 로그인 후 내 프로필 조회 
         const me = await getUserInfo(); 
-        const nextNickname = (me as any)?.nickname ?? (me as any)?.nickName ?? null;
+        const nextNickname = (me as ResponseUserInfo)?.nickName ?? null;
         if (nextNickname) {
           setNicknameInStorage(nextNickname);
           setNickname(nextNickname);
@@ -127,7 +127,7 @@ export const AuthProvider = ({ children }: PropsWithChildren): ReactElement => {
           setNickname(null);
         }
 
-        const nextName = (me as any)?.name ?? null;
+        const nextName = (data as LoginResult)?.name ?? null;
         if (nextName) {
           setNameInStorage(nextName);
         }
