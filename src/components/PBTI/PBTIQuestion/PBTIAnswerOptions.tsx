@@ -8,7 +8,7 @@ interface AnswerOptionsProps {
 
 const PBTIAnswerOptions: React.FC<AnswerOptionsProps> = ({ options, progressIdx, onSelect }) => {
   return (
-    <div className="flex justify-center gap-4">
+    <div className="flex justify-center gap-3">
       {options.map((option, idx) => (
         <div
           key={idx}
@@ -20,7 +20,7 @@ const PBTIAnswerOptions: React.FC<AnswerOptionsProps> = ({ options, progressIdx,
           `}
           onClick={() => onSelect(idx)}
         >
-          <div className='w-35 h-15.8 px-1.5 text-center'>
+          <div className='w-35 h-15.8 px-1 text-center whitespace-pre-wrap break-words'>
             {option}
           </div>
         </div>
