@@ -1,16 +1,39 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import ResultContent from "../../components/PerfumeLab/Result/ResultContent";
 import ResultButton from "../../components/ImageKeyword/Result/ResultButton";
 import SaveNameModal from "../../components/ImageKeyword/Result/SaveNameModal";
 import SaveCompleteModal from "../../components/ImageKeyword/Result/SaveCompleteModal";
-import { postWorkshopSave } from "../../apis/Workshop";
+import { getWorkshopDetail, postWorkshopSave } from "../../apis/Workshop";
+import { usePerfumeLab } from "../../hooks/PerfumeLab/usePerfumeLab";
 
 const LabResultPage = () => {
   const navigate = useNavigate();
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const { completedPerfume, setCompletedPerfume } = usePerfumeLab();
+  const { workshopId } = useParams<{ workshopId?: string }>();
+
+  useEffect(() => {
+    const loadWorkshopDetail = async () => {
+      if (!workshopId) {
+        return;
+      }
+
+      try {
+        const response = await getWorkshopDetail(workshopId);
+
+        if (response.isSuccess && response.result) {
+          setCompletedPerfume(response.result);
+        }
+      } catch (error) {
+        console.error("API 호출 에러:", error);
+      }
+    };
+
+    loadWorkshopDetail();
+  }, [workshopId, setCompletedPerfume]);
 
   const handleSave = async (savedName: string) => {
     try {
@@ -50,22 +73,26 @@ const LabResultPage = () => {
           당신만의 향을 퍼퓨온미를 통해 담아 보세요.
         </p>
       </header>
+
       {/* 결과 요약 */}
       <ResultContent />
 
-      {/* 하단 버튼들 */}
+      {/* 하단 버튼들 - 저장된 워크샵인 경우 저장 버튼 숨김 */}
       <div className="flex justify-center gap-4 w-full">
-        <ResultButton
-          label="저장하기"
-          onClick={() => setShowSaveModal(true)}
-          disabled={isSaving}
-        />
+        {!workshopId && (
+          <ResultButton
+            label="저장하기"
+            onClick={() => setShowSaveModal(true)}
+            disabled={isSaving}
+          />
+        )}
         <ResultButton
           label="홈으로"
           onClick={() => navigate("/")}
           disabled={false}
         />
       </div>
+
       {showSaveModal && (
         <SaveNameModal
           onSubmit={handleSave}

@@ -48,7 +48,7 @@ const router = createBrowserRouter([
     path: "/kakao",
     element: <KakaoSignupPage />,
   },
-    {
+  {
     path: "/oauth/kakao/callback",
     element: <KakaoCallback />,
   },
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <PBTIMainPage /> },
               { path: "question", element: <PBTIQuestionPage /> },
-              { path: "loading", element: <PBTILoadingPage />,},
+              { path: "loading", element: <PBTILoadingPage /> },
               { path: "result", element: <PBTIResultPage /> },
             ],
           },
@@ -128,7 +128,7 @@ const router = createBrowserRouter([
             element: <LabLoadingPage />,
           },
           {
-            path: "result",
+            path: "result/:workshopId?",
             element: <LabResultPage />,
           },
         ],
@@ -136,6 +136,10 @@ const router = createBrowserRouter([
       {
         path: "/perfume/detail/:id",
         element: <PerfumeDetailPage />,
+      },
+      {
+        path: "/image-keyword/detail/:imageKeywordId",
+        element: <ImageKeywordResultPage />,
       },
     ],
   },

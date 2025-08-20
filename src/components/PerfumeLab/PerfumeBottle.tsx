@@ -12,7 +12,9 @@ interface PerfumeBottleProps {
 }
 
 const getNoteImage = (noteType: Note, noteId: string): string | undefined => {
-  const note = noteOptions[noteType]?.find((option) => option.id === noteId);
+  const note = noteOptions[noteType]?.find(
+    (option) => option.id === noteId || option.krName === noteId
+  );
   return note?.img;
 };
 
@@ -20,11 +22,12 @@ const PerfumeBottle: React.FC<PerfumeBottleProps> = ({
   perfumeImage,
   className = "",
 }) => {
-  const { selectedNotes } = usePerfumeLab();
+  const { selectedNotes, completedPerfume } = usePerfumeLab();
 
-  const hasBaseNote = selectedNotes.베이스?.id;
-  const hasMiddleNote = selectedNotes.미들?.id;
-  const hasTopNote = selectedNotes.탑?.id;
+  // completedPerfume이 있으면 API 데이터 사용, 없으면 selectedNotes 사용
+  const hasBaseNote = completedPerfume?.baseNote || selectedNotes.베이스?.id;
+  const hasMiddleNote = completedPerfume?.middleNote || selectedNotes.미들?.id;
+  const hasTopNote = completedPerfume?.topNote || selectedNotes.탑?.id;
 
   return (
     <div className={`relative ${className}`}>

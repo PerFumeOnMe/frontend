@@ -8,10 +8,11 @@ import SaveCompleteModal from './SaveCompleteModal';
 import { postImageKeywordSave } from '../../../apis/ImageKeyword';
 
 interface KeywordRecommendationProps {
-  recommendations: RecommendedPerfume[];
+    recommendations: RecommendedPerfume[];
+    hideActions?: boolean; // 저장하기/홈으로 버튼을 숨길지 여부
 }
 
-export default function KeywordRecommendation({ recommendations }: KeywordRecommendationProps) {
+export default function KeywordRecommendation({ recommendations, hideActions = false }: KeywordRecommendationProps) {
     const navigate = useNavigate();
     const [showSaveModal, setShowSaveModal] = useState(false);
     const [showCompleteModal, setShowCompleteModal] = useState(false);
@@ -57,30 +58,35 @@ export default function KeywordRecommendation({ recommendations }: KeywordRecomm
                     />
                 ))}
             </div>
-            <div className="flex justify-center gap-[16px] mt-[24px] mb-[16px]">
-                <ResultButton 
-                    label="저장하기" 
-                    onClick={() => setShowSaveModal(true)}
-                    disabled={isSaving}
-                />
-                <ResultButton 
-                    label="홈으로" 
-                    onClick={() => navigate('/')}
-                    disabled={false}
-                />
-            </div>
+            
+            {!hideActions && (
+                <>
+                    <div className="flex justify-center gap-[16px] mt-[24px] mb-[16px]">
+                        <ResultButton 
+                            label="저장하기" 
+                            onClick={() => setShowSaveModal(true)}
+                            disabled={isSaving}
+                        />
+                        <ResultButton 
+                            label="홈으로" 
+                            onClick={() => navigate('/')}
+                            disabled={false}
+                        />
+                    </div>
 
-            {showSaveModal && (
-                <SaveNameModal
-                    onSubmit={handleSave}
-                    onClose={() => setShowSaveModal(false)}
-                />
-            )}
+                    {showSaveModal && (
+                        <SaveNameModal
+                            onSubmit={handleSave}
+                            onClose={() => setShowSaveModal(false)}
+                        />
+                    )}
 
-            {showCompleteModal && (
-                <SaveCompleteModal
-                    onConfirm={handleComplete}
-                />
+                    {showCompleteModal && (
+                        <SaveCompleteModal
+                            onConfirm={handleComplete}
+                        />
+                    )}
+                </>
             )}
         </div>
     );
