@@ -1,12 +1,20 @@
 import type { MyPerfume } from "../../types/apis/Fragrance";
 import PerfumeSliderCard from "./PerfumeSliderCard";
+import PerfumeSliderSkeleton from "./PerfumeSliderSkeleton";
 
 interface PerfumeSliderProps {
     perfumes: MyPerfume[];
     currentIndex: number;
+    isLoading?: boolean;
 }
 
-export default function PerfumeSlider({ perfumes, currentIndex }: PerfumeSliderProps) {
+export default function PerfumeSlider({ perfumes, currentIndex, isLoading = false }: PerfumeSliderProps) {
+    const empty = !perfumes || perfumes.length === 0;
+
+    if (isLoading || empty) {
+        return <PerfumeSliderSkeleton />; // ✅ 스켈레톤 표시
+    }
+    
     return (
         <div className="mt-[6px] relative overflow-hidden h-[230px] w-full flex justify-center">
             <div 
