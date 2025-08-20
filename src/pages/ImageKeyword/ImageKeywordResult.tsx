@@ -8,13 +8,14 @@ import KeywordDescription from '../../components/ImageKeyword/Result/KeywordDesc
 import KeywordScenario from '../../components/ImageKeyword/Result/KeywordScenario';
 import KeywordCharacter from '../../components/ImageKeyword/Result/KeywordCharacter';
 import KeywordRecommendations from '../../components/ImageKeyword/Result/KeywordRecommendation';
-import { getMdChoice } from '../../apis/Fragrance';
+import { useAuth } from '../../context/AuthContext';
 import { getImageKeywordDetail } from '../../apis/ImageKeyword';
 import KeywordResultHeader from '../../components/ImageKeyword/Result/KeywordResultHeader';
 
 export default function ImageKeywordResultPage() {
     const location = useLocation();
     const { imageKeywordId } = useParams<{ imageKeywordId: string }>();
+    const { name } = useAuth();
     
     // 새로운 결과 페이지인지 상세 페이지인지 구분
     const isDetailView = !!imageKeywordId;
@@ -26,22 +27,6 @@ export default function ImageKeywordResultPage() {
     const [detailResult, setDetailResult] = useState<ImageKeywordDetailResult | null>(null);
     const [loading, setLoading] = useState(isDetailView);
     const [error, setError] = useState<string | null>(null);
-    
-    // 사용자 이름
-    const [userName, setUserName] = useState<string>("");
-
-    // 사용자 이름 가져오기
-    useEffect(() => {
-        const fetchUserName = async () => {
-            try {
-                const data = await getMdChoice();
-                setUserName(data.result.name);
-            } catch (error) {
-                console.error('Failed to fetch user name:', error);
-            }
-        };
-        fetchUserName();
-    }, []);
 
     // 상세 조회 데이터 가져오기 (상세 페이지인 경우)
     useEffect(() => {
@@ -115,7 +100,7 @@ export default function ImageKeywordResultPage() {
             )}
             
             <div className={`flex flex-col items-center justify-center ${isDetailView ? 'pt-[80px]' : 'pt-[24px]'}`}>
-                <h1 className="text-title2 text-grayscale-900">{userName}님의</h1>
+                <h1 className="text-title2 text-grayscale-900">{name}님의</h1>
                 <h1 className="text-display1 text-[28px] text-grayscale-1000 mb-[40px]">향기무드 테스트</h1>
                 
                 {result?.keywords && <KeywordBubbles keywords={result.keywords} />}
