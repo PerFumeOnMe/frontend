@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import MyPageWorkShopRecommendationCard from "./MyPageWorkShopRecommendationCard";
 import SkeletonRecommendationCard from "./SkeletonRecommendationCard";
 import { getPBTIList } from "../../apis/PBTI";
-import { getWorkShopMyPerfumeList } from "../../apis/Workshop";
+import { getMyPageWorkShopList } from "../../apis/Workshop";
 import { getImageKeywordMyPerfumeList } from "../../apis/Image-Keyword";
-import type { WorkShopMyPerfume } from "../../types/apis/Workshop";
+import type { WorkshopSaveDto } from "../../types/apis/Workshop";
 import type { ImageKeywordResult } from "../../types/apis/Image-Keyword";
 import type { PbtiListResult } from "../../types/apis/PBTI";
 import MyPageKeywordRecommendationCard from "./MyPageKeywordRecommendationCard";
@@ -14,17 +14,21 @@ interface RecommendationsResultSectionProps {
   option: string;
 }
 
-const RecommendationsResultSection: React.FC<RecommendationsResultSectionProps> = ({ option }) => {
+const RecommendationsResultSection: React.FC<
+  RecommendationsResultSectionProps
+> = ({ option }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [perfumeLab, setPerfumeLab] = useState<WorkShopMyPerfume[]>([]);
-  const [keywordPerfume, setKeywordPerfume] = useState<ImageKeywordResult[]>([]);
+  const [perfumeLab, setPerfumeLab] = useState<WorkshopSaveDto[]>([]);
+  const [keywordPerfume, setKeywordPerfume] = useState<ImageKeywordResult[]>(
+    []
+  );
   const [PBTIPerfume, setPBTIPerfume] = useState<PbtiListResult[]>([]);
 
   useEffect(() => {
     const fetchAllData = async () => {
       try {
         const [labRes, keywordRes, pbtiRes] = await Promise.all([
-          getWorkShopMyPerfumeList(),
+          getMyPageWorkShopList(),
           getImageKeywordMyPerfumeList(),
           getPBTIList(),
         ]);
@@ -34,10 +38,9 @@ const RecommendationsResultSection: React.FC<RecommendationsResultSectionProps> 
         console.log("keywordRes:", keywordRes);
         console.log("pbtiRes:", pbtiRes);
 
-        setPerfumeLab(labRes.myPerfumeList);
+        setPerfumeLab(labRes);
         setKeywordPerfume(keywordRes);
-        setPBTIPerfume(pbtiRes.result);
-
+        setPBTIPerfume(pbtiRes);
       } catch (error) {
         console.error("데이터를 불러오는 중 오류 발생:", error);
       } finally {
@@ -59,7 +62,7 @@ const RecommendationsResultSection: React.FC<RecommendationsResultSectionProps> 
       ));
     } else if (option === "PBTI") {
       return PBTIPerfume.map((item, idx) => (
-        <MyPagePBTIRecommendationCard y={`pbti-ke${idx}`} data={item} />
+        <MyPagePBTIRecommendationCard key={`pbti-ke${idx}`} data={item} />
       ));
     } else {
       return <div>유효하지 않은 추천 옵션입니다.</div>;
@@ -69,7 +72,9 @@ const RecommendationsResultSection: React.FC<RecommendationsResultSectionProps> 
   return (
     <div className="flex flex-col w-full">
       {isLoading
-        ? Array.from({ length: 3 }).map((_, idx) => <SkeletonRecommendationCard key={idx} />)
+        ? Array.from({ length: 3 }).map((_, idx) => (
+            <SkeletonRecommendationCard key={idx} />
+          ))
         : renderCards()}
     </div>
   );

@@ -45,10 +45,10 @@ export default function DiaryCalendar() {
     fetchMonthly();
   }, [activeStartDate]);
 
-  return (
-    <div className="min-w-[375px] w-full max-w-[480px] mx-auto bg-main-500 h-screen flex flex-col">
-      {/* 달력 영역 */}
-      <div className="flex-[0.55] bg-main-500">
+return (
+  <div className="min-w-[375px] w-full max-w-[480px] mx-auto bg-main-500 h-dvh flex flex-col overflow-hidden">
+    <div className="basis-[50%] flex-none bg-main-500">
+      <div className="h-full">
         <Calendar
           onClickDay={setSelectedDate}
           value={selectedDate}
@@ -58,6 +58,7 @@ export default function DiaryCalendar() {
           showNeighboringMonth={false}
           prev2Label={null}
           next2Label={null}
+          className="h-full"
           navigationLabel={({ date }) => (
             <div className="text-white text-center text-lg font-bold">
               {moment(date).format("YYYY.MM")}
@@ -66,19 +67,16 @@ export default function DiaryCalendar() {
           onActiveStartDateChange={({ activeStartDate }) => {
             if (activeStartDate) setActiveStartDate(activeStartDate);
           }}
-          tileClassName={({ date, view }) => {
-            if (view === "month" && hasDiary(date)) {
-              return "has-diary"; 
-            }
-            return "";
-          }}
+          tileClassName={({ date, view }) =>
+            view === "month" && hasDiary(date) ? "has-diary" : ""
+          }
         />
       </div>
-
-      {/* 달력 아래 컨텐츠 */}
-      <div className="bg-white flex-[0.45] overflow-y-auto rounded-t-3xl p-4">
-        <CalendarDiary selectedDate={selectedDate} diaryData={{}} />
-      </div>
     </div>
-  );
+
+    <div className="basis-[50%] flex-none bg-white overflow-y-auto hide-scrollbar  rounded-t-3xl p-4 pb-24">
+      <CalendarDiary selectedDate={selectedDate} diaryData={{}} />
+    </div>
+  </div>
+);
 }

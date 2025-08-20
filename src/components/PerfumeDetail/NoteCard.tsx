@@ -19,29 +19,20 @@ const NoteCard = ({
   onClick: () => void;
   maxHeight: number;
 }) => {
-  // 3D 회전 스타일 계산
+  // 기존 디자인 유지 - 위치별 스타일
   const getCardStyle = () => {
-    const baseTransition =
-      "transition-all duration-1000 cubic-bezier(0.4,0,0.2,1) transform-gpu";
-
     if (isActive) {
-      return `z-50 scale-100 rotate-y-0 rotate-0 translate-x-0 translate-y-5 ${baseTransition}`;
+      return "scale-100";
     }
 
     switch (position) {
       case "left":
-        return `z-10 scale-100 rotate-16 translate-x-30 translate-y-4 opacity-50 ${baseTransition}`;
+        return "scale-100";
       case "right":
-        return `z-10 scale-100 -rotate-16 -translate-x-30 translate-y-4 opacity-50 ${baseTransition}`;
+        return "scale-100";
       default:
-        return `z-20 scale-100 rotate-y-0 rotate-0 translate-x-0 translate-y-0 ${baseTransition}`;
+        return "scale-100";
     }
-  };
-
-  // 카드 배경 스타일 계산
-  const getCardBackground = () => {
-    console.log(maxHeight);
-    return "bg-white";
   };
 
   return (
@@ -50,14 +41,13 @@ const NoteCard = ({
         w-55 p-5 rounded-lg cursor-pointer
         shadow-[0_2px_10px_-1px_rgba(0,0,0,0.12)]
         hover:shadow-[0_4px_15px_-1px_rgba(0,0,0,0.15)]
+        bg-white
         ${getCardStyle()}
-        ${getCardBackground()}
       `}
       onClick={onClick}
       style={{
+        height: `${maxHeight}px`,
         transformStyle: "preserve-3d",
-        backfaceVisibility: "visible",
-        height: `${maxHeight}px`, // 동적 높이 적용
       }}
     >
       <div className="flex flex-col items-center justify-center h-min">

@@ -19,6 +19,8 @@ const DescriptionNote = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const [maxHeight, setMaxHeight] = useState(180);
+  const [rotation, setRotation] = useState(0); // 회전 각도 상태 추가
+  const [isAnimating, setIsAnimating] = useState(false);
   const cardRefs = useRef<HTMLDivElement[]>([]);
   const { note } = usePerfumeNotes();
 
@@ -64,41 +66,81 @@ const DescriptionNote = ({
       }
     };
 
-    // 약간의 딜레이를 주어 렌더링 완료 후 측정
     const timer = setTimeout(measureHeights, 100);
-
-    // 리사이즈 이벤트에도 대응
     window.addEventListener("resize", measureHeights);
 
     return () => {
       clearTimeout(timer);
       window.removeEventListener("resize", measureHeights);
     };
-  }, [note]); // note가 변경될 때마다 재측정
+  }, [note]);
 
   const handleCardClick = useCallback(
     (clickedCardId: string) => {
+      if (isAnimating) return;
+
       const cards = transformNoteData();
       const clickedIndex = cards.findIndex((card) => card.id === clickedCardId);
 
       if (clickedIndex === -1) return;
 
-      // 클릭된 카드의 현재 위치 계산
-      const relativePosition = (clickedIndex - activeIndex + 3) % 3;
+      // 현재 클릭된 카드의 위치 확인
+      const cardPos = getCardPosition(clickedIndex);
 
-      if (relativePosition === 2) {
-        // 왼쪽 카드 클릭 -> 시계 반대 방향
+      if (cardPos.position === "left") {
+        // 왼쪽 카드 클릭 -> 시계 반대 방향 회전
+        setIsAnimating(true);
+        setRotation((prev) => prev + 120);
         setActiveIndex((prev) => (prev + cards.length - 1) % cards.length);
-      } else if (relativePosition === 1) {
-        // 오른쪽 카드 클릭 -> 시계 방향
+      } else if (cardPos.position === "right") {
+        // 오른쪽 카드 클릭 -> 시계 방향 회전
+        setIsAnimating(true);
+        setRotation((prev) => prev - 120);
         setActiveIndex((prev) => (prev + 1) % cards.length);
       }
       // 중앙 카드 클릭 시에는 아무것도 하지 않음
+
+      if (cardPos.position !== "center") {
+        setTimeout(() => {
+          setIsAnimating(false);
+        }, 1200);
+      }
     },
-    [transformNoteData, activeIndex]
+    [transformNoteData, rotation, isAnimating]
   );
 
   const cards = transformNoteData();
+
+  // 각 카드의 위치를 계산하는 함수
+  const getCardPosition = (cardIndex: number) => {
+    // 각 카드는 원형으로 120도씩 떨어져 있음
+    const baseAngle = cardIndex * 120; // 0, 120, 240도
+    const currentAngle = baseAngle + rotation; // 현재 회전각도 적용
+    const angleInRadians = (currentAngle * Math.PI) / 180;
+
+    // 원형 배치를 위한 계산
+    const radius = 160;
+    const x = Math.sin(angleInRadians) * radius;
+    const z = Math.cos(angleInRadians) * radius;
+
+    // 현재 활성 카드 판단 (가장 앞에 있는 카드)
+    const normalizedAngle = ((currentAngle % 360) + 360) % 360;
+    const isCenter = normalizedAngle < 60 || normalizedAngle > 300;
+    const isRight = normalizedAngle >= 60 && normalizedAngle < 180;
+    const isLeft = normalizedAngle >= 180 && normalizedAngle <= 300;
+
+    let position: "left" | "center" | "right" = "center";
+    if (isLeft) position = "left";
+    else if (isRight) position = "right";
+
+    return {
+      x,
+      z,
+      position,
+      isActive: isCenter,
+      angle: normalizedAngle,
+    };
+  };
 
   return (
     <div className="w-full">
@@ -116,48 +158,58 @@ const DescriptionNote = ({
           className="relative w-full flex items-center justify-center"
           style={{ perspective: "1200px" }}
         >
-          {/* 카드들을 absolute로 배치할 컨테이너 */}
           <div
             className="relative w-55"
             style={{
               transformStyle: "preserve-3d",
-              height: `${maxHeight + 40}px`, // 동적 높이 적용
+              height: `${maxHeight + 60}px`,
+              top: "25px",
             }}
           >
-            {/* 모든 카드를 항상 렌더링하고 transform으로만 위치 변경 */}
-            {cards.map((card, index) => {
-              // 현재 카드의 위치 계산
-              const relativePosition = (index - activeIndex + 3) % 3;
-              let position: "left" | "center" | "right";
-              let isActive = false;
-
-              if (relativePosition === 2) {
-                position = "left"; // 왼쪽
-              } else if (relativePosition === 0) {
-                position = "center"; // 중앙 (활성)
-                isActive = true;
-              } else {
-                position = "right"; // 오른쪽
-              }
+            {/* 각 카드를 원형으로 배치 */}
+            {cards.map((card, cardIndex) => {
+              const cardPos = getCardPosition(cardIndex);
 
               return (
                 <div
                   key={card.id}
                   ref={(el) => {
-                    if (el) cardRefs.current[index] = el;
+                    if (el) cardRefs.current[cardIndex] = el;
                   }}
-                  className="absolute top-0 left-0"
+                  className="absolute top-0 left-1/2"
                   style={{
-                    isolation: position === "center" ? "isolate" : "auto",
-                    zIndex: position === "center" ? 50 : 10,
+                    transform: `
+                      translateX(-50%) 
+                      translateX(${cardPos.x}px) 
+                      translateZ(${cardPos.z}px)
+                      ${
+                        cardPos.position === "left"
+                          ? "rotateY(15deg) rotateZ(-20deg)"
+                          : ""
+                      }
+                      ${
+                        cardPos.position === "right"
+                          ? "rotateY(-15deg) rotateZ(20deg)"
+                          : ""
+                      }
+                      ${
+                        cardPos.position === "center"
+                          ? "rotateY(0deg) rotateZ(0deg)"
+                          : ""
+                      }
+                    `,
+                    transformStyle: "preserve-3d",
+                    transition: "all 1000ms cubic-bezier(0.4,0,0.2,1)",
+                    zIndex: cardPos.isActive ? 50 : 10,
+                    opacity: cardPos.isActive ? 1 : 0.5,
                   }}
                 >
                   <NoteCard
                     note={card}
-                    isActive={isActive}
-                    position={position}
+                    isActive={cardPos.isActive}
+                    position={cardPos.position}
                     onClick={() => handleCardClick(card.id)}
-                    maxHeight={maxHeight - 25} // 최대 높이 전달
+                    maxHeight={maxHeight + 10}
                   />
                 </div>
               );

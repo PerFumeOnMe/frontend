@@ -140,7 +140,7 @@ const topNoteOptions: NoteOption[] = [
   {
     id: "bergamot",
     emotion: "🍏",
-    krName: "베르가뭇",
+    krName: "베르가못",
     description: "이탈리아 감귤, 칵테일 등 부드러운 시트러스 향",
     color: "#8B951F",
     img: bergamotImg,

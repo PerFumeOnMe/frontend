@@ -1,13 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import SortModalArrowIcon from "../../assets/MyPage/SortModalArrow.svg";
 import Favorites from "./Favorites";
 import RecommendationsResultSection from "./RecommendationsResultSection";
 import MyPageTabButton from "./MyPageTabButton";
 
 const FavoritesAndRecommendations: React.FC = () => {
+  const location = useLocation();
   const [favOrRecommend, setFavOrRecommend] = useState(true);
   const [isRecommendationOptionModalOpen, setIsRecommendationOptionModalOpen] = useState(false);
   const [recommendationOption, setRecommendationOption] = useState("향수공방"); // 초기 정렬 기준 텍스트
+
+  // URL 쿼리 파라미터 확인해서 탭 설정
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const tab = searchParams.get('tab');
+    const filter = searchParams.get('filter');
+    
+    if (tab === 'recommendations') {
+      setFavOrRecommend(false); // 추천결과 탭으로 이동
+      
+      // 키워드 필터가 있으면 해당 옵션 설정
+      if (filter === 'keyword') {
+        setRecommendationOption("키워드");
+      }
+    }
+  }, [location.search]);
 
   const handleSortOptionClick = (option: string) => {
     setRecommendationOption(option);

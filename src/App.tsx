@@ -32,6 +32,7 @@ import PerfumeLabLayout from "./layout/perfumelab-layout.tsx";
 import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import KakaoCallback from "./pages/Login/KakaoCallback.tsx";
+import PBTILoadingPage from "./pages/PBTI/PBTILoadingPage.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
     path: "/kakao",
     element: <KakaoSignupPage />,
   },
-    {
+  {
     path: "/oauth/kakao/callback",
     element: <KakaoCallback />,
   },
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
             children: [
               { index: true, element: <PBTIMainPage /> },
               { path: "question", element: <PBTIQuestionPage /> },
+              { path: "loading", element: <PBTILoadingPage /> },
               { path: "result", element: <PBTIResultPage /> },
             ],
           },
@@ -126,7 +128,7 @@ const router = createBrowserRouter([
             element: <LabLoadingPage />,
           },
           {
-            path: "result",
+            path: "result/:workshopId?",
             element: <LabResultPage />,
           },
         ],
@@ -134,6 +136,10 @@ const router = createBrowserRouter([
       {
         path: "/perfume/detail/:id",
         element: <PerfumeDetailPage />,
+      },
+      {
+        path: "/image-keyword/detail/:imageKeywordId",
+        element: <ImageKeywordResultPage />,
       },
     ],
   },

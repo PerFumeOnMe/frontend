@@ -2,6 +2,7 @@ import React from 'react';
 import PBTIHeader from '../../components/PBTI/PBTIMain/PBTIHeader';
 import PBTIStartButton from '../../components/PBTI/PBTIMain/PBTIStartButton';
 import PBTIInfoCard from '../../components/PBTI/PBTIMain/PBTIInfoCard';
+import PBTILOGO from '../../assets/PBTI/PBTILOGO.gif';
 
 const PBTIMainPage: React.FC = () => {
   const infoList = [
@@ -12,7 +13,8 @@ const PBTIMainPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-w-[375px] w-full h-screen -mb-20 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
+    <div className="min-w-[375px] w-full min-h-screen pb-20 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
+      <img src={PBTILOGO} className="fixed top-0 w-[375px] h-[375px] -mt-20 z-0" />
       <PBTIHeader />
       <div className="flex flex-col mt-10 gap-5 w-[90%] h-fit relative">
         {infoList.map((info, idx) => (
