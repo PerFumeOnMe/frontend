@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import mainBg from "../../assets/mainPage/main.png";
+import mainBg from "../../assets/MainPage/main.png";
 import TipProgress from "../../components/PBTI/Tip/TipProgress";
 import TipContent from "../../components/PBTI/Tip/TipContent";
 import { tips } from "../../constants/PBTI/ment";

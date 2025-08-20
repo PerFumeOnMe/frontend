@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import mainBg from '../../assets/mainPage/main.png';
+import mainBg from '../../assets/MainPage/main.png';
 import { postImageKeywordPreview } from '../../apis/ImageKeyword';
 
 export default function ImageKeywordLoading() {

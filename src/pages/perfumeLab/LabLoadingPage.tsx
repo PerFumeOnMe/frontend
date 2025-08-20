@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePerfumeLab } from "../../hooks/PerfumeLab/usePerfumeLab";
-import mainBg from "../../assets/mainPage/main.png";
+import mainBg from "../../assets/MainPage/main.png";
 
 const LabLoadingPage = () => {
   const navigate = useNavigate();
