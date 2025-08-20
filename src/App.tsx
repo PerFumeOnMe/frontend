@@ -137,6 +137,10 @@ const router = createBrowserRouter([
         path: "/perfume/detail/:id",
         element: <PerfumeDetailPage />,
       },
+      {
+        path: "/image-keyword/detail/:imageKeywordId",
+        element: <ImageKeywordResultPage />,
+      },
     ],
   },
 ]);
