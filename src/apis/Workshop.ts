@@ -50,15 +50,6 @@ export const getMyPageWorkShopList = async (): Promise<
     );
     const data = res.data.result;
 
-<<<<<<< HEAD
-        return data;
-        
-    } catch (error){
-        alert("나만의 향수를 조회하는 과정에서 오류가 발생했습니다.")
-        throw error
-    }
-}
-=======
     return data;
   } catch (error) {
     alert("나만의 향수를 조회하는 과정에서 오류가 발생했습니다.");
@@ -72,4 +63,3 @@ export const getWorkshopDetail = async (workshopId: number) => {
   );
   return response.data;
 };
->>>>>>> upstream/dev
