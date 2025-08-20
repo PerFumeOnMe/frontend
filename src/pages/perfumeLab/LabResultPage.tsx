@@ -18,21 +18,14 @@ const LabResultPage = () => {
   useEffect(() => {
     const loadWorkshopDetail = async () => {
       if (!workshopId) {
-        console.log("workshopId가 없음, 새로운 결과로 처리");
         return;
       }
 
       try {
-        console.log("API 호출 시작:", workshopId);
-
         const response = await getWorkshopDetail(workshopId);
-        console.log("API 응답:", response);
 
         if (response.isSuccess && response.result) {
-          console.log("데이터 설정:", response.result);
           setCompletedPerfume(response.result);
-        } else {
-          console.error("API 응답 실패:", response);
         }
       } catch (error) {
         console.error("API 호출 에러:", error);
@@ -65,9 +58,6 @@ const LabResultPage = () => {
     setShowCompleteModal(false);
     navigate("/");
   };
-
-  // ✅ 데이터 확인용 로그
-  console.log("렌더링 시 completedPerfume:", completedPerfume);
 
   return (
     <div
