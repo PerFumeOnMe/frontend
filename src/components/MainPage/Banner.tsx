@@ -64,7 +64,7 @@ export default function Banner({ userName, exists, myPerfumes }: BannerProps) {
                     <div className="flex justify-end px-[16px]">
                         <button
                             onClick={() => navigate("/choose-path")}
-                            className="mt-[16px] text-body4 text-grayscale-300 flex items-center"
+                            className="mt-[2px] text-body4 text-grayscale-300 flex items-center"
                         >
                             나만의 향수 만들러 가기
                             <SlArrowRight size={12} />

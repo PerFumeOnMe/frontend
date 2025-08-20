@@ -8,7 +8,7 @@ interface PerfumeSliderProps {
 
 export default function PerfumeSlider({ perfumes, currentIndex }: PerfumeSliderProps) {
     return (
-        <div className="mt-[16px] relative overflow-hidden h-[250px] w-full flex justify-center">
+        <div className="mt-[6px] relative overflow-hidden h-[230px] w-full flex justify-center">
             <div 
                 className="flex items-center h-full"
                 style={{

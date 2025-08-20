@@ -26,7 +26,7 @@ export default function PerfumeSliderCard({ perfume, index, currentIndex, totalP
     return (
         <div 
             className={`
-                min-w-[196px] h-[194px] p-[16px] rounded-[24px] transition-all duration-700 ease-in-out
+                min-w-[180px] h-[180px] p-[15px] rounded-[22px] transition-all duration-700 ease-in-out
                 ${isCenter ? 'z-20' : 'z-10'}
                 ${isLeft || isRight ? 'absolute' : ''}
             `}
@@ -35,7 +35,8 @@ export default function PerfumeSliderCard({ perfume, index, currentIndex, totalP
                 transform: cardTransform,
                 transformOrigin: 'center center',
                 opacity: isCenter ? 1 : 0.5,
-                backdropFilter: 'blur(2px)',
+                backdropFilter: 'blur(3px)',
+                WebkitBackdropFilter: 'blur(3px)',
                 background: isCenter 
                     ? 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%)' 
                     : 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.15) 100%)',
@@ -49,13 +50,13 @@ export default function PerfumeSliderCard({ perfume, index, currentIndex, totalP
                     src={perfume.imageUrl} 
                     alt={perfume.name}
                     className={`
-                        w-[112px] h-[120px] object-contain mx-auto transition-all duration-700 rounded-[16px]
+                        w-[104px] h-[112px] object-contain mx-auto transition-all duration-700 rounded-[15px]
                         ${isCenter ? 'opacity-100' : 'opacity-50'}
                     `}
                 />
-                <div className={isCenter ? 'opacity-100 w-[112px]' : 'opacity-50 w-[112px]'}>
-                    <p className="text-caption2 text-white pt-[8px]">{perfume.brand}</p>
-                    <p className="mt-[4px] text-body3 text-white pb-[15px] truncate">{perfume.name}</p>
+                <div className={isCenter ? 'opacity-100 w-[104px]' : 'opacity-50 w-[104px]'}>
+                    <p className="text-caption2 text-white pt-[6px]">{perfume.brand}</p>
+                    <p className="mt-[3px] text-body3 text-white pb-[12px] truncate">{perfume.name}</p>
                 </div>
             </div>
         </div>
