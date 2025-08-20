@@ -27,40 +27,8 @@ export default function LoginForm() {
       setErrorMessage("");
       navigate("/", { replace: true });
     } catch (error) {
-      alert("로그인 실패!")
+        setErrorMessage(error?.message || "아이디 또는 비밀번호가 올바르지 않습니다.");
     }
-    
-
-    /*
-    try {
-      const { accessToken, data } = await postSignin({ loginId : inputId, password : inputPassword});
-      const refreshToekn = data.refreshToken
-      
-      console.log("해더 엑세스 토큰? : ", accessToken)
-      console.log("데이터? : ", refreshToekn)
-      
-      localStorage.setItem( "accessToken", accessToken )
-      localStorage.setItem( "refreshToekn", refreshToekn )
-    
-      setErrorMessage("");
-      localStorage.setItem("isLoggedIn", "true");
-      navigate("/", { replace: true });
-    } catch (error) {
-      alert(error?.message);
-    }*/
-
-    {/*
-    if (inputId !== "UMC"){
-      setErrorMessage("등록되지 않은 아이디입니다.");
-      return;
-    } else if (inputPassword !== "1234"){
-      setErrorMessage("비밀번호가 올바르지 않습니다.");
-      return
-    } else {
-      setErrorMessage("");
-      localStorage.setItem("isLoggedIn", "true");
-      navigate("/", { replace: true });
-    };*/}
   
   }
 

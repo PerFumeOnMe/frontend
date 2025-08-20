@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import mainBg from '../../assets/MainPage/main.png';
+import mainBg from '../../assets/mainPage/main.png';
 import { postImageKeywordPreview } from '../../apis/ImageKeyword';
 
 export default function ImageKeywordLoading() {
@@ -59,7 +59,7 @@ export default function ImageKeywordLoading() {
             <div className="absolute inset-0 bg-black/40" />
             <div className="relative w-full h-full flex flex-col items-center justify-center -mt-[100px]">
                 <p className="text-title1 text-white mb-[24px]">
-                    김진성님의 이미지를
+                    김성섭님의 이미지를
                 </p>
                 <p className="text-title1 text-white">
                     파악중이에요

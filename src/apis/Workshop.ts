@@ -5,6 +5,7 @@ import type {
   WorkShopListResponseDTO,
   WorkShopMyPerfume,
   ResponseWorkshopSaveDto,
+  WorkshopSaveDto,
 } from "../types/apis/Workshop";
 import { axiosInstance } from "./axios";
 
@@ -35,3 +36,16 @@ export const postWorkshopSave = async (
 
   return response.data;
 };
+
+export const getMyPageWorkShopList = async () : Promise<WorkshopSaveDto[] | []> => {
+    try {
+        const res = await axiosInstance.get<ResponseWorkshopSaveDto>("/workshop/result/list")
+        const data = res.data.result
+
+        return data;
+        
+    } catch (error){
+        alert("나만의 향수를 조회하는 과정에서 오류가 발생했습니다.")
+        throw error
+    }
+}
