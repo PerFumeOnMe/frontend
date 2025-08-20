@@ -40,3 +40,17 @@ export type SaveImageKeywordResult = {
     createdAt: string;
 }
 
+// 이미지 키워드 상세 조회 결과 타입
+export type ImageKeywordDetailResult = {
+    savedName: string;
+    keywords: string[];
+    descriptions: string;
+    scenario: string;
+    characterImageUrl: string;
+    recommendations: RecommendedPerfume[];
+}
+
+// 이미지 키워드 상세 조회 요청 타입
+export type ImageKeywordDetailRequest = {
+    imageKeywordId: number;
+}
