@@ -33,7 +33,7 @@ export type PerfumeRequestDto = {
 export type MyPerfume = {
   brand: string;
   name: string;
-  imageUrl: string;
+  removebgImageUrl: string;
 }
 
 export type MyPerfumeResponseDto = CommonResponse<{
