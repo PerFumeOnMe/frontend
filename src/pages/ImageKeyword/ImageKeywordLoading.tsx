@@ -20,7 +20,6 @@ export default function ImageKeywordLoading() {
     const navigate = useNavigate();
     const location = useLocation();
     const keywords = location.state?.keywords;
-    const { name } = useAuth();
 
     // 키워드 결과 가져오기
     useEffect(() => {
