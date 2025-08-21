@@ -14,13 +14,27 @@ const MyPageKeywordRecommendationCard: React.FC<MyPageKeywordRecommendationCardP
     navigate(`/image-keyword/detail/${data.imageKeywordId}`);
   };
 
+  const formatKoreanYMD = (iso: string) => {
+    const [y, m, d] = iso.slice(0, 10).split("-");
+    return y && m && d ? `${y}년 ${m}월 ${d}일` : iso;
+  };
+
+  const formattedDate = formatKoreanYMD(data.createdAt)
+
   return (
     <div 
-      className="w-full flex flex-col bg-main-10 py-5 px-6 rounded-lg shadow-sm mb-3 cursor-pointer hover:bg-main-20 transition-colors"
+      className="w-full flex flex-col bg-main-10 py-4 px-6 mb-3 hover:shadow-md transition-shadow cursor-pointer"
       onClick={handleClick}
     >
-      <div className="text-body2 text-grayscale-1000">{data.savedName}</div>
-      <div className="text-body2 text-grayscale-1000 font-semibold">{data.createdAt.substring(0, 10)}</div>
+      <div className="text-body4 text-grayscale-1000 font-[400] pl-[0.7px]">키워드</div>
+      <div className="flex justify-between">
+          <div className="text-body3 text-grayscale-1000 font-[500]">
+            {data.savedName}
+          </div>
+          <div className="text-body4 text-grayscale-1000 font-[500]">
+            {formattedDate}
+          </div>
+        </div>
     </div>
   );
 };
