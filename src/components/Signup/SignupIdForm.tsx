@@ -23,7 +23,7 @@ export default function SignupIdForm({
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    const formatValid = /^[a-z0-9_]{5,16}$/.test(loginId);
+    const formatValid = /^[a-z0-9_]{1,16}$/.test(loginId);
 
     if (loginId === "") {
       setError("");
@@ -48,7 +48,7 @@ export default function SignupIdForm({
       <PageHeader title="회원가입" onBack={onBack} />
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n아이디가 필요해요."}
-        subtitle="영어랑 소문자로만 작성해 주세요."
+        subtitle="영어(소문자), 숫자로 17글자 이내로 작성해주세요."
       />
       <div className="flex-1">
         <SignupInput
