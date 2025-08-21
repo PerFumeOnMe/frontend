@@ -19,7 +19,7 @@ const Navbar = () => {
     <nav className="
       fixed bottom-0 inset-x-0 mx-auto
       w-full max-w-120 h-18 bg-[#FBFBFB]
-      rounded-t-3xl
+      rounded-t-3xl px-3
       shadow-2xl shadow-[#6401BB29]
       border-t border-gray-100
       flex justify-evenly items-center
@@ -36,7 +36,7 @@ const Navbar = () => {
           >
             <div className="w-full flex items-center justify-center mb-1">
               <Icon
-                className={`flex w-[16%] transition-colors duration-300 ${
+                className={`flex w-[18%] transition-colors duration-300 ${
                   isActive ? "text-main-500" : "text-grayscale-800"
                 }`}
               />
