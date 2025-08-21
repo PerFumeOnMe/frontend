@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState ,useEffect } from "react";
 import OnboardingLayout from "../../components/Onboarding/OnboardingLayout";
 import BottomButton from "../../components/common/BottomButton";
 import OnboardingProgress from "../../components/Onboarding/OnboardingProgress";
@@ -23,8 +23,13 @@ export default function OnboardingStep1({
   const [isUploading, setIsUploading] = useState(false);
   const [previewURL, setPreviewURL] = useState<string | null>(null); // 선택 직후 미리보기용
 
-  const handlePick = () => fileRef.current?.click();
+    useEffect(() => {
+    return () => {
+      if (previewURL) URL.revokeObjectURL(previewURL);
+    };
+  }, [previewURL]);
 
+  const handlePick = () => fileRef.current?.click();
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -52,6 +57,7 @@ export default function OnboardingStep1({
       console.error("upload error:", e);
     } finally {
       setIsUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
     }
   };
 
@@ -122,6 +128,7 @@ export default function OnboardingStep1({
               accept="image/*"
               className="hidden"
               onChange={handleFile}
+              onClick={(e) => (e.currentTarget.value = "")} 
             />
           </div>
 
