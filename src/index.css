@@ -32,7 +32,6 @@ html, body {
   height: 100%;
   margin: 0;
   overflow: hidden;              /* 루트는 스크롤 금지 */
-  overscroll-behavior-y: none;   /* 상/하 오버스크롤 제스처 차단 */
 }
 
 /* 실제 스크롤 컨테이너 */
