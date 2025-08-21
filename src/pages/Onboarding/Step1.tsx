@@ -16,7 +16,7 @@ export default function OnboardingStep1({
   onNext: () => void;
   nickname: string;
   setNickname: (v: string) => void;
-  imageURL: string | null;           
+  imageURL: string | null;
   setImageURL: (v: string | null) => void;
 }) {
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -26,35 +26,34 @@ export default function OnboardingStep1({
   const handlePick = () => fileRef.current?.click();
 
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  const file = e.target.files?.[0];
-  if (!file) return;
+    const file = e.target.files?.[0];
+    if (!file) return;
 
+    try {
+      setIsUploading(true);
 
-  try {
-    setIsUploading(true);
+      // 1 Presigned URL 발급
+      const { presignedUrl, s3Url } = await getPresignedUrl(file.name);
+      // 2 S3에 업로드
+      await uploadToS3(presignedUrl, file);
+      // 3 UI 반영
+      setPreviewURL(URL.createObjectURL(file));
+      setImageURL(s3Url);
 
-    // 1 Presigned URL 발급
-    const { presignedUrl, s3Url } = await getPresignedUrl(file.name);
-    // 2 S3에 업로드
-    await uploadToS3(presignedUrl, file);
-    // 3 UI 반영
-    setPreviewURL(URL.createObjectURL(file));
-    setImageURL(s3Url);
-
-    console.log("[Onboarding Step1] s3Url:", s3Url);
-    alert("이미지 업로드가 완료되었습니다!");
-  } catch (e: any) {
-    const code = e?.response?.data?.code;
-    if (code === "S3IMAGE4001") {
-      alert("지원하지 않는 파일 확장자입니다.");
-    } else {
-      alert("이미지 업로드에 실패했습니다. 콘솔을 확인해주세요.");
+      // console.log("[Onboarding Step1] s3Url:", s3Url);
+      // alert("이미지 업로드가 완료되었습니다!");
+    } catch (e: any) {
+      const code = e?.response?.data?.code;
+      if (code === "S3IMAGE4001") {
+        alert("지원하지 않는 파일 확장자입니다.");
+      } else {
+        alert("이미지 업로드에 실패했습니다. 콘솔을 확인해주세요.");
+      }
+      console.error("upload error:", e);
+    } finally {
+      setIsUploading(false);
     }
-  } finally {
-    setIsUploading(false);
-  }
-};
-
+  };
 
   return (
     <OnboardingLayout>
@@ -63,9 +62,11 @@ export default function OnboardingStep1({
 
       {/* 타이틀 */}
       <div className="w-full px-4 mx-auto mt-5.5">
-        <h2 className="text-title2 text-grayscale-1000 ">반가워요 회원님 :)</h2>
+        <h2 className="text-title2 text-grayscale-1000">반가워요 회원님 :)</h2>
         <p className="text-grayscale-600 text-body3 mb-8">
-          퍼퓨온미에서 사용하실 닉네임과<br />사진을 정해주세요.
+          퍼퓨온미에서 사용하실 닉네임과
+          <br />
+          사진을 정해주세요.
         </p>
 
         {/* 입력 UI */}
@@ -87,8 +88,32 @@ export default function OnboardingStep1({
               disabled={isUploading}
               className="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-main-500 text-white text-sm flex items-center justify-center disabled:opacity-60"
               title={isUploading ? "업로드 중..." : "사진 추가"}
+              aria-busy={isUploading}
             >
-              <FiPlus className="w-4 h-4" />
+              {isUploading ? (
+                <svg
+                  className="animate-spin w-3.5 h-3.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4A4 4 0 008 12H4z"
+                  />
+                </svg>
+              ) : (
+                <FiPlus className="w-4 h-4" />
+              )}
             </button>
 
             <input
