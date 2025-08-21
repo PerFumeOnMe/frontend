@@ -77,8 +77,8 @@ const MyPageProfileSection = ({ onClickSetting }: MyPageProfileSectionProps) => 
       });
       setUserProfileImageURL(s3Url);
 
-      console.log("[MyPage] s3Url:", s3Url);
-      alert("프로필 이미지 업로드가 완료되었습니다!");
+      //console.log("[MyPage] s3Url:", s3Url);
+      //alert("프로필 이미지 업로드가 완료되었습니다!");
 
       // (선택) 서버에 프로필 이미지 URL 저장 API가 있다면 여기서 PATCH 호출
       // await patchUserProfileImage({ imageUrl: s3Url });

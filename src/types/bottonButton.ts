@@ -3,4 +3,6 @@ export type ButtonProps = {
   onClick?: () => void;
   children: React.ReactNode;
   to?: string;
+  customClassName?: string
+  noPxValue?: boolean
 };

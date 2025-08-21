@@ -3,12 +3,14 @@ import MessageSend from "../../assets/Chatbot/MessageSend.png";
 
 interface InputBoxProps {
   onSend: (text: string) => void;
+  onSendBlock: boolean
 }
 
-const InputBox: React.FC<InputBoxProps> = ({ onSend }) => {
+const InputBox: React.FC<InputBoxProps> = ({ onSend, onSendBlock }) => {
   const [input, setInput] = useState<string>("");
 
   const handleSend = () => {
+    if (onSendBlock) return; // ✅ 막혀있으면 전송 X
     const text = input.trim();
     if (!text) return;
     onSend(text);
@@ -30,11 +32,11 @@ const InputBox: React.FC<InputBoxProps> = ({ onSend }) => {
         />
         <button
           onClick={handleSend}
-          className="absolute right-9 top-1/2 -translate-y-1/2 transition hover:brightness-110 disabled:opacity-50"
+          className="absolute right-9 top-1/2 -translate-y-1/2 transition hover:brightness-110 disabled:opacity-30"
           aria-label="전송"
-          disabled={!input.trim()}
+          disabled={!input.trim() || onSendBlock}
         >
-          <img src={MessageSend} alt="send" className="w-[20px] h-[16px]" />
+          <img src={MessageSend} alt="send" className="w-[22px] h-[18px]" />
         </button>
       </div>
     </div>

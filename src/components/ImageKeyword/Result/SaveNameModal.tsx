@@ -47,7 +47,7 @@ export default function SaveNameModal({ onSubmit, onClose }: SaveNameModalProps)
                         disabled={!name.trim()}
                         className={`w-full h-[48px] rounded-[16px] text-title3 text-grayscale-200 mt-[32px] ${
                             name.trim() 
-                                ? 'bg-main-600' 
+                                ? 'bg-main-500' 
                                 : 'bg-grayscale-500'
                         }`}
                     >

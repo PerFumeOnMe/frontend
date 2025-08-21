@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import returnShape from '../../../assets/Login/ReturnShape.png';
 
-interface KeywordResultHeaderProps {
+interface PBTIDetailResultHeaderProps {
     title: string;
     onBack?: () => void;
     backPath?: string;
     className?: string;
 }
 
-export default function KeywordResultHeader({ title, onBack, backPath, className = '' }: KeywordResultHeaderProps) {
+export default function PBTIDetailResultHeader({ title, onBack, backPath, className = '' }: PBTIDetailResultHeaderProps) {
     const navigate = useNavigate();
 
     const handleBack = () => {
