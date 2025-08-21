@@ -102,17 +102,6 @@ const LabResultPage = () => {
             />
           </div>
         )}
-
-        {/* 저장된 워크샵인 경우 홈으로 버튼만 표시 */}
-        {!workshopId && (
-          <div className="flex justify-center w-full">
-            <ResultButton
-              label="홈으로"
-              onClick={() => navigate("/")}
-              disabled={false}
-            />
-          </div>
-        )}
       </div>
 
       {showSaveModal && (
