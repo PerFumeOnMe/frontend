@@ -11,7 +11,7 @@ import SignupPage from "./pages/Login/SignupPage.tsx";
 import MyPage from "./pages/MyPage/MyPage.tsx";
 import PBTIMainPage from "./pages/PBTI/PBTIMainPage.tsx";
 import ProtectedRoute from "./layout/ProtectedRoute.tsx";
-import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
+//import KakaoSignupPage from "./pages/Login/KakaoSignupPage.tsx";
 import PerfumLabPage from "./pages/perfumeLab/PerfumeLabPage.tsx";
 import LabLoadingPage from "./pages/perfumeLab/LabLoadingPage.tsx";
 import LabResultPage from "./pages/perfumeLab/LabResultPage.tsx";
@@ -31,7 +31,7 @@ import ImageKeywordResultPage from "./pages/ImageKeyword/ImageKeywordResult.tsx"
 import PerfumeLabLayout from "./layout/perfumelab-layout.tsx";
 import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
-import KakaoCallback from "./pages/Login/KakaoCallback.tsx";
+//import KakaoCallback from "./pages/Login/KakaoCallback.tsx";
 import PBTILoadingPage from "./pages/PBTI/PBTILoadingPage.tsx";
 import PBTIDetailResultView from "./pages/PBTI/PBTIDetailResultView.tsx";
 
@@ -45,14 +45,14 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignupPage />,
   },
-  {
-    path: "/kakao",
-    element: <KakaoSignupPage />,
-  },
-  {
-    path: "/oauth/kakao/callback",
-    element: <KakaoCallback />,
-  },
+  // {
+  //   path: "/kakao",
+  //   element: <KakaoSignupPage />,
+  // },
+  // {
+  //   path: "/oauth/kakao/callback",
+  //   element: <KakaoCallback />,
+  // },
   {
     path: "/onboarding",
     element: <OnboardingRouter />,
