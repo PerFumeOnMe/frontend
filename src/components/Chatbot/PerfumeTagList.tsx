@@ -32,7 +32,7 @@ const PerfumeTagList: React.FC<PerfumeTagListProps> = ({
       <div
         className={[
           "flex items-center gap-2",
-          "overflow-x-auto",
+          "overflow-x-auto no-scrollbar",
           "whitespace-nowrap",
           "px-1 py-1.5",
         ].join(" ")}
