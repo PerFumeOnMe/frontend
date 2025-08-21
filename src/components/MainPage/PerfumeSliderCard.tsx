@@ -47,7 +47,7 @@ export default function PerfumeSliderCard({ perfume, index, currentIndex, totalP
         >
             <div className="relative h-full flex flex-col justify-between items-center">
                 <img 
-                    src={perfume.imageUrl} 
+                    src={perfume.removebgImageUrl} 
                     alt={perfume.name}
                     className={`
                         w-[104px] h-[112px] object-contain mx-auto transition-all duration-700 rounded-[15px]
