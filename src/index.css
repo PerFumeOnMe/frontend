@@ -31,7 +31,6 @@
 html, body {
   height: 100%;
   margin: 0;
-  overflow: hidden;              /* 루트는 스크롤 금지 */
 }
 
 /* 실제 스크롤 컨테이너 */
