@@ -15,9 +15,6 @@ const PBTIRecommendedPerfume = ({
           alt={name}
           className="w-full h-full object-cover rounded-2xl shadow bg-amber-300"
         />
-        <div className="absolute bottom-0 right-1">
-          <span className="text-[18px]">💜</span>
-        </div>
       </div>
 
       {/* 텍스트 파트 */}

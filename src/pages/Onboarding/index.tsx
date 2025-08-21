@@ -12,18 +12,26 @@ export default function OnboardingRouter() {
   const [ageKo, setAgeKo] = useState<"10대" | "20대" | "30대" | "40대" | "상관없음">("상관없음");
   const [selectedNotesDesc, setSelectedNotesDesc] = useState<string[]>([]);
 
+  const [nicknameError, setNicknameError] = useState<string>("");
+
   const next = () => setStep((p) => Math.min(p + 1, 3));
   const prev = () => setStep((p) => Math.max(p - 1, 1));
+  const backToNickname = () => setStep(1);
 
   return (
     <>
       {step === 1 && (
         <OnboardingStep1
           nickname={nickname}
-          setNickname={setNickname}
+          setNickname={(v) => {
+            setNickname(v);
+            // 입력이 바뀌면 에러 문구 제거
+            if (nicknameError) setNicknameError("");
+          }}
           imageURL={imageURL}
           setImageURL={setImageURL}
           onNext={next}
+          errorMessage={nicknameError}
         />
       )}
       {step === 2 && (
@@ -43,8 +51,10 @@ export default function OnboardingRouter() {
           imageURL={imageURL}
           genderKo={genderKo}
           ageKo={ageKo}
-          selectedNotesDesc={selectedNotesDesc}
-          setSelectedNotesDesc={setSelectedNotesDesc}
+          onDuplicateNickname={(msg: string) => {
+            setNicknameError(msg);
+            backToNickname();
+          }}
         />
       )}
     </>

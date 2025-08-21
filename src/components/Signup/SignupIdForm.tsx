@@ -23,7 +23,7 @@ export default function SignupIdForm({
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    const formatValid = /^[a-z0-9_]{5,16}$/.test(loginId);
+    const formatValid = /^[a-z0-9_]{1,16}$/.test(loginId);
 
     if (loginId === "") {
       setError("");
@@ -37,32 +37,40 @@ export default function SignupIdForm({
     }
   }, [loginId]);
 
+  //서버에서 온 중복 에러가 있으면 버튼 비활성화
+  useEffect(() => {
+    if (idError) setIsValid(false);
+  }, [idError]);
+
   const handleNext = () => {
-    if (isValid) {
+    if (isValid && !idError) {
       onNext();
     }
   };
+
+  const composedError = error || idError;
+  const isButtonDisabled = !isValid || !!composedError;
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <PageHeader title="회원가입" onBack={onBack} />
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n아이디가 필요해요."}
-        subtitle="영어랑 소문자로만 작성해 주세요."
+        subtitle="영어(소문자), 숫자로 17글자 이내로 작성해주세요."
       />
       <div className="flex-1">
         <SignupInput
           value={loginId}
           onChange={(e) => {
             setLoginId(e.target.value);
-            setIdError(""); 
+            setIdError(""); //입력 바꾸면 서버 에러 초기화
           }}
           placeholder="아이디를 입력해주세요!"
         />
-        <SignupErrorMessage message={error || idError} />
+        <SignupErrorMessage message={composedError} />
       </div>
 
-      <BottomButton disabled={!isValid} onClick={handleNext}>
+      <BottomButton disabled={isButtonDisabled} onClick={handleNext}>
         다음
       </BottomButton>
     </div>

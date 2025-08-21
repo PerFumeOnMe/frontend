@@ -8,6 +8,7 @@ import PageHeader from "../../components/common/PageHeader";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineExclamation } from "react-icons/ai";
 import { postOnboarding } from "../../apis/onboarding";
+import OnboardingCompleteModal from "../../components/Onboarding/OnboardingCompleteModal";
 
 const GENDER_MAP = { 여성: "FEMALE", 남성: "MALE", 상관없음: "NONE" } as const;
 const AGE_MAP = {
@@ -24,14 +25,17 @@ export default function OnboardingStep3({
   imageURL,
   genderKo,
   ageKo,
+  onDuplicateNickname,
 }: {
   onPrev: () => void;
   nickname: string;
   imageURL: string | null;
   genderKo: "여성" | "남성" | "상관없음";
   ageKo: "10대" | "20대" | "30대" | "40대" | "상관없음";
+  onDuplicateNickname: (msg: string) => void;
 }) {
   const [selected, setSelected] = useState<string[]>([]);
+  const [showComplete, setShowComplete] = useState(false); 
 
   const toggle = (id: string) => {
     if (selected.includes(id)) {
@@ -73,7 +77,7 @@ const handleSubmit = async () => {
 
     const body = {
       nickname,
-      imageURL, // 업로드 미연동이면 null/빈문자열 가능
+      imageURL, 
       gender: GENDER_MAP[genderKo],
       age: AGE_MAP[ageKo],
       noteCategoryId: noteIds,
@@ -82,12 +86,23 @@ const handleSubmit = async () => {
     try {
       const data = await postOnboarding(body); 
       if (data?.isSuccess) {
-        alert("온보딩 저장 완료!");
-        window.location.href = "/Main";
-      } else {
-        toast.error(`${data?.code} - ${data?.message}`);
+        setShowComplete(true);
+        return;
       }
+
+      const codeFromData = (data as any)?.code;
+      if (codeFromData === "MEMBER4006") {
+        onDuplicateNickname("이미 사용된 닉네임입니다.");
+        return;
+      }
+
+      toast.error(`${codeFromData || "ERROR"} - ${(data as any)?.message || "요청이 실패했습니다."}`);
     } catch (e: any) {
+      const code = e?.response?.data?.error?.errorCode || e?.response?.data?.code;
+      if (code === "MEMBER4006") {
+        onDuplicateNickname("이미 사용된 닉네임입니다.");
+        return;
+      }
       toast.error("요청 중 오류가 발생했습니다.");
       if (e?.response?.data) {
         console.group("Error Response");
@@ -127,6 +142,8 @@ const handleSubmit = async () => {
           확인
         </BottomButton>
       </div>
+      
+      {showComplete && <OnboardingCompleteModal />}
     </OnboardingLayout>
   );
 }
