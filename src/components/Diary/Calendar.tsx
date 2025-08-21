@@ -46,7 +46,7 @@ export default function DiaryCalendar() {
   }, [activeStartDate]);
 
 return (
-  <div className="min-w-[375px] w-full max-w-[480px] mx-auto bg-main-500 h-dvh flex flex-col overflow-hidden">
+  <div className="min-w-[375px] w-full max-w-[480px] min-h-screen mx-auto bg-main-500 h-dvh flex flex-col overflow-hidden">
     <div className="basis-[50%] flex-none bg-main-500">
       <div className="h-full">
         <Calendar
