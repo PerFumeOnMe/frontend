@@ -37,11 +37,19 @@ export default function SignupIdForm({
     }
   }, [loginId]);
 
+  //서버에서 온 중복 에러가 있으면 버튼 비활성화
+  useEffect(() => {
+    if (idError) setIsValid(false);
+  }, [idError]);
+
   const handleNext = () => {
-    if (isValid) {
+    if (isValid && !idError) {
       onNext();
     }
   };
+
+  const composedError = error || idError;
+  const isButtonDisabled = !isValid || !!composedError;
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -55,14 +63,14 @@ export default function SignupIdForm({
           value={loginId}
           onChange={(e) => {
             setLoginId(e.target.value);
-            setIdError(""); 
+            setIdError(""); //입력 바꾸면 서버 에러 초기화
           }}
           placeholder="아이디를 입력해주세요!"
         />
-        <SignupErrorMessage message={error || idError} />
+        <SignupErrorMessage message={composedError} />
       </div>
 
-      <BottomButton disabled={!isValid} onClick={handleNext}>
+      <BottomButton disabled={isButtonDisabled} onClick={handleNext}>
         다음
       </BottomButton>
     </div>

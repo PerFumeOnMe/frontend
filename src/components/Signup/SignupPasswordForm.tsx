@@ -51,7 +51,7 @@ export default function SignupPasswordForm({
       <PageHeader title="회원가입" onBack={onBack} />
       <SignupTitle
         title={"퍼퓨온미에서 사용할\n비밀번호를 입력해주세요."}
-        subtitle="8-20자, 영문/숫자/특수문자 조합"
+        subtitle="8-20자로 입력해주세요"
       />
       <div className="flex-1 flex flex-col gap-8">
         <div>

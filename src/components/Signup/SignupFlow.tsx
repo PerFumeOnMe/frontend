@@ -16,6 +16,11 @@ export default function SignupFlow() {
 
   const [idError, setIdError] = useState(""); 
 
+    const handleIdErrorAndBack = (msg: string) => {
+    setIdError(msg);
+    setStep(1);
+  };
+
   return (
     <main className="w-screen h-screen flex items-center justify-center">
       <section className="min-w-[375px] w-120 mx-auto">
@@ -50,7 +55,7 @@ export default function SignupFlow() {
             name={name}
             loginId={loginId}
             password={password}
-            setIdError={setIdError}
+            setIdError={handleIdErrorAndBack}
             onNext={() => setStep(4)}
             onBack={() => setStep(2)}
           />
