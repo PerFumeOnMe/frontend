@@ -8,6 +8,7 @@ import PageHeader from "../../components/common/PageHeader";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineExclamation } from "react-icons/ai";
 import { postOnboarding } from "../../apis/onboarding";
+import OnboardingCompleteModal from "../../components/Onboarding/OnboardingCompleteModal";
 
 const GENDER_MAP = { 여성: "FEMALE", 남성: "MALE", 상관없음: "NONE" } as const;
 const AGE_MAP = {
@@ -32,6 +33,7 @@ export default function OnboardingStep3({
   ageKo: "10대" | "20대" | "30대" | "40대" | "상관없음";
 }) {
   const [selected, setSelected] = useState<string[]>([]);
+  const [showComplete, setShowComplete] = useState(false); 
 
   const toggle = (id: string) => {
     if (selected.includes(id)) {
@@ -73,7 +75,7 @@ const handleSubmit = async () => {
 
     const body = {
       nickname,
-      imageURL, // 업로드 미연동이면 null/빈문자열 가능
+      imageURL, 
       gender: GENDER_MAP[genderKo],
       age: AGE_MAP[ageKo],
       noteCategoryId: noteIds,
@@ -82,8 +84,9 @@ const handleSubmit = async () => {
     try {
       const data = await postOnboarding(body); 
       if (data?.isSuccess) {
-        alert("온보딩 저장 완료!");
-        window.location.href = "/Main";
+       // alert("온보딩 저장 완료!");
+       // window.location.href = "/Main";
+        setShowComplete(true); 
       } else {
         toast.error(`${data?.code} - ${data?.message}`);
       }
@@ -127,6 +130,8 @@ const handleSubmit = async () => {
           확인
         </BottomButton>
       </div>
+      
+      {showComplete && <OnboardingCompleteModal />}
     </OnboardingLayout>
   );
 }
