@@ -124,7 +124,7 @@ const [visibleTips] = useState(() => {
   const progressStep = (current % visibleTips.length) + 1;
 
   return (
-    <div className="w-full min-w-[375px] max-w-[480px] min-h-screen relative overflow-hidden">
+    <div className="w-full min-w-[375px] max-w-[480px] min-h-screen relative overflow-hidden z-51">
       <div className="absolute inset-0 w-[200%] animate-infinite-slide">
         <img src={mainBg} alt="배경 이미지" className="w-full h-full object-cover" />
       </div>

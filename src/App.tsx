@@ -33,6 +33,7 @@ import EditScentPreferences from "./pages/MyPage/EditScentPreferences.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 //import KakaoCallback from "./pages/Login/KakaoCallback.tsx";
 import PBTILoadingPage from "./pages/PBTI/PBTILoadingPage.tsx";
+import PBTIDetailResultView from "./pages/PBTI/PBTIDetailResultView.tsx";
 
 const router = createBrowserRouter([
   // 로그인, 회원가입은 보호 라우트 없이 누구나 접근 가능
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: "/onboarding",
     element: <OnboardingRouter />,
+  },
+  {
+    path: "/PBTI/detail/:id",
+    element: <PBTIDetailResultView />,
   },
   // 아래는 보호 라우트로 감싼 실제 서비스 페이지들
   {
@@ -148,7 +153,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <AuthProvider>
-      <div className="w-full min-h-screen h-full  bg-black/40 flex justify-center">
+      <div className="w-full min-h-screen h-full bg-black/40 flex justify-center">
         <RouterProvider router={router} />
       </div>
     </AuthProvider>

@@ -132,9 +132,9 @@ export default function AllPerfumePage() {
     
     const handleFilterClick = () => navigate('/filter');
 
-    const handleSearch = (term: string) => {
+    const handleSearch = useCallback((term: string) => {
         setKeyword(term);
-    }
+    }, []);
 
     const isSearch = keyword.trim().length >= 2;
     const isEmpty = isSearch && perfumes.length === 0;

@@ -39,7 +39,7 @@ const PBTIQuestionPage: React.FC = () => {
   const currentQuestion = questions[currentIdx];
 
   return (
-    <div className="min-w-[375px] h-screen -mb-20 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard] overflow-hidden">
+    <div className="min-w-[375px] min-h-screen bg-[#F4EEFA] flex flex-col items-center font-[Pretendard] overflow-hidden">
       <img src={PBTILOGO} className="w-[376px] h-[360px] -mt-16" />
 
       <div className="w-full flex justify-center px-4">

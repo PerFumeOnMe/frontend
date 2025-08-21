@@ -11,6 +11,7 @@ export type RequestWorkshopDto = {
 };
 
 export type ResponseWorkshopDto = CommonResponse<{
+  savaedName?: string;
   topNote: string;
   topNoteVolume: number;
   middleNote: string;
@@ -26,13 +27,13 @@ export type ResponseWorkshopDto = CommonResponse<{
   recommendedFragranceJson: PerfumeDetail[];
 }>;
 
-export type WorkShopListResponseDTO = CommonResponse<WorkShopMyPerfume[]>
+export type WorkShopListResponseDTO = CommonResponse<WorkShopMyPerfume[]>;
 
 export type WorkShopMyPerfume = {
-  brand : number,
-  name : string,
-  imageUrl : string,
-}
+  brand: number;
+  name: string;
+  imageUrl: string;
+};
 
 export type RequestWorkshopSaveDto = {
   savedName: string;
@@ -44,4 +45,4 @@ export type WorkshopSaveDto = {
   workshopId: number;
   savedName: string;
   createdAt: string;
-}
+};

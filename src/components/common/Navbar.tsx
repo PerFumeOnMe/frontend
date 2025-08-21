@@ -8,7 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 const navItems = [
   { to: "/Main", label: "홈", Icon: HomeIcon },
   { to: "/PBTI", label: "PBTI", Icon: PBTIIcon },
-  { to: "/Diary", label: "일기", Icon: DiaryIcon },
+  { to: "/Diary", label: "다이어리", Icon: DiaryIcon },
   { to: "/MyPage", label: "마이", Icon: MyPageIcon },
 ];
 
@@ -34,7 +34,7 @@ const Navbar = () => {
             to={to}
             className="w-full h-full flex flex-col items-center justify-end font-[Pretendard]"
           >
-            <div className="w-full flex items-center justify-center px-auto mb-1">
+            <div className="w-full flex items-center justify-center mb-1">
               <Icon
                 className={`flex w-[20%] transition-colors duration-300 ${
                   isActive ? "text-main-500" : "text-grayscale-800"
