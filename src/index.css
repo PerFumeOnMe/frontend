@@ -27,3 +27,18 @@
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;              /* 루트는 스크롤 금지 */
+  overscroll-behavior-y: none;   /* 상/하 오버스크롤 제스처 차단 */
+}
+
+/* 실제 스크롤 컨테이너 */
+.app-scroll {
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;  /* 부모로 체이닝 방지 */
+  -webkit-overflow-scrolling: touch; /* iOS 관성 스크롤 유지 */
+}
