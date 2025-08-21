@@ -112,7 +112,10 @@ const ChatbotPage: React.FC = () => {
           className='mb-17'
         />
       )}
-      <InputBox onSend={handleSend} />
+      <InputBox
+        onSend={handleSend}
+        onSendBlock={isLoading}  
+      />
       
       {/* 확인 모달 */}
       <ConfirmLeaveModal
