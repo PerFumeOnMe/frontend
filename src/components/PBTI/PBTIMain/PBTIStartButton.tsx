@@ -12,7 +12,7 @@ const PBTIStartButton : React.FC = () => {
     return (
         <button onClick={handleStart} className="w-full px-4 cursor-pointer">
             <div className="
-                py-3 mt-15 mb-5 rounded-3xl 
+                py-3 mt-10 mb-10 rounded-3xl 
                 bg-main-500 text-title3 text-grayscale-200 font-[600]
                 transition-colors duration-900 ease-in-out
                 hover:bg-[#490189]
