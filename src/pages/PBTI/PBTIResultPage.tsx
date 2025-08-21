@@ -31,13 +31,20 @@ const PBTIResultPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSaveClick = () => setModalOpen(true);
-  const handleSaveConfirm = () => setModalStep(2);
+  const handleSaveConfirm = () => {
+    setModalStep(2);
+  };
   const handleCloseModal = () => {
     setModalOpen(false);
     setModalStep(1);
     setPerfumeName("");
-    navigate("/");
   };
+  const handleGoHome = () => {
+    setModalOpen(false);
+    setModalStep(1);
+    setPerfumeName("");
+    navigate("/");
+  }
 
   // ⭐ 커스텀 토스트 (디자인 동일, 메시지만 변경)
   const showCopiedToast = () =>
@@ -92,6 +99,7 @@ const PBTIResultPage: React.FC = () => {
         onChange={setPerfumeName}
         onSave={handleSaveConfirm}
         onClose={handleCloseModal}
+        onHome={handleGoHome}
       />
 
       {/* ✅ Toaster (앱 전역에 이미 있다면 중복 배치하지 말 것) */}

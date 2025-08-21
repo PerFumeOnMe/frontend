@@ -9,6 +9,7 @@ type PBTISaveModalProps = {
   onChange: (value: string) => void;
   onSave: () => void;
   onClose: () => void;
+  onHome: () => void;
 };
 
 const modalVariants = {
@@ -24,6 +25,7 @@ const PBTISaveModal: React.FC<PBTISaveModalProps> = ({
   onChange,
   onSave,
   onClose,
+  onHome
 }) => {
   const handleSaveButton = async () => {
     try {
@@ -98,7 +100,7 @@ const PBTISaveModal: React.FC<PBTISaveModalProps> = ({
                 </p>
                 <button
                   className="w-full bg-main-500 text-white py-3 mb-3 rounded-2xl font-semibold"
-                  onClick={onClose}
+                  onClick={onHome}
                 >
                   홈으로
                 </button>
