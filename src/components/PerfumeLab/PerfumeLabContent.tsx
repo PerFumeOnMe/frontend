@@ -17,7 +17,7 @@ const PerfumeLabContent = () => {
 
   return (
     <div
-      className="min-w-[375px] w-120 bg-white flex flex-col min-h-screen relative"
+      className="min-w-[375px] w-120 bg-white flex flex-col min-h-screen relative font-[pretandard]"
       style={{
         backgroundImage: `url(${bgImage})`,
         minHeight: "100vh", // fallback
