@@ -25,12 +25,14 @@ export default function OnboardingStep3({
   imageURL,
   genderKo,
   ageKo,
+  onDuplicateNickname,
 }: {
   onPrev: () => void;
   nickname: string;
   imageURL: string | null;
   genderKo: "여성" | "남성" | "상관없음";
   ageKo: "10대" | "20대" | "30대" | "40대" | "상관없음";
+  onDuplicateNickname: (msg: string) => void;
 }) {
   const [selected, setSelected] = useState<string[]>([]);
   const [showComplete, setShowComplete] = useState(false); 
@@ -84,13 +86,23 @@ const handleSubmit = async () => {
     try {
       const data = await postOnboarding(body); 
       if (data?.isSuccess) {
-       // alert("온보딩 저장 완료!");
-       // window.location.href = "/Main";
-        setShowComplete(true); 
-      } else {
-        toast.error(`${data?.code} - ${data?.message}`);
+        setShowComplete(true);
+        return;
       }
+
+      const codeFromData = (data as any)?.code;
+      if (codeFromData === "MEMBER4006") {
+        onDuplicateNickname("이미 사용된 닉네임입니다.");
+        return;
+      }
+
+      toast.error(`${codeFromData || "ERROR"} - ${(data as any)?.message || "요청이 실패했습니다."}`);
     } catch (e: any) {
+      const code = e?.response?.data?.error?.errorCode || e?.response?.data?.code;
+      if (code === "MEMBER4006") {
+        onDuplicateNickname("이미 사용된 닉네임입니다.");
+        return;
+      }
       toast.error("요청 중 오류가 발생했습니다.");
       if (e?.response?.data) {
         console.group("Error Response");
