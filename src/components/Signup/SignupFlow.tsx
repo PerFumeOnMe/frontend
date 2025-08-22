@@ -18,7 +18,10 @@ export default function SignupFlow() {
 
     const handleIdErrorAndBack = (msg: string) => {
     setIdError(msg);
-    setStep(1);
+    // 에러 메시지가 있을 때만 아이디 입력 페이지로 이동
+    if (msg.trim()) {
+      setStep(1);
+    }
   };
 
   return (
