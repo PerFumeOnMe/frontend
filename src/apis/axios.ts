@@ -8,18 +8,27 @@ export const axiosInstance = axios.create({
 // 요청 인터셉터: 매 요청마다 실시간으로 토큰을 확인하고 추가
 axiosInstance.interceptors.request.use(
     (config) => {
-        // localStorage에서 현재 토큰 값을 가져옴
-        const rawAccessToken = localStorage.getItem(LOCAL_STORAGE_KEY.accessToken);
-
-        // ✅ 따옴표로 감싸져있으므로 이를 제거
-        const accessToken = rawAccessToken?.replace(/^"(.*)"$/, '$1');
+        // 인증이 필요하지 않은 API 경로들
+        const publicPaths = ['/users/signup', '/auth/login', '/auth/kakao'];
+        const isPublicPath = publicPaths.some(path => config.url?.includes(path));
         
-        // 토큰이 존재할 때만 Authorization 헤더 추가
-        if (accessToken) {
-            config.headers.Authorization = `Bearer ${accessToken}`;
-            console.log("✅ Authorization 헤더 추가됨:", config.headers.Authorization);
+        // 공개 API가 아닌 경우에만 Authorization 헤더 추가
+        if (!isPublicPath) {
+            // localStorage에서 현재 토큰 값을 가져옴
+            const rawAccessToken = localStorage.getItem(LOCAL_STORAGE_KEY.accessToken);
+
+            // ✅ 따옴표로 감싸져있으므로 이를 제거
+            const accessToken = rawAccessToken?.replace(/^"(.*)"$/, '$1');
+            
+            // 토큰이 존재할 때만 Authorization 헤더 추가
+            if (accessToken) {
+                config.headers.Authorization = `Bearer ${accessToken}`;
+                console.log("✅ Authorization 헤더 추가됨:", config.headers.Authorization);
+            } else {
+                console.warn("⚠️ accessToken 없음, Authorization 헤더 미포함");
+            }
         } else {
-            console.warn("⚠️ accessToken 없음, Authorization 헤더 미포함");
+            console.log("✅ 공개 API, Authorization 헤더 제외:", config.url);
         }
         
         // 기본 헤더 설정
