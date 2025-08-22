@@ -31,16 +31,21 @@ export default function SignupAgreementForm({
       setIdError(""); 
       setIsModalOpen(true);
     } catch (err: any) {
+      console.error("회원가입 에러 전체:", err);
+      console.error("응답 데이터:", err?.response?.data);
+      
       const code = err?.response?.data?.code;
       const result = err?.response?.data?.result;
+      const message = err?.response?.data?.message;
 
       if (code === "MEMBER4001") {
         setIdError("중복된 아이디입니다.");
       } else if (code === "COMMON400") {
-        setIdError(result?.loginId || "");
+        setIdError(result?.loginId || message || "입력 정보를 확인해주세요.");
       } else {
-      console.error("회원가입 예외 오류:", err);
-    }
+        console.error("회원가입 예외 오류:", err);
+        setIdError(message || "회원가입 중 오류가 발생했습니다.");
+      }
     }
   };
 
