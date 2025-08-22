@@ -30,6 +30,8 @@ export interface SignupAgreementProps {
 export interface SignupNameFormProps extends StepNavigationProps {
   name: string;
   setName: (val: string) => void;
+  idError: string;
+  setIdError: (msg: string) => void;
 }
 
 export interface SignupIdFormProps extends StepNavigationProps {

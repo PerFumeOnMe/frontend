@@ -14,13 +14,42 @@ export default function SignupFlow() {
   const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
 
-  const [idError, setIdError] = useState(""); 
+  const [idError, setIdError] = useState("");
+  const [idErrorType, setIdErrorType] = useState(""); 
 
-    const handleIdErrorAndBack = (msg: string) => {
+  const handleIdErrorAndBack = (
+    msg: string,
+    errorType: "name" | "id" | "password" | "unknown" | ""
+
+  ) => {
     setIdError(msg);
-    // 에러 메시지가 있을 때만 아이디 입력 페이지로 이동
-    if (msg.trim()) {
-      setStep(1);
+    setIdErrorType(errorType)
+    
+    if (!msg.trim()) return; // 빈 메시지는 무시
+
+    switch (errorType) {
+      case "name":
+        setStep(0);
+        break;
+
+      // "id" 또는 "loginId" 모두 아이디 단계로 이동
+      case "id":
+        setStep(1);
+        break;
+
+      // 비밀번호 관련은 모두 비밀번호 단계
+      case "password":
+        setStep(2);
+        break;
+
+      // Unknown
+      case "unknown":
+        setStep(0);
+        break;
+
+      // 그 외에는 현재 단계 유지 (필요시 원하는 기본 동작으로 변경 가능)
+      default:
+        break;
     }
   };
 
@@ -31,6 +60,8 @@ export default function SignupFlow() {
           <SignupNameForm
             name={name}
             setName={setName}
+            idError={idError}
+            setIdError={setIdError}
             onNext={() => setStep(1)}
             onBack={() => navigate("/login")}
           />
