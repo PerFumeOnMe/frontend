@@ -15,7 +15,7 @@ export default function SignupNameForm({
       <PageHeader title="회원가입" onBack={onBack} />
       <SignupTitle
         title={"안녕하세요!\n퍼퓨온미에 오신 걸 환영해요."}
-        subtitle="퍼퓨온미에서 사용할 이름이 필요해요."
+        subtitle={"퍼퓨온미에서 사용할 이름이 필요해요.\n한글만 입력할 수 있으며, 공백 없이 1자 이상 입력해주세요."}
       />
       <div className="flex-1">
         <SignupInput

@@ -44,7 +44,7 @@ export default function SignupAgreementForm({
         setIdError(result?.loginId || message || "입력 정보를 확인해주세요.");
       } else {
         console.error("회원가입 예외 오류:", err);
-        setIdError(message || "회원가입 중 오류가 발생했습니다.");
+        setIdError(message);
       }
     }
   };
