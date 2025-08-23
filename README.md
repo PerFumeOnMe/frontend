@@ -8,6 +8,18 @@
 
 퍼퓸온미는 단순한 제품 추천을 넘어, 사용자의 감정과 상황, 개성까지 반영하여 진짜 '나만의 향'을 발견할 수 있는 여정을 제공합니다. 기술(GPT 기반 검색, 설문형 MBTI 진단 등)과 감성(향 기록, 키워드 추천 등)을 결합해, 사용자가 향기를 통해 자신을 발견하고 표현할 수 있는 플랫폼입니다.
 
+## 👥 Contributors
+
+<div align="center">
+
+| 칠성/김진성 | 웰시/최지은 | 미르/오동이 | 위즈/이슬기 |
+|-------------|-------------|-------------|-------------|
+| [![김진성](https://github.com/smileman62.png?size=100)](https://github.com/smileman62) | [![최지은](https://github.com/chlwldms.png?size=100)](https://github.com/chlwldms) | [![오동이](https://github.com/OhDongI.png?size=100)](https://github.com/OhDongI) | [![이슬기](https://github.com/wiz0208.png?size=100)](https://github.com/wiz0208) |
+| [@smileman62](https://github.com/smileman62) | [@chlwldms](https://github.com/chlwldms) | [@OhDongI](https://github.com/OhDongI) | [@wiz0208](https://github.com/wiz0208) |
+
+</div>
+
+
 ## 📌 서비스 목표
 
 1. **선택의 어려움 해결**: 수천 가지의 향수가 존재하지만, 대부분의 사용자들은 어떤 향이 자신에게 어울릴지 몰라서 선택에 어려움을 겪기에 퍼퓨온미는 사용자가 자신에게 맞는 향을 쉽게 찾을 수 있도록 돕습니다.
