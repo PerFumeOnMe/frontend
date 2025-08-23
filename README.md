@@ -14,10 +14,8 @@
 
 | 칠성/김진성 | 웰시/최지은 | 미르/오동이 | 위즈/이슬기 |
 |-------------|-------------|-------------|-------------|
-| [![김진성](https://github.com/smileman62.png?size=100)](https://github.com/smileman62) | [![최지은](https://github.com/chlwldms.png?size=100)](https://github.com/chlwldms) | [![오동이](https://github.com/OhDongI.png?size=100)](https://github.com/OhDongI) | [![이슬기](https://github.com/wiz0208.png?size=100)](https://github.com/wiz0208) |
+| <a href="https://github.com/smileman62"><img src="https://github.com/smileman62.png" width="150" height="150" alt="김진성"/></a> | <a href="https://github.com/chlwldms"><img src="https://github.com/chlwldms.png" width="150" height="150" alt="최지은"/></a> | <a href="https://github.com/OhDongI"><img src="https://github.com/OhDongI.png" width="150" height="150" alt="오동이"/></a> | <a href="https://github.com/wiz0208"><img src="https://github.com/wiz0208.png" width="150" height="150" alt="이슬기"/></a> |
 | [@smileman62](https://github.com/smileman62) | [@chlwldms](https://github.com/chlwldms) | [@OhDongI](https://github.com/OhDongI) | [@wiz0208](https://github.com/wiz0208) |
-
-</div>
 
 
 ## 📌 서비스 목표
