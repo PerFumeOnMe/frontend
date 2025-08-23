@@ -17,6 +17,7 @@
 | <a href="https://github.com/smileman62"><img src="https://github.com/smileman62.png" width="150" height="150" alt="김진성"/></a> | <a href="https://github.com/chlwldms"><img src="https://github.com/chlwldms.png" width="150" height="150" alt="최지은"/></a> | <a href="https://github.com/OhDongI"><img src="https://github.com/OhDongI.png" width="150" height="150" alt="오동이"/></a> | <a href="https://github.com/wiz0208"><img src="https://github.com/wiz0208.png" width="150" height="150" alt="이슬기"/></a> |
 | [@smileman62](https://github.com/smileman62) | [@chlwldms](https://github.com/chlwldms) | [@OhDongI](https://github.com/OhDongI) | [@wiz0208](https://github.com/wiz0208) |
 
+</div>
 
 ## 📌 서비스 목표
 
