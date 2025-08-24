@@ -108,7 +108,7 @@ const PBTIDetailResultView: React.FC = () => {
   // ---------- loading view ----------
   if (isLoading) {
     return (
-      <div className="min-w-[375px] min-h-screen p-3 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
+      <div className="w-full min-w-[375px] max-w-120 min-h-screen p-3 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
         <PBTIResultHeader />
         <div className="w-full max-w-[640px] mt-6 animate-pulse space-y-3">
           <div className="h-8 bg-white/70 rounded-xl" />
@@ -124,7 +124,7 @@ const PBTIDetailResultView: React.FC = () => {
   // ---------- empty view (데이터 없음) ----------
   if (!detail) {
     return (
-      <div className="min-w-[375px] w-120 min-h-screen p-3 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
+      <div className="min-w-[375px] max-w-120 min-h-screen p-3 bg-[#F4EEFA] flex flex-col items-center font-[Pretendard]">
         <PBTIResultHeader />
         <div className="w-full max-w-[640px] mt-10 text-center text-grayscale-800">
           조회 결과가 없어요.
