@@ -12,10 +12,13 @@ export default function SignupAgreementForm({
   name,
   loginId,
   password,
-  setIdError, 
+  setIdError,
   onNext,
   onBack,
-}: SignupAgreementFormProps & { setIdError: (msg: string) => void }) {
+}: SignupAgreementFormProps & { setIdError: (
+  msg: string,
+  errorType: "name" | "id" | "password" | "unknown" | ""
+) => void }) {
   const [isAgreed, setIsAgreed] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +31,7 @@ export default function SignupAgreementForm({
     try {
       const res = await postSignup(requestBody);
       console.log("회원가입 성공:", res);
-      setIdError(""); 
+      setIdError("", "");
       setIsModalOpen(true);
     } catch (err: any) {
       console.error("회원가입 에러 전체:", err);
@@ -39,12 +42,21 @@ export default function SignupAgreementForm({
       const message = err?.response?.data?.message;
 
       if (code === "MEMBER4001") {
-        setIdError("중복된 아이디입니다.");
+        setIdError("중복된 아이디입니다.", "id");
       } else if (code === "COMMON400") {
-        setIdError(result?.loginId || message || "입력 정보를 확인해주세요.");
+        // 순서대로 분기 처리
+        if (result?.name) {
+          setIdError(result.name, "name");
+        } else if (result?.loginId) {
+          setIdError(result.loginId, "id");
+        } else if (result?.password) {
+          setIdError(result.password, "password");
+        } else {
+          setIdError(message || "입력 정보를 확인해주세요.", "unknown");
+        }
       } else {
         console.error("회원가입 예외 오류:", err);
-        setIdError(message || "회원가입 중 오류가 발생했습니다.");
+        setIdError(message || "알 수 없는 오류가 발생했습니다.", "unknown");
       }
     }
   };

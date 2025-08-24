@@ -91,35 +91,37 @@ export default function ImageKeywordResultPage() {
                 backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
             }}
         >
-            {/* 상세 페이지인 경우 헤더 표시 */}
-            {isDetailView && (
-                <KeywordResultHeader
-                    title={result && 'savedName' in result ? (result as ImageKeywordDetailResult).savedName : '키워드 결과'}
-                    backPath="/MyPage?tab=recommendations&filter=keyword"
-                />
-            )}
-            
-            <div className={`flex flex-col items-center justify-center ${isDetailView ? 'pt-[80px]' : 'pt-[24px]'}`}>
-                <h1 className="text-title2 text-grayscale-900">{name}님의</h1>
-                <h1 className="text-display1 text-[28px] text-grayscale-1000 mb-[40px]">향기무드 테스트</h1>
+            <div className='w-full min-w-[375px] max-w-[480px] min-h-screen relative'>
+                {/* 상세 페이지인 경우 헤더 표시 */}
+                {isDetailView && (
+                    <KeywordResultHeader
+                        title={result && 'savedName' in result ? (result as ImageKeywordDetailResult).savedName : '키워드 결과'}
+                        backPath="/MyPage?tab=recommendations&filter=keyword"
+                    />
+                )}
                 
-                {result?.keywords && <KeywordBubbles keywords={result.keywords} />}
-                <div className="mt-[36px] w-full">
-                    {result.descriptions && <KeywordDescription descriptions={result.descriptions} />}
-                </div>
-                <div className="mt-[32px] w-full">
-                    {result.scenario && <KeywordScenario scenario={result.scenario} />}
-                </div>
-                <div className="mt-[32px] w-full">
-                    {result.characterImageUrl && <KeywordCharacter characterImageUrl={result.characterImageUrl} />}
-                </div>
-                <div className="mt-[48px] w-full">
-                    {result.recommendations?.length > 0 && (
-                        <KeywordRecommendations 
-                            recommendations={result.recommendations} 
-                            hideActions={isDetailView}
-                        />
-                    )}
+                <div className={`flex flex-col items-center justify-center ${isDetailView ? 'pt-[80px]' : 'pt-[24px]'}`}>
+                    <h1 className="text-title2 text-grayscale-900">{name}님의</h1>
+                    <h1 className="text-display1 text-[28px] text-grayscale-1000 mb-[40px]">향기무드 테스트</h1>
+                    
+                    {result?.keywords && <KeywordBubbles keywords={result.keywords} />}
+                    <div className="mt-[36px] w-full">
+                        {result.descriptions && <KeywordDescription descriptions={result.descriptions} />}
+                    </div>
+                    <div className="mt-[32px] w-full">
+                        {result.scenario && <KeywordScenario scenario={result.scenario} />}
+                    </div>
+                    <div className="mt-[32px] w-full">
+                        {result.characterImageUrl && <KeywordCharacter characterImageUrl={result.characterImageUrl} />}
+                    </div>
+                    <div className="mt-[48px] w-full">
+                        {result.recommendations?.length > 0 && (
+                            <KeywordRecommendations 
+                                recommendations={result.recommendations} 
+                                hideActions={isDetailView}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

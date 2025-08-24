@@ -5,4 +5,7 @@
     { "path": "./tsconfig.node.json" }
   ],
   "include": ["src", "custohttp://m.d.ts"],
+  "compilerOptions": {
+    "types": ["node"],
+  }
 }
