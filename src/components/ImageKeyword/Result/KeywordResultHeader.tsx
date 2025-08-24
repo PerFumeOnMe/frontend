@@ -22,7 +22,7 @@ export default function KeywordResultHeader({ title, onBack, backPath, className
     };
 
     return (
-        <div className={`w-full min-w-[375px] max-w-[480px] mx-auto fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm ${className}`}>
+        <div className={`w-full min-w-[375px] max-w-[480px] fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-white/10 backdrop-blur-sm ${className}`}>
             <button
                 onClick={handleBack}
                 className="flex items-center justify-center w-8 h-8"
