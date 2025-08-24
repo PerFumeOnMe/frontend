@@ -7,7 +7,7 @@ const RootLayout = () => {
     const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
 
     return (
-        <div className="min-w-[375px] w-120 min-h-screen h-full bg-sky-300 items-center relative">
+        <div className="min-w-[375px] w-120 min-h-screen h-full bg-black/40 items-center relative">
             <Outlet />
             {shouldShowNavbar && <Navbar />}
         </div>
